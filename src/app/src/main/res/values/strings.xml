@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">MoneyKeeper</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="nav_item_balance">Balance</string>
+    <string name="nav_item_report">Report</string>
+    <string-array name="nav_section_modes">
+        <item>@string/nav_item_balance</item>
+        <item>@string/nav_item_report</item>
+    </string-array>
+
+    <string name="nav_item_accounts">Accounts</string>
+    <string name="nav_item_categories">Categories</string>
+    <string name="nav_item_default_currency">Default currency</string>
+    <string-array name="nav_section_settings">
+        <item>@string/nav_item_accounts</item>
+        <item>@string/nav_item_categories</item>
+        <item>@string/nav_item_default_currency</item>
+    </string-array>
+</resources>
