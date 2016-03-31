@@ -3,9 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/thirdparty/opencv/opencv.iml" filepath="$PROJECT_DIR$/thirdparty/opencv/opencv.iml" />
       <module fileurl="file://$PROJECT_DIR$/src.iml" filepath="$PROJECT_DIR$/src.iml" />
+      <module fileurl="file://$PROJECT_DIR$/opencv/src-opencv.iml" filepath="$PROJECT_DIR$/opencv/src-opencv.iml" />
       <module fileurl="file://$PROJECT_DIR$/thirdparty/thirdparty.iml" filepath="$PROJECT_DIR$/thirdparty/thirdparty.iml" />
+      <module fileurl="file://$PROJECT_DIR$/thirdparty/opencv/thirdparty-opencv.iml" filepath="$PROJECT_DIR$/thirdparty/opencv/thirdparty-opencv.iml" />
     </modules>
   </component>
 </project>
