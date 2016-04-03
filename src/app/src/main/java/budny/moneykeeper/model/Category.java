@@ -1,4 +1,4 @@
-package budny.moneykeeper.model;
+package budny.moneykeeper.model.realm;
 
 import java.math.BigDecimal;
 

@@ -8,18 +8,14 @@ import android.view.ViewGroup;
 
 import budny.moneykeeper.R;
 
-/**
- * Created by budnyjj on 3/13/16.
- */
-public class MainFragment extends Fragment {
+public class FragmentAccount extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_account, container, false);
     }
 }

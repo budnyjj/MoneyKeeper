@@ -58,7 +58,7 @@ android {
         compile fileTree(dir: 'libs', include: ['*.jar'])
         compile "com.android.support:appcompat-v7:$project.supportVersion"
         compile "com.android.support:design:$project.supportVersion"
-
+        compile "com.android.support:recyclerview-v7:$project.supportVersion"
         testCompile 'junit:junit:4.12'
     }
 }

@@ -1,8 +1,18 @@
 <resources>
+    <string name="account">Account</string>
     <string name="app_name">MoneyKeeper</string>
     <string name="demo_collection">Demo collection</string>
-    <string name="dummy_section_text">Dummy section text</string>
     <string name="demo_external_activity">Demo external activity</string>
+    <string name="dummy_section_text">Dummy section text</string>
+
     <string name="main">Main</string>
-    <string name="account">Account</string>
+    <string name="menu_action_group_categories">Group by categories</string>
+
+    <string name="nav_drawer_close">Close</string>
+    <string name="nav_drawer_open">Open</string>
+
+    <string name="nav_item_balance">Balance</string>
+    <string name="nav_item_camera">Camera</string>
+    <string name="nav_item_report">Report</string>
+    <string name="nav_item_settings">Settings</string>
 </resources>
