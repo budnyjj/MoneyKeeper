@@ -24,6 +24,8 @@
         <activity android:name=".view.activities.ActivityInput" />
         <activity android:name=".view.activities.ActivityReport" />
         <activity android:name=".view.activities.ActivitySettings" />
-        <activity android:name=".view.activities.ActivityCamera" />
+        <activity android:name=".view.activities.ActivityCamera"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation"/>
     </application>
 </manifest>

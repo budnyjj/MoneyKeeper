@@ -11,6 +11,7 @@ import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.core.Mat;
 
 import budny.moneykeeper.R;
+import budny.moneykeeper.cv.Filters;
 import budny.moneykeeper.cv.OpenCVLoader;
 
 public class FragmentCamera extends Fragment
@@ -57,6 +58,6 @@ public class FragmentCamera extends Fragment
 
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        return inputFrame.rgba();
+        return Filters.basicFilter(inputFrame.rgba());
     }
 }

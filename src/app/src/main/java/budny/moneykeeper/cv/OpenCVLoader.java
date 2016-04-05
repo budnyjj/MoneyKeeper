@@ -11,6 +11,7 @@ public class OpenCVLoader {
 
     public static boolean init() {
         try {
+            Log.i(TAG, "Loading OpenCV library");
             OpenCVLoader loader = Holder.INSTANCE;
         } catch (SecurityException | UnsatisfiedLinkError e) {
             Log.e(TAG, "Unable to load OpenCV library");

@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <org.opencv.android.JavaCameraView
+    <budny.moneykeeper.view.views.ViewCamera
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:visibility="gone"
         android:id="@+id/view_camera"
-        opencv:show_fps="true"
-        opencv:camera_id="any" />
+        opencv:show_fps="false"
+        opencv:camera_id="back" />
 </LinearLayout>
