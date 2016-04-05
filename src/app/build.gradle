@@ -1,11 +1,9 @@
 //apply plugin: 'com.android.model.application'
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
-
 ext {
     supportVersion = "23.2.1"
 }
-
 //model {
 android {
     compileSdkVersion 23
@@ -62,7 +60,6 @@ android {
         testCompile 'junit:junit:4.12'
     }
 }
-
 dependencies {
     compile project(':thirdparty:opencv')
 }

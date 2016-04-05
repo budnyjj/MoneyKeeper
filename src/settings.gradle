@@ -1,2 +1,2 @@
-include ':app', ':thirdparty:opencv'
-include ':opencv'
+include ':app'
+include ':thirdparty:opencv'

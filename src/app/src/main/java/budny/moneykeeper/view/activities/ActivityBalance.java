@@ -37,9 +37,9 @@ public class ActivityBalance extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_balance);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar_main);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
 
@@ -79,11 +79,6 @@ public class ActivityBalance extends AppCompatActivity
             }
         };
         mDrawerLayout.addDrawerListener(mDrawerToggle);
-
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.fragment_container_nav_drawer, new FragmentNavDrawer())
-                .commit();
     }
 
     @Override

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Main content -->
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -14,7 +15,7 @@
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-            <include layout="@layout/toolbar_main" />
+            <include layout="@layout/toolbar" />
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabs"
@@ -38,5 +39,14 @@
             android:layout_margin="@dimen/fab_margin"
             android:src="@drawable/ic_add" />
     </android.support.design.widget.CoordinatorLayout>
+
+    <!-- Navigation drawer -->
+    <fragment
+        android:id="@+id/fragment_navigation_drawer"
+        android:name="budny.moneykeeper.view.fragments.FragmentNavDrawer"
+        android:layout_width="@dimen/nav_drawer_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:layout="@layout/fragment_nav_drawer" />
 </android.support.v4.widget.DrawerLayout>
 
