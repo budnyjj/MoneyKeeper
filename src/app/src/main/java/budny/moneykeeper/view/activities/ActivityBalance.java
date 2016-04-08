@@ -58,7 +58,7 @@ public class ActivityBalance extends AppCompatActivity
             }
         });
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.fragment_container_nav_drawer);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.fragment_container_balance_nav_drawer);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.nav_drawer_open, R.string.nav_drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {

@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <header
         android:fragment="budny.moneykeeper.view.activities.ActivitySettings$Prefs1Fragment"
-        android:icon="@drawable/ic_account_balance_wallet_black"
+        app:icon="@drawable/ic_account_balance_wallet_black"
         android:title="@string/pref_header_title_accounts"
         android:summary="@string/pref_header_summary_accounts" />
 
     <header
         android:fragment="budny.moneykeeper.view.activities.ActivitySettings$Prefs1Fragment"
-        android:icon="@drawable/ic_assignment_black"
+        app:icon="@drawable/ic_assignment_black"
         android:title="@string/pref_header_title_categories"
         android:summary="@string/pref_header_summary_categories" />
 
     <header
         android:fragment="budny.moneykeeper.view.activities.ActivitySettings$Prefs2Fragment"
-        android:icon="@drawable/ic_euro_symbol_black"
+        app:icon="@drawable/ic_euro_symbol_black"
         android:title="@string/pref_header_title_default_currency"
         android:summary="@string/pref_header_summary_default_currency" />
 

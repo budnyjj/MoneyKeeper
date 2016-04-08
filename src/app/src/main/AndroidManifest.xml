@@ -14,16 +14,20 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".view.activities.ActivityBalance" >
+        <activity android:name=".view.activities.ActivityBalance"
+            android:label="@string/title_balance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activities.ActivityInput" />
-        <activity android:name=".view.activities.ActivityReport" />
-        <activity android:name=".view.activities.ActivitySettings" />
+        <activity android:name=".view.activities.ActivityInput"
+            android:label="@string/title_input"/>
+        <activity android:name=".view.activities.ActivityReport"
+            android:label="@string/title_report"/>
+        <activity android:name=".view.activities.ActivitySettings"
+            android:label="@string/title_settings"/>
         <activity android:name=".view.activities.ActivityCamera"
             android:screenOrientation="landscape"
             android:configChanges="keyboardHidden|orientation"/>

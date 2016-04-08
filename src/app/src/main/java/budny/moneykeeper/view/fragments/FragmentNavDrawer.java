@@ -46,7 +46,7 @@ public class FragmentNavDrawer extends Fragment {
                              final ViewGroup container, Bundle savedInstanceState) {
         mParentActivity = getActivity();
         if (!(mParentActivity instanceof ActivityContract)) {
-            throw new IllegalArgumentException("Parent activity should implement the contract");
+            throw new IllegalArgumentException("Parent activity should implement contract");
         }
 
         final View layout = inflater.inflate(R.layout.fragment_nav_drawer, container, false);

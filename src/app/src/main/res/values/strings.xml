@@ -22,4 +22,9 @@
     <string name="pref_header_summary_categories">Categories</string>
     <string name="pref_header_title_default_currency">Default currency</string>
     <string name="pref_header_summary_default_currency">Default currency</string>
+
+    <string name="title_balance">Balance</string>
+    <string name="title_input">Input</string>
+    <string name="title_report">Report</string>
+    <string name="title_settings">Settings</string>
 </resources>
