@@ -15,4 +15,11 @@
     <string name="nav_item_camera">Camera</string>
     <string name="nav_item_report">Report</string>
     <string name="nav_item_settings">Settings</string>
+
+    <string name="pref_header_title_accounts">Accounts</string>
+    <string name="pref_header_summary_accounts">Accounts</string>
+    <string name="pref_header_title_categories">Categories</string>
+    <string name="pref_header_summary_categories">Categories</string>
+    <string name="pref_header_title_default_currency">Default currency</string>
+    <string name="pref_header_summary_default_currency">Default currency</string>
 </resources>

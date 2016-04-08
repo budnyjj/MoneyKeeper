@@ -22,6 +22,12 @@ public class ActivitySettings extends PreferenceActivity {
         loadHeadersFromResource(R.xml.preference_headers, target);
     }
 
+    @Override
+    public boolean isValidFragment(String fragmentName) {
+        return Prefs1Fragment.class.getName().equals(fragmentName)
+                || Prefs2Fragment.class.getName().equals(fragmentName);
+    }
+
     public static class Prefs1Fragment extends PreferenceFragment {
         @Override
         public void onCreate(Bundle savedInstanceState) {
