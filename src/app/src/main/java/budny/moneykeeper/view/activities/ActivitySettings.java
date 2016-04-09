@@ -1,6 +1,7 @@
 package budny.moneykeeper.view.activities;
 
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.preference.PreferenceFragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -9,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import budny.moneykeeper.R;
+import budny.moneykeeper.presenter.PresenterMainPreferences;
 import budny.moneykeeper.view.fragments.FragmentNavDrawer;
 
 public class ActivitySettings extends AppCompatActivity
@@ -52,7 +54,7 @@ public class ActivitySettings extends AppCompatActivity
 
         getFragmentManager()
                 .beginTransaction()
-                .add(R.id.fragment_container_settings, new Prefs2Fragment())
+                .add(R.id.fragment_container_settings, new FragmentMainPreferences())
                 .commit();
     }
 
@@ -67,20 +69,31 @@ public class ActivitySettings extends AppCompatActivity
         mDrawerLayout.closeDrawer(drawerView);
     }
 
-    public static class Prefs1Fragment extends PreferenceFragment {
+    public static class FragmentMainPreferences extends PreferenceFragment {
+        private PresenterMainPreferences mPresenter;
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            //PreferenceManager.setDefaultValues(getActivity(), R.xml.preference_advanced, false);
-            addPreferencesFromResource(R.xml.preferences_fragmented);
+            addPreferencesFromResource(R.xml.preferences_main);
+
+            mPresenter = PresenterMainPreferences.getInstance();
+
+            final String defaultCurrencyKey =
+                    getResources().getString(R.string.pref_key_default_currency);
+            final ListPreference defaultCurrencyPreference =
+                    (ListPreference) findPreference(defaultCurrencyKey);
+            defaultCurrencyPreference.setEntries(mPresenter.getCurrencyNames());
+            defaultCurrencyPreference.setEntryValues(mPresenter.getCurrencyCodes());
+            defaultCurrencyPreference.setDefaultValue(mPresenter.getDefaultCurrencyCode());
         }
     }
 
-    public static class Prefs2Fragment extends PreferenceFragment {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.preferences_dependencies);
-        }
-    }
+//    public static class Prefs2Fragment extends PreferenceFragment {
+//        @Override
+//        public void onCreate(Bundle savedInstanceState) {
+//            super.onCreate(savedInstanceState);
+//            addPreferencesFromResource(R.xml.preferences_dependencies);
+//        }
+//    }
 }

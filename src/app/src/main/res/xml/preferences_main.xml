@@ -2,15 +2,27 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory
-        android:title="Inline preferences">
+    <PreferenceScreen
+        android:fragment="budny.moneykeeper.view.fragments.FragmentMain"
+        android:title="Main"
+        android:summary="Main fragment">
+    </PreferenceScreen>
 
-        <CheckBoxPreference
-            android:key="checkbox_preference"
-            android:title="Checkbox preference"
-            android:summary="Checkbox preference" />
+    <ListPreference
+        android:dialogTitle="@string/pref_dialog_title_default_currency"
+        android:key="@string/pref_key_default_currency"
+        android:summary="@string/pref_header_summary_default_currency"
+        android:title="@string/pref_header_title_default_currency" />
 
-    </PreferenceCategory>
+    <!--<PreferenceCategory-->
+        <!--android:title="Inline preferences">-->
+
+        <!--<CheckBoxPreference-->
+            <!--android:key="checkbox_preference"-->
+            <!--android:title="Checkbox preference"-->
+            <!--android:summary="Checkbox preference" />-->
+
+    <!--</PreferenceCategory>-->
 
     <!--<PreferenceCategory-->
         <!--android:title="@string/dialog_based_preferences">-->
@@ -34,16 +46,10 @@
     <!--<PreferenceCategory-->
         <!--android:title="@string/launch_preferences">-->
 
-        <!--&lt;!&ndash; This PreferenceScreen tag sends the user to a new fragment of-->
-             <!--preferences.  If running in a large screen, they can be embedded-->
-             <!--inside of the overall preferences UI. &ndash;&gt;-->
-        <!--<PreferenceScreen-->
-            <!--android:fragment="com.example.android.apis.preference.PreferenceWithHeaders$Prefs1FragmentInner"-->
-            <!--android:title="@string/title_fragment_preference"-->
-            <!--android:summary="@string/summary_fragment_preference">-->
-            <!--&lt;!&ndash; Arbitrary key/value pairs can be included for fragment arguments &ndash;&gt;-->
-            <!--<extra android:name="someKey" android:value="somePrefValue" />-->
-        <!--</PreferenceScreen>-->
+        <!-- This PreferenceScreen tag sends the user to a new fragment of
+             preferences.  If running in a large screen, they can be embedded
+             inside of the overall preferences UI. -->
+
 
         <!--&lt;!&ndash; This PreferenceScreen tag sends the user to a completely different-->
              <!--activity, switching out of the current preferences UI. &ndash;&gt;-->

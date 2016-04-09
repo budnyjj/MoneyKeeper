@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="design_2.svg"
+   sodipodi:docname="ui.svg"
    inkscape:export-filename="/home/budnyjj/dev/projects/moneykeeper/design/design_2.png"
    inkscape:export-xdpi="306.57001"
    inkscape:export-ydpi="306.57001">
@@ -28,18 +28,18 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5"
-     inkscape:cx="781.85108"
-     inkscape:cy="974.85926"
+     inkscape:zoom="0.35355339"
+     inkscape:cx="1893.3763"
+     inkscape:cy="1039.4283"
      inkscape:document-units="px"
      inkscape:current-layer="layer8"
      showgrid="false"
      units="px"
-     showguides="false"
+     showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:window-width="1916"
-     inkscape:window-height="1056"
-     inkscape:window-x="0"
+     inkscape:window-width="1276"
+     inkscape:window-height="1001"
+     inkscape:window-x="1920"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      fit-margin-top="100"
@@ -375,6 +375,56 @@
      style="display:inline"
      sodipodi:insensitive="true">
     <g
+       style="display:inline"
+       id="g6454-5"
+       transform="translate(-1.99999,-2397.6377)">
+      <rect
+         y="-2376.0632"
+         x="1201.1655"
+         height="507.37857"
+         width="1052.5563"
+         id="rect6492-5-7-0"
+         style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#4d4d4d;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+         transform="translate(0,2947.6378)" />
+      <flowRoot
+         transform="translate(-35.095436,48.813915)"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot6180-4"
+         xml:space="preserve"><flowRegion
+           id="flowRegion6182-0"><rect
+             y="733.18591"
+             x="2040.873"
+             height="77.784447"
+             width="262.33301"
+             id="rect6184-4" /></flowRegion><flowPara
+           style="font-size:35px"
+           id="flowPara6186-7">Категории</flowPara></flowRoot>    </g>
+    <g
+       style="display:inline"
+       id="g6454"
+       transform="translate(-1.75072,-2949.178)">
+      <rect
+         y="-2376.0632"
+         x="1201.1655"
+         height="507.37857"
+         width="1052.5563"
+         id="rect6492-5-7"
+         style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#4d4d4d;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+         transform="translate(0,2947.6378)" />
+      <flowRoot
+         transform="translate(-17.095436,26.813915)"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot6180"
+         xml:space="preserve"><flowRegion
+           id="flowRegion6182"><rect
+             y="752.54956"
+             x="2066.873"
+             height="50.420799"
+             width="192.33304"
+             id="rect6184" /></flowRegion><flowPara
+           style="font-size:35px"
+           id="flowPara6186">Счета</flowPara></flowRoot>    </g>
+    <g
        id="g6504">
       <rect
          y="-2923.7524"
@@ -499,13 +549,6 @@
        y="-2346.2092" />
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
-       id="rect4184"
-       width="297.4899"
-       height="448.4209"
-       x="1652.6096"
-       y="-2346.2092" />
-    <rect
-       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
        id="rect4182-8"
        width="299.0051"
        height="448.4209"
@@ -532,13 +575,35 @@
        height="450.52808"
        x="850.55304"
        y="-1796.4651" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+       id="rect4184-8"
+       width="297.4899"
+       height="448.42093"
+       x="1653.3452"
+       y="-1796.6449" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+       id="rect4184"
+       width="297.4899"
+       height="448.4209"
+       x="1652.6096"
+       y="-2346.2092" />
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+       id="rect4184-8-4"
+       width="297.4899"
+       height="448.42096"
+       x="1251.2524"
+       y="-1795.8534" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="screen_main"
      style="display:inline"
-     transform="translate(350.55633,151.12113)">
+     transform="translate(350.55633,151.12113)"
+     sodipodi:insensitive="true">
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
        id="rect4388"
@@ -1487,8 +1552,7 @@
      id="layer5"
      inkscape:label="screen_settings"
      style="display:inline"
-     transform="translate(350.55633,151.12113)"
-     sodipodi:insensitive="true">
+     transform="translate(350.55633,151.12113)">
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
        id="rect4388-73"
@@ -1516,43 +1580,6 @@
        x="1250.4941"
        y="100.02888" />
     <flowRoot
-       xml:space="preserve"
-       id="flowRoot5798"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:36px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(1224.3268,-432.23781)"><flowRegion
-         id="flowRegion5800"><rect
-           id="rect5802"
-           width="225.71428"
-           height="50.714287"
-           x="50.714287"
-           y="666.42859" /></flowRegion><flowPara
-         id="flowPara5804"
-         style="font-size:12.5px">Счета</flowPara></flowRoot>    <flowRoot
-       xml:space="preserve"
-       id="flowRoot5798-2"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:36px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(1223.91,-405.95428)"><flowRegion
-         id="flowRegion5800-0"><rect
-           id="rect5802-6"
-           width="225.71428"
-           height="50.714287"
-           x="50.714287"
-           y="666.42859" /></flowRegion><flowPara
-         id="flowPara5804-0"
-         style="font-size:12.5px">Категории учета</flowPara></flowRoot>    <flowRoot
-       xml:space="preserve"
-       id="flowRoot5830"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.5px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(1200.4595,-453.24397)"><flowRegion
-         id="flowRegion5832"><rect
-           id="rect5834"
-           width="224.25386"
-           height="80.714287"
-           x="74.751289"
-           y="741.42859"
-           style="font-size:17.5px" /></flowRegion><flowPara
-         id="flowPara5836"
-         style="font-size:12.5px">Валюта по умолчанию</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot14028-3"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:36px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -1593,7 +1620,7 @@
        xml:space="preserve"
        id="flowRoot5798-8"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:36px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(1221.7696,-461.20216)"><flowRegion
+       transform="translate(1221.7696,-493.20216)"><flowRegion
          id="flowRegion5800-9"><rect
            id="rect5802-2"
            width="225.71428"
@@ -1601,11 +1628,11 @@
            x="50.714287"
            y="666.42859" /></flowRegion><flowPara
          id="flowPara5804-1"
-         style="font-weight:bold;font-size:12.5px">Настройки</flowPara></flowRoot>    <flowRoot
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;font-family:Verdana;-inkscape-font-specification:Verdana">Настройки</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot5798-8-5"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:36px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(1223.9291,-520.77488)"><flowRegion
+       transform="translate(1223.9291,-550.77488)"><flowRegion
          id="flowRegion5800-9-9"><rect
            id="rect5802-2-3"
            width="225.71428"
@@ -1617,7 +1644,7 @@
        xml:space="preserve"
        id="flowRoot5798-8-5-7"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:36px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(1223.9621,-491.515)"><flowRegion
+       transform="translate(1223.9621,-521.515)"><flowRegion
          id="flowRegion5800-9-9-8"><rect
            id="rect5802-2-3-2"
            width="225.71428"
@@ -1625,25 +1652,271 @@
            x="50.714287"
            y="666.42859" /></flowRegion><flowPara
          id="flowPara5804-1-2-0"
-         style="font-weight:normal;font-size:12.5px">Отчет</flowPara></flowRoot>    <flowRoot
+         style="font-weight:normal;font-size:12.5px">Отчет</flowPara></flowRoot>    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+       id="rect4388-73-0"
+       width="299.28571"
+       height="49.750103"
+       x="1652.5634"
+       y="50.035282" />
+    <g
+       transform="translate(1603.5907,-1.4346581)"
+       style="display:inline"
+       id="g7646-8-4">
+      <rect
+         y="66.728203"
+         x="63.423771"
+         height="1.7266954"
+         width="22.028128"
+         id="rect7572-92-3"
+         style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.48409069;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+      <rect
+         y="74.519409"
+         x="63.400784"
+         height="1.7266955"
+         width="22.028128"
+         id="rect7572-6-1-7"
+         style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.48409069;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+      <rect
+         y="81.944031"
+         x="63.400784"
+         height="1.7266955"
+         width="22.028128"
+         id="rect7572-62-3-0"
+         style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.48409069;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+    </g>
+    <g
+       id="g5920">
+      <rect
+         y="100.26389"
+         x="1652.4437"
+         height="68"
+         width="297.75"
+         id="rect5086"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <flowRoot
+         transform="translate(-366.55633,-159.12113)"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot5888"
+         xml:space="preserve"><flowRegion
+           id="flowRegion5890"><rect
+             y="269.38501"
+             x="2034"
+             height="117"
+             width="272"
+             id="rect5892" /></flowRegion><flowPara
+           style="font-size:17.5px"
+           id="flowPara5894">Счета</flowPara></flowRoot>      <flowRoot
+         transform="translate(-365.42156,-130.19374)"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot5888-4"
+         xml:space="preserve"><flowRegion
+           id="flowRegion5890-8"><rect
+             y="269.38501"
+             x="2034"
+             height="117"
+             width="272"
+             id="rect5892-3" /></flowRegion><flowPara
+           style="font-size:12.5px"
+           id="flowPara5894-7">Наличные, банковские карты, ...</flowPara></flowRoot>    </g>
+    <g
+       transform="translate(-0.0392681,68.064343)"
+       style="display:inline"
+       id="g5920-9">
+      <rect
+         y="100.26389"
+         x="1652.4437"
+         height="68"
+         width="297.75"
+         id="rect5086-5"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <flowRoot
+         transform="translate(-366.55633,-159.12113)"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot5888-6"
+         xml:space="preserve"><flowRegion
+           id="flowRegion5890-5"><rect
+             y="269.38501"
+             x="2034"
+             height="117"
+             width="272"
+             id="rect5892-8" /></flowRegion><flowPara
+           style="font-size:17.5px"
+           id="flowPara5894-74">Категории</flowPara></flowRoot>      <flowRoot
+         transform="translate(-365.42156,-130.19374)"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot5888-4-5"
+         xml:space="preserve"><flowRegion
+           id="flowRegion5890-8-4"><rect
+             y="269.38501"
+             x="2034"
+             height="117"
+             width="272"
+             id="rect5892-3-6" /></flowRegion><flowPara
+           style="font-size:12.5px"
+           id="flowPara5894-7-9">Категории учета денежных средств</flowPara><flowPara
+           style="font-size:12.5px"
+           id="flowPara6015" /></flowRoot>    </g>
+    <g
+       transform="translate(0.1866679,136.10878)"
+       style="display:inline"
+       id="g5920-9-3">
+      <rect
+         y="100.26389"
+         x="1652.4437"
+         height="68"
+         width="297.75"
+         id="rect5086-5-5"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <flowRoot
+         transform="translate(-366.55633,-159.12113)"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot5888-6-1"
+         xml:space="preserve"><flowRegion
+           id="flowRegion5890-5-6"><rect
+             y="269.38501"
+             x="2034"
+             height="117"
+             width="272"
+             id="rect5892-8-9" /></flowRegion><flowPara
+           style="font-size:17.5px"
+           id="flowPara5894-74-1">Валюта по умолчанию</flowPara></flowRoot>      <flowRoot
+         transform="translate(-365.42156,-130.19374)"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot5888-4-5-4"
+         xml:space="preserve"><flowRegion
+           id="flowRegion5890-8-4-8"><rect
+             y="269.38501"
+             x="2034"
+             height="117"
+             width="272"
+             id="rect5892-3-6-4" /></flowRegion><flowPara
+           style="font-size:12.5px"
+           id="flowPara5894-7-9-4">Выбор стандартной валюты ввода</flowPara></flowRoot>    </g>
+    <flowRoot
        xml:space="preserve"
-       id="flowRoot5798-8-6"
+       id="flowRoot14028-3-3"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:36px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(1221.9291,-549.52489)"><flowRegion
-         id="flowRegion5800-9-6"><rect
-           id="rect5802-2-6"
-           width="225.71428"
-           height="50.714287"
+       transform="translate(1654.1152,92.896282)"><flowRegion
+         id="flowRegion14030-5-5"><rect
+           id="rect14032-2-9"
+           width="248.29086"
+           height="202.43451"
            x="50.714287"
-           y="666.42859" /></flowRegion><flowPara
-         id="flowPara5804-1-1"
-         style="font-weight:bold;font-size:12.5px">Режимы</flowPara></flowRoot>  </g>
+           y="-152.13101" /></flowRegion><flowPara
+         id="flowPara14034-7-6">Настройки</flowPara></flowRoot>    <g
+       id="g6779">
+      <rect
+         y="601.19476"
+         x="1651.5232"
+         height="49.750107"
+         width="299.28571"
+         id="rect4388-73-0-2"
+         style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+      <g
+         transform="matrix(1.1085332,0,0,1.2742982,-178.52625,-169.94816)"
+         id="g6723">
+        <rect
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.24945533;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+           id="rect7572-92-3-3"
+           width="8.9789019"
+           height="0.71440989"
+           x="999.00256"
+           y="1520.2992"
+           transform="matrix(0.78692094,-0.61705383,0.57705343,0.8167064,0,0)" />
+        <rect
+           style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.24867821;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+           id="rect7572-6-1-7-3"
+           width="22.028128"
+           height="1.7266955"
+           x="1665.9513"
+           y="624.2442" />
+        <rect
+           style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.24940288;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+           id="rect7572-92-3-3-0"
+           width="8.6919107"
+           height="0.67184097"
+           x="1706.8578"
+           y="-584.61554"
+           transform="matrix(0.76874921,0.63955035,-0.60180023,0.79864665,0,0)" />
+      </g>
+      <g
+         transform="translate(-4,0)"
+         id="g6775">
+        <rect
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.56570637;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+           id="rect7572-92-3-3-5-2"
+           width="14.887077"
+           height="1.2649279"
+           x="1018.4767"
+           y="-1340.9286"
+           transform="matrix(0.57570238,0.81765932,-0.9873983,0.15825486,0,0)"
+           inkscape:transform-center-x="5.5000003"
+           inkscape:transform-center-y="6.0000003" />
+        <rect
+           style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.48409069;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+           id="rect7572-6-1-7-3-4-7"
+           width="22.028128"
+           height="1.7266955"
+           x="974.74066"
+           y="1767.756"
+           transform="matrix(0.73260118,-0.68065814,0.6806581,0.73260122,0,0)" />
+      </g>
+    </g>
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect6789"
+       width="281.49615"
+       height="37.207409"
+       x="1660.6096"
+       y="687.76379" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot6791"
+       style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(-344.67765,-136.41402)"><flowRegion
+         id="flowRegion6793"><rect
+           id="rect6795"
+           width="197.3904"
+           height="48.864899"
+           x="2003.1659"
+           y="802.97034"
+           style="font-size:15px" /></flowRegion><flowPara
+         id="flowPara6797">Название счета</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot6791-9"
+       style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(-344.15863,-57.510199)"><flowRegion
+         id="flowRegion6793-9"><rect
+           id="rect6795-6"
+           width="197.3904"
+           height="48.864899"
+           x="2003.1659"
+           y="802.97034"
+           style="font-size:15px" /></flowRegion><flowPara
+         id="flowPara6797-3">Валюта учета</flowPara></flowRoot>    <g
+       id="g6875">
+      <rect
+         y="766.66766"
+         x="1661.1287"
+         height="37.207413"
+         width="281.49615"
+         id="rect6789-0"
+         style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path7921-4-95"
+         d="m 1918.0095,780.87446 6.6747,8.97025 6.5586,-8.97051 z"
+         style="display:inline;fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0.56607288px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+  </g>
   <g
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="screen_account"
      style="display:inline"
-     transform="translate(350.55633,151.12113)">
+     transform="translate(350.55633,151.12113)"
+     sodipodi:insensitive="true">
     <flowRoot
        xml:space="preserve"
        id="flowRoot5036-4"
@@ -3583,7 +3856,468 @@
              id="flowPara4984-2-4-9-7-3-9-1"
              style="font-size:12.5px">Перевод</flowPara></flowRoot>      </g>
     </g>
-  </g>
+    <g
+       id="g6350"
+       transform="translate(-401.13665,-0.25735937)">
+      <rect
+         ry="0.044"
+         y="660.20502"
+         x="1660.983"
+         height="65.154793"
+         width="279.82144"
+         id="rect5154-7-9"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+         rx="0.044" />
+      <flowRoot
+         transform="translate(1579.6973,451.3509)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot5160-8-5"
+         xml:space="preserve"><flowRegion
+           id="flowRegion5162-5-0"><rect
+             style="font-size:12.5px"
+             y="224.80742"
+             x="98.363602"
+             height="43.241001"
+             width="169.95816"
+             id="rect5164-9-97" /></flowRegion><flowPara
+           style="font-size:22.5px"
+           id="flowPara5166-5-7">Наличные</flowPara></flowRoot>    </g>
+    <g
+       style="display:inline"
+       transform="translate(1213.5549,495.60235)"
+       id="g8384-9">
+      <circle
+         r="2.5253813"
+         cy="386.68436"
+         cx="173.4937"
+         id="path4486-4-4-4"
+         style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+      <circle
+         r="2.5253813"
+         cy="386.71497"
+         cx="188.12033"
+         id="path4486-2-4-2-7"
+         style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+      <circle
+         r="2.5253813"
+         cy="386.59503"
+         cx="203.03278"
+         id="path4486-6-7-6-8"
+         style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+    </g>
+    <g
+       transform="translate(-400.98318,64.974161)"
+       style="display:inline"
+       id="g6350-1">
+      <rect
+         ry="0.044"
+         y="660.20502"
+         x="1660.983"
+         height="65.154793"
+         width="279.82144"
+         id="rect5154-7-9-7"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+         rx="0.044" />
+      <flowRoot
+         transform="translate(1579.6973,451.3509)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot5160-8-5-7"
+         xml:space="preserve"><flowRegion
+           id="flowRegion5162-5-0-3"><rect
+             style="font-size:12.5px"
+             y="224.80742"
+             x="98.363602"
+             height="39.324322"
+             width="218.74855"
+             id="rect5164-9-97-7" /></flowRegion><flowPara
+           style="font-size:22.5px"
+           id="flowPara5166-5-7-8">Дебетовая карта</flowPara></flowRoot>    </g>
+    <g
+       transform="translate(-400.95008,129.98152)"
+       style="display:inline"
+       id="g6350-1-2">
+      <rect
+         ry="0.044"
+         y="660.20502"
+         x="1660.983"
+         height="65.154793"
+         width="279.82144"
+         id="rect5154-7-9-7-9"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+         rx="0.044" />
+      <flowRoot
+         transform="translate(1579.6973,451.3509)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot5160-8-5-7-1"
+         xml:space="preserve"><flowRegion
+           id="flowRegion5162-5-0-3-6"><rect
+             style="font-size:12.5px"
+             y="224.80742"
+             x="98.363602"
+             height="39.324322"
+             width="218.74855"
+             id="rect5164-9-97-7-4" /></flowRegion><flowPara
+           style="font-size:22.5px"
+           id="flowPara5166-5-7-8-6">Кредитная карта</flowPara></flowRoot>    </g>
+    <g
+       id="g6762">
+      <rect
+         y="601.32819"
+         x="1250.5079"
+         height="49.750107"
+         width="299.28571"
+         id="rect4388-73-0-2-0"
+         style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+      <g
+         id="g7646-8-4-9-6"
+         style="display:inline"
+         transform="translate(1201.5352,549.85823)">
+        <rect
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.48409069;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+           id="rect7572-92-3-3-5"
+           width="22.028128"
+           height="1.7266954"
+           x="63.423771"
+           y="66.728203" />
+        <rect
+           style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.48409069;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+           id="rect7572-6-1-7-3-4"
+           width="22.028128"
+           height="1.7266955"
+           x="63.400784"
+           y="74.519409" />
+        <rect
+           style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.48409069;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+           id="rect7572-62-3-0-4-5"
+           width="22.028128"
+           height="1.7266955"
+           x="63.400784"
+           y="81.944031" />
+      </g>
+      <g
+         transform="matrix(0.80656163,0,0,0.80656163,293.58082,121.91313)"
+         id="g6688">
+        <path
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.23983085;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 1497.6246,628.24301 c -0.1721,-0.0868 -0.3795,-0.35279 -0.4617,-0.5919 -0.1928,-0.56125 -0.1928,-2.68142 0,-3.24629 0.2849,-0.83458 -0.5351,-0.79458 16.3367,-0.79687 9.7792,-10e-4 15.318,0.0424 15.554,0.12266 0.719,0.24463 0.8529,0.6045 0.863,2.31935 0.01,1.74975 -0.061,2.07033 -0.4983,2.23657 -0.1882,0.0715 -6.4342,0.11711 -15.8956,0.11599 -12.2917,-10e-4 -15.6516,-0.0352 -15.8981,-0.15951 z m 20.4063,-2.30732 c -2.0797,-0.0193 -5.4829,-0.0193 -7.5625,0 -2.0797,0.0192 -0.3782,0.035 3.7812,0.035 4.1594,0 5.8609,-0.0157 3.7813,-0.035 z"
+           id="path6671"
+           inkscape:connector-curvature="0" />
+        <path
+           style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.23983085;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 1511.2059,610.17044 c 0.087,-0.1721 0.3528,-0.3795 0.5919,-0.4617 0.5613,-0.1928 2.6814,-0.1928 3.2463,0 0.8346,0.2849 0.7946,-0.5351 0.7969,16.3367 0,9.7792 -0.042,15.318 -0.1227,15.554 -0.2446,0.719 -0.6045,0.8529 -2.3193,0.863 -1.7498,0.01 -2.0704,-0.061 -2.2366,-0.4983 -0.072,-0.1882 -0.1171,-6.4342 -0.116,-15.8956 10e-4,-12.2917 0.035,-15.6516 0.1595,-15.8981 z m 2.3073,20.4063 c 0.019,-2.0797 0.019,-5.4829 0,-7.5625 -0.019,-2.0797 -0.035,-0.3782 -0.035,3.7812 0,4.1594 0.016,5.8609 0.035,3.7813 z"
+           id="path6671-8"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <g
+       transform="translate(0.61811711,550.34412)"
+       style="display:inline"
+       id="g6779-3">
+      <rect
+         y="601.19476"
+         x="1651.5232"
+         height="49.750107"
+         width="299.28571"
+         id="rect4388-73-0-2-1"
+         style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+      <g
+         transform="matrix(1.1085332,0,0,1.2742982,-178.52625,-169.94816)"
+         id="g6723-9">
+        <rect
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.24945533;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+           id="rect7572-92-3-3-53"
+           width="8.9789019"
+           height="0.71440989"
+           x="999.00256"
+           y="1520.2992"
+           transform="matrix(0.78692094,-0.61705383,0.57705343,0.8167064,0,0)" />
+        <rect
+           style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.24867821;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+           id="rect7572-6-1-7-3-5"
+           width="22.028128"
+           height="1.7266955"
+           x="1665.9513"
+           y="624.2442" />
+        <rect
+           style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.24940288;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+           id="rect7572-92-3-3-0-1"
+           width="8.6919107"
+           height="0.67184097"
+           x="1706.8578"
+           y="-584.61554"
+           transform="matrix(0.76874921,0.63955035,-0.60180023,0.79864665,0,0)" />
+      </g>
+      <g
+         transform="translate(-4,0)"
+         id="g6775-1">
+        <rect
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.56570637;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+           id="rect7572-92-3-3-5-2-3"
+           width="14.887077"
+           height="1.2649279"
+           x="1018.4767"
+           y="-1340.9286"
+           transform="matrix(0.57570238,0.81765932,-0.9873983,0.15825486,0,0)"
+           inkscape:transform-center-x="5.5000003"
+           inkscape:transform-center-y="6.0000003" />
+        <rect
+           style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.48409069;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+           id="rect7572-6-1-7-3-4-7-3"
+           width="22.028128"
+           height="1.7266955"
+           x="974.74066"
+           y="1767.756"
+           transform="matrix(0.73260118,-0.68065814,0.6806581,0.73260122,0,0)" />
+      </g>
+    </g>
+    <rect
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect6789-8"
+       width="281.49615"
+       height="37.207413"
+       x="1661.2277"
+       y="1238.108" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot6791-8"
+       style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(-344.05958,413.9301)"><flowRegion
+         id="flowRegion6793-1"><rect
+           id="rect6795-1"
+           width="197.3904"
+           height="48.864899"
+           x="2003.1659"
+           y="802.97034"
+           style="font-size:15px" /></flowRegion><flowPara
+         id="flowPara6797-8">Название категории</flowPara></flowRoot>    <g
+       transform="translate(0.61811711,550.34412)"
+       style="display:inline"
+       id="g6762-2">
+      <rect
+         y="601.32819"
+         x="1250.5079"
+         height="49.750107"
+         width="299.28571"
+         id="rect4388-73-0-2-0-1"
+         style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+      <g
+         id="g7646-8-4-9-6-7"
+         style="display:inline"
+         transform="translate(1201.5352,549.85823)">
+        <rect
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.48409069;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+           id="rect7572-92-3-3-5-4"
+           width="22.028128"
+           height="1.7266954"
+           x="63.423771"
+           y="66.728203" />
+        <rect
+           style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.48409069;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+           id="rect7572-6-1-7-3-4-2"
+           width="22.028128"
+           height="1.7266955"
+           x="63.400784"
+           y="74.519409" />
+        <rect
+           style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.48409069;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+           id="rect7572-62-3-0-4-5-1"
+           width="22.028128"
+           height="1.7266955"
+           x="63.400784"
+           y="81.944031" />
+      </g>
+      <g
+         transform="matrix(0.80656163,0,0,0.80656163,293.58082,121.91313)"
+         id="g6688-8">
+        <path
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.23983085;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 1497.6246,628.24301 c -0.1721,-0.0868 -0.3795,-0.35279 -0.4617,-0.5919 -0.1928,-0.56125 -0.1928,-2.68142 0,-3.24629 0.2849,-0.83458 -0.5351,-0.79458 16.3367,-0.79687 9.7792,-10e-4 15.318,0.0424 15.554,0.12266 0.719,0.24463 0.8529,0.6045 0.863,2.31935 0.01,1.74975 -0.061,2.07033 -0.4983,2.23657 -0.1882,0.0715 -6.4342,0.11711 -15.8956,0.11599 -12.2917,-10e-4 -15.6516,-0.0352 -15.8981,-0.15951 z m 20.4063,-2.30732 c -2.0797,-0.0193 -5.4829,-0.0193 -7.5625,0 -2.0797,0.0192 -0.3782,0.035 3.7812,0.035 4.1594,0 5.8609,-0.0157 3.7813,-0.035 z"
+           id="path6671-6"
+           inkscape:connector-curvature="0" />
+        <path
+           style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.23983085;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 1511.2059,610.17044 c 0.087,-0.1721 0.3528,-0.3795 0.5919,-0.4617 0.5613,-0.1928 2.6814,-0.1928 3.2463,0 0.8346,0.2849 0.7946,-0.5351 0.7969,16.3367 0,9.7792 -0.042,15.318 -0.1227,15.554 -0.2446,0.719 -0.6045,0.8529 -2.3193,0.863 -1.7498,0.01 -2.0704,-0.061 -2.2366,-0.4983 -0.072,-0.1882 -0.1171,-6.4342 -0.116,-15.8956 10e-4,-12.2917 0.035,-15.6516 0.1595,-15.8981 z m 2.3073,20.4063 c 0.019,-2.0797 0.019,-5.4829 0,-7.5625 -0.019,-2.0797 -0.035,-0.3782 -0.035,3.7812 0,4.1594 0.016,5.8609 0.035,3.7813 z"
+           id="path6671-8-0"
+           inkscape:connector-curvature="0" />
+      </g>
+    </g>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot6692-5"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(-465.19668,416.90066)"><flowRegion
+         id="flowRegion6694-6"><rect
+           id="rect6696-9"
+           width="266.51425"
+           height="50.748608"
+           x="1851.2706"
+           y="701.80096"
+           style="fill:#ff0000" /></flowRegion><flowPara
+         id="flowPara6698-5"
+         style="font-size:12.5px;fill:#ff0000">При нажатии появляется фрагмент добавления/редактирования категории</flowPara></flowRoot>    <g
+       transform="translate(398.56058,1005.5697)"
+       style="display:inline"
+       id="g7738-5">
+      <g
+         transform="translate(800.56397,-0.0126964)"
+         id="g5180-5-55">
+        <rect
+           rx="0.044"
+           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+           id="rect5154-7-3"
+           width="279.82144"
+           height="65.154793"
+           x="60"
+           y="209.9077"
+           ry="0.044" />
+        <rect
+           rx="0.044"
+           style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+           id="rect5158-6-54"
+           width="27.630733"
+           height="65.1548"
+           x="60"
+           y="209.9077"
+           ry="0.044" />
+      </g>
+      <flowRoot
+         transform="translate(801.27826,1.040875)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot5160-8-9"
+         xml:space="preserve"><flowRegion
+           id="flowRegion5162-5-69"><rect
+             style="font-size:12.5px"
+             y="224.80742"
+             x="98.363602"
+             height="43.241001"
+             width="169.95816"
+             id="rect5164-9-6" /></flowRegion><flowPara
+           style="font-size:22.5px"
+           id="flowPara5166-5-4">Пища</flowPara></flowRoot>    </g>
+    <g
+       transform="translate(398.81058,940.8197)"
+       style="display:inline"
+       id="g7875-0">
+      <rect
+         rx="0.044"
+         ry="0.044"
+         y="339.74405"
+         x="860.44641"
+         height="65.154793"
+         width="279.82144"
+         id="rect5154-7-0-2"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+      <rect
+         rx="0.044"
+         ry="0.044"
+         y="339.74405"
+         x="860.44641"
+         height="65.1548"
+         width="27.630733"
+         id="rect5158-6-6-7"
+         style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+      <flowRoot
+         transform="translate(801.16071,130.88992)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot5160-8-75-0"
+         xml:space="preserve"><flowRegion
+           id="flowRegion5162-5-1-52"><rect
+             style="font-size:12.5px"
+             y="224.80742"
+             x="98.363602"
+             height="43.241001"
+             width="169.95816"
+             id="rect5164-9-9-07" /></flowRegion><flowPara
+           style="font-size:22.5px"
+           id="flowPara5166-5-6-4">Зарплата</flowPara></flowRoot>    </g>
+    <g
+       transform="translate(398.8473,1135.742)"
+       style="display:inline"
+       id="g7738-5-6">
+      <g
+         transform="translate(800.56397,-0.0126964)"
+         id="g5180-5-55-9">
+        <rect
+           rx="0.044"
+           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+           id="rect5154-7-3-3"
+           width="279.82144"
+           height="65.154793"
+           x="60"
+           y="209.9077"
+           ry="0.044" />
+        <rect
+           rx="0.044"
+           style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+           id="rect5158-6-54-5"
+           width="27.630733"
+           height="65.1548"
+           x="60"
+           y="209.9077"
+           ry="0.044" />
+      </g>
+      <flowRoot
+         transform="translate(801.27826,1.040875)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot5160-8-9-1"
+         xml:space="preserve"><flowRegion
+           id="flowRegion5162-5-69-8"><rect
+             style="font-size:12.5px"
+             y="224.80742"
+             x="98.363602"
+             height="43.241001"
+             width="169.95816"
+             id="rect5164-9-6-8" /></flowRegion><flowPara
+           style="font-size:22.5px"
+           id="flowPara5166-5-4-4">Транспорт</flowPara></flowRoot>    </g>
+    <g
+       id="g7285">
+      <rect
+         rx="0.044"
+         ry="0.044"
+         y="1410.7361"
+         x="1259.5437"
+         height="65.154793"
+         width="279.82144"
+         id="rect5154-7-0-2-7"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+      <rect
+         rx="0.044"
+         ry="0.044"
+         y="1410.7361"
+         x="1259.5437"
+         height="65.1548"
+         width="27.630733"
+         id="rect5158-6-6-7-0"
+         style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+      <flowRoot
+         transform="translate(1200.258,1189.8819)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot5160-8-75-0-7"
+         xml:space="preserve"><flowRegion
+           id="flowRegion5162-5-1-52-3"><rect
+             style="font-size:12.5px"
+             y="224.80742"
+             x="98.363602"
+             height="82.838997"
+             width="202.09264"
+             id="rect5164-9-9-07-5" /></flowRegion><flowPara
+           style="font-size:22.5px"
+           id="flowPara5166-5-6-4-3">Коммунальная плата</flowPara></flowRoot>    </g>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot6692-5-7"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(-578.41735,792.13533)"><flowRegion
+         id="flowRegion6694-6-7"><rect
+           id="rect6696-9-1"
+           width="266.51425"
+           height="50.748608"
+           x="1851.2706"
+           y="701.80096"
+           style="fill:#ff0000" /></flowRegion><flowPara
+         id="flowPara6698-5-8"
+         style="font-size:12.5px;fill:#ff0000">Цвета категорий устанавливаются автоматически</flowPara></flowRoot>  </g>
   <g
      inkscape:groupmode="layer"
      id="layer6"
@@ -3597,4 +4331,46 @@
      inkscape:label="screen_graph"
      sodipodi:insensitive="true"
      transform="translate(350.55633,151.12113)" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="comments">
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot6644"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(-2,16.000001)"><flowRegion
+         id="flowRegion6646"><rect
+           id="rect6648"
+           width="171.55615"
+           height="48.864922"
+           x="1774"
+           y="802.97034" /></flowRegion><flowPara
+         id="flowPara6650"
+         style="font-size:12.5px;fill:#ff0000">При долгом нажатии появляется меню, где можно удалить аккаунт</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot6692"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+       transform="translate(-115.25841,17.677671)"><flowRegion
+         id="flowRegion6694"><rect
+           id="rect6696"
+           width="266.51425"
+           height="50.748608"
+           x="1851.2706"
+           y="701.80096"
+           style="fill:#ff0000;" /></flowRegion><flowPara
+         id="flowPara6698"
+         style="font-size:12.5px;fill:#ff0000;">При нажатии появляется фрагмент добавления/редактирования аккаунта</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot6644-6"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(-37.567625,562.68988)"><flowRegion
+         id="flowRegion6646-6"><rect
+           id="rect6648-0"
+           width="173.67746"
+           height="91.806549"
+           x="1774"
+           y="802.97034" /></flowRegion><flowPara
+         id="flowPara6650-5"
+         style="font-size:12.5px;fill:#ff0000">При долгом нажатии появляется меню, где можно удалить категорию</flowPara></flowRoot>  </g>
 </svg>
