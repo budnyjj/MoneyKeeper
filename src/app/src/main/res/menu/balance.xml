@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/menu_balance_item_group_categories"
-        android:title="@string/menu_action_group_categories"
+        android:title="@string/menu_balance_item_group_categories"
         android:orderInCategory="100"
         app:showAsAction="never" />
 </menu>

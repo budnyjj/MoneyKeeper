@@ -1,9 +1,11 @@
 package budny.moneykeeper.view.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -23,13 +25,12 @@ import java.util.List;
 import budny.moneykeeper.R;
 import budny.moneykeeper.view.fragments.FragmentAccount;
 import budny.moneykeeper.view.fragments.FragmentMain;
-import budny.moneykeeper.view.fragments.FragmentNavDrawer;
 
-public class ActivityBalance extends AppCompatActivity
-        implements FragmentNavDrawer.ActivityContract {
+public class ActivityBalance extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private FloatingActionButton mFab;
+    private NavigationView mNavigationView;
     private TabLayout mTabLayout;
     private Toolbar mToolbar;
     private ViewPager mViewPager;
@@ -79,6 +80,33 @@ public class ActivityBalance extends AppCompatActivity
             }
         };
         mDrawerLayout.addDrawerListener(mDrawerToggle);
+
+        mNavigationView = (NavigationView) findViewById(R.id.balance_navigation);
+        mNavigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                Class<? extends Activity> selectedActivityCls = null;
+                switch (item.getItemId()) {
+                    case R.id.menu_nav_drawer_item_report:
+                        selectedActivityCls = ActivityReport.class;
+                        break;
+                    case R.id.menu_balance_item_group_categories:
+                        selectedActivityCls = ActivitySettings.class;
+                        break;
+                    case R.id.menu_nav_drawer_item_camera:
+                        selectedActivityCls = ActivityCamera.class;
+                        break;
+                }
+
+                mDrawerLayout.closeDrawer(mNavigationView);
+                if (selectedActivityCls != null) {
+                    Intent intent = new Intent(getBaseContext(), selectedActivityCls);
+                    startActivity(intent);
+                }
+                return true;
+            }
+        });
     }
 
     @Override
@@ -134,7 +162,7 @@ public class ActivityBalance extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_balance, menu);
+        getMenuInflater().inflate(R.menu.balance, menu);
         return true;
     }
 
@@ -148,10 +176,5 @@ public class ActivityBalance extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void closeNavigationDrawer(View drawerView) {
-        mDrawerLayout.closeDrawer(drawerView);
     }
 }

@@ -3,22 +3,16 @@ package budny.moneykeeper.view.activities;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.PreferenceFragment;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import budny.moneykeeper.R;
 import budny.moneykeeper.presenter.PresenterMainPreferences;
-import budny.moneykeeper.view.fragments.FragmentNavDrawer;
 
-public class ActivitySettings extends AppCompatActivity
-        implements FragmentNavDrawer.ActivityContract {
+public class ActivitySettings extends AppCompatActivity {
     private static final String TAG = ActivitySettings.class.getSimpleName();
 
-    private ActionBarDrawerToggle mDrawerToggle;
-    private DrawerLayout mDrawerLayout;
     private Toolbar mToolbar;
 
     @Override
@@ -28,45 +22,19 @@ public class ActivitySettings extends AppCompatActivity
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
-
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.fragment_container_settings_nav_drawer);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.nav_drawer_open, R.string.nav_drawer_close) {
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                invalidateOptionsMenu();
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-                invalidateOptionsMenu();
-            }
-
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-                super.onDrawerSlide(drawerView, slideOffset);
-                mToolbar.setAlpha(1 - slideOffset / 2);
-            }
-        };
-        mDrawerLayout.addDrawerListener(mDrawerToggle);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getFragmentManager()
                 .beginTransaction()
-                .add(R.id.fragment_container_settings, new FragmentMainPreferences())
+                .add(R.id.fragment_container_settings_content, new FragmentMainPreferences())
                 .commit();
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        mDrawerToggle.syncState();
-    }
-
-    @Override
-    public void closeNavigationDrawer(View drawerView) {
-        mDrawerLayout.closeDrawer(drawerView);
     }
 
     public static class FragmentMainPreferences extends PreferenceFragment {
@@ -86,6 +54,22 @@ public class ActivitySettings extends AppCompatActivity
             defaultCurrencyPreference.setEntries(mPresenter.getCurrencyNames());
             defaultCurrencyPreference.setEntryValues(mPresenter.getCurrencyCodes());
             defaultCurrencyPreference.setDefaultValue(mPresenter.getDefaultCurrencyCode());
+        }
+    }
+
+    public static class FragmentAccountsPreferences extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.preferences_main);
+        }
+    }
+
+    public static class FragmentCategoriesPreferences extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.preferences_main);
         }
     }
 

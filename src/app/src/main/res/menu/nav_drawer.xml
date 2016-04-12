@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_nav_drawer_item_balance"
+        android:icon="@drawable/ic_account_balance_wallet_24dp"
+        android:title="@string/menu_nav_drawer_item_balance" />
+    <item
+        android:id="@+id/menu_nav_drawer_item_report"
+        android:icon="@drawable/ic_assessment_24dp"
+        android:title="@string/menu_nav_drawer_item_report" />
+    <item
+        android:id="@+id/menu_balance_item_group_categories"
+        android:icon="@drawable/ic_settings_24dp"
+        android:title="@string/menu_nav_drawer_item_settings" />
+    <item
+        android:id="@+id/menu_nav_drawer_item_camera"
+        android:icon="@drawable/ic_camera_alt_24dp"
+        android:title="@string/menu_nav_drawer_item_camera" />
+</menu>

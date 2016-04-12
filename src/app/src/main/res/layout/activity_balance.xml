@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_container_balance_nav_drawer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <!-- Main content -->
     <android.support.design.widget.CoordinatorLayout
@@ -44,13 +45,11 @@
             app:srcCompat="@drawable/ic_add_white" />
     </android.support.design.widget.CoordinatorLayout>
 
-    <!-- Navigation drawer -->
-    <fragment
-        android:id="@+id/fragment_navigation_drawer"
-        android:name="budny.moneykeeper.view.fragments.FragmentNavDrawer"
-        android:layout_width="@dimen/nav_drawer_width"
+    <android.support.design.widget.NavigationView
+        android:id="@+id/balance_navigation"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:layout="@layout/fragment_nav_drawer" />
+        app:menu="@menu/nav_drawer" />
 </android.support.v4.widget.DrawerLayout>
 
