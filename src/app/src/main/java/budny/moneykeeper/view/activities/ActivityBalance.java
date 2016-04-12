@@ -88,10 +88,13 @@ public class ActivityBalance extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem item) {
                 Class<? extends Activity> selectedActivityCls = null;
                 switch (item.getItemId()) {
-                    case R.id.menu_nav_drawer_item_report:
-                        selectedActivityCls = ActivityReport.class;
+                    case R.id.menu_nav_drawer_item_accounts:
+                        selectedActivityCls = ActivityAccounts.class;
                         break;
-                    case R.id.menu_balance_item_group_categories:
+                    case R.id.menu_nav_drawer_item_categories:
+                        selectedActivityCls = ActivityCategories.class;
+                        break;
+                    case R.id.menu_nav_drawer_item_settings:
                         selectedActivityCls = ActivitySettings.class;
                         break;
                     case R.id.menu_nav_drawer_item_camera:
@@ -113,6 +116,24 @@ public class ActivityBalance extends AppCompatActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mDrawerToggle.syncState();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
+        getMenuInflater().inflate(R.menu.balance, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        final int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.menu_balance_item_group_categories) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void setupViewPager() {
@@ -158,23 +179,5 @@ public class ActivityBalance extends AppCompatActivity {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
-        getMenuInflater().inflate(R.menu.balance, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        final int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.menu_balance_item_group_categories) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

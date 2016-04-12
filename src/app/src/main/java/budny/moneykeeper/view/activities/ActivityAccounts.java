@@ -10,13 +10,15 @@ import android.view.View;
 
 import budny.moneykeeper.R;
 
-public class ActivityInput extends AppCompatActivity {
+public class ActivityAccounts extends AppCompatActivity {
+    private static final String TAG = ActivityAccounts.class.getSimpleName();
+
     private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_input);
+        setContentView(R.layout.activity_accounts);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -32,7 +34,7 @@ public class ActivityInput extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {
-        getMenuInflater().inflate(R.menu.input, menu);
+        getMenuInflater().inflate(R.menu.accounts, menu);
         return true;
     }
 
@@ -41,7 +43,7 @@ public class ActivityInput extends AppCompatActivity {
         final int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.menu_input_item_camera) {
+        if (id == R.id.menu_accounts_item_add) {
             return true;
         }
 

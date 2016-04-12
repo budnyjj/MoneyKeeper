@@ -43,7 +43,7 @@ public class ActivitySettings extends AppCompatActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.preferences_main);
+            addPreferencesFromResource(R.xml.preferences);
 
             mPresenter = PresenterMainPreferences.getInstance();
 
@@ -56,28 +56,4 @@ public class ActivitySettings extends AppCompatActivity {
             defaultCurrencyPreference.setDefaultValue(mPresenter.getDefaultCurrencyCode());
         }
     }
-
-    public static class FragmentAccountsPreferences extends PreferenceFragment {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.preferences_main);
-        }
-    }
-
-    public static class FragmentCategoriesPreferences extends PreferenceFragment {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.preferences_main);
-        }
-    }
-
-//    public static class Prefs2Fragment extends PreferenceFragment {
-//        @Override
-//        public void onCreate(Bundle savedInstanceState) {
-//            super.onCreate(savedInstanceState);
-//            addPreferencesFromResource(R.xml.preferences_dependencies);
-//        }
-//    }
 }

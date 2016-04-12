@@ -3,18 +3,22 @@
 
     <item
         android:id="@+id/menu_nav_drawer_item_balance"
-        android:icon="@drawable/ic_account_balance_wallet_24dp"
+        android:icon="@drawable/ic_graph_24dp"
         android:title="@string/menu_nav_drawer_item_balance" />
     <item
-        android:id="@+id/menu_nav_drawer_item_report"
-        android:icon="@drawable/ic_assessment_24dp"
-        android:title="@string/menu_nav_drawer_item_report" />
+        android:id="@+id/menu_nav_drawer_item_accounts"
+        android:icon="@drawable/ic_account_balance_wallet_24dp"
+        android:title="@string/menu_nav_drawer_item_accounts" />
     <item
-        android:id="@+id/menu_balance_item_group_categories"
+        android:id="@+id/menu_nav_drawer_item_categories"
+        android:icon="@drawable/ic_categories_24dp"
+        android:title="@string/menu_nav_drawer_item_categories" />
+    <item
+        android:id="@+id/menu_nav_drawer_item_settings"
         android:icon="@drawable/ic_settings_24dp"
         android:title="@string/menu_nav_drawer_item_settings" />
     <item
         android:id="@+id/menu_nav_drawer_item_camera"
-        android:icon="@drawable/ic_camera_alt_24dp"
+        android:icon="@drawable/ic_camera_black_24dp"
         android:title="@string/menu_nav_drawer_item_camera" />
 </menu>

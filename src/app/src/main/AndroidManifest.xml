@@ -24,8 +24,10 @@
         </activity>
         <activity android:name=".view.activities.ActivityInput"
             android:label="@string/title_input"/>
-        <activity android:name=".view.activities.ActivityReport"
-            android:label="@string/title_report"/>
+        <activity android:name=".view.activities.ActivityAccounts"
+            android:label="@string/title_accounts"/>
+        <activity android:name=".view.activities.ActivityCategories"
+            android:label="@string/title_categories"/>
         <activity android:name=".view.activities.ActivitySettings"
             android:label="@string/title_settings"/>
         <activity android:name=".view.activities.ActivityCamera"

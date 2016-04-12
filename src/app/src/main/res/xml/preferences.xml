@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:dialogTitle="@string/pref_dialog_title_default_currency"
+        android:key="@string/pref_key_default_currency"
+        android:summary="@string/pref_header_summary_default_currency"
+        android:title="@string/pref_header_title_default_currency"
+        android:icon="@drawable/ic_attach_money_24dp"/>
+</PreferenceScreen>
