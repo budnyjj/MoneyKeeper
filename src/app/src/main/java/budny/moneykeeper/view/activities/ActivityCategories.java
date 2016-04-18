@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import budny.moneykeeper.R;
+import budny.moneykeeper.view.fragments.FragmentAccounts;
+import budny.moneykeeper.view.fragments.FragmentCategories;
 
 public class ActivityCategories extends AppCompatActivity {
     private static final String TAG = ActivityCategories.class.getSimpleName();
@@ -30,6 +32,11 @@ public class ActivityCategories extends AppCompatActivity {
         });
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.fragment_container_categories_content, new FragmentCategories())
+                .commit();
     }
 
     @Override
