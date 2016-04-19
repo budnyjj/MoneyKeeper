@@ -1,4 +1,4 @@
-package budny.moneykeeper.view.activities;
+package budny.moneykeeper.ui.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,8 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import budny.moneykeeper.R;
-import budny.moneykeeper.view.fragments.FragmentAccount;
-import budny.moneykeeper.view.fragments.FragmentMain;
+import budny.moneykeeper.ui.fragments.FragmentAccount;
+import budny.moneykeeper.ui.fragments.FragmentMain;
 
 public class ActivityBalance extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;

@@ -1,4 +1,4 @@
-package budny.moneykeeper.view.activities;
+package budny.moneykeeper.ui.activities;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

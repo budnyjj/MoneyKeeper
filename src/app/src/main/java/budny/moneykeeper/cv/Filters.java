@@ -10,7 +10,7 @@ public class Filters {
     public static final String TAG = Filters.class.getSimpleName();
 
     static {
-        if (!OpenCVLoader.init()) {
+        if (!CVManager.init()) {
             Log.e(TAG, "Unable to load OpenCV library");
         }
     }

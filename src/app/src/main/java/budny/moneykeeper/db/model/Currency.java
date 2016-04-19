@@ -1,4 +1,4 @@
-package budny.moneykeeper.model.realm;
+package budny.moneykeeper.db.model;
 
 import io.realm.RealmObject;
 

@@ -1,4 +1,4 @@
-package budny.moneykeeper.view.fragments;
+package budny.moneykeeper.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,9 +18,9 @@ import java.util.Collections;
 import java.util.List;
 
 import budny.moneykeeper.R;
-import budny.moneykeeper.view.misc.RVDividerItemDecoration;
+import budny.moneykeeper.ui.misc.RVDividerItemDecoration;
 
-public class FragmentAccounts extends Fragment {
+public class FragmentCategories extends Fragment {
     LayoutManager mLayoutManager;
     RecyclerView mRecyclerView;
     RVAdapter mAdapter;
@@ -33,9 +33,9 @@ public class FragmentAccounts extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_accounts, container, false);
+        View view = inflater.inflate(R.layout.fragment_categories, container, false);
         // setup recycler view
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_accounts);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_categories);
         mLayoutManager = new LinearLayoutManager(getContext());
         mAdapter = new RVAdapter(new String[]{"a", "b", "c", "d", "e"});
         mTouchHelper = new ItemTouchHelper(new RVTouchCallback(mAdapter));
@@ -59,7 +59,7 @@ public class FragmentAccounts extends Fragment {
 
             public ViewHolder(View v) {
                 super(v);
-                mTextView = (TextView) v.findViewById(R.id.accounts_row_item_title);
+                mTextView = (TextView) v.findViewById(R.id.categories_row_item_title);
             }
         }
 
@@ -73,7 +73,7 @@ public class FragmentAccounts extends Fragment {
         public RVAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             // create a new view
             View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.accounts_row, parent, false);
+                    .inflate(R.layout.categories_row, parent, false);
             ViewHolder vh = new ViewHolder(v);
             return vh;
         }

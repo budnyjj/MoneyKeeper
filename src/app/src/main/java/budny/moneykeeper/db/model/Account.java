@@ -1,11 +1,11 @@
-package budny.moneykeeper.model.realm;
+package budny.moneykeeper.db.model;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
 
 public class Account extends RealmObject {
     private String mName;
-    private String mDefaultCurrency;
+    private String mCurrencyCode;
     private RealmList<BalanceChange> mBalanceChanges;
     private String mTotalAmount;
 
@@ -17,12 +17,12 @@ public class Account extends RealmObject {
         mName = name;
     }
 
-    public String getDefaultCurrency() {
-        return mDefaultCurrency;
+    public String getCurrencyCode() {
+        return mCurrencyCode;
     }
 
-    public void setDefaultCurrency(String currency) {
-        mDefaultCurrency = currency;
+    public void setCurrencyCode(String currency) {
+        mCurrencyCode = currency;
     }
 
     // TODO: use lazy evaluation to provide total amount

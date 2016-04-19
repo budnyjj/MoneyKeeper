@@ -1,4 +1,4 @@
-package budny.moneykeeper.view.fragments;
+package budny.moneykeeper.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,13 +18,17 @@ import java.util.Collections;
 import java.util.List;
 
 import budny.moneykeeper.R;
-import budny.moneykeeper.view.misc.RVDividerItemDecoration;
+import budny.moneykeeper.bl.presenters.PresenterAccounts;
+import budny.moneykeeper.db.model.Account;
+import budny.moneykeeper.ui.misc.RVDividerItemDecoration;
 
-public class FragmentCategories extends Fragment {
-    LayoutManager mLayoutManager;
-    RecyclerView mRecyclerView;
-    RVAdapter mAdapter;
-    ItemTouchHelper mTouchHelper;
+public class FragmentAccounts extends Fragment {
+    private final PresenterAccounts mPresenter = new PresenterAccounts();
+
+    private LayoutManager mLayoutManager;
+    private RecyclerView mRecyclerView;
+    private AccountsAdapter mAdapter;
+    private ItemTouchHelper mTouchHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,11 +37,11 @@ public class FragmentCategories extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_categories, container, false);
+        View view = inflater.inflate(R.layout.fragment_accounts, container, false);
         // setup recycler view
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_categories);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_accounts);
         mLayoutManager = new LinearLayoutManager(getContext());
-        mAdapter = new RVAdapter(new String[]{"a", "b", "c", "d", "e"});
+        mAdapter = new AccountsAdapter(mPresenter.getAccounts());
         mTouchHelper = new ItemTouchHelper(new RVTouchCallback(mAdapter));
         mTouchHelper.attachToRecyclerView(mRecyclerView);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -47,8 +51,8 @@ public class FragmentCategories extends Fragment {
         return view;
     }
 
-    private static class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
-        private List<String> mDataset;
+    private static class AccountsAdapter extends RecyclerView.Adapter<AccountsAdapter.ViewHolder> {
+        private List<Account> mAccounts;
 
         // Provide a reference to the views for each data item
         // Complex data items may need more than one view per item, and
@@ -59,23 +63,22 @@ public class FragmentCategories extends Fragment {
 
             public ViewHolder(View v) {
                 super(v);
-                mTextView = (TextView) v.findViewById(R.id.categories_row_item_title);
+                mTextView = (TextView) v.findViewById(R.id.accounts_row_item_title);
             }
         }
 
         // Provide a suitable constructor (depends on the kind of dataset)
-        public RVAdapter(String[] dataset) {
-            mDataset = new ArrayList<>(Arrays.asList(dataset));
+        public AccountsAdapter(List<Account> accounts) {
+            mAccounts = accounts;
         }
 
         // Create new views (invoked by the layout manager)
         @Override
-        public RVAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public AccountsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             // create a new view
             View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.categories_row, parent, false);
-            ViewHolder vh = new ViewHolder(v);
-            return vh;
+                    .inflate(R.layout.accounts_row, parent, false);
+            return new ViewHolder(v);
         }
 
         // Replace the contents of a view (invoked by the layout manager)
@@ -83,28 +86,28 @@ public class FragmentCategories extends Fragment {
         public void onBindViewHolder(ViewHolder holder, int position) {
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
-            holder.mTextView.setText(mDataset.get(position));
+            holder.mTextView.setText(mAccounts.get(position).getName());
         }
 
         // Return the size of your dataset (invoked by the layout manager)
         @Override
         public int getItemCount() {
-            return mDataset.size();
+            return mAccounts.size();
         }
 
         public void onItemDismiss(int position) {
-            mDataset.remove(position);
+            mAccounts.remove(position);
             notifyItemRemoved(position);
         }
 
         public boolean onItemMove(int fromPosition, int toPosition) {
             if (fromPosition < toPosition) {
                 for (int i = fromPosition; i < toPosition; i++) {
-                    Collections.swap(mDataset, i, i + 1);
+                    Collections.swap(mAccounts, i, i + 1);
                 }
             } else {
                 for (int i = fromPosition; i > toPosition; i--) {
-                    Collections.swap(mDataset, i, i - 1);
+                    Collections.swap(mAccounts, i, i - 1);
                 }
             }
             notifyItemMoved(fromPosition, toPosition);
@@ -113,9 +116,9 @@ public class FragmentCategories extends Fragment {
     }
 
     private class RVTouchCallback extends ItemTouchHelper.Callback {
-        private final RVAdapter mAdapter;
+        private final AccountsAdapter mAdapter;
 
-        public RVTouchCallback(RVAdapter adapter) {
+        public RVTouchCallback(AccountsAdapter adapter) {
             mAdapter = adapter;
         }
 

@@ -1,10 +1,10 @@
-package budny.moneykeeper.view.activities;
+package budny.moneykeeper.ui.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import budny.moneykeeper.R;
-import budny.moneykeeper.view.fragments.FragmentCamera;
+import budny.moneykeeper.ui.fragments.FragmentCamera;
 
 public class ActivityCamera extends AppCompatActivity {
     private static final String TAG = ActivityCamera.class.getSimpleName();

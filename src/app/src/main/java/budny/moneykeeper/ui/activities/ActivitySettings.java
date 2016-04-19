@@ -1,4 +1,4 @@
-package budny.moneykeeper.view.activities;
+package budny.moneykeeper.ui.activities;
 
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import budny.moneykeeper.R;
-import budny.moneykeeper.presenter.PresenterMainPreferences;
+import budny.moneykeeper.bl.presenters.PresenterMainPreferences;
 
 public class ActivitySettings extends AppCompatActivity {
     private static final String TAG = ActivitySettings.class.getSimpleName();

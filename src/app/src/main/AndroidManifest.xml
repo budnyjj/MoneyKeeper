@@ -3,18 +3,24 @@
     package="budny.moneykeeper"
     android:installLocation="preferExternal">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
-    <uses-feature android:name="android.hardware.camera" android:required="false"/>
-    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/>
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
 
     <application
+        android:name=".MoneyKeeperApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".view.activities.ActivityBalance"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.activities.ActivityBalance"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,16 +28,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activities.ActivityInput"
-            android:label="@string/title_input"/>
-        <activity android:name=".view.activities.ActivityAccounts"
-            android:label="@string/title_accounts"/>
-        <activity android:name=".view.activities.ActivityCategories"
-            android:label="@string/title_categories"/>
-        <activity android:name=".view.activities.ActivitySettings"
-            android:label="@string/title_settings"/>
-        <activity android:name=".view.activities.ActivityCamera"
-            android:screenOrientation="landscape"
-            android:configChanges="keyboardHidden|orientation"/>
+        <activity
+            android:name=".ui.activities.ActivityInput"
+            android:label="@string/title_input" />
+        <activity
+            android:name=".ui.activities.ActivityAccounts"
+            android:label="@string/title_accounts" />
+        <activity
+            android:name=".ui.activities.ActivityCategories"
+            android:label="@string/title_categories" />
+        <activity
+            android:name=".ui.activities.ActivitySettings"
+            android:label="@string/title_settings" />
+        <activity
+            android:name=".ui.activities.ActivityCamera"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="landscape" />
     </application>
 </manifest>

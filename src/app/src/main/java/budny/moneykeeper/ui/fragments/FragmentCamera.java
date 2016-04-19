@@ -1,4 +1,4 @@
-package budny.moneykeeper.view.fragments;
+package budny.moneykeeper.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,7 +12,7 @@ import org.opencv.core.Mat;
 
 import budny.moneykeeper.R;
 import budny.moneykeeper.cv.Filters;
-import budny.moneykeeper.cv.OpenCVLoader;
+import budny.moneykeeper.cv.CVManager;
 
 public class FragmentCamera extends Fragment
         implements CameraBridgeViewBase.CvCameraViewListener2 {
@@ -43,7 +43,7 @@ public class FragmentCamera extends Fragment
     @Override
     public void onResume() {
         super.onResume();
-        if (OpenCVLoader.init()) {
+        if (CVManager.init()) {
             mCameraView.enableView();
         }
     }

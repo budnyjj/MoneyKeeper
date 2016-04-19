@@ -1,4 +1,4 @@
-package budny.moneykeeper.view.misc;
+package budny.moneykeeper.ui.misc;
 
 import android.content.Context;
 import android.content.res.TypedArray;

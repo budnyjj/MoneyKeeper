@@ -1,4 +1,4 @@
-package budny.moneykeeper.presenter;
+package budny.moneykeeper.bl.presenters;
 
 import android.annotation.TargetApi;
 import android.os.Build;

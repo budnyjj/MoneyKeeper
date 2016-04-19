@@ -1,4 +1,4 @@
-package budny.moneykeeper.view.views;
+package budny.moneykeeper.ui.views;
 
 import android.content.Context;
 import android.hardware.Camera;

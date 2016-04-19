@@ -1,4 +1,4 @@
-package budny.moneykeeper.view.activities;
+package budny.moneykeeper.ui.activities;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,8 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import budny.moneykeeper.R;
-import budny.moneykeeper.view.fragments.FragmentAccounts;
-import budny.moneykeeper.view.fragments.FragmentCategories;
+import budny.moneykeeper.ui.fragments.FragmentCategories;
 
 public class ActivityCategories extends AppCompatActivity {
     private static final String TAG = ActivityCategories.class.getSimpleName();
