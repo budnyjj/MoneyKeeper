@@ -1,29 +1,26 @@
 package budny.moneykeeper.ui.activities;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import budny.moneykeeper.R;
-import budny.moneykeeper.ui.fragments.FragmentCategories;
+import budny.moneykeeper.ui.fragments.FragmentPreferences;
 
-public class ActivityCategories extends AppCompatActivity {
+public class ActivityPreferences extends AppCompatActivity {
     @SuppressWarnings("unused")
-    private static final String TAG = ActivityCategories.class.getSimpleName();
+    private static final String TAG = ActivityPreferences.class.getSimpleName();
 
     @SuppressWarnings("FieldCanBeLocal")
     private Toolbar mToolbar;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_categories);
+        setContentView(R.layout.activity_preferences);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -35,27 +32,10 @@ public class ActivityCategories extends AppCompatActivity {
         });
         setupActionBar(getSupportActionBar());
 
-        getSupportFragmentManager()
+        getFragmentManager()
                 .beginTransaction()
-                .add(R.id.fragment_container_categories_content, new FragmentCategories())
+                .add(R.id.fragment_container_camera_content, new FragmentPreferences())
                 .commit();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
-        getMenuInflater().inflate(R.menu.categories, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        final int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.menu_categories_item_add) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void setupActionBar(@Nullable ActionBar bar) {

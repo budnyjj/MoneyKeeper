@@ -3,6 +3,8 @@ package budny.moneykeeper.db.model;
 import io.realm.RealmObject;
 
 public class Category extends RealmObject {
+    public static final String FIELD_NAME = "mName";
+
     private String mName;
     private String mConversionRate;
 

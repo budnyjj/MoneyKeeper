@@ -12,18 +12,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import budny.moneykeeper.R;
+import budny.moneykeeper.bl.presenters.IPresenterCategories;
+import budny.moneykeeper.bl.presenters.impl.PresenterCategories;
+import budny.moneykeeper.db.model.Category;
 import budny.moneykeeper.ui.misc.RVDividerItemDecoration;
 
 public class FragmentCategories extends Fragment {
+    private final IPresenterCategories mPresenter = new PresenterCategories();
+
     LayoutManager mLayoutManager;
     RecyclerView mRecyclerView;
-    RVAdapter mAdapter;
+    RVAccountsAdapter mAdapter;
     ItemTouchHelper mTouchHelper;
 
     @Override
@@ -37,7 +37,7 @@ public class FragmentCategories extends Fragment {
         // setup recycler view
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_categories);
         mLayoutManager = new LinearLayoutManager(getContext());
-        mAdapter = new RVAdapter(new String[]{"a", "b", "c", "d", "e"});
+        mAdapter = new RVAccountsAdapter(mPresenter);
         mTouchHelper = new ItemTouchHelper(new RVTouchCallback(mAdapter));
         mTouchHelper.attachToRecyclerView(mRecyclerView);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -47,81 +47,68 @@ public class FragmentCategories extends Fragment {
         return view;
     }
 
-    private static class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
-        private List<String> mDataset;
+    @Override
+    public void onStart() {
+        super.onStart();
+        mPresenter.onStart();
+    }
 
-        // Provide a reference to the views for each data item
-        // Complex data items may need more than one view per item, and
-        // you provide access to all the views for a data item in a view holder
+    @Override
+    public void onStop() {
+        super.onStop();
+        mPresenter.onStop();
+    }
+
+    private static class RVAccountsAdapter extends RecyclerView.Adapter<RVAccountsAdapter.ViewHolder> {
+        private final IPresenterCategories mPresenter;
+
         public static class ViewHolder extends RecyclerView.ViewHolder {
-            // each data item is just a string in this case
             public TextView mTextView;
 
             public ViewHolder(View v) {
                 super(v);
-                mTextView = (TextView) v.findViewById(R.id.categories_row_item_title);
+                mTextView = (TextView) v.findViewById(R.id.item_title);
             }
         }
 
-        // Provide a suitable constructor (depends on the kind of dataset)
-        public RVAdapter(String[] dataset) {
-            mDataset = new ArrayList<>(Arrays.asList(dataset));
+        public RVAccountsAdapter(IPresenterCategories presenter) {
+            mPresenter = presenter;
         }
 
-        // Create new views (invoked by the layout manager)
         @Override
-        public RVAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            // create a new view
+        public RVAccountsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.categories_row, parent, false);
-            ViewHolder vh = new ViewHolder(v);
-            return vh;
+                    .inflate(R.layout.rv_row_categories, parent, false);
+            return new ViewHolder(v);
         }
 
-        // Replace the contents of a view (invoked by the layout manager)
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            // - get element from your dataset at this position
-            // - replace the contents of the view with that element
-            holder.mTextView.setText(mDataset.get(position));
+            Category category = mPresenter.getCategory(position);
+            holder.mTextView.setText(category.getName());
         }
 
-        // Return the size of your dataset (invoked by the layout manager)
         @Override
         public int getItemCount() {
-            return mDataset.size();
+            return mPresenter.getNumCategories();
         }
 
         public void onItemDismiss(int position) {
-            mDataset.remove(position);
+            mPresenter.removeCategory(position);
             notifyItemRemoved(position);
-        }
-
-        public boolean onItemMove(int fromPosition, int toPosition) {
-            if (fromPosition < toPosition) {
-                for (int i = fromPosition; i < toPosition; i++) {
-                    Collections.swap(mDataset, i, i + 1);
-                }
-            } else {
-                for (int i = fromPosition; i > toPosition; i--) {
-                    Collections.swap(mDataset, i, i - 1);
-                }
-            }
-            notifyItemMoved(fromPosition, toPosition);
-            return true;
         }
     }
 
     private class RVTouchCallback extends ItemTouchHelper.Callback {
-        private final RVAdapter mAdapter;
+        private final RVAccountsAdapter mAdapter;
 
-        public RVTouchCallback(RVAdapter adapter) {
+        public RVTouchCallback(RVAccountsAdapter adapter) {
             mAdapter = adapter;
         }
 
         @Override
         public boolean isLongPressDragEnabled() {
-            return true;
+            return false;
         }
 
         @Override
@@ -131,14 +118,12 @@ public class FragmentCategories extends Fragment {
 
         @Override
         public int getMovementFlags(RecyclerView recyclerView, ViewHolder viewHolder) {
-            int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
             int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
-            return makeMovementFlags(dragFlags, swipeFlags);
+            return makeMovementFlags(0, swipeFlags);
         }
 
         @Override
         public boolean onMove(RecyclerView recyclerView, ViewHolder source, ViewHolder target) {
-            mAdapter.onItemMove(source.getAdapterPosition(), target.getAdapterPosition());
             return true;
         }
 

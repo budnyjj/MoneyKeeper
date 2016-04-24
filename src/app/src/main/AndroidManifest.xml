@@ -35,10 +35,13 @@
             android:name=".ui.activities.ActivityAccounts"
             android:label="@string/title_accounts" />
         <activity
+            android:name=".ui.activities.ActivityAccountEdit"
+            android:label="@string/title_account_edit" />
+        <activity
             android:name=".ui.activities.ActivityCategories"
             android:label="@string/title_categories" />
         <activity
-            android:name=".ui.activities.ActivitySettings"
+            android:name=".ui.activities.ActivityPreferences"
             android:label="@string/title_settings" />
         <activity
             android:name=".ui.activities.ActivityCamera"

@@ -2,7 +2,7 @@ package budny.moneykeeper;
 
 import android.app.Application;
 
-import budny.moneykeeper.db.DBManager;
+import budny.moneykeeper.db.util.impl.DBManager;
 
 public class MoneyKeeperApplication extends Application {
     @Override

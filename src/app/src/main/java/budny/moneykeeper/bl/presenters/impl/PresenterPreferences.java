@@ -1,4 +1,4 @@
-package budny.moneykeeper.bl.presenters;
+package budny.moneykeeper.bl.presenters.impl;
 
 import android.annotation.TargetApi;
 import android.os.Build;
@@ -8,18 +8,21 @@ import java.util.Currency;
 import java.util.List;
 import java.util.Set;
 
-public class PresenterMainPreferences {
-    private static final String TAG = PresenterMainPreferences.class.getSimpleName();
+import budny.moneykeeper.bl.presenters.IPresenterMainPreferences;
+
+public class PresenterPreferences implements IPresenterMainPreferences {
+    @SuppressWarnings("unused")
+    private static final String TAG = PresenterPreferences.class.getSimpleName();
 
     private final List<CharSequence> mCurrencyNames;
     private final List<CharSequence> mCurrencyCodes;
 
-    public static PresenterMainPreferences getInstance() {
+    public static PresenterPreferences getInstance() {
         return Holder.INSTANCE;
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    private PresenterMainPreferences() {
+    private PresenterPreferences() {
         Set<Currency> currencies = Currency.getAvailableCurrencies();
         mCurrencyNames = new ArrayList<>(currencies.size());
         for (Currency c : currencies) {
@@ -31,19 +34,22 @@ public class PresenterMainPreferences {
         }
     }
 
+    @Override
     public CharSequence[] getCurrencyNames() {
         return mCurrencyNames.toArray(new CharSequence[mCurrencyNames.size()]);
     }
 
+    @Override
     public CharSequence[] getCurrencyCodes() {
         return mCurrencyCodes.toArray(new CharSequence[mCurrencyCodes.size()]);
     }
 
+    @Override
     public CharSequence getDefaultCurrencyCode() {
         return "USD";
     }
 
     private static class Holder {
-        private static final PresenterMainPreferences INSTANCE = new PresenterMainPreferences();
+        private static final PresenterPreferences INSTANCE = new PresenterPreferences();
     }
 }

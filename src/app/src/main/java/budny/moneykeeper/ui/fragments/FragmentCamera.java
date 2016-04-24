@@ -16,6 +16,7 @@ import budny.moneykeeper.cv.CVManager;
 
 public class FragmentCamera extends Fragment
         implements CameraBridgeViewBase.CvCameraViewListener2 {
+    @SuppressWarnings("unused")
     private static final String TAG = FragmentCamera.class.getSimpleName();
 
     private CameraBridgeViewBase mCameraView;

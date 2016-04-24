@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -12,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -29,8 +31,10 @@ import budny.moneykeeper.ui.fragments.FragmentMain;
 public class ActivityBalance extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
+    @SuppressWarnings("FieldCanBeLocal")
     private FloatingActionButton mFab;
     private NavigationView mNavigationView;
+    @SuppressWarnings("FieldCanBeLocal")
     private TabLayout mTabLayout;
     private Toolbar mToolbar;
     private ViewPager mViewPager;
@@ -42,12 +46,13 @@ public class ActivityBalance extends AppCompatActivity {
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        setupActionBar(getSupportActionBar());
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager();
 
         mTabLayout = (TabLayout) findViewById(R.id.tabs);
+        //noinspection ConstantConditions
         mTabLayout.setupWithViewPager(mViewPager);
 
         mFab = (FloatingActionButton) findViewById(R.id.fab);
@@ -60,7 +65,9 @@ public class ActivityBalance extends AppCompatActivity {
         });
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.fragment_container_balance_nav_drawer);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.nav_drawer_open, R.string.nav_drawer_close) {
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, mToolbar,
+                R.string.nav_drawer_open, R.string.nav_drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
@@ -95,7 +102,7 @@ public class ActivityBalance extends AppCompatActivity {
                         selectedActivityCls = ActivityCategories.class;
                         break;
                     case R.id.menu_nav_drawer_item_settings:
-                        selectedActivityCls = ActivitySettings.class;
+                        selectedActivityCls = ActivityPreferences.class;
                         break;
                     case R.id.menu_nav_drawer_item_camera:
                         selectedActivityCls = ActivityCamera.class;
@@ -132,7 +139,6 @@ public class ActivityBalance extends AppCompatActivity {
         if (id == R.id.menu_balance_item_group_categories) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -178,6 +184,12 @@ public class ActivityBalance extends AppCompatActivity {
         public void addFragment(Fragment fragment, String title) {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
+        }
+    }
+
+    private void setupActionBar(@Nullable ActionBar bar) {
+        if (bar != null) {
+            bar.setDefaultDisplayHomeAsUpEnabled(true);
         }
     }
 }

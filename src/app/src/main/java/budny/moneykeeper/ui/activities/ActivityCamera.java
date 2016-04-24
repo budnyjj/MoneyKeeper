@@ -7,6 +7,7 @@ import budny.moneykeeper.R;
 import budny.moneykeeper.ui.fragments.FragmentCamera;
 
 public class ActivityCamera extends AppCompatActivity {
+    @SuppressWarnings("unused")
     private static final String TAG = ActivityCamera.class.getSimpleName();
 
     @Override
@@ -16,7 +17,7 @@ public class ActivityCamera extends AppCompatActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.layout_camera, new FragmentCamera())
+                .add(R.id.fragment_container_camera_content, new FragmentCamera())
                 .commit();
     }
 }

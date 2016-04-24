@@ -2,6 +2,8 @@ package budny.moneykeeper.ui.activities;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -11,6 +13,7 @@ import android.view.View;
 import budny.moneykeeper.R;
 
 public class ActivityInput extends AppCompatActivity {
+    @SuppressWarnings("FieldCanBeLocal")
     private Toolbar mToolbar;
 
     @Override
@@ -26,8 +29,7 @@ public class ActivityInput extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setupActionBar(getSupportActionBar());
     }
 
     @Override
@@ -44,7 +46,13 @@ public class ActivityInput extends AppCompatActivity {
         if (id == R.id.menu_input_item_camera) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setupActionBar(@Nullable ActionBar bar) {
+        if (bar != null) {
+            bar.setDefaultDisplayHomeAsUpEnabled(true);
+            bar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 }

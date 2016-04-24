@@ -1,7 +1,10 @@
 package budny.moneykeeper.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -12,8 +15,10 @@ import budny.moneykeeper.R;
 import budny.moneykeeper.ui.fragments.FragmentAccounts;
 
 public class ActivityAccounts extends AppCompatActivity {
+    @SuppressWarnings("unused")
     private static final String TAG = ActivityAccounts.class.getSimpleName();
 
+    @SuppressWarnings("FieldCanBeLocal")
     private Toolbar mToolbar;
 
     @Override
@@ -29,8 +34,7 @@ public class ActivityAccounts extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setupActionBar(getSupportActionBar());
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -46,13 +50,20 @@ public class ActivityAccounts extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        final int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.menu_accounts_item_add) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.menu_accounts_item_add: {
+                Intent intent = new Intent(this, ActivityAccountEdit.class);
+                startActivity(intent);
+                return true;
+            }
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setupActionBar(@Nullable ActionBar bar) {
+        if (bar != null) {
+            bar.setDefaultDisplayHomeAsUpEnabled(true);
+            bar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 }
