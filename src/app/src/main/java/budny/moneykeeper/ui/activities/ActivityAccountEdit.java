@@ -1,21 +1,23 @@
 package budny.moneykeeper.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 
 import budny.moneykeeper.R;
 import budny.moneykeeper.ui.fragments.FragmentAccountEdit;
+import budny.moneykeeper.ui.misc.listeners.ISaveContentListener;
 
 public class ActivityAccountEdit extends AppCompatActivity {
+    private ISaveContentListener mSaveListener;
+
     @SuppressWarnings("FieldCanBeLocal")
     private Toolbar mToolbar;
 
@@ -34,9 +36,11 @@ public class ActivityAccountEdit extends AppCompatActivity {
         });
         setupActionBar(getSupportActionBar());
 
+        FragmentAccountEdit fragment = new FragmentAccountEdit();
+        mSaveListener = fragment;
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.fragment_container_account_edit_content, new FragmentAccountEdit())
+                .add(R.id.fragment_container_account_edit_content, fragment)
                 .commit();
     }
 
@@ -48,13 +52,17 @@ public class ActivityAccountEdit extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        final int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.menu_account_edit_item_save) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.menu_account_edit_item_save: {
+                if (mSaveListener.onSaveContent()) {
+                    onBackPressed();
+                }
+                return true;
+            }
+            default: {
+                return super.onOptionsItemSelected(item);
+            }
         }
-        return super.onOptionsItemSelected(item);
     }
 
     private void setupActionBar(@Nullable ActionBar bar) {

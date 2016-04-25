@@ -9,6 +9,25 @@ import io.realm.RealmResults;
  */
 public class AccountOperations {
     /**
+     * Stores account in database.
+     * Automatically setups account's index.
+     */
+    public static void addAccount(Realm realm, final Account account) {
+        // get maximal index value of existing accounts
+        Number maxIndex = realm.where(Account.class).max(Account.FIELD_INDEX);
+        // set greater index value in the new account
+        int accountIndex = maxIndex == null ? 0 : maxIndex.intValue() + 1;
+        account.setIndex(accountIndex);
+        // store account
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.copyToRealm(account);
+            }
+        });
+    }
+
+    /**
      * Retrieves accounts from database.
      */
     public static RealmResults<Account> getAccounts(Realm realm) {

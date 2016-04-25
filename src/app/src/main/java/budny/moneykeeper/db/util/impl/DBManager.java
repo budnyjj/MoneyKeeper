@@ -4,6 +4,7 @@ import android.content.Context;
 
 import budny.moneykeeper.db.model.Account;
 import budny.moneykeeper.db.model.Category;
+import budny.moneykeeper.db.operations.AccountOperations;
 import budny.moneykeeper.db.operations.CommonOperations;
 import budny.moneykeeper.db.util.IDBManager;
 import io.realm.Realm;
@@ -48,15 +49,13 @@ public class DBManager implements IDBManager {
         defaultAccount.setName(DEFAULT_ACCOUNT_NAME);
         // TODO: set default currency automatically
         defaultAccount.setCurrencyCode("USD");
-        defaultAccount.setIndex(1);
-        CommonOperations.add(realm, defaultAccount);
+        AccountOperations.addAccount(realm, defaultAccount);
 
         Account defaultAccount2 = new Account();
         defaultAccount2.setName(DEFAULT_ACCOUNT_NAME + "2");
         // TODO: set default currency automatically
         defaultAccount2.setCurrencyCode("USD");
-        defaultAccount.setIndex(2);
-        CommonOperations.add(realm, defaultAccount2);
+        AccountOperations.addAccount(realm, defaultAccount2);
 
         for (String categoryName : DEFAULT_CATEGORIES) {
             Category category = new Category();

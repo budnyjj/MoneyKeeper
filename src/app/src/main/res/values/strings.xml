@@ -44,4 +44,5 @@
     <string name="menu_account_edit_item_save">Save</string>
 
     <string name="label_account_name">Account name</string>
+    <string name="err_msg_account_name">Incorrect account name</string>
 </resources>

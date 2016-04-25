@@ -49,6 +49,8 @@ public class FragmentAccounts extends Fragment {
     public void onStart() {
         super.onStart();
         mPresenter.onStart();
+        // new account may be added, so we need to update content of accounts list
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
