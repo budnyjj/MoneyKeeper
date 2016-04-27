@@ -55,11 +55,17 @@ public class PresenterAccounts implements IPresenterAccounts {
 
     @Override
     public void removeAccount(int position) {
+        if (!mInitialized) {
+            throw new IllegalArgumentException(MSG_NOT_INITIALIZED);
+        }
         CommonOperations.remove(mRealm, mAccounts.get(position));
     }
 
     @Override
     public void swapAccounts(int fromPosition, int toPosition) {
+        if (!mInitialized) {
+            throw new IllegalArgumentException(MSG_NOT_INITIALIZED);
+        }
         AccountOperations.swapAccounts(mRealm, mAccounts.get(fromPosition), mAccounts.get(toPosition));
     }
 }

@@ -1,6 +1,5 @@
 package budny.moneykeeper.ui.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,11 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 
 import budny.moneykeeper.R;
-import budny.moneykeeper.ui.fragments.FragmentCategories;
+import budny.moneykeeper.ui.fragments.FragmentCategoryEdit;
+import budny.moneykeeper.ui.misc.listeners.ISaveContentListener;
 
-public class ActivityCategories extends AppCompatActivity {
-    @SuppressWarnings("unused")
-    private static final String TAG = ActivityCategories.class.getSimpleName();
+public class ActivityCategoryEdit extends AppCompatActivity {
+    private ISaveContentListener mSaveListener;
 
     @SuppressWarnings("FieldCanBeLocal")
     private Toolbar mToolbar;
@@ -24,7 +23,7 @@ public class ActivityCategories extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_categories);
+        setContentView(R.layout.activity_category_edit);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -36,29 +35,33 @@ public class ActivityCategories extends AppCompatActivity {
         });
         setupActionBar(getSupportActionBar());
 
+        FragmentCategoryEdit fragment = new FragmentCategoryEdit();
+        mSaveListener = fragment;
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.fragment_container_categories_content, new FragmentCategories())
+                .add(R.id.fragment_container_category_edit_content, fragment)
                 .commit();
     }
 
     @Override
     public boolean onCreateOptionsMenu(@NonNull Menu menu) {
-        getMenuInflater().inflate(R.menu.categories, menu);
+        getMenuInflater().inflate(R.menu.category_edit, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        final int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.menu_categories_item_add) {
-            Intent intent = new Intent(this, ActivityCategoryEdit.class);
-            startActivity(intent);
-            return true;
+        switch (item.getItemId()) {
+            case R.id.menu_category_edit_item_save: {
+                if (mSaveListener.onSaveContent()) {
+                    onBackPressed();
+                }
+                return true;
+            }
+            default: {
+                return super.onOptionsItemSelected(item);
+            }
         }
-        return super.onOptionsItemSelected(item);
     }
 
     private void setupActionBar(@Nullable ActionBar bar) {

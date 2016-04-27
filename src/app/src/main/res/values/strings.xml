@@ -42,7 +42,12 @@
     <string name="menu_categories_item_add">Add category</string>
     <string name="menu_accounts_item_add">Add account</string>
     <string name="menu_account_edit_item_save">Save</string>
+    <string name="menu_category_edit_item_save">Save</string>
 
     <string name="label_account_name">Account name</string>
-    <string name="err_msg_account_name">Incorrect account name</string>
+    <string name="label_category_name">Category name</string>
+
+    <string name="err_msg_account_name">Invalid account name</string>
+    <string name="err_msg_category_name">Invalid category name</string>
+    <string name="title_category_edit">Edit category</string>
 </resources>

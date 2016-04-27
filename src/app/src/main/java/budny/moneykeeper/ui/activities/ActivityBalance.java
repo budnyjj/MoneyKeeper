@@ -21,14 +21,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import budny.moneykeeper.R;
-import budny.moneykeeper.ui.fragments.FragmentAccount;
-import budny.moneykeeper.ui.fragments.FragmentMain;
+import budny.moneykeeper.bl.presenters.IPresenterBalance;
+import budny.moneykeeper.bl.presenters.impl.PresenterBalance;
 
 public class ActivityBalance extends AppCompatActivity {
+    private final IPresenterBalance mPresenter = new PresenterBalance();
+
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     @SuppressWarnings("FieldCanBeLocal")
@@ -37,6 +36,7 @@ public class ActivityBalance extends AppCompatActivity {
     @SuppressWarnings("FieldCanBeLocal")
     private TabLayout mTabLayout;
     private Toolbar mToolbar;
+    @SuppressWarnings("FieldCanBeLocal")
     private ViewPager mViewPager;
 
     @Override
@@ -44,12 +44,17 @@ public class ActivityBalance extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_balance);
 
+        // initialize presenter
+        mPresenter.onCreate();
+
+        // setup views
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         setupActionBar(getSupportActionBar());
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager();
+        AdapterViewPager adapter = new AdapterViewPager(getSupportFragmentManager(), mPresenter);
+        mViewPager.setAdapter(adapter);
 
         mTabLayout = (TabLayout) findViewById(R.id.tabs);
         //noinspection ConstantConditions
@@ -91,38 +96,44 @@ public class ActivityBalance extends AppCompatActivity {
         mNavigationView = (NavigationView) findViewById(R.id.balance_navigation);
         mNavigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-                Class<? extends Activity> selectedActivityCls = null;
-                switch (item.getItemId()) {
-                    case R.id.menu_nav_drawer_item_accounts:
-                        selectedActivityCls = ActivityAccounts.class;
-                        break;
-                    case R.id.menu_nav_drawer_item_categories:
-                        selectedActivityCls = ActivityCategories.class;
-                        break;
-                    case R.id.menu_nav_drawer_item_settings:
-                        selectedActivityCls = ActivityPreferences.class;
-                        break;
-                    case R.id.menu_nav_drawer_item_camera:
-                        selectedActivityCls = ActivityCamera.class;
-                        break;
-                }
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem item) {
+                        Class<? extends Activity> selectedActivityCls = null;
+                        switch (item.getItemId()) {
+                            case R.id.menu_nav_drawer_item_accounts:
+                                selectedActivityCls = ActivityAccounts.class;
+                                break;
+                            case R.id.menu_nav_drawer_item_categories:
+                                selectedActivityCls = ActivityCategories.class;
+                                break;
+                            case R.id.menu_nav_drawer_item_settings:
+                                selectedActivityCls = ActivityPreferences.class;
+                                break;
+                            case R.id.menu_nav_drawer_item_camera:
+                                selectedActivityCls = ActivityCamera.class;
+                                break;
+                        }
 
-                mDrawerLayout.closeDrawer(mNavigationView);
-                if (selectedActivityCls != null) {
-                    Intent intent = new Intent(getBaseContext(), selectedActivityCls);
-                    startActivity(intent);
-                }
-                return true;
-            }
-        });
+                        mDrawerLayout.closeDrawer(mNavigationView);
+                        if (selectedActivityCls != null) {
+                            Intent intent = new Intent(getBaseContext(), selectedActivityCls);
+                            startActivity(intent);
+                        }
+                        return true;
+                    }
+                });
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mDrawerToggle.syncState();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.onDestroy();
     }
 
     @Override
@@ -142,54 +153,33 @@ public class ActivityBalance extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupViewPager() {
-        AdapterViewPager adapter = new AdapterViewPager(getSupportFragmentManager());
-        adapter.addFragment(new FragmentMain(), "Main");
-        adapter.addFragment(new FragmentAccount(), "Account 1");
-        adapter.addFragment(new FragmentAccount(), "Account 2");
-        adapter.addFragment(new FragmentAccount(), "Account 3");
-        adapter.addFragment(new FragmentAccount(), "Account 4");
-        adapter.addFragment(new FragmentAccount(), "Account 5");
-        adapter.addFragment(new FragmentAccount(), "Account 6");
-        adapter.addFragment(new FragmentAccount(), "Account 7");
-        adapter.addFragment(new FragmentAccount(), "Account 8");
-        adapter.addFragment(new FragmentAccount(), "Account 9");
-        adapter.addFragment(new FragmentAccount(), "Account 10");
-        mViewPager.setAdapter(adapter);
+    private void setupActionBar(@Nullable ActionBar bar) {
+        if (bar != null) {
+            bar.setDefaultDisplayHomeAsUpEnabled(true);
+        }
     }
 
     private static class AdapterViewPager extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
+        private final IPresenterBalance mPresenter;
 
-        public AdapterViewPager(@NonNull FragmentManager manager) {
+        public AdapterViewPager(@NonNull FragmentManager manager, IPresenterBalance presenter) {
             super(manager);
+            mPresenter = presenter;
         }
 
         @Override
         public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
+            return mPresenter.getAccountFragment(position);
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
+            return mPresenter.getAccountName(position);
         }
 
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-    }
-
-    private void setupActionBar(@Nullable ActionBar bar) {
-        if (bar != null) {
-            bar.setDefaultDisplayHomeAsUpEnabled(true);
+        @Override
+        public int getCount() {
+            return mPresenter.getNumAccounts();
         }
     }
 }

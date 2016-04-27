@@ -1,63 +1,65 @@
 package budny.moneykeeper.bl.presenters.impl;
 
-import budny.moneykeeper.bl.presenters.IPresenterCategories;
-import budny.moneykeeper.db.model.Category;
-import budny.moneykeeper.db.operations.CategoryOperations;
-import budny.moneykeeper.db.operations.CommonOperations;
+import android.support.v4.app.Fragment;
+
+import budny.moneykeeper.bl.presenters.IPresenterBalance;
+import budny.moneykeeper.db.model.Account;
+import budny.moneykeeper.db.operations.AccountOperations;
 import budny.moneykeeper.db.util.IDBManager;
 import budny.moneykeeper.db.util.impl.DBManager;
+import budny.moneykeeper.ui.fragments.FragmentAccount;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-public class PresenterCategories implements IPresenterCategories {
-    private static final String TAG = PresenterCategories.class.getSimpleName();
+public class PresenterBalance implements IPresenterBalance {
+    private static final String TAG = PresenterBalance.class.getSimpleName();
     private static final String MSG_NOT_INITIALIZED = TAG + " is not initialized";
 
     private final IDBManager mDbManager = DBManager.getInstance();
 
     private Realm mRealm;
-    private RealmResults<Category> mCategories;
+    private RealmResults<Account> mAccounts;
 
     private volatile boolean mInitialized;
 
     @Override
-    public void onStart() {
+    public void onCreate() {
         mRealm = mDbManager.getRealm();
-        mCategories = CategoryOperations.getCategories(mRealm);
+        mAccounts = AccountOperations.getAccounts(mRealm);
         mInitialized = true;
     }
 
     @Override
-    public void onStop() {
+    public void onDestroy() {
         if (!mInitialized) {
             throw new IllegalArgumentException(MSG_NOT_INITIALIZED);
         }
-        mCategories = null;
+        mAccounts = null;
         mRealm.close();
         mInitialized = false;
     }
 
     @Override
-    public int getNumCategories() {
+    public Fragment getAccountFragment(int position) {
         if (!mInitialized) {
             throw new IllegalArgumentException(MSG_NOT_INITIALIZED);
         }
-        return mCategories.size();
+        return new FragmentAccount();
     }
 
     @Override
-    public Category getCategory(int position) {
+    public CharSequence getAccountName(int position) {
         if (!mInitialized) {
             throw new IllegalArgumentException(MSG_NOT_INITIALIZED);
         }
-        return mCategories.get(position);
+        return mAccounts.get(position).getName();
     }
 
     @Override
-    public void removeCategory(int position) {
+    public int getNumAccounts() {
         if (!mInitialized) {
             throw new IllegalArgumentException(MSG_NOT_INITIALIZED);
         }
-        CommonOperations.remove(mRealm, mCategories.get(position));
+        return mAccounts.size();
     }
 }
