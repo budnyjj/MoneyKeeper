@@ -1,6 +1,6 @@
 package budny.moneykeeper.bl.presenters;
 
-public interface IPresenterMainPreferences {
+public interface IPresenterFragmentPreferences {
     CharSequence[] getCurrencyNames();
 
     CharSequence[] getCurrencyCodes();

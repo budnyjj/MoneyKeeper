@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import budny.moneykeeper.R;
-import budny.moneykeeper.bl.presenters.IPresenterCategoryEdit;
-import budny.moneykeeper.bl.presenters.impl.PresenterCategoryEdit;
+import budny.moneykeeper.bl.presenters.IPresenterFragmentCategoryEdit;
+import budny.moneykeeper.bl.presenters.impl.PresenterFragmentCategoryEdit;
 import budny.moneykeeper.bl.validators.IValidator;
 import budny.moneykeeper.bl.validators.impl.TextValidator;
 import budny.moneykeeper.db.model.Category;
@@ -21,7 +21,7 @@ public class FragmentCategoryEdit extends Fragment
         implements ISaveContentListener {
     private String mErrorMsgCategoryName;
 
-    private IPresenterCategoryEdit mPresenter = new PresenterCategoryEdit();
+    private IPresenterFragmentCategoryEdit mPresenter = new PresenterFragmentCategoryEdit();
     private IValidator mTextValidator = new TextValidator();
 
     @SuppressWarnings("FieldCanBeLocal")

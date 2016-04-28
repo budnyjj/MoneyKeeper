@@ -8,21 +8,21 @@ import java.util.Currency;
 import java.util.List;
 import java.util.Set;
 
-import budny.moneykeeper.bl.presenters.IPresenterMainPreferences;
+import budny.moneykeeper.bl.presenters.IPresenterFragmentPreferences;
 
-public class PresenterPreferences implements IPresenterMainPreferences {
+public class PresenterFragmentPreferences implements IPresenterFragmentPreferences {
     @SuppressWarnings("unused")
-    private static final String TAG = PresenterPreferences.class.getSimpleName();
+    private static final String TAG = PresenterFragmentPreferences.class.getSimpleName();
 
     private final List<CharSequence> mCurrencyNames;
     private final List<CharSequence> mCurrencyCodes;
 
-    public static PresenterPreferences getInstance() {
+    public static PresenterFragmentPreferences getInstance() {
         return Holder.INSTANCE;
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    private PresenterPreferences() {
+    private PresenterFragmentPreferences() {
         Set<Currency> currencies = Currency.getAvailableCurrencies();
         mCurrencyNames = new ArrayList<>(currencies.size());
         for (Currency c : currencies) {
@@ -50,6 +50,6 @@ public class PresenterPreferences implements IPresenterMainPreferences {
     }
 
     private static class Holder {
-        private static final PresenterPreferences INSTANCE = new PresenterPreferences();
+        private static final PresenterFragmentPreferences INSTANCE = new PresenterFragmentPreferences();
     }
 }

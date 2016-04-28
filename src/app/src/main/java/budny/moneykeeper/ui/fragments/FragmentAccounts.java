@@ -13,13 +13,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import budny.moneykeeper.R;
-import budny.moneykeeper.bl.presenters.IPresenterAccounts;
-import budny.moneykeeper.bl.presenters.impl.PresenterAccounts;
+import budny.moneykeeper.bl.presenters.IPresenterFragmentAccounts;
+import budny.moneykeeper.bl.presenters.impl.PresenterFragmentAccounts;
 import budny.moneykeeper.db.model.Account;
+import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.ui.misc.RVDividerItemDecoration;
 
 public class FragmentAccounts extends Fragment {
-    private final IPresenterAccounts mPresenter = new PresenterAccounts();
+    private final IPresenterFragmentAccounts mPresenter = new PresenterFragmentAccounts();
 
     @SuppressWarnings("FieldCanBeLocal")
     private LayoutManager mLayoutManager;
@@ -49,8 +50,6 @@ public class FragmentAccounts extends Fragment {
     public void onStart() {
         super.onStart();
         mPresenter.onStart();
-        // new account may be added, so we need to update content of accounts list
-        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -60,7 +59,7 @@ public class FragmentAccounts extends Fragment {
     }
 
     private static class RVAccountsAdapter extends RecyclerView.Adapter<RVAccountsAdapter.ViewHolder> {
-        private final IPresenterAccounts mPresenter;
+        private final IPresenterFragmentAccounts mPresenter;
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
             public TextView mTextView;
@@ -71,8 +70,14 @@ public class FragmentAccounts extends Fragment {
             }
         }
 
-        public RVAccountsAdapter(IPresenterAccounts presenter) {
+        public RVAccountsAdapter(IPresenterFragmentAccounts presenter) {
             mPresenter = presenter;
+            mPresenter.addDataChangeListener(new IDataChangeListener() {
+                @Override
+                public void onChange() {
+                    notifyDataSetChanged();
+                }
+            });
         }
 
         @Override

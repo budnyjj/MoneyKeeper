@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import budny.moneykeeper.R;
-import budny.moneykeeper.bl.presenters.IPresenterAccountEdit;
-import budny.moneykeeper.bl.presenters.impl.PresenterAccountEdit;
+import budny.moneykeeper.bl.presenters.IPresenterFragmentAccountEdit;
+import budny.moneykeeper.bl.presenters.impl.PresenterFragmentAccountEdit;
 import budny.moneykeeper.bl.validators.IValidator;
 import budny.moneykeeper.bl.validators.impl.TextValidator;
 import budny.moneykeeper.db.model.Account;
@@ -21,7 +21,7 @@ public class FragmentAccountEdit extends Fragment
         implements ISaveContentListener {
     private String mErrorMsgAccountName;
 
-    private IPresenterAccountEdit mPresenter = new PresenterAccountEdit();
+    private IPresenterFragmentAccountEdit mPresenter = new PresenterFragmentAccountEdit();
     private IValidator mTextValidator = new TextValidator();
 
     @SuppressWarnings("FieldCanBeLocal")

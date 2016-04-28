@@ -5,18 +5,18 @@ import android.preference.ListPreference;
 import android.preference.PreferenceFragment;
 
 import budny.moneykeeper.R;
-import budny.moneykeeper.bl.presenters.IPresenterMainPreferences;
-import budny.moneykeeper.bl.presenters.impl.PresenterPreferences;
+import budny.moneykeeper.bl.presenters.IPresenterFragmentPreferences;
+import budny.moneykeeper.bl.presenters.impl.PresenterFragmentPreferences;
 
 public class FragmentPreferences extends PreferenceFragment {
-    private IPresenterMainPreferences mPresenter;
+    private IPresenterFragmentPreferences mPresenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
-        mPresenter = PresenterPreferences.getInstance();
+        mPresenter = PresenterFragmentPreferences.getInstance();
 
         final String defaultCurrencyKey =
                 getResources().getString(R.string.pref_key_default_currency);

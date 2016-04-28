@@ -2,10 +2,14 @@ package budny.moneykeeper.bl.presenters;
 
 import android.support.v4.app.Fragment;
 
-public interface IPresenterBalance {
+import budny.moneykeeper.db.util.IDataChangeListener;
+
+public interface IPresenterActivityBalance {
     void onCreate();
 
     void onDestroy();
+
+    void addDataChangeListener(IDataChangeListener listener);
 
     Fragment getAccountFragment(int position);
 

@@ -22,11 +22,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 import budny.moneykeeper.R;
-import budny.moneykeeper.bl.presenters.IPresenterBalance;
-import budny.moneykeeper.bl.presenters.impl.PresenterBalance;
+import budny.moneykeeper.bl.presenters.IPresenterActivityBalance;
+import budny.moneykeeper.bl.presenters.impl.PresenterActivityBalance;
+import budny.moneykeeper.db.util.IDataChangeListener;
 
 public class ActivityBalance extends AppCompatActivity {
-    private final IPresenterBalance mPresenter = new PresenterBalance();
+    private final IPresenterActivityBalance mPresenter = new PresenterActivityBalance();
 
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
@@ -160,11 +161,17 @@ public class ActivityBalance extends AppCompatActivity {
     }
 
     private static class AdapterViewPager extends FragmentPagerAdapter {
-        private final IPresenterBalance mPresenter;
+        private final IPresenterActivityBalance mPresenter;
 
-        public AdapterViewPager(@NonNull FragmentManager manager, IPresenterBalance presenter) {
+        public AdapterViewPager(@NonNull FragmentManager manager, IPresenterActivityBalance presenter) {
             super(manager);
             mPresenter = presenter;
+            mPresenter.addDataChangeListener(new IDataChangeListener() {
+                @Override
+                public void onChange() {
+                    notifyDataSetChanged();
+                }
+            });
         }
 
         @Override
