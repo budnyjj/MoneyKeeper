@@ -16,7 +16,7 @@ public class PresenterActivityCategories implements IPresenterActivityCategories
     }
 
     /**
-     * Starts {@linkplain budny.moneykeeper.ui.activities.ActivityAccountEdit}
+     * Starts {@linkplain budny.moneykeeper.ui.activities.ActivityCategoryEdit}
      * to create new category.
      */
     @Override

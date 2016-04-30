@@ -18,8 +18,10 @@ import budny.moneykeeper.bl.presenters.impl.PresenterFragmentAccounts;
 import budny.moneykeeper.db.model.Account;
 import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.ui.misc.RVItemDividerDecoration;
+import budny.moneykeeper.ui.misc.RVItemTouchListener;
 import budny.moneykeeper.ui.misc.listeners.IContentDeleteListener;
 import budny.moneykeeper.ui.misc.listeners.IContentSwapListener;
+import budny.moneykeeper.ui.misc.listeners.IRVItemClickListener;
 
 public class FragmentAccounts extends Fragment {
     private final IPresenterFragmentAccounts mPresenter = new PresenterFragmentAccounts();
@@ -42,6 +44,8 @@ public class FragmentAccounts extends Fragment {
         mAdapter = new RVAccountsAdapter(mPresenter);
         mTouchHelper = new ItemTouchHelper(new RVTouchCallback(mAdapter, mAdapter));
         mTouchHelper.attachToRecyclerView(mRecyclerView);
+        mRecyclerView.addOnItemTouchListener(
+                new RVItemTouchListener(getActivity(), mRecyclerView, new RVItemClickListener(mPresenter)));
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addItemDecoration(new RVItemDividerDecoration(getContext()));
@@ -152,6 +156,24 @@ public class FragmentAccounts extends Fragment {
         @Override
         public void onSwiped(ViewHolder holder, int direction) {
             mDeleteListener.onDeleteContent(holder.getAdapterPosition());
+        }
+    }
+
+    private class RVItemClickListener implements IRVItemClickListener {
+        private final IPresenterFragmentAccounts mPresenter;
+
+        public RVItemClickListener(IPresenterFragmentAccounts presenter) {
+            mPresenter = presenter;
+        }
+
+        @Override
+        public void onItemClick(View view, int position) {
+            mPresenter.updateAccount(getActivity(), position);
+        }
+
+        @Override
+        public void onItemLongClick(View view, int position) {
+
         }
     }
 }

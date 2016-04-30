@@ -12,11 +12,15 @@ import android.view.MenuItem;
 import android.view.View;
 
 import budny.moneykeeper.R;
+import budny.moneykeeper.bl.presenters.IPresenterActivityAccounts;
+import budny.moneykeeper.bl.presenters.impl.PresenterActivityAccounts;
 import budny.moneykeeper.ui.fragments.FragmentAccounts;
 
 public class ActivityAccounts extends AppCompatActivity {
     @SuppressWarnings("unused")
     private static final String TAG = ActivityAccounts.class.getSimpleName();
+
+    private final IPresenterActivityAccounts mPresenter = new PresenterActivityAccounts(this);
 
     @SuppressWarnings("FieldCanBeLocal")
     private Toolbar mToolbar;
@@ -52,8 +56,7 @@ public class ActivityAccounts extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_accounts_item_add: {
-                Intent intent = new Intent(this, ActivityAccountEdit.class);
-                startActivity(intent);
+                mPresenter.createAccount();
                 return true;
             }
         }

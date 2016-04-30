@@ -66,7 +66,7 @@ public class PresenterFragmentCategories implements IPresenterFragmentCategories
     }
 
     /**
-     * Starts {@linkplain budny.moneykeeper.ui.activities.ActivityAccountEdit}
+     * Starts {@linkplain budny.moneykeeper.ui.activities.ActivityCategoryEdit}
      * to update specified category.
      *
      * @param context activity context

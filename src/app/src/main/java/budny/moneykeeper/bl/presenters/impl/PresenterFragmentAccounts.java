@@ -1,5 +1,8 @@
 package budny.moneykeeper.bl.presenters.impl;
 
+import android.content.Context;
+import android.content.Intent;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +13,8 @@ import budny.moneykeeper.db.operations.CommonOperations;
 import budny.moneykeeper.db.util.IDBManager;
 import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.db.util.impl.DBManager;
+import budny.moneykeeper.ui.activities.ActivityAccountEdit;
+import budny.moneykeeper.ui.misc.IntentExtras;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
@@ -58,6 +63,24 @@ public class PresenterFragmentAccounts implements IPresenterFragmentAccounts {
     public Account getAccount(int position) {
         checkInitialized();
         return mAccounts.get(position);
+    }
+
+    /**
+     * Starts {@linkplain budny.moneykeeper.ui.activities.ActivityAccountEdit}
+     * to update specified category.
+     *
+     * @param context activity context
+     * @param index   index of category to edit
+     */
+    @Override
+    public void updateAccount(Context context, int index) {
+        if (context == null) {
+            return;
+        }
+        Intent intent = new Intent(context, ActivityAccountEdit.class);
+        intent.putExtra(IntentExtras.FIELD_ACTION, IntentExtras.ACTION_UPDATE);
+        intent.putExtra(IntentExtras.FIELD_INDEX, index);
+        context.startActivity(intent);
     }
 
     @Override

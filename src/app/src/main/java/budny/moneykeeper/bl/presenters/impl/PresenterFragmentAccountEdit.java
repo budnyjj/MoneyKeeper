@@ -3,9 +3,11 @@ package budny.moneykeeper.bl.presenters.impl;
 import budny.moneykeeper.bl.presenters.IPresenterFragmentAccountEdit;
 import budny.moneykeeper.db.model.Account;
 import budny.moneykeeper.db.operations.AccountOperations;
+import budny.moneykeeper.db.operations.CategoryOperations;
 import budny.moneykeeper.db.util.IDBManager;
 import budny.moneykeeper.db.util.impl.DBManager;
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class PresenterFragmentAccountEdit implements IPresenterFragmentAccountEdit {
     private static final String TAG = PresenterFragmentAccountEdit.class.getSimpleName();
@@ -14,26 +16,54 @@ public class PresenterFragmentAccountEdit implements IPresenterFragmentAccountEd
     private final IDBManager mDbManager = DBManager.getInstance();
 
     private Realm mRealm;
+    private RealmResults<Account> mAccounts;
 
     private volatile boolean mInitialized;
 
     @Override
     public void onStart() {
         mRealm = mDbManager.getRealm();
+        mAccounts = AccountOperations.getAccounts(mRealm);
         mInitialized = true;
     }
 
     @Override
     public void onStop() {
-        if (!mInitialized) {
-            throw new IllegalArgumentException(MSG_NOT_INITIALIZED);
-        }
+        checkInitialized();
+        mAccounts = null;
         mRealm.close();
         mInitialized = false;
     }
 
     @Override
-    public void addAccount(Account account) {
-        AccountOperations.addAccount(mRealm, account);
+    public Account getAccount(int index) {
+        checkInitialized();
+        return mAccounts.get(index);
+    }
+
+    @Override
+    public void createAccount(Account account) {
+        AccountOperations.createAccount(mRealm, account);
+    }
+
+    /**
+     * Updates specified account by replacing its contents.
+     *
+     * @param dstIndex   index of account to be replaced
+     * @param srcAccount new account
+     */
+    @Override
+    public void updateAccount(Account srcAccount, int dstIndex) {
+        checkInitialized();
+        AccountOperations.updateAccount(mRealm, srcAccount, mAccounts.get(dstIndex));
+    }
+
+    /**
+     * Checks, if presenter is in active state.
+     */
+    private void checkInitialized() {
+        if (!mInitialized) {
+            throw new IllegalArgumentException(MSG_NOT_INITIALIZED);
+        }
     }
 }

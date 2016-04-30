@@ -50,7 +50,7 @@ public class PresenterFragmentCategoryEdit implements IPresenterFragmentCategory
     /**
      * Updates specified category by replacing its contents.
      *
-     * @param dstIndex index of category to be replaced
+     * @param dstIndex    index of category to be replaced
      * @param srcCategory new category
      */
     @Override

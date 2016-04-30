@@ -15,7 +15,7 @@ import budny.moneykeeper.ui.fragments.FragmentCategoryEdit;
 import budny.moneykeeper.ui.misc.listeners.IContentEditListener;
 
 public class ActivityCategoryEdit extends AppCompatActivity {
-    private IContentEditListener mCreateUpdateListener;
+    private IContentEditListener mEditListener;
 
     @SuppressWarnings("FieldCanBeLocal")
     private Toolbar mToolbar;
@@ -38,7 +38,7 @@ public class ActivityCategoryEdit extends AppCompatActivity {
         FragmentCategoryEdit fragment = new FragmentCategoryEdit();
         // pass activity's arguments to the fragment
         fragment.setArguments(getIntent().getExtras());
-        mCreateUpdateListener = fragment;
+        mEditListener = fragment;
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.fragment_container_category_edit_content, fragment)
@@ -55,7 +55,7 @@ public class ActivityCategoryEdit extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_category_edit_item_save: {
-                if (mCreateUpdateListener.onEditContent()) {
+                if (mEditListener.onEditContent()) {
                     onBackPressed();
                 }
                 return true;

@@ -49,13 +49,13 @@ public class DBManager implements IDBManager {
         defaultAccount.setName(DEFAULT_ACCOUNT_NAME);
         // TODO: set default currency automatically
         defaultAccount.setCurrencyCode("USD");
-        AccountOperations.addAccount(realm, defaultAccount);
+        AccountOperations.createAccount(realm, defaultAccount);
 
         Account defaultAccount2 = new Account();
         defaultAccount2.setName(DEFAULT_ACCOUNT_NAME + "2");
         // TODO: set default currency automatically
         defaultAccount2.setCurrencyCode("USD");
-        AccountOperations.addAccount(realm, defaultAccount2);
+        AccountOperations.createAccount(realm, defaultAccount2);
 
         for (String categoryName : DEFAULT_CATEGORIES) {
             Category category = new Category();

@@ -7,5 +7,9 @@ public interface IPresenterFragmentAccountEdit {
 
     void onStop();
 
-    void addAccount(Account account);
+    void createAccount(Account account);
+
+    void updateAccount(Account srcAccount, int dstIndex);
+
+    Account getAccount(int index);
 }

@@ -12,7 +12,7 @@ public class AccountOperations {
      * Stores account in database.
      * Automatically setups account's index.
      */
-    public static void addAccount(Realm realm, final Account account) {
+    public static void createAccount(Realm realm, final Account account) {
         // get maximal index value of existing accounts
         Number maxIndex = realm.where(Account.class).max(Account.FIELD_INDEX);
         // set greater index value in the new account
@@ -44,6 +44,22 @@ public class AccountOperations {
                 int fromIndex = fromAccount.getIndex();
                 fromAccount.setIndex(toAccount.getIndex());
                 toAccount.setIndex(fromIndex);
+            }
+        });
+    }
+
+    /**
+     * Updates contents of specified account.
+     *
+     * @param realm Realm instance
+     * @param srcAccount source account with new values
+     * @param dstAccount account to be updated
+     */
+    public static void updateAccount(Realm realm, final Account srcAccount, final Account dstAccount) {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                dstAccount.setName(srcAccount.getName());
             }
         });
     }

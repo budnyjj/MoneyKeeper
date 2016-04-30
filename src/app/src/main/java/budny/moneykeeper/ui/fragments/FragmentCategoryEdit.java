@@ -18,8 +18,7 @@ import budny.moneykeeper.ui.misc.IntentExtras;
 import budny.moneykeeper.ui.misc.ValidationTextWatcher;
 import budny.moneykeeper.ui.misc.listeners.IContentEditListener;
 
-public class FragmentCategoryEdit extends Fragment
-        implements IContentEditListener {
+public class FragmentCategoryEdit extends Fragment implements IContentEditListener {
     // action to perform with category (create or update)
     private String mAction = IntentExtras.ACTION_INVALID;
     // index of category to edit
@@ -27,7 +26,6 @@ public class FragmentCategoryEdit extends Fragment
     private IPresenterFragmentCategoryEdit mPresenter = new PresenterFragmentCategoryEdit();
     private IValidator mTextValidator = new TextValidator();
     private String mErrorMsgCategoryName;
-
 
     @SuppressWarnings("FieldCanBeLocal")
     private TextInputLayout mCategoryNameContainer;
@@ -86,6 +84,7 @@ public class FragmentCategoryEdit extends Fragment
                 mPresenter.updateCategory(category, mCategoryIdx);
                 break;
             default:
+                break;
         }
         return true;
     }

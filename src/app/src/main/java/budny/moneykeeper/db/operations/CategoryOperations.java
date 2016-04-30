@@ -13,7 +13,7 @@ public class CategoryOperations {
     }
 
     /**
-     * Updates contents specified category.
+     * Updates contents of specified category.
      *
      * @param realm Realm instance
      * @param srcCategory source category with new values

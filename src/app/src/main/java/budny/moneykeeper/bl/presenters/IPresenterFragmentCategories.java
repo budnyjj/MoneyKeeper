@@ -20,7 +20,7 @@ public interface IPresenterFragmentCategories {
      * Update specified category.
      *
      * @param context activity context
-     * @param index   index of category in dataset
+     * @param index   index of category to update
      */
     void updateCategory(Context context, int index);
 
