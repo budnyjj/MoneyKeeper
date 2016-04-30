@@ -31,9 +31,7 @@ public class AccountOperations {
      * Retrieves accounts from database.
      */
     public static RealmResults<Account> getAccounts(Realm realm) {
-        RealmResults<Account> accounts = realm.where(Account.class).findAll();
-        accounts.sort(Account.FIELD_INDEX);
-        return accounts;
+        return realm.where(Account.class).findAllSorted(Account.FIELD_INDEX);
     }
 
     /**

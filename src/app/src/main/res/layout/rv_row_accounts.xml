@@ -9,11 +9,11 @@
         android:id="@+id/item_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginEnd="@dimen/margin_end_default"
+        android:layout_marginLeft="@dimen/margin_start_default"
+        android:layout_marginRight="@dimen/margin_end_default"
+        android:layout_marginStart="@dimen/margin_start_default"
         android:gravity="center_vertical"
-        android:textSize="16sp"
+        android:textSize="@dimen/text_size_default"
         tools:text="Title" />
 </FrameLayout>

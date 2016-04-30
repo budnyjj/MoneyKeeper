@@ -14,5 +14,5 @@ public interface IPresenterFragmentCategories {
 
     Category getCategory(int position);
 
-    void removeCategory(int position);
+    void deteteCategory(int position);
 }

@@ -11,6 +11,7 @@ import budny.moneykeeper.db.util.IDBManager;
 import budny.moneykeeper.db.util.impl.DBManager;
 import budny.moneykeeper.db.util.IDataChangeListener;
 import io.realm.Realm;
+import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 
 public class PresenterFragmentCategories implements IPresenterFragmentCategories {
@@ -18,7 +19,9 @@ public class PresenterFragmentCategories implements IPresenterFragmentCategories
     private static final String MSG_NOT_INITIALIZED = TAG + " is not initialized";
 
     private final IDBManager mDbManager = DBManager.getInstance();
-    private final List<IDataChangeListener> mDataChangeListeners = new ArrayList<>();
+    // preserves data change listeners from being garbage collected
+    // and saves them from being removed during fragment lifecycle
+    private final List<RealmChangeListener> mChangeListeners = new ArrayList<>();
 
     private Realm mRealm;
     private RealmResults<Category> mCategories;
@@ -29,54 +32,63 @@ public class PresenterFragmentCategories implements IPresenterFragmentCategories
     public void onStart() {
         mRealm = mDbManager.getRealm();
         mCategories = CategoryOperations.getCategories(mRealm);
-        for (final IDataChangeListener listener : mDataChangeListeners) {
-            CommonOperations.addDataChangeListener(mRealm, listener);
+        // add pending listeners
+        for (final RealmChangeListener listener : mChangeListeners) {
+            mCategories.addChangeListener(listener);
         }
         mInitialized = true;
     }
 
     @Override
     public void onStop() {
-        if (!mInitialized) {
-            throw new IllegalArgumentException(MSG_NOT_INITIALIZED);
-        }
+        checkInitialized();
+        mCategories.removeChangeListeners();
         mCategories = null;
-        mDataChangeListeners.clear();
         mRealm.close();
         mInitialized = false;
     }
 
     @Override
     public int getNumCategories() {
-        if (!mInitialized) {
-            throw new IllegalArgumentException(MSG_NOT_INITIALIZED);
-        }
+        checkInitialized();
         return mCategories.size();
     }
 
     @Override
     public Category getCategory(int position) {
-        if (!mInitialized) {
-            throw new IllegalArgumentException(MSG_NOT_INITIALIZED);
-        }
+        checkInitialized();
         return mCategories.get(position);
     }
 
     @Override
-    public void removeCategory(int position) {
-        if (!mInitialized) {
-            throw new IllegalArgumentException(MSG_NOT_INITIALIZED);
-        }
-        CommonOperations.deleteObject(mRealm, mCategories.get(position));
+    public void deteteCategory(int position) {
+        checkInitialized();
+        CommonOperations.deleteObject(mRealm, mCategories, position);
     }
 
     @Override
     public void addDataChangeListener(final IDataChangeListener listener) {
+        // wrap data change listener into realm data change listener
+        RealmChangeListener realmListener = new RealmChangeListener() {
+            @Override
+            public void onChange() {
+                listener.onChange();
+            }
+        };
+        // store listener in list to preserve it from GC
+        mChangeListeners.add(realmListener);
         // if already initialized, addObject change listener immediately
         if (mInitialized) {
-            CommonOperations.addDataChangeListener(mRealm, listener);
+            mCategories.addChangeListener(realmListener);
         }
-        // store listener in temporary list to be added during initialization
-        mDataChangeListeners.add(listener);
+    }
+
+    /**
+     * Checks, if presenter is in active state.
+     */
+    private void checkInitialized() {
+        if (!mInitialized) {
+            throw new IllegalArgumentException(MSG_NOT_INITIALIZED);
+        }
     }
 }

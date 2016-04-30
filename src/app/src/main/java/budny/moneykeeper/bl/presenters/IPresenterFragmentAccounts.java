@@ -14,7 +14,7 @@ public interface IPresenterFragmentAccounts {
 
     Account getAccount(int position);
 
-    void removeAccount(int position);
+    void deleteAccount(int position);
 
     void swapAccounts(int fromPosition, int toPosition);
 }

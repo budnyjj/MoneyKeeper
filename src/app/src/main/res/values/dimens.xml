@@ -9,4 +9,8 @@
     <dimen name="tab_padding_bottom">16dp</dimen>
     <dimen name="tab_label">14sp</dimen>
     <dimen name="custom_tab_layout_height">72dp</dimen>
+    <dimen name="margin_start_default">16dp</dimen>
+    <dimen name="margin_end_default">16dp</dimen>
+    <dimen name="text_size_default">16sp</dimen>
+    <dimen name="text_size_big">34sp</dimen>
 </resources>

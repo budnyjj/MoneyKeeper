@@ -11,6 +11,7 @@ import budny.moneykeeper.db.util.IDBManager;
 import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.db.util.impl.DBManager;
 import io.realm.Realm;
+import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 
 public class PresenterFragmentAccounts implements IPresenterFragmentAccounts {
@@ -18,7 +19,9 @@ public class PresenterFragmentAccounts implements IPresenterFragmentAccounts {
     private static final String MSG_NOT_INITIALIZED = TAG + " is not initialized";
 
     private final IDBManager mDbManager = DBManager.getInstance();
-    private final List<IDataChangeListener> mDataChangeListeners = new ArrayList<>();
+    // preserves data change listeners from being garbage collected
+    // and saves them from being removed during fragment lifecycle
+    private final List<RealmChangeListener> mChangeListeners = new ArrayList<>();
 
     private Realm mRealm;
     private RealmResults<Account> mAccounts;
@@ -29,17 +32,17 @@ public class PresenterFragmentAccounts implements IPresenterFragmentAccounts {
     public void onStart() {
         mRealm = mDbManager.getRealm();
         mAccounts = AccountOperations.getAccounts(mRealm);
-        for (final IDataChangeListener listener : mDataChangeListeners) {
-            CommonOperations.addDataChangeListener(mRealm, listener);
+        // add pending listeners
+        for (final RealmChangeListener listener : mChangeListeners) {
+            mAccounts.addChangeListener(listener);
         }
         mInitialized = true;
     }
 
     @Override
     public void onStop() {
-        if (!mInitialized) {
-            throw new IllegalArgumentException(MSG_NOT_INITIALIZED);
-        }
+        checkInitialized();
+        mAccounts.removeChangeListeners();
         mAccounts = null;
         mRealm.close();
         mInitialized = false;
@@ -47,43 +50,56 @@ public class PresenterFragmentAccounts implements IPresenterFragmentAccounts {
 
     @Override
     public int getNumAccounts() {
-        if (!mInitialized) {
-            throw new IllegalArgumentException(MSG_NOT_INITIALIZED);
-        }
+        checkInitialized();
         return mAccounts.size();
     }
 
     @Override
     public Account getAccount(int position) {
-        if (!mInitialized) {
-            throw new IllegalArgumentException(MSG_NOT_INITIALIZED);
-        }
+        checkInitialized();
         return mAccounts.get(position);
     }
 
     @Override
-    public void removeAccount(int position) {
-        if (!mInitialized) {
-            throw new IllegalArgumentException(MSG_NOT_INITIALIZED);
-        }
-        CommonOperations.deleteObject(mRealm, mAccounts.get(position));
+    public void deleteAccount(int position) {
+        checkInitialized();
+        CommonOperations.deleteObject(mRealm, mAccounts, position);
     }
 
     @Override
     public void swapAccounts(int fromPosition, int toPosition) {
-        if (!mInitialized) {
-            throw new IllegalArgumentException(MSG_NOT_INITIALIZED);
+        checkInitialized();
+        Account fromAccount = mAccounts.get(fromPosition);
+        Account toAccount = mAccounts.get(toPosition);
+        AccountOperations.swapAccounts(mRealm, fromAccount, toAccount);
+        for (RealmChangeListener listener : mChangeListeners) {
+            listener.onChange();
         }
-        AccountOperations.swapAccounts(mRealm, mAccounts.get(fromPosition), mAccounts.get(toPosition));
     }
 
     @Override
     public void addDataChangeListener(final IDataChangeListener listener) {
-        // if presenter was already initialized, addObject change listener immediately,
+        // wrap data change listener into realm data change listener
+        RealmChangeListener realmListener = new RealmChangeListener() {
+            @Override
+            public void onChange() {
+                listener.onChange();
+            }
+        };
+        // store listener in list to preserve it from GC
+        mChangeListeners.add(realmListener);
+        // if already initialized, add change listener immediately
         if (mInitialized) {
-            CommonOperations.addDataChangeListener(mRealm, listener);
+            mAccounts.addChangeListener(realmListener);
         }
-        // store listener in temporary list to be added during initialization
-        mDataChangeListeners.add(listener);
+    }
+
+    /**
+     * Checks, if presenter is in active state.
+     */
+    private void checkInitialized() {
+        if (!mInitialized) {
+            throw new IllegalArgumentException(MSG_NOT_INITIALIZED);
+        }
     }
 }

@@ -18,6 +18,8 @@ import budny.moneykeeper.bl.presenters.impl.PresenterFragmentAccounts;
 import budny.moneykeeper.db.model.Account;
 import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.ui.misc.RVDividerItemDecoration;
+import budny.moneykeeper.ui.misc.listeners.IDeleteContentListener;
+import budny.moneykeeper.ui.misc.listeners.ISwapContentListener;
 
 public class FragmentAccounts extends Fragment {
     private final IPresenterFragmentAccounts mPresenter = new PresenterFragmentAccounts();
@@ -38,7 +40,7 @@ public class FragmentAccounts extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_accounts);
         mLayoutManager = new LinearLayoutManager(getContext());
         mAdapter = new RVAccountsAdapter(mPresenter);
-        mTouchHelper = new ItemTouchHelper(new RVTouchCallback(mAdapter));
+        mTouchHelper = new ItemTouchHelper(new RVTouchCallback(mAdapter, mAdapter));
         mTouchHelper.attachToRecyclerView(mRecyclerView);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
@@ -58,7 +60,9 @@ public class FragmentAccounts extends Fragment {
         mPresenter.onStop();
     }
 
-    private static class RVAccountsAdapter extends RecyclerView.Adapter<RVAccountsAdapter.ViewHolder> {
+    private static class RVAccountsAdapter
+            extends RecyclerView.Adapter<RVAccountsAdapter.ViewHolder>
+            implements IDeleteContentListener, ISwapContentListener {
         private final IPresenterFragmentAccounts mPresenter;
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -98,23 +102,25 @@ public class FragmentAccounts extends Fragment {
             return mPresenter.getNumAccounts();
         }
 
-        public void onItemDismiss(int position) {
-            mPresenter.removeAccount(position);
-            notifyItemRemoved(position);
+        @Override
+        public void onDeleteContent(int position) {
+            mPresenter.deleteAccount(position);
         }
 
-        public boolean onItemMove(int fromPosition, int toPosition) {
+        @Override
+        public void onSwapContent(int fromPosition, int toPosition) {
             mPresenter.swapAccounts(fromPosition, toPosition);
-            notifyItemMoved(fromPosition, toPosition);
-            return true;
         }
     }
 
     private class RVTouchCallback extends ItemTouchHelper.Callback {
-        private final RVAccountsAdapter mAdapter;
+        private final IDeleteContentListener mDeleteListener;
+        private final ISwapContentListener mSwapListener;
 
-        public RVTouchCallback(RVAccountsAdapter adapter) {
-            mAdapter = adapter;
+        public RVTouchCallback(
+                IDeleteContentListener deleteListener, ISwapContentListener swapListener) {
+            mDeleteListener = deleteListener;
+            mSwapListener = swapListener;
         }
 
         @Override
@@ -136,13 +142,13 @@ public class FragmentAccounts extends Fragment {
 
         @Override
         public boolean onMove(RecyclerView recyclerView, ViewHolder source, ViewHolder target) {
-            mAdapter.onItemMove(source.getAdapterPosition(), target.getAdapterPosition());
+            mSwapListener.onSwapContent(source.getAdapterPosition(), target.getAdapterPosition());
             return true;
         }
 
         @Override
-        public void onSwiped(ViewHolder viewHolder, int direction) {
-            mAdapter.onItemDismiss(viewHolder.getAdapterPosition());
+        public void onSwiped(ViewHolder holder, int direction) {
+            mDeleteListener.onDeleteContent(holder.getAdapterPosition());
         }
     }
 }

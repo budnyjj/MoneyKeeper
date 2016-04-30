@@ -1,8 +1,6 @@
 package budny.moneykeeper.db.operations;
 
-import budny.moneykeeper.db.util.IDataChangeListener;
 import io.realm.Realm;
-import io.realm.RealmChangeListener;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
 
@@ -23,7 +21,7 @@ public class CommonOperations {
     }
 
     /**
-     * Stores object in database.
+     * Deletes object from database.
      */
     public static <T extends RealmObject> void deleteObject(Realm realm, final T obj) {
         realm.executeTransaction(new Realm.Transaction() {
@@ -35,13 +33,13 @@ public class CommonOperations {
     }
 
     /**
-     * Adds change data listener to database engine.
+     * Deletes object from database (for lists).
      */
-    public static void addDataChangeListener(Realm realm, final IDataChangeListener listener) {
-        realm.addChangeListener(new RealmChangeListener() {
+    public static void deleteObject(Realm realm, final RealmResults results, final int position) {
+        realm.executeTransaction(new Realm.Transaction() {
             @Override
-            public void onChange() {
-                listener.onChange();
+            public void execute(Realm realm) {
+                results.deleteFromRealm(position);
             }
         });
     }
