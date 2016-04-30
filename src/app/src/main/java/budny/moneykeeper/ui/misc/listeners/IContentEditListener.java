@@ -2,13 +2,13 @@ package budny.moneykeeper.ui.misc.listeners;
 
 /**
  * Listener for communication between fragment and parent activity,
- * when user wants to save content.
+ * when user wants to create or update content.
  */
-public interface ISaveContentListener {
+public interface IContentEditListener {
     /**
-     * Action, which should be performed to save content.
+     * Action, which should be performed to create or update content.
      *
      * @return true on success, false otherwise.
      */
-    boolean onSaveContent();
+    boolean onEditContent();
 }

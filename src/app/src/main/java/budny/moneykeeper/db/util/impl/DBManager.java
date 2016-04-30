@@ -60,7 +60,7 @@ public class DBManager implements IDBManager {
         for (String categoryName : DEFAULT_CATEGORIES) {
             Category category = new Category();
             category.setName(categoryName);
-            CommonOperations.addObject(realm, category);
+            CommonOperations.createObject(realm, category);
         }
     }
 

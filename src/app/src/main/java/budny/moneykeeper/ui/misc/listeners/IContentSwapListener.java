@@ -4,7 +4,7 @@ package budny.moneykeeper.ui.misc.listeners;
  * Listener for communication between touch callback and fragment,
  * when user wants to swap content.
  */
-public interface ISwapContentListener {
+public interface IContentSwapListener {
     /**
      * Action, which should be performed to swap content.
      *

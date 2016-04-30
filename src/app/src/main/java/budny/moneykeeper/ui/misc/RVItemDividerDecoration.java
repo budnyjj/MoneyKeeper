@@ -8,7 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-public class RVDividerItemDecoration extends RecyclerView.ItemDecoration {
+public class RVItemDividerDecoration extends RecyclerView.ItemDecoration {
     private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
 
     private final Drawable mDivider;
@@ -16,7 +16,7 @@ public class RVDividerItemDecoration extends RecyclerView.ItemDecoration {
     /**
      * Creates recycler view decoration with default divider.
      */
-    public RVDividerItemDecoration(Context context) {
+    public RVItemDividerDecoration(Context context) {
         final TypedArray styledAttributes = context.obtainStyledAttributes(ATTRS);
         mDivider = styledAttributes.getDrawable(0);
         styledAttributes.recycle();
@@ -25,7 +25,7 @@ public class RVDividerItemDecoration extends RecyclerView.ItemDecoration {
     /**
      * Creates recycler view decoration with custom divider.
      */
-    public RVDividerItemDecoration(Context context, int resId) {
+    public RVItemDividerDecoration(Context context, int resId) {
         mDivider = ContextCompat.getDrawable(context, resId);
     }
 

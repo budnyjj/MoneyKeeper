@@ -15,10 +15,10 @@ import budny.moneykeeper.bl.validators.IValidator;
 import budny.moneykeeper.bl.validators.impl.TextValidator;
 import budny.moneykeeper.db.model.Account;
 import budny.moneykeeper.ui.misc.ValidationTextWatcher;
-import budny.moneykeeper.ui.misc.listeners.ISaveContentListener;
+import budny.moneykeeper.ui.misc.listeners.IContentEditListener;
 
 public class FragmentAccountEdit extends Fragment
-        implements ISaveContentListener {
+        implements IContentEditListener {
     private String mErrorMsgAccountName;
 
     private IPresenterFragmentAccountEdit mPresenter = new PresenterFragmentAccountEdit();
@@ -55,7 +55,7 @@ public class FragmentAccountEdit extends Fragment
     }
 
     @Override
-    public boolean onSaveContent() {
+    public boolean onEditContent() {
         String accountName = mAccountNameField.getText().toString().trim();
         if (!mTextValidator.validate(accountName)) {
             mAccountNameContainer.setError(mErrorMsgAccountName);

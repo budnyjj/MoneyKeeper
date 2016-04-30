@@ -1,6 +1,5 @@
 package budny.moneykeeper.ui.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,11 +11,15 @@ import android.view.MenuItem;
 import android.view.View;
 
 import budny.moneykeeper.R;
+import budny.moneykeeper.bl.presenters.IPresenterActivityCategories;
+import budny.moneykeeper.bl.presenters.impl.PresenterActivityCategories;
 import budny.moneykeeper.ui.fragments.FragmentCategories;
 
 public class ActivityCategories extends AppCompatActivity {
     @SuppressWarnings("unused")
     private static final String TAG = ActivityCategories.class.getSimpleName();
+
+    private final IPresenterActivityCategories mPresenter = new PresenterActivityCategories(this);
 
     @SuppressWarnings("FieldCanBeLocal")
     private Toolbar mToolbar;
@@ -54,8 +57,7 @@ public class ActivityCategories extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.menu_categories_item_add) {
-            Intent intent = new Intent(this, ActivityCategoryEdit.class);
-            startActivity(intent);
+            mPresenter.createCategory();
             return true;
         }
         return super.onOptionsItemSelected(item);

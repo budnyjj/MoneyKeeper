@@ -12,10 +12,10 @@ import android.view.View;
 
 import budny.moneykeeper.R;
 import budny.moneykeeper.ui.fragments.FragmentAccountEdit;
-import budny.moneykeeper.ui.misc.listeners.ISaveContentListener;
+import budny.moneykeeper.ui.misc.listeners.IContentEditListener;
 
 public class ActivityAccountEdit extends AppCompatActivity {
-    private ISaveContentListener mSaveListener;
+    private IContentEditListener mSaveListener;
 
     @SuppressWarnings("FieldCanBeLocal")
     private Toolbar mToolbar;
@@ -53,7 +53,7 @@ public class ActivityAccountEdit extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_account_edit_item_save: {
-                if (mSaveListener.onSaveContent()) {
+                if (mSaveListener.onEditContent()) {
                     onBackPressed();
                 }
                 return true;

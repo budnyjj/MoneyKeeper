@@ -1,5 +1,8 @@
 package budny.moneykeeper.bl.presenters.impl;
 
+import android.content.Context;
+import android.content.Intent;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +11,10 @@ import budny.moneykeeper.db.model.Category;
 import budny.moneykeeper.db.operations.CategoryOperations;
 import budny.moneykeeper.db.operations.CommonOperations;
 import budny.moneykeeper.db.util.IDBManager;
-import budny.moneykeeper.db.util.impl.DBManager;
 import budny.moneykeeper.db.util.IDataChangeListener;
+import budny.moneykeeper.db.util.impl.DBManager;
+import budny.moneykeeper.ui.activities.ActivityCategoryEdit;
+import budny.moneykeeper.ui.misc.IntentExtras;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
@@ -60,8 +65,26 @@ public class PresenterFragmentCategories implements IPresenterFragmentCategories
         return mCategories.get(position);
     }
 
+    /**
+     * Starts {@linkplain budny.moneykeeper.ui.activities.ActivityAccountEdit}
+     * to update specified category.
+     *
+     * @param context activity context
+     * @param index   index of category to edit
+     */
     @Override
-    public void deteteCategory(int position) {
+    public void updateCategory(Context context, int index) {
+        if (context == null) {
+            return;
+        }
+        Intent intent = new Intent(context, ActivityCategoryEdit.class);
+        intent.putExtra(IntentExtras.FIELD_ACTION, IntentExtras.ACTION_UPDATE);
+        intent.putExtra(IntentExtras.FIELD_INDEX, index);
+        context.startActivity(intent);
+    }
+
+    @Override
+    public void deleteCategory(int position) {
         checkInitialized();
         CommonOperations.deleteObject(mRealm, mCategories, position);
     }
@@ -77,7 +100,7 @@ public class PresenterFragmentCategories implements IPresenterFragmentCategories
         };
         // store listener in list to preserve it from GC
         mChangeListeners.add(realmListener);
-        // if already initialized, addObject change listener immediately
+        // if already initialized, add change listener immediately
         if (mInitialized) {
             mCategories.addChangeListener(realmListener);
         }

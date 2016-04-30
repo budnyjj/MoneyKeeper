@@ -1,5 +1,6 @@
 package budny.moneykeeper.db.operations;
 
+import budny.moneykeeper.db.model.Category;
 import io.realm.Realm;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
@@ -11,7 +12,7 @@ public class CommonOperations {
     /**
      * Stores object in database.
      */
-    public static <T extends RealmObject> void addObject(Realm realm, final T obj) {
+    public static <T extends RealmObject> void createObject(Realm realm, final T obj) {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {

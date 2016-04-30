@@ -4,7 +4,7 @@ package budny.moneykeeper.ui.misc.listeners;
  * Listener for communication between touch callback and fragment,
  * when user wants to delete content by swipe.
  */
-public interface IDeleteContentListener {
+public interface IContentDeleteListener {
     /**
      * Action, which should be performed to delete content.
      *

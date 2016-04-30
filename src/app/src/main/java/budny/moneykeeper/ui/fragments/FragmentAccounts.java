@@ -17,9 +17,9 @@ import budny.moneykeeper.bl.presenters.IPresenterFragmentAccounts;
 import budny.moneykeeper.bl.presenters.impl.PresenterFragmentAccounts;
 import budny.moneykeeper.db.model.Account;
 import budny.moneykeeper.db.util.IDataChangeListener;
-import budny.moneykeeper.ui.misc.RVDividerItemDecoration;
-import budny.moneykeeper.ui.misc.listeners.IDeleteContentListener;
-import budny.moneykeeper.ui.misc.listeners.ISwapContentListener;
+import budny.moneykeeper.ui.misc.RVItemDividerDecoration;
+import budny.moneykeeper.ui.misc.listeners.IContentDeleteListener;
+import budny.moneykeeper.ui.misc.listeners.IContentSwapListener;
 
 public class FragmentAccounts extends Fragment {
     private final IPresenterFragmentAccounts mPresenter = new PresenterFragmentAccounts();
@@ -44,7 +44,7 @@ public class FragmentAccounts extends Fragment {
         mTouchHelper.attachToRecyclerView(mRecyclerView);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addItemDecoration(new RVDividerItemDecoration(getContext()));
+        mRecyclerView.addItemDecoration(new RVItemDividerDecoration(getContext()));
         return view;
     }
 
@@ -52,6 +52,9 @@ public class FragmentAccounts extends Fragment {
     public void onStart() {
         super.onStart();
         mPresenter.onStart();
+        // update recycler view contents for those cases,
+        // when user navigates back from corresponding edit activity
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -62,7 +65,7 @@ public class FragmentAccounts extends Fragment {
 
     private static class RVAccountsAdapter
             extends RecyclerView.Adapter<RVAccountsAdapter.ViewHolder>
-            implements IDeleteContentListener, ISwapContentListener {
+            implements IContentDeleteListener, IContentSwapListener {
         private final IPresenterFragmentAccounts mPresenter;
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -114,11 +117,11 @@ public class FragmentAccounts extends Fragment {
     }
 
     private class RVTouchCallback extends ItemTouchHelper.Callback {
-        private final IDeleteContentListener mDeleteListener;
-        private final ISwapContentListener mSwapListener;
+        private final IContentDeleteListener mDeleteListener;
+        private final IContentSwapListener mSwapListener;
 
         public RVTouchCallback(
-                IDeleteContentListener deleteListener, ISwapContentListener swapListener) {
+                IContentDeleteListener deleteListener, IContentSwapListener swapListener) {
             mDeleteListener = deleteListener;
             mSwapListener = swapListener;
         }
