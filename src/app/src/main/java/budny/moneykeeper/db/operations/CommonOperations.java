@@ -11,14 +11,14 @@ import io.realm.RealmResults;
 public class CommonOperations {
     /**
      * Stores object in database.
+     *
+     * @return object, managed by Realm
      */
-    public static <T extends RealmObject> void createObject(Realm realm, final T obj) {
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                realm.copyToRealm(obj);
-            }
-        });
+    public static <T extends RealmObject> T createObject(Realm realm, final T obj) {
+        realm.beginTransaction();
+        T managedObj = realm.copyToRealm(obj);
+        realm.commitTransaction();
+        return managedObj;
     }
 
     /**

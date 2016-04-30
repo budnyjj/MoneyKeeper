@@ -2,9 +2,13 @@ package budny.moneykeeper.db.util.impl;
 
 import android.content.Context;
 
+import java.util.List;
+
 import budny.moneykeeper.db.model.Account;
+import budny.moneykeeper.db.model.BalanceChange;
 import budny.moneykeeper.db.model.Category;
 import budny.moneykeeper.db.operations.AccountOperations;
+import budny.moneykeeper.db.operations.BalanceChangeOperations;
 import budny.moneykeeper.db.operations.CommonOperations;
 import budny.moneykeeper.db.util.IDBManager;
 import io.realm.Realm;
@@ -45,17 +49,18 @@ public class DBManager implements IDBManager {
     }
 
     private void fillDatabaseWithDefaultData(Realm realm) {
-        Account defaultAccount = new Account();
-        defaultAccount.setName(DEFAULT_ACCOUNT_NAME);
-        // TODO: set default currency automatically
-        defaultAccount.setCurrencyCode("USD");
-        AccountOperations.createAccount(realm, defaultAccount);
+        BalanceChange bc1 = BalanceChangeOperations.createBalanceChange(realm, 100_000);
+        BalanceChange bc2 = BalanceChangeOperations.createBalanceChange(realm, 200_000);
+        BalanceChange bc3 = BalanceChangeOperations.createBalanceChange(realm, 50_000);
 
-        Account defaultAccount2 = new Account();
-        defaultAccount2.setName(DEFAULT_ACCOUNT_NAME + "2");
-        // TODO: set default currency automatically
-        defaultAccount2.setCurrencyCode("USD");
-        AccountOperations.createAccount(realm, defaultAccount2);
+        Account defaultAccount = AccountOperations.createAccount(realm, DEFAULT_ACCOUNT_NAME, "USD");
+        AccountOperations.addBalanceChange(realm, defaultAccount, bc1);
+        AccountOperations.addBalanceChange(realm, defaultAccount, bc2);
+        AccountOperations.addBalanceChange(realm, defaultAccount, bc3);
+
+        Account defaultAccount2 = AccountOperations.createAccount(realm, DEFAULT_ACCOUNT_NAME + "2", "EUR");
+        AccountOperations.addBalanceChange(realm, defaultAccount2, bc1);
+        AccountOperations.addBalanceChange(realm, defaultAccount2, bc2);
 
         for (String categoryName : DEFAULT_CATEGORIES) {
             Category category = new Category();

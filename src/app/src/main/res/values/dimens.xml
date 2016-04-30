@@ -13,4 +13,6 @@
     <dimen name="margin_end_default">16dp</dimen>
     <dimen name="text_size_default">16sp</dimen>
     <dimen name="text_size_big">34sp</dimen>
+    <dimen name="margin_bottom_default">16dp</dimen>
+    <dimen name="margin_top_default">16dp</dimen>
 </resources>

@@ -2,7 +2,6 @@ package budny.moneykeeper.db.model;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
 
 public class Account extends RealmObject {
     public static final String FIELD_INDEX = "mIndex";
@@ -11,7 +10,6 @@ public class Account extends RealmObject {
     private String mCurrencyCode;
     private int mIndex;
     private String mName;
-    private String mTotalAmount;
 
     public String getCurrencyCode() {
         return mCurrencyCode;
@@ -37,18 +35,12 @@ public class Account extends RealmObject {
         mName = name;
     }
 
-    // TODO: use lazy evaluation to provide total amount
-    // TODO: try to return it as BigDecimal
-    public String getTotalAmount() {
-        return mTotalAmount;
+    // TODO: consider using lazy evaluation
+    public long getTotalAmount() {
+        return mBalanceChanges.sum(BalanceChange.FIELD_AMOUNT).longValue();
     }
 
-    // TODO: do not provide direct access to the list of balance changes
     public RealmList<BalanceChange> getBalanceChanges() {
         return mBalanceChanges;
-    }
-
-    public void setBalanceChanges(RealmList<BalanceChange> changes) {
-        mBalanceChanges = changes;
     }
 }

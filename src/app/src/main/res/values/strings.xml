@@ -1,9 +1,5 @@
 <resources>
-    <string name="account">Account</string>
     <string name="app_name">MoneyKeeper</string>
-    <string name="demo_collection">Demo collection</string>
-    <string name="demo_external_activity">Demo external activity</string>
-    <string name="dummy_section_text">Dummy section text</string>
 
     <string name="main">Main</string>
     <string name="menu_balance_item_group_categories">Group by categories</string>
@@ -25,6 +21,7 @@
     <string name="pref_dialog_title_default_currency">Choose default currency</string>
     <string name="pref_key_default_currency">default_currency</string>
 
+    <string name="title_account">Account</string>
     <string name="title_accounts">Accounts</string>
     <string name="title_account_edit">Edit account</string>
     <string name="title_balance">Balance</string>
@@ -50,4 +47,5 @@
     <string name="err_msg_account_name">Invalid account name</string>
     <string name="err_msg_category_name">Invalid category name</string>
     <string name="title_category_edit">Edit category</string>
+    <string name="title_total">Total</string>
 </resources>

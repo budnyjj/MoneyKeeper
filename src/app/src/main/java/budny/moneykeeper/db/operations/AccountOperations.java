@@ -1,6 +1,9 @@
 package budny.moneykeeper.db.operations;
 
+import java.util.List;
+
 import budny.moneykeeper.db.model.Account;
+import budny.moneykeeper.db.model.BalanceChange;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -10,21 +13,34 @@ import io.realm.RealmResults;
 public class AccountOperations {
     /**
      * Stores account in database.
-     * Automatically setups account's index.
+     * Initializes account's fields from method parameters.
+     *
+     * @return managed {@linkplain Account} instance
      */
-    public static void createAccount(Realm realm, final Account account) {
+    public static Account createAccount(Realm realm, String name, String currencyCode) {
+        Account account = new Account();
+        account.setName(name);
+        account.setCurrencyCode(currencyCode);
         // get maximal index value of existing accounts
         Number maxIndex = realm.where(Account.class).max(Account.FIELD_INDEX);
         // set greater index value in the new account
         int accountIndex = maxIndex == null ? 0 : maxIndex.intValue() + 1;
         account.setIndex(accountIndex);
-        // store account
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                realm.copyToRealm(account);
-            }
-        });
+        return createAccount(realm, account);
+    }
+
+    /**
+     * Stores account in database.
+     * Initializes account's fields with values from prototype.
+     *
+     * @return managed {@linkplain Account} instance
+     */
+    public static Account createAccount(Realm realm, Account account) {
+        // store in database
+        realm.beginTransaction();
+        Account managedAccount = realm.copyToRealm(account);
+        realm.commitTransaction();
+        return managedAccount;
     }
 
     /**
@@ -60,6 +76,22 @@ public class AccountOperations {
             @Override
             public void execute(Realm realm) {
                 dstAccount.setName(srcAccount.getName());
+            }
+        });
+    }
+
+    /**
+     * Adds balance change to specified account.
+     *
+     * @param realm Realm instance
+     * @param account account to update, managed by Realm
+     * @param change balance change to add, managed by Realm
+     */
+    public static void addBalanceChange(Realm realm, final Account account, final BalanceChange change) {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                account.getBalanceChanges().add(change);
             }
         });
     }

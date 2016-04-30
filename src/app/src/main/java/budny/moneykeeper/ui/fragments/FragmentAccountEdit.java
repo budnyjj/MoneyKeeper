@@ -14,18 +14,20 @@ import budny.moneykeeper.bl.presenters.impl.PresenterFragmentAccountEdit;
 import budny.moneykeeper.bl.validators.IValidator;
 import budny.moneykeeper.bl.validators.impl.TextValidator;
 import budny.moneykeeper.db.model.Account;
-import budny.moneykeeper.db.model.Category;
 import budny.moneykeeper.ui.misc.IntentExtras;
 import budny.moneykeeper.ui.misc.ValidationTextWatcher;
 import budny.moneykeeper.ui.misc.listeners.IContentEditListener;
 
 public class FragmentAccountEdit extends Fragment implements IContentEditListener {
+    private static final String TAG = FragmentAccountEdit.class.getSimpleName();
+
+    private final IPresenterFragmentAccountEdit mPresenter = new PresenterFragmentAccountEdit();
+    private final IValidator mTextValidator = new TextValidator();
+
     // action to perform with account (create or update)
     private String mAction = IntentExtras.ACTION_INVALID;
     // index of account to edit
     private int mAccountIdx = IntentExtras.INDEX_INVALID;
-    private IPresenterFragmentAccountEdit mPresenter = new PresenterFragmentAccountEdit();
-    private IValidator mTextValidator = new TextValidator();
     private String mErrorMsgAccountName;
 
     @SuppressWarnings("FieldCanBeLocal")
@@ -36,10 +38,20 @@ public class FragmentAccountEdit extends Fragment implements IContentEditListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // parse arguments
         Bundle args = getArguments();
-        if (args != null) {
-            String action = args.getString(IntentExtras.FIELD_ACTION);
-            mAction = (action == null) ? IntentExtras.ACTION_INVALID : action;
-            mAccountIdx = args.getInt(IntentExtras.FIELD_INDEX, IntentExtras.INDEX_INVALID);
+        if (args == null) {
+            throw new IllegalArgumentException(
+                    TAG + " is not initialized with arguments bundle");
+        }
+        String action = args.getString(IntentExtras.FIELD_ACTION);
+        mAction = (action == null) ? IntentExtras.ACTION_INVALID : action;
+        if (IntentExtras.ACTION_INVALID.equals(mAction)) {
+            throw new IllegalArgumentException(
+                    "Unable to locate following arguments: " + IntentExtras.FIELD_ACTION);
+        }
+        mAccountIdx = args.getInt(IntentExtras.FIELD_INDEX, IntentExtras.INDEX_INVALID);
+        if (mAccountIdx == IntentExtras.INDEX_INVALID) {
+            throw new IllegalArgumentException(
+                    "Unable to locate following arguments: " + IntentExtras.FIELD_INDEX);
         }
         // setup owned views
         View view = inflater.inflate(R.layout.fragment_account_edit, container, false);
@@ -57,7 +69,7 @@ public class FragmentAccountEdit extends Fragment implements IContentEditListene
     public void onStart() {
         super.onStart();
         mPresenter.onStart();
-        updateViews();
+        updateFields();
     }
 
     @Override
@@ -91,9 +103,9 @@ public class FragmentAccountEdit extends Fragment implements IContentEditListene
     }
 
     /**
-     * Fills owned views with data.
+     * Fills owned fields with data.
      */
-    private void updateViews() {
+    private void updateFields() {
         if (IntentExtras.ACTION_UPDATE.equals(mAction)
                 && mAccountIdx != IntentExtras.INDEX_INVALID) {
             Account account = mPresenter.getAccount(mAccountIdx);

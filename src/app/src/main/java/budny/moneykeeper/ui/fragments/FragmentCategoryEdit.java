@@ -19,12 +19,15 @@ import budny.moneykeeper.ui.misc.ValidationTextWatcher;
 import budny.moneykeeper.ui.misc.listeners.IContentEditListener;
 
 public class FragmentCategoryEdit extends Fragment implements IContentEditListener {
+    private static final String TAG = FragmentCategoryEdit.class.getSimpleName();
+
+    private final IPresenterFragmentCategoryEdit mPresenter = new PresenterFragmentCategoryEdit();
+    private final IValidator mTextValidator = new TextValidator();
+
     // action to perform with category (create or update)
     private String mAction = IntentExtras.ACTION_INVALID;
     // index of category to edit
     private int mCategoryIdx = IntentExtras.INDEX_INVALID;
-    private IPresenterFragmentCategoryEdit mPresenter = new PresenterFragmentCategoryEdit();
-    private IValidator mTextValidator = new TextValidator();
     private String mErrorMsgCategoryName;
 
     @SuppressWarnings("FieldCanBeLocal")
@@ -35,10 +38,20 @@ public class FragmentCategoryEdit extends Fragment implements IContentEditListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // parse arguments
         Bundle args = getArguments();
-        if (args != null) {
-            String action = args.getString(IntentExtras.FIELD_ACTION);
-            mAction = (action == null) ? IntentExtras.ACTION_INVALID : action;
-            mCategoryIdx = args.getInt(IntentExtras.FIELD_INDEX, IntentExtras.INDEX_INVALID);
+        if (args == null) {
+            throw new IllegalArgumentException(
+                    TAG + " is not initialized with arguments bundle");
+        }
+        String action = args.getString(IntentExtras.FIELD_ACTION);
+        mAction = (action == null) ? IntentExtras.ACTION_INVALID : action;
+        if (IntentExtras.ACTION_INVALID.equals(mAction)) {
+            throw new IllegalArgumentException(
+                    "Unable to locate following arguments: " + IntentExtras.FIELD_ACTION);
+        }
+        mCategoryIdx = args.getInt(IntentExtras.FIELD_INDEX, IntentExtras.INDEX_INVALID);
+        if (mCategoryIdx == IntentExtras.INDEX_INVALID) {
+            throw new IllegalArgumentException(
+                    "Unable to locate following arguments: " + IntentExtras.FIELD_INDEX);
         }
         // setup owned views
         View view = inflater.inflate(R.layout.fragment_category_edit, container, false);

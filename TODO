@@ -4,4 +4,4 @@ BUGS:
 * 
 
 CRASHES:
-* 
+* during resume to BalanceActivity after remove of Account

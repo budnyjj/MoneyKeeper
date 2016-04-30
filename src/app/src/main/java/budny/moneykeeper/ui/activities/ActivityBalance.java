@@ -27,7 +27,7 @@ import budny.moneykeeper.bl.presenters.impl.PresenterActivityBalance;
 import budny.moneykeeper.db.util.IDataChangeListener;
 
 public class ActivityBalance extends AppCompatActivity {
-    private final IPresenterActivityBalance mPresenter = new PresenterActivityBalance();
+    private final IPresenterActivityBalance mPresenter = new PresenterActivityBalance(this);
 
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
@@ -160,6 +160,9 @@ public class ActivityBalance extends AppCompatActivity {
         }
     }
 
+    /**
+     * Provides total fragment and number of fragments per each account.
+     */
     private static class AdapterViewPager extends FragmentPagerAdapter {
         private final IPresenterActivityBalance mPresenter;
 
@@ -176,17 +179,25 @@ public class ActivityBalance extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return mPresenter.getAccountFragment(position);
+            if (position == 0) {
+                return mPresenter.getFragmentTotal();
+            } else {
+                return mPresenter.getFragmentAccountView(position - 1);
+            }
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return mPresenter.getAccountName(position);
+            if (position == 0) {
+                return mPresenter.getFragmentTotalName();
+            } else {
+                return mPresenter.getFragmentAccountViewName(position - 1);
+            }
         }
 
         @Override
         public int getCount() {
-            return mPresenter.getNumAccounts();
+            return mPresenter.getNumAccounts() + 1;
         }
     }
 }

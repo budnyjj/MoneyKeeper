@@ -3,17 +3,17 @@ package budny.moneykeeper.db.model;
 import io.realm.RealmObject;
 
 public class BalanceChange extends RealmObject {
-    private String mAmount;
+    public static final String FIELD_AMOUNT = "mAmount";
+
+    private long mAmount;
     private Category mCategory;
     private String mCurrency;
 
-    // TODO: use BigDecimal instead
-    public String getAmount() {
+    public long getAmount() {
         return mAmount;
     }
 
-    // TODO: use BigDecimal instead
-    public void setAmount(String amount) {
+    public void setAmount(long amount) {
         mAmount = amount;
     }
 
