@@ -83,10 +83,18 @@ public class PresenterFragmentAccounts implements IPresenterFragmentAccounts {
         context.startActivity(intent);
     }
 
+    /**
+     * Deletes specified account.
+     *
+     * @param index index of account to delete
+     * @return true, if the actual deletion was performed
+     */
     @Override
-    public void deleteAccount(int position) {
+    public boolean deleteAccount(int index) {
         checkInitialized();
-        CommonOperations.deleteObject(mRealm, mAccounts, position);
+        // there are more accounts, so we can delete this one
+        CommonOperations.deleteObject(mRealm, mAccounts, index);
+        return true;
     }
 
     @Override

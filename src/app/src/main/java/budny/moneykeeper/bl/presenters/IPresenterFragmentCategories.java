@@ -24,5 +24,11 @@ public interface IPresenterFragmentCategories {
      */
     void updateCategory(Context context, int index);
 
-    void deleteCategory(int position);
+    /**
+     * Deletes specified category, if possible.
+     *
+     * @param index index of category to delete
+     * @return true, if deletion succeed, false otherwise
+     */
+    boolean deleteCategory(int index);
 }

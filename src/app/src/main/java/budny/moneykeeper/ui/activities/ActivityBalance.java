@@ -10,7 +10,8 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -38,7 +39,9 @@ public class ActivityBalance extends AppCompatActivity {
     private TabLayout mTabLayout;
     private Toolbar mToolbar;
     @SuppressWarnings("FieldCanBeLocal")
-    private ViewPager mViewPager;
+    private ViewPager mPagerView;
+    @SuppressWarnings("FieldCanBeLocal")
+    private PagerAdapter mPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +56,11 @@ public class ActivityBalance extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         setupActionBar(getSupportActionBar());
 
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        AdapterViewPager adapter = new AdapterViewPager(getSupportFragmentManager(), mPresenter);
-        mViewPager.setAdapter(adapter);
-
         mTabLayout = (TabLayout) findViewById(R.id.tabs);
-        //noinspection ConstantConditions
-        mTabLayout.setupWithViewPager(mViewPager);
+        mPagerView = (ViewPager) findViewById(R.id.viewpager);
+        mPagerAdapter = new AdapterViewPager(getSupportFragmentManager(), mTabLayout, mPresenter);
+        mPagerView.setAdapter(mPagerAdapter);
+        mTabLayout.setupWithViewPager(mPagerView);
 
         mFab = (FloatingActionButton) findViewById(R.id.fab);
         mFab.setOnClickListener(new View.OnClickListener() {
@@ -161,43 +162,74 @@ public class ActivityBalance extends AppCompatActivity {
     }
 
     /**
-     * Provides total fragment and number of fragments per each account.
+     * An adapter for view pager.
+     *
+     * If there is only one account, it provides a fragment for it.
+     * It there is more than one account, it provides a fragment with total values
+     * and number of fragments per each account.
      */
-    private static class AdapterViewPager extends FragmentPagerAdapter {
+    private static class AdapterViewPager extends FragmentStatePagerAdapter {
         private final IPresenterActivityBalance mPresenter;
 
-        public AdapterViewPager(@NonNull FragmentManager manager, IPresenterActivityBalance presenter) {
+        private final TabLayout mTabLayout;
+
+        public AdapterViewPager(@NonNull FragmentManager manager,
+                                TabLayout layout, IPresenterActivityBalance presenter) {
             super(manager);
+            mTabLayout = layout;
             mPresenter = presenter;
             mPresenter.addDataChangeListener(new IDataChangeListener() {
                 @Override
                 public void onChange() {
+                    if (mPresenter.getNumAccounts() > 1) {
+                        mTabLayout.setVisibility(View.VISIBLE);
+                    } else {
+                        mTabLayout.setVisibility(View.GONE);
+                    }
                     notifyDataSetChanged();
                 }
             });
         }
 
         @Override
+        public int getItemPosition(Object object) {
+            // this is needed to perform full redraw when the dataset is updated
+            return POSITION_NONE;
+        }
+
+        @Override
         public Fragment getItem(int position) {
-            if (position == 0) {
+            int numAccounts = mPresenter.getNumAccounts();
+            if (numAccounts > 1) {
+                if (position > 0) {
+                    return mPresenter.getFragmentAccountView(position - 1);
+                }
                 return mPresenter.getFragmentTotal();
             } else {
-                return mPresenter.getFragmentAccountView(position - 1);
+                return mPresenter.getFragmentAccountView(position);
             }
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            if (position == 0) {
+            int numAccounts = mPresenter.getNumAccounts();
+            if (numAccounts > 1) {
+                if (position > 0) {
+                    return mPresenter.getFragmentAccountViewName(position - 1);
+                }
                 return mPresenter.getFragmentTotalName();
             } else {
-                return mPresenter.getFragmentAccountViewName(position - 1);
+                return mPresenter.getFragmentAccountViewName(position);
             }
         }
 
         @Override
         public int getCount() {
-            return mPresenter.getNumAccounts() + 1;
+            int numAccounts = mPresenter.getNumAccounts();
+            if (numAccounts > 1) {
+                return numAccounts + 1;
+            }
+            return numAccounts;
         }
     }
 }

@@ -48,10 +48,12 @@ public class FragmentCategoryEdit extends Fragment implements IContentEditListen
             throw new IllegalArgumentException(
                     "Unable to locate following arguments: " + IntentExtras.FIELD_ACTION);
         }
-        mCategoryIdx = args.getInt(IntentExtras.FIELD_INDEX, IntentExtras.INDEX_INVALID);
-        if (mCategoryIdx == IntentExtras.INDEX_INVALID) {
-            throw new IllegalArgumentException(
-                    "Unable to locate following arguments: " + IntentExtras.FIELD_INDEX);
+        if (IntentExtras.ACTION_UPDATE.equals(mAction)) {
+            mCategoryIdx = args.getInt(IntentExtras.FIELD_INDEX, IntentExtras.INDEX_INVALID);
+            if (mCategoryIdx == IntentExtras.INDEX_INVALID) {
+                throw new IllegalArgumentException(
+                        "Unable to locate following arguments: " + IntentExtras.FIELD_INDEX);
+            }
         }
         // setup owned views
         View view = inflater.inflate(R.layout.fragment_category_edit, container, false);

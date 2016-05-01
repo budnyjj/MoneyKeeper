@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import budny.moneykeeper.R;
 import budny.moneykeeper.bl.presenters.IPresenterFragmentAccounts;
@@ -42,7 +43,7 @@ public class FragmentAccounts extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_accounts);
         mLayoutManager = new LinearLayoutManager(getContext());
         mAdapter = new RVAccountsAdapter(mPresenter);
-        mTouchHelper = new ItemTouchHelper(new RVTouchCallback(mAdapter, mAdapter));
+        mTouchHelper = new ItemTouchHelper(new RVTouchCallback(mPresenter));
         mTouchHelper.attachToRecyclerView(mRecyclerView);
         mRecyclerView.addOnItemTouchListener(
                 new RVItemTouchListener(getActivity(), mRecyclerView, new RVItemClickListener(mPresenter)));
@@ -68,8 +69,7 @@ public class FragmentAccounts extends Fragment {
     }
 
     private static class RVAccountsAdapter
-            extends RecyclerView.Adapter<RVAccountsAdapter.ViewHolder>
-            implements IContentDeleteListener, IContentSwapListener {
+            extends RecyclerView.Adapter<RVAccountsAdapter.ViewHolder> {
         private final IPresenterFragmentAccounts mPresenter;
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -108,26 +108,13 @@ public class FragmentAccounts extends Fragment {
         public int getItemCount() {
             return mPresenter.getNumAccounts();
         }
-
-        @Override
-        public void onDeleteContent(int position) {
-            mPresenter.deleteAccount(position);
-        }
-
-        @Override
-        public void onSwapContent(int fromPosition, int toPosition) {
-            mPresenter.swapAccounts(fromPosition, toPosition);
-        }
     }
 
     private class RVTouchCallback extends ItemTouchHelper.Callback {
-        private final IContentDeleteListener mDeleteListener;
-        private final IContentSwapListener mSwapListener;
+        private final IPresenterFragmentAccounts mPresenter;
 
-        public RVTouchCallback(
-                IContentDeleteListener deleteListener, IContentSwapListener swapListener) {
-            mDeleteListener = deleteListener;
-            mSwapListener = swapListener;
+        public RVTouchCallback(IPresenterFragmentAccounts presenter) {
+            mPresenter = presenter;
         }
 
         @Override
@@ -137,7 +124,8 @@ public class FragmentAccounts extends Fragment {
 
         @Override
         public boolean isItemViewSwipeEnabled() {
-            return true;
+            // allow swipe if there is more than one account only
+            return mPresenter.getNumAccounts() > 1;
         }
 
         @Override
@@ -149,13 +137,13 @@ public class FragmentAccounts extends Fragment {
 
         @Override
         public boolean onMove(RecyclerView recyclerView, ViewHolder source, ViewHolder target) {
-            mSwapListener.onSwapContent(source.getAdapterPosition(), target.getAdapterPosition());
+            mPresenter.swapAccounts(source.getAdapterPosition(), target.getAdapterPosition());
             return true;
         }
 
         @Override
         public void onSwiped(ViewHolder holder, int direction) {
-            mDeleteListener.onDeleteContent(holder.getAdapterPosition());
+            mPresenter.deleteAccount(holder.getAdapterPosition());
         }
     }
 

@@ -20,11 +20,17 @@ public interface IPresenterFragmentAccounts {
      * Update specified category.
      *
      * @param context activity context
-     * @param index   index of category to update
+     * @param index   index of account to update
      */
     void updateAccount(Context context, int index);
 
-    void deleteAccount(int position);
+    /**
+     * Deletes specified account, if possible.
+     *
+     * @param index index of account to delete
+     * @return true, if deletion succeed, false otherwise
+     */
+    boolean deleteAccount(int index);
 
     void swapAccounts(int fromPosition, int toPosition);
 }

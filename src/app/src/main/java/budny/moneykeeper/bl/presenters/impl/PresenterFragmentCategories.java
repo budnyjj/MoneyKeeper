@@ -84,9 +84,10 @@ public class PresenterFragmentCategories implements IPresenterFragmentCategories
     }
 
     @Override
-    public void deleteCategory(int position) {
+    public boolean deleteCategory(int position) {
         checkInitialized();
         CommonOperations.deleteObject(mRealm, mCategories, position);
+        return true;
     }
 
     @Override

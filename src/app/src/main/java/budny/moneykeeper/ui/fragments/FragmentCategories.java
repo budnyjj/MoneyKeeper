@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import budny.moneykeeper.R;
 import budny.moneykeeper.bl.presenters.IPresenterFragmentCategories;
@@ -19,7 +20,6 @@ import budny.moneykeeper.db.model.Category;
 import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.ui.misc.RVItemDividerDecoration;
 import budny.moneykeeper.ui.misc.RVItemTouchListener;
-import budny.moneykeeper.ui.misc.listeners.IContentDeleteListener;
 import budny.moneykeeper.ui.misc.listeners.IRVItemClickListener;
 
 public class FragmentCategories extends Fragment {
@@ -42,7 +42,7 @@ public class FragmentCategories extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_categories);
         mLayoutManager = new LinearLayoutManager(getContext());
         mAdapter = new RVAccountsAdapter(mPresenter);
-        mTouchHelper = new ItemTouchHelper(new RVTouchCallback(mAdapter));
+        mTouchHelper = new ItemTouchHelper(new RVTouchCallback(mPresenter));
         mTouchHelper.attachToRecyclerView(mRecyclerView);
         mRecyclerView.addOnItemTouchListener(
                 new RVItemTouchListener(getActivity(), mRecyclerView, new RVItemClickListener(mPresenter)));
@@ -68,8 +68,7 @@ public class FragmentCategories extends Fragment {
     }
 
     private static class RVAccountsAdapter
-            extends RecyclerView.Adapter<RVAccountsAdapter.ViewHolder>
-            implements IContentDeleteListener {
+            extends RecyclerView.Adapter<RVAccountsAdapter.ViewHolder> {
         private final IPresenterFragmentCategories mPresenter;
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -109,18 +108,13 @@ public class FragmentCategories extends Fragment {
         public int getItemCount() {
             return mPresenter.getNumCategories();
         }
-
-        @Override
-        public void onDeleteContent(int position) {
-            mPresenter.deleteCategory(position);
-        }
     }
 
     private static class RVTouchCallback extends ItemTouchHelper.Callback {
-        private final IContentDeleteListener mListener;
+        private final IPresenterFragmentCategories mPresenter;
 
-        public RVTouchCallback(IContentDeleteListener listener) {
-            mListener = listener;
+        public RVTouchCallback(IPresenterFragmentCategories presenter) {
+            mPresenter = presenter;
         }
 
         @Override
@@ -130,7 +124,8 @@ public class FragmentCategories extends Fragment {
 
         @Override
         public boolean isItemViewSwipeEnabled() {
-            return true;
+            // allow swipe if there is more than one category only
+            return mPresenter.getNumCategories() > 1;
         }
 
         @Override
@@ -146,7 +141,7 @@ public class FragmentCategories extends Fragment {
 
         @Override
         public void onSwiped(ViewHolder viewHolder, int direction) {
-            mListener.onDeleteContent(viewHolder.getAdapterPosition());
+            mPresenter.deleteCategory(viewHolder.getAdapterPosition());
         }
     }
 

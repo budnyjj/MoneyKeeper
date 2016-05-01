@@ -48,10 +48,12 @@ public class FragmentAccountEdit extends Fragment implements IContentEditListene
             throw new IllegalArgumentException(
                     "Unable to locate following arguments: " + IntentExtras.FIELD_ACTION);
         }
-        mAccountIdx = args.getInt(IntentExtras.FIELD_INDEX, IntentExtras.INDEX_INVALID);
-        if (mAccountIdx == IntentExtras.INDEX_INVALID) {
-            throw new IllegalArgumentException(
-                    "Unable to locate following arguments: " + IntentExtras.FIELD_INDEX);
+        if (IntentExtras.ACTION_UPDATE.equals(mAction)) {
+            mAccountIdx = args.getInt(IntentExtras.FIELD_INDEX, IntentExtras.INDEX_INVALID);
+            if (mAccountIdx == IntentExtras.INDEX_INVALID) {
+                throw new IllegalArgumentException(
+                        "Unable to locate following arguments: " + IntentExtras.FIELD_INDEX);
+            }
         }
         // setup owned views
         View view = inflater.inflate(R.layout.fragment_account_edit, container, false);

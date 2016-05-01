@@ -9,6 +9,7 @@ public interface IContentDeleteListener {
      * Action, which should be performed to delete content.
      *
      * @param position index of content in dataset
+     * @return true if succeed, false otherwise
      */
-    void onDeleteContent(int position);
+    boolean onDeleteContent(int position);
 }
