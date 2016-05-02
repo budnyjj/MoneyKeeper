@@ -28,14 +28,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.1767767"
-     inkscape:cx="2093.0687"
-     inkscape:cy="612.72016"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="601.91004"
+     inkscape:cy="1404.3954"
      inkscape:document-units="px"
-     inkscape:current-layer="layer8"
+     inkscape:current-layer="layer2"
      showgrid="false"
      units="px"
-     showguides="true"
+     showguides="false"
      inkscape:guide-bbox="true"
      inkscape:window-width="1276"
      inkscape:window-height="1001"
@@ -45,7 +45,8 @@
      fit-margin-top="100"
      fit-margin-left="100"
      fit-margin-right="100"
-     fit-margin-bottom="100">
+     fit-margin-bottom="100"
+     inkscape:snap-global="false">
     <sodipodi:guide
        position="402.54864,1633.5247"
        orientation="1,0"
@@ -354,6 +355,10 @@
        position="999.71281,546.41275"
        orientation="0,1"
        id="guide9251" />
+    <sodipodi:guide
+       position="1625.5843,1128.5247"
+       orientation="0,1"
+       id="guide5385" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -363,7 +368,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -600,10 +605,9 @@
   <g
      inkscape:groupmode="layer"
      id="layer2"
-     inkscape:label="screen_main"
+     inkscape:label="screen_balance"
      style="display:inline"
-     transform="translate(351.83435,151.7494)"
-     sodipodi:insensitive="true">
+     transform="translate(351.83435,151.7494)">
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
        id="rect4388"
@@ -661,13 +665,13 @@
        transform="translate(-27.269172,127.2803)"><flowRegion
          id="flowRegion5162-7-7"><rect
            id="rect5164-4-4"
-           width="80.054588"
-           height="40.406101"
+           width="194.60588"
+           height="43.234539"
            x="98.363602"
            y="224.80742"
            style="font-size:12.5px" /></flowRegion><flowPara
          id="flowPara5166-4-9"
-         style="font-size:17.5px">-75К</flowPara></flowRoot>    <flowRoot
+         style="font-size:17.5px">Стипендия</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot5172-3-3"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:36px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -679,7 +683,9 @@
            x="106.06602"
            y="251.82899" /></flowRegion><flowPara
          id="flowPara5178-3-5"
-         style="font-size:12.5px">Банковский счет</flowPara></flowRoot>    <g
+         style="font-size:12.5px">-75K</flowPara><flowPara
+         style="font-size:12.5px"
+         id="flowPara5389" /></flowRoot>    <g
        id="g5138"
        transform="matrix(1.324444,0,0,1.324444,-121.4426,-75.853708)">
       <circle
@@ -727,13 +733,13 @@
        transform="translate(-29.285714,-2.9464286)"><flowRegion
          id="flowRegion5162"><rect
            id="rect5164"
-           width="80.054588"
-           height="40.406101"
+           width="182.58507"
+           height="44.648754"
            x="98.363602"
            y="224.80742"
            style="font-size:12.5px" /></flowRegion><flowPara
          id="flowPara5166"
-         style="font-size:17.5px">+230К</flowPara></flowRoot>    <flowRoot
+         style="font-size:17.5px">Наличные</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot5172"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:36px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -745,7 +751,7 @@
            x="106.06602"
            y="251.82899" /></flowRegion><flowPara
          id="flowPara5178"
-         style="font-size:12.5px">Наличные</flowPara></flowRoot>    <rect
+         style="font-size:12.5px">+230K</flowPara></flowRoot>    <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
        id="rect5154-5"
        width="279.82144"
@@ -761,13 +767,13 @@
        transform="translate(-29.301041,62.216425)"><flowRegion
          id="flowRegion5162-7"><rect
            id="rect5164-4"
-           width="80.054588"
-           height="40.406101"
+           width="228.547"
+           height="34.74926"
            x="98.363602"
            y="224.80742"
            style="font-size:12.5px" /></flowRegion><flowPara
          id="flowPara5166-4"
-         style="font-size:17.5px">+3.2M</flowPara></flowRoot>    <flowRoot
+         style="font-size:17.5px">Кредитная карта</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot5172-3"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:36px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -779,7 +785,9 @@
            x="106.06602"
            y="251.82899" /></flowRegion><flowPara
          id="flowPara5178-3"
-         style="font-size:12.5px">Кредитная карта</flowPara></flowRoot>    <g
+         style="font-size:12.5px">+3.2M</flowPara><flowPara
+         style="font-size:12.5px"
+         id="flowPara5387" /></flowRoot>    <g
        id="g8105">
       <g
          id="g8101">
@@ -1567,7 +1575,8 @@
      id="layer5"
      inkscape:label="screen_settings"
      style="display:inline"
-     transform="translate(351.83435,151.7494)">
+     transform="translate(351.83435,151.7494)"
+     sodipodi:insensitive="true">
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
        id="rect4388-73"
@@ -2898,7 +2907,8 @@
      id="layer8"
      inkscape:label="screen_input"
      style="display:inline"
-     transform="translate(351.83435,151.7494)">
+     transform="translate(351.83435,151.7494)"
+     sodipodi:insensitive="true">
     <g
        id="g9022">
       <g
