@@ -43,7 +43,7 @@ public class PresenterActivityBalance implements IPresenterActivityBalance {
     @Override
     public void onCreate() {
         mRealm = mDbManager.getRealm();
-        mAccounts = AccountOperations.getAccounts(mRealm);
+        mAccounts = AccountOperations.read(mRealm);
         // add pending listeners
         for (final RealmChangeListener listener : mChangeListeners) {
             mAccounts.addChangeListener(listener);

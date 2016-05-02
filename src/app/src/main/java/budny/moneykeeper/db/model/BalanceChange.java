@@ -1,13 +1,16 @@
 package budny.moneykeeper.db.model;
 
+import java.util.Date;
+
 import io.realm.RealmObject;
 
 public class BalanceChange extends RealmObject {
     public static final String FIELD_AMOUNT = "mAmount";
+    public static final String FIELD_DATE = "mDate";
 
     private long mAmount;
     private Category mCategory;
-    private String mCurrency;
+    private Date mDate;
 
     public long getAmount() {
         return mAmount;
@@ -25,11 +28,11 @@ public class BalanceChange extends RealmObject {
         mCategory = category;
     }
 
-    public String getCurrency() {
-        return mCurrency;
+    public Date getDate() {
+        return mDate;
     }
 
-    public void setCurrency(String currency) {
-        mCurrency = currency;
+    public void setDate(Date date) {
+        mDate = date;
     }
 }

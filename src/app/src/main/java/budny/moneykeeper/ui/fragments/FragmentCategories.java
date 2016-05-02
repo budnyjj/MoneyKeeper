@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import budny.moneykeeper.R;
 import budny.moneykeeper.bl.presenters.IPresenterFragmentCategories;
@@ -76,7 +75,7 @@ public class FragmentCategories extends Fragment {
 
             public ViewHolder(View v) {
                 super(v);
-                mTextView = (TextView) v.findViewById(R.id.item_title);
+                mTextView = (TextView) v.findViewById(R.id.text_view_title);
             }
         }
 
@@ -94,7 +93,7 @@ public class FragmentCategories extends Fragment {
         public RVAccountsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View v = LayoutInflater
                     .from(parent.getContext())
-                    .inflate(R.layout.rv_row_categories, parent, false);
+                    .inflate(R.layout.rv_row_category, parent, false);
             return new ViewHolder(v);
         }
 

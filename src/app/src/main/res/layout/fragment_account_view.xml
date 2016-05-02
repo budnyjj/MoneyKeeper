@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:paddingBottom="16dp"
     android:paddingEnd="@dimen/margin_end_default"
     android:paddingLeft="@dimen/margin_start_default"
@@ -11,12 +13,30 @@
     android:paddingTop="16dp">
 
     <TextView
-        android:id="@+id/view_amount_total"
+        android:id="@+id/text_view_amount_total"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/margin_bottom_default"
+        android:paddingEnd="@dimen/margin_end_default"
+        android:paddingLeft="@dimen/margin_start_default"
+        android:paddingRight="@dimen/margin_end_default"
+        android:paddingStart="@dimen/margin_start_default"
         android:paddingTop="@dimen/margin_top_default"
         android:singleLine="true"
-        android:textSize="@dimen/text_size_big"
+        android:textColor="@color/text_primary_dark"
+        android:textSize="@dimen/text_size_very_big"
         tools:text="+100500" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/text_secondary" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_balance_changes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:scrollbars="vertical" />
 </LinearLayout>

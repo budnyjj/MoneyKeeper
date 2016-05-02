@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/margin_bottom_default"
+    android:paddingTop="@dimen/margin_top_default"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text_view_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_end_default"
+        android:layout_marginLeft="@dimen/margin_start_default"
+        android:layout_marginRight="@dimen/margin_end_default"
+        android:layout_marginStart="@dimen/margin_start_default"
+        android:paddingBottom="@dimen/margin_bottom_very_small"
+        android:textSize="@dimen/text_size_big"
+        android:textColor="@color/text_primary_dark"
+        tools:text="Account name" />
+
+    <TextView
+        android:id="@+id/text_view_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_end_default"
+        android:layout_marginLeft="@dimen/margin_start_default"
+        android:layout_marginRight="@dimen/margin_end_default"
+        android:layout_marginStart="@dimen/margin_start_default"
+        android:textSize="@dimen/text_size_default"
+        tools:text="+100,500.99" />
+</LinearLayout>

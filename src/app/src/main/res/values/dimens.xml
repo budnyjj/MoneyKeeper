@@ -15,4 +15,9 @@
     <dimen name="text_size_big">34sp</dimen>
     <dimen name="margin_bottom_default">16dp</dimen>
     <dimen name="margin_top_default">16dp</dimen>
+    <dimen name="margin_bottom_very_small">4dp</dimen>
+    <dimen name="text_size_very_big">56sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="margin_top_small">8dp</dimen>
+    <dimen name="margin_bottom_small">8dp</dimen>
 </resources>

@@ -30,7 +30,7 @@ public class PresenterFragmentTotal implements IPresenterFragmentTotal {
     @Override
     public void onStart() {
         mRealm = mDbManager.getRealm();
-        mAccounts = AccountOperations.getAccounts(mRealm);
+        mAccounts = AccountOperations.read(mRealm);
         // add pending listeners
         for (final RealmChangeListener listener : mChangeListeners) {
             mAccounts.addChangeListener(listener);
@@ -71,6 +71,16 @@ public class PresenterFragmentTotal implements IPresenterFragmentTotal {
             amount += account.getTotalAmount();
         }
         return amount;
+    }
+
+    @Override
+    public int getNumAccounts() {
+        return mAccounts.size();
+    }
+
+    @Override
+    public Account getAccount(int index) {
+        return mAccounts.get(index);
     }
 
     /**

@@ -5,6 +5,7 @@ import java.util.List;
 
 import budny.moneykeeper.bl.presenters.IPresenterFragmentAccountView;
 import budny.moneykeeper.db.model.Account;
+import budny.moneykeeper.db.model.BalanceChange;
 import budny.moneykeeper.db.operations.AccountOperations;
 import budny.moneykeeper.db.util.IDBManager;
 import budny.moneykeeper.db.util.IDataChangeListener;
@@ -34,7 +35,7 @@ public class PresenterFragmentAccountView implements IPresenterFragmentAccountVi
     @Override
     public void onStart() {
         mRealm = mDbManager.getRealm();
-        mAccount = AccountOperations.getAccounts(mRealm).get(mAccountIndex);
+        mAccount = AccountOperations.read(mRealm).get(mAccountIndex);
         // add pending listeners
         for (final RealmChangeListener listener : mChangeListeners) {
             mAccount.addChangeListener(listener);
@@ -66,6 +67,21 @@ public class PresenterFragmentAccountView implements IPresenterFragmentAccountVi
         if (mInitialized) {
             mAccount.addChangeListener(realmListener);
         }
+    }
+
+    @Override
+    public int getNumBalanceChanges() {
+        return mAccount.getBalanceChanges().size();
+    }
+
+    @Override
+    public BalanceChange getBalanceChange(int index) {
+        return mAccount.getBalanceChanges().get(index);
+    }
+
+    @Override
+    public String getCurrencyCode() {
+        return mAccount.getCurrencyCode();
     }
 
     @Override

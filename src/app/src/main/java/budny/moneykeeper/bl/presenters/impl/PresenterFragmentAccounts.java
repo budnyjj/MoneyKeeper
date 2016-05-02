@@ -36,7 +36,7 @@ public class PresenterFragmentAccounts implements IPresenterFragmentAccounts {
     @Override
     public void onStart() {
         mRealm = mDbManager.getRealm();
-        mAccounts = AccountOperations.getAccounts(mRealm);
+        mAccounts = AccountOperations.read(mRealm);
         // add pending listeners
         for (final RealmChangeListener listener : mChangeListeners) {
             mAccounts.addChangeListener(listener);
@@ -93,7 +93,7 @@ public class PresenterFragmentAccounts implements IPresenterFragmentAccounts {
     public boolean deleteAccount(int index) {
         checkInitialized();
         // there are more accounts, so we can delete this one
-        CommonOperations.deleteObject(mRealm, mAccounts, index);
+        CommonOperations.delete(mRealm, mAccounts, index);
         return true;
     }
 
@@ -102,7 +102,7 @@ public class PresenterFragmentAccounts implements IPresenterFragmentAccounts {
         checkInitialized();
         Account fromAccount = mAccounts.get(fromPosition);
         Account toAccount = mAccounts.get(toPosition);
-        AccountOperations.swapAccounts(mRealm, fromAccount, toAccount);
+        AccountOperations.swap(mRealm, fromAccount, toAccount);
         for (RealmChangeListener listener : mChangeListeners) {
             listener.onChange();
         }

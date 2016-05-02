@@ -3,7 +3,6 @@ package budny.moneykeeper.bl.presenters.impl;
 import budny.moneykeeper.bl.presenters.IPresenterFragmentAccountEdit;
 import budny.moneykeeper.db.model.Account;
 import budny.moneykeeper.db.operations.AccountOperations;
-import budny.moneykeeper.db.operations.CategoryOperations;
 import budny.moneykeeper.db.util.IDBManager;
 import budny.moneykeeper.db.util.impl.DBManager;
 import io.realm.Realm;
@@ -23,7 +22,7 @@ public class PresenterFragmentAccountEdit implements IPresenterFragmentAccountEd
     @Override
     public void onStart() {
         mRealm = mDbManager.getRealm();
-        mAccounts = AccountOperations.getAccounts(mRealm);
+        mAccounts = AccountOperations.read(mRealm);
         mInitialized = true;
     }
 
@@ -43,7 +42,7 @@ public class PresenterFragmentAccountEdit implements IPresenterFragmentAccountEd
 
     @Override
     public void createAccount(Account account) {
-        AccountOperations.createAccount(mRealm, account);
+        AccountOperations.create(mRealm, account);
     }
 
     /**
@@ -55,7 +54,7 @@ public class PresenterFragmentAccountEdit implements IPresenterFragmentAccountEd
     @Override
     public void updateAccount(Account srcAccount, int dstIndex) {
         checkInitialized();
-        AccountOperations.updateAccount(mRealm, srcAccount, mAccounts.get(dstIndex));
+        AccountOperations.update(mRealm, srcAccount, mAccounts.get(dstIndex));
     }
 
     /**

@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import budny.moneykeeper.R;
 import budny.moneykeeper.bl.presenters.IPresenterFragmentAccounts;
@@ -20,8 +19,6 @@ import budny.moneykeeper.db.model.Account;
 import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.ui.misc.RVItemDividerDecoration;
 import budny.moneykeeper.ui.misc.RVItemTouchListener;
-import budny.moneykeeper.ui.misc.listeners.IContentDeleteListener;
-import budny.moneykeeper.ui.misc.listeners.IContentSwapListener;
 import budny.moneykeeper.ui.misc.listeners.IRVItemClickListener;
 
 public class FragmentAccounts extends Fragment {
@@ -32,7 +29,7 @@ public class FragmentAccounts extends Fragment {
     @SuppressWarnings("FieldCanBeLocal")
     private RecyclerView mRecyclerView;
     @SuppressWarnings("FieldCanBeLocal")
-    private RVAccountsAdapter mAdapter;
+    private RecyclerView.Adapter mAdapter;
     @SuppressWarnings("FieldCanBeLocal")
     private ItemTouchHelper mTouchHelper;
 
@@ -77,7 +74,7 @@ public class FragmentAccounts extends Fragment {
 
             public ViewHolder(View v) {
                 super(v);
-                mTextView = (TextView) v.findViewById(R.id.item_title);
+                mTextView = (TextView) v.findViewById(R.id.text_view_title);
             }
         }
 
@@ -94,7 +91,7 @@ public class FragmentAccounts extends Fragment {
         @Override
         public RVAccountsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.rv_row_accounts, parent, false);
+                    .inflate(R.layout.rv_row_account, parent, false);
             return new ViewHolder(v);
         }
 

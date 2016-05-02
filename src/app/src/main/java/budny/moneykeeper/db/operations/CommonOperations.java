@@ -14,7 +14,7 @@ public class CommonOperations {
      *
      * @return object, managed by Realm
      */
-    public static <T extends RealmObject> T createObject(Realm realm, final T obj) {
+    public static <T extends RealmObject> T create(Realm realm, final T obj) {
         realm.beginTransaction();
         T managedObj = realm.copyToRealm(obj);
         realm.commitTransaction();
@@ -24,7 +24,7 @@ public class CommonOperations {
     /**
      * Deletes object from database.
      */
-    public static <T extends RealmObject> void deleteObject(Realm realm, final T obj) {
+    public static <T extends RealmObject> void delete(Realm realm, final T obj) {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -36,7 +36,7 @@ public class CommonOperations {
     /**
      * Deletes object from database (for lists).
      */
-    public static void deleteObject(Realm realm, final RealmResults results, final int position) {
+    public static void delete(Realm realm, final RealmResults results, final int position) {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {

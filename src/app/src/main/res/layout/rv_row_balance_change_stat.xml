@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/margin_bottom_default"
+    android:paddingTop="@dimen/margin_top_default">
+
+    <TextView
+        android:id="@+id/text_view_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="@dimen/margin_end_default"
+        android:layout_marginLeft="@dimen/margin_start_default"
+        android:layout_marginRight="@dimen/margin_end_default"
+        android:layout_marginStart="@dimen/margin_start_default"
+        android:paddingBottom="@dimen/margin_bottom_very_small"
+        android:textSize="@dimen/text_size_big"
+        tools:text="+100,500.99" />
+
+    <TextView
+        android:id="@+id/text_view_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_below="@id/text_view_amount"
+        android:layout_marginEnd="@dimen/margin_end_default"
+        android:layout_marginLeft="@dimen/margin_start_default"
+        android:layout_marginRight="@dimen/margin_start_default"
+        android:layout_marginStart="@dimen/margin_start_default"
+        android:textColor="@color/text_secondary"
+        android:textSize="@dimen/text_size_small"
+        tools:text="07.08.1993" />
+
+    <TextView
+        android:id="@+id/text_view_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_amount"
+        android:layout_marginEnd="@dimen/margin_end_default"
+        android:layout_marginLeft="@dimen/margin_start_default"
+        android:layout_marginRight="@dimen/margin_end_default"
+        android:layout_marginStart="@dimen/margin_start_default"
+        android:textColor="@color/text_primary_dark"
+        android:textSize="@dimen/text_size_default"
+        tools:text="Food" />
+</RelativeLayout>

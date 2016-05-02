@@ -23,7 +23,7 @@ public class PresenterFragmentCategoryEdit implements IPresenterFragmentCategory
     @Override
     public void onStart() {
         mRealm = mDbManager.getRealm();
-        mCategories = CategoryOperations.getCategories(mRealm);
+        mCategories = CategoryOperations.read(mRealm);
         mInitialized = true;
     }
 
@@ -44,7 +44,7 @@ public class PresenterFragmentCategoryEdit implements IPresenterFragmentCategory
     @Override
     public void createCategory(Category category) {
         checkInitialized();
-        CommonOperations.createObject(mRealm, category);
+        CommonOperations.create(mRealm, category);
     }
 
     /**
@@ -56,7 +56,7 @@ public class PresenterFragmentCategoryEdit implements IPresenterFragmentCategory
     @Override
     public void updateCategory(Category srcCategory, int dstIndex) {
         checkInitialized();
-        CategoryOperations.updateCategory(mRealm, srcCategory, mCategories.get(dstIndex));
+        CategoryOperations.update(mRealm, srcCategory, mCategories.get(dstIndex));
     }
 
     /**

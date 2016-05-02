@@ -32,9 +32,9 @@ public class ActivityBalance extends AppCompatActivity {
 
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
+    private NavigationView mNavigationView;
     @SuppressWarnings("FieldCanBeLocal")
     private FloatingActionButton mFab;
-    private NavigationView mNavigationView;
     @SuppressWarnings("FieldCanBeLocal")
     private TabLayout mTabLayout;
     private Toolbar mToolbar;
@@ -61,7 +61,6 @@ public class ActivityBalance extends AppCompatActivity {
         mPagerAdapter = new AdapterViewPager(getSupportFragmentManager(), mTabLayout, mPresenter);
         mPagerView.setAdapter(mPagerAdapter);
         mTabLayout.setupWithViewPager(mPagerView);
-
         mFab = (FloatingActionButton) findViewById(R.id.fab);
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +69,6 @@ public class ActivityBalance extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         mDrawerLayout = (DrawerLayout) findViewById(R.id.fragment_container_balance_nav_drawer);
         mDrawerToggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, mToolbar,

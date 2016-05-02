@@ -10,13 +10,11 @@
     android:paddingStart="@dimen/margin_start_default"
     android:paddingTop="16dp">
 
-    <TextView
-        android:id="@+id/view_amount_total"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_accounts"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/margin_bottom_default"
-        android:paddingTop="@dimen/margin_top_default"
-        android:singleLine="true"
-        android:textSize="@dimen/text_size_big"
-        tools:text="+100500" />
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/margin_bottom_small"
+        android:paddingTop="@dimen/margin_top_small"
+        android:scrollbars="vertical" />
 </LinearLayout>

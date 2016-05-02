@@ -9,16 +9,16 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="2401.6558"
-   height="1854.385"
-   viewBox="0 0 2401.6558 1854.3851"
+   width="2704.8054"
+   height="1881.7025"
+   viewBox="0 0 2704.8055 1881.7026"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
    sodipodi:docname="ui.svg"
-   inkscape:export-filename="/home/budnyjj/dev/projects/moneykeeper/design/design_2.png"
-   inkscape:export-xdpi="306.57001"
-   inkscape:export-ydpi="306.57001">
+   inkscape:export-filename="/home/budnyjj/dev/projects/MoneyKeeper/doc/design/ui/ui.png"
+   inkscape:export-xdpi="200"
+   inkscape:export-ydpi="200">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -28,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35355339"
-     inkscape:cx="1893.3763"
-     inkscape:cy="1039.4283"
+     inkscape:zoom="0.1767767"
+     inkscape:cx="2093.0687"
+     inkscape:cy="612.72016"
      inkscape:document-units="px"
      inkscape:current-layer="layer8"
      showgrid="false"
@@ -43,315 +43,315 @@
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      fit-margin-top="100"
-     fit-margin-left="400"
+     fit-margin-left="100"
      fit-margin-right="100"
      fit-margin-bottom="100">
     <sodipodi:guide
-       position="401.2706,1606.8355"
+       position="402.54864,1633.5247"
        orientation="1,0"
        id="guide4136" />
     <sodipodi:guide
-       position="413.18577,1652.9606"
+       position="414.46381,1679.6498"
        orientation="0,1"
        id="guide4138" />
     <sodipodi:guide
-       position="2300.6558,1444.364"
+       position="2301.9338,1471.0532"
        orientation="1,0"
        id="guide4140" />
     <sodipodi:guide
-       position="700.55632,1518.9784"
+       position="701.83441,1545.6676"
        orientation="1,0"
        id="guide4142" />
     <sodipodi:guide
-       position="801.08436,1274.1533"
+       position="802.36241,1300.8425"
        orientation="1,0"
        id="guide4144" />
     <sodipodi:guide
-       position="1101.0997,1321.6305"
+       position="1102.3777,1348.3197"
        orientation="1,0"
        id="guide4146" />
     <sodipodi:guide
-       position="751.58688,1202.4325"
+       position="752.86491,1229.1217"
        orientation="0,1"
        id="guide4148" />
     <sodipodi:guide
-       position="1200.0946,1522.6509"
+       position="1201.3726,1549.3401"
        orientation="1,0"
        id="guide4156" />
     <sodipodi:guide
-       position="1501.12,1435.7777"
+       position="1502.398,1462.4669"
        orientation="1,0"
        id="guide4158" />
     <sodipodi:guide
-       position="1601.1252,1365.0671"
+       position="1602.4032,1391.7563"
        orientation="1,0"
        id="guide4160" />
     <sodipodi:guide
-       position="1900.1303,1298.397"
+       position="1901.4083,1325.0862"
        orientation="1,0"
        id="guide4162" />
     <sodipodi:guide
-       position="2003.1659,1273.1432"
+       position="2004.4439,1299.8324"
        orientation="1,0"
        id="guide4164" />
     <sodipodi:guide
-       position="584.12775,1101.8355"
+       position="585.40579,1128.5247"
        orientation="0,1"
        id="guide4172" />
     <sodipodi:guide
-       position="452.07664,653.41461"
+       position="453.35468,680.10385"
        orientation="0,1"
        id="guide4174" />
     <sodipodi:guide
-       position="327.82788,1573.2847"
+       position="329.10592,1599.9739"
        orientation="0,1"
        id="guide4186" />
     <sodipodi:guide
-       position="1152.5563,7.2641"
+       position="1153.8343,33.95334"
        orientation="1,0"
        id="guide4190" />
     <sodipodi:guide
-       position="493.74543,1228.1914"
+       position="495.02347,1254.8806"
        orientation="0,1"
        id="guide4192" />
     <sodipodi:guide
-       position="459.77905,1493.3564"
+       position="461.05709,1520.0456"
        orientation="0,1"
        id="guide4195" />
     <sodipodi:guide
-       position="438.18705,1455.0001"
+       position="439.46509,1481.6893"
        orientation="1,0"
        id="guide4205" />
     <sodipodi:guide
-       position="469.50177,1463.1781"
+       position="470.77981,1489.8673"
        orientation="0,1"
        id="guide4254" />
     <sodipodi:guide
-       position="388.43703,1392.8463"
+       position="389.71507,1419.5355"
        orientation="0,1"
        id="guide4382" />
     <sodipodi:guide
-       position="401.2706,1417.0899"
+       position="402.54864,1443.7791"
        orientation="0,1"
        id="guide4384" />
     <sodipodi:guide
-       position="382.12358,1603.2105"
+       position="383.40162,1629.8997"
        orientation="0,1"
        id="guide4386" />
     <sodipodi:guide
-       position="810.37775,1687.3712"
+       position="811.65581,1714.0604"
        orientation="1,0"
        id="guide4480" />
     <sodipodi:guide
-       position="1090.5563,1659.8712"
+       position="1091.8343,1686.5604"
        orientation="1,0"
        id="guide4482" />
     <sodipodi:guide
-       position="559.6579,1316.5797"
+       position="560.93594,1343.2689"
        orientation="0,1"
        id="guide4509" />
     <sodipodi:guide
-       position="843.51076,1350.4199"
+       position="844.78881,1377.1091"
        orientation="1,0"
        id="guide4522" />
     <sodipodi:guide
-       position="1225.1992,1532.1927"
+       position="1226.4772,1558.8819"
        orientation="1,0"
        id="guide4761" />
     <sodipodi:guide
-       position="1475.9134,1468.9784"
+       position="1477.1914,1495.6676"
        orientation="1,0"
        id="guide4763" />
     <sodipodi:guide
-       position="1397.6992,1332.5498"
+       position="1398.9772,1359.239"
        orientation="0,1"
        id="guide4767" />
     <sodipodi:guide
-       position="1376.2706,1273.2641"
+       position="1377.5486,1299.9533"
        orientation="0,1"
        id="guide4769" />
     <sodipodi:guide
-       position="1301.2706,1348.9784"
+       position="1302.5486,1375.6676"
        orientation="1,0"
        id="guide4771" />
     <sodipodi:guide
-       position="1400.5563,1293.2641"
+       position="1401.8343,1319.9533"
        orientation="1,0"
        id="guide4773" />
     <sodipodi:guide
-       position="1293.4135,1411.1212"
+       position="1294.6915,1437.8104"
        orientation="0,1"
        id="guide4831" />
     <sodipodi:guide
-       position="1451.9849,1369.6927"
+       position="1453.2629,1396.3819"
        orientation="1,0"
        id="guide4861" />
     <sodipodi:guide
-       position="649.56147,946.86392"
+       position="650.83952,973.55316"
        orientation="1,0"
        id="guide5786" />
     <sodipodi:guide
-       position="539.12775,1002.5498"
+       position="540.40579,1029.239"
        orientation="0,1"
        id="guide5790" />
     <sodipodi:guide
-       position="556.27061,961.83552"
+       position="557.54865,988.52476"
        orientation="0,1"
        id="guide5792" />
     <sodipodi:guide
-       position="534.12775,922.54982"
+       position="535.40579,949.23906"
        orientation="0,1"
        id="guide5794" />
     <sodipodi:guide
-       position="550.55632,881.12122"
+       position="551.83436,907.81046"
        orientation="0,1"
        id="guide5796" />
     <sodipodi:guide
-       position="584.84203,1069.6927"
+       position="586.12007,1096.3819"
        orientation="0,1"
        id="guide5919" />
     <sodipodi:guide
-       position="526.32286,1038.2827"
+       position="527.6009,1064.9719"
        orientation="1,0"
        id="guide5923" />
     <sodipodi:guide
-       position="883.41179,1051.4147"
+       position="884.68981,1078.1039"
        orientation="0,1"
        id="guide6042" />
     <sodipodi:guide
-       position="793.00001,1021.5001"
+       position="794.27801,1048.1893"
        orientation="0,1"
        id="guide6094" />
     <sodipodi:guide
-       position="869.12775,1002.5498"
+       position="870.40581,1029.239"
        orientation="1,0"
        id="guide6110" />
     <sodipodi:guide
-       position="548.04114,1585.2803"
+       position="549.31918,1611.9695"
        orientation="0,1"
        id="guide5010" />
     <sodipodi:guide
-       position="401.2706,1460.4069"
+       position="402.54864,1487.0961"
        orientation="1,0"
        id="guide5146" />
     <sodipodi:guide
-       position="410.55631,1453.2029"
+       position="411.83435,1479.8921"
        orientation="1,0"
        id="guide5148" />
     <sodipodi:guide
-       position="396.64452,1513.1807"
+       position="397.92256,1539.8699"
        orientation="0,1"
        id="guide5150" />
     <sodipodi:guide
-       position="497.02843,1428.2016"
+       position="498.30647,1454.8908"
        orientation="0,1"
        id="guide5156" />
     <sodipodi:guide
-       position="450.55631,1453.3534"
+       position="451.83435,1480.0426"
        orientation="1,0"
        id="guide5168" />
     <sodipodi:guide
-       position="467.60988,1438.1748"
+       position="468.88792,1464.864"
        orientation="0,1"
        id="guide5170" />
     <sodipodi:guide
-       position="1051.0971,1369.6127"
+       position="1052.3751,1396.3019"
        orientation="1,0"
        id="guide6104" />
     <sodipodi:guide
-       position="1210.5563,1269.7819"
+       position="1211.8343,1296.4711"
        orientation="1,0"
        id="guide7727" />
     <sodipodi:guide
-       position="1490.5563,1467.5498"
+       position="1491.8343,1494.239"
        orientation="1,0"
        id="guide7729" />
     <sodipodi:guide
-       position="999.12775,1215.0498"
+       position="1000.4058,1241.739"
        orientation="0,1"
        id="guide7847" />
     <sodipodi:guide
-       position="1555.3777,1232.5498"
+       position="1556.6557,1259.239"
        orientation="0,1"
        id="guide8752" />
     <sodipodi:guide
-       position="1610.5563,1351.1212"
+       position="1611.8343,1377.8104"
        orientation="1,0"
        id="guide8754" />
     <sodipodi:guide
-       position="1890.9134,1243.7998"
+       position="1892.1914,1270.489"
        orientation="1,0"
        id="guide8756" />
     <sodipodi:guide
-       position="1624.3063,1358.9784"
+       position="1625.5843,1385.6676"
        orientation="1,0"
        id="guide8817" />
     <sodipodi:guide
-       position="1875.1991,1296.4784"
+       position="1876.4771,1323.1676"
        orientation="1,0"
        id="guide9200" />
     <sodipodi:guide
-       position="1851.2706,1273.2641"
+       position="1852.5486,1299.9533"
        orientation="1,0"
        id="guide9202" />
     <sodipodi:guide
-       position="2100.5563,1373.2641"
+       position="2101.8343,1399.9533"
        orientation="1,0"
        id="guide9452" />
     <sodipodi:guide
-       position="2200.5563,1368.2641"
+       position="2201.8343,1394.9533"
        orientation="1,0"
        id="guide9454" />
     <sodipodi:guide
-       position="-199.40412,1332.5498"
+       position="-198.12609,1359.239"
        orientation="0,1"
        id="guide9521" />
     <sodipodi:guide
-       position="2115.8484,1302.7912"
+       position="2117.1264,1329.4804"
        orientation="0,1"
        id="guide9700" />
     <sodipodi:guide
-       position="438.18705,622.90801"
+       position="439.46509,649.59725"
        orientation="1,0"
        id="guide9765" />
     <sodipodi:guide
-       position="568.55632,678.26411"
+       position="569.83436,704.95335"
        orientation="0,1"
        id="guide9991" />
     <sodipodi:guide
-       position="862.55632,858.51412"
+       position="863.83441,885.20336"
        orientation="0,1"
        id="guide10460" />
     <sodipodi:guide
-       position="887.95747,942.52022"
+       position="889.23551,969.20946"
        orientation="0,1"
        id="guide10967" />
     <sodipodi:guide
-       position="368.58753,552.90441"
+       position="369.86557,579.59365"
        orientation="0,1"
        id="guide12078" />
     <sodipodi:guide
-       position="801.08436,101.7703"
+       position="802.36241,128.45954"
        orientation="0,1"
        id="guide12677" />
     <sodipodi:guide
-       position="950.55632,393.26411"
+       position="951.83441,419.95335"
        orientation="0,1"
        id="guide12906" />
     <sodipodi:guide
-       position="977.05293,1726.7017"
+       position="978.33101,1753.3909"
        orientation="0,1"
        id="guide14072" />
     <sodipodi:guide
-       position="100,1652.9606"
+       position="101.27804,1679.6498"
        orientation="1,0"
        id="guide6486" />
     <sodipodi:guide
-       position="514.06664,1619.2746"
+       position="515.34468,1645.9638"
        orientation="0,1"
        id="guide7917" />
     <sodipodi:guide
-       position="998.43479,519.72351"
+       position="999.71281,546.41275"
        orientation="0,1"
        id="guide9251" />
   </sodipodi:namedview>
@@ -363,7 +363,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -371,7 +371,7 @@
      inkscape:label="background"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(350.55633,3098.7589)"
+     transform="translate(351.83435,3099.3872)"
      style="display:inline"
      sodipodi:insensitive="true">
     <g
@@ -602,7 +602,7 @@
      id="layer2"
      inkscape:label="screen_main"
      style="display:inline"
-     transform="translate(350.55633,151.12113)"
+     transform="translate(351.83435,151.7494)"
      sodipodi:insensitive="true">
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
@@ -652,7 +652,8 @@
        height="65.154793"
        x="60.016541"
        y="340.13443"
-       ry="0.044" />
+       ry="0.044"
+       rx="0.044" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot5160-2-9"
@@ -696,7 +697,8 @@
            height="1.8870566"
            x="306.15961"
            y="391.33469"
-           ry="0.94352829" />
+           ry="0.94352829"
+           rx="0.94352829" />
         <rect
            style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
            id="rect5098-7"
@@ -705,7 +707,8 @@
            x="381.27499"
            y="-317.93118"
            ry="0.94352829"
-           transform="matrix(0,1,-1,0,0,0)" />
+           transform="matrix(0,1,-1,0,0,0)"
+           rx="0.94352829" />
       </g>
     </g>
     <rect
@@ -715,7 +718,8 @@
        height="65.154793"
        x="60"
        y="209.9077"
-       ry="0.044" />
+       ry="0.044"
+       rx="0.044" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot5160"
@@ -748,7 +752,8 @@
        height="65.154793"
        x="59.984673"
        y="275.07056"
-       ry="0.044" />
+       ry="0.044"
+       rx="0.044" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot5160-2"
@@ -955,7 +960,8 @@
          height="65.154793"
          width="279.82144"
          id="rect5154-5-6-5"
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+         rx="0.044" />
       <rect
          ry="0.044"
          y="340.13443"
@@ -963,7 +969,8 @@
          height="65.1548"
          width="27.630733"
          id="rect5158-4-6-1"
-         style="fill:#808080;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+         style="fill:#808080;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+         rx="0.044" />
       <flowRoot
          transform="translate(0.7308278,127.2803)"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -1003,7 +1010,8 @@
            height="65.154793"
            x="59.950497"
            y="405.26865"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
         <rect
            style="fill:#ececec;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
            id="rect5158-4-6-42-5"
@@ -1011,7 +1019,8 @@
            height="65.1548"
            x="59.950497"
            y="405.26865"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
       </g>
       <flowRoot
          transform="translate(0.66478534,192.4145)"
@@ -1058,7 +1067,8 @@
            height="1.8870566"
            x="306.15961"
            y="391.33469"
-           ry="0.94352829" />
+           ry="0.94352829"
+           rx="0.94352829" />
         <rect
            style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
            id="rect5098-7-42"
@@ -1067,7 +1077,8 @@
            x="381.27499"
            y="-317.93118"
            ry="0.94352829"
-           transform="matrix(0,1,-1,0,0,0)" />
+           transform="matrix(0,1,-1,0,0,0)"
+           rx="0.94352829" />
       </g>
     </g>
     <g
@@ -1083,7 +1094,8 @@
            height="65.154793"
            x="60"
            y="209.9077"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
         <rect
            style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
            id="rect5158-89"
@@ -1091,7 +1103,8 @@
            height="65.1548"
            x="60"
            y="209.9077"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
       </g>
       <flowRoot
          transform="translate(0.71428569,-2.9464286)"
@@ -1132,7 +1145,8 @@
            height="65.154793"
            x="59.984673"
            y="275.07056"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
         <rect
            style="fill:#333333;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
            id="rect5158-4-61"
@@ -1140,7 +1154,8 @@
            height="65.1548"
            x="59.984673"
            y="275.07056"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
       </g>
       <flowRoot
          transform="translate(0.69895885,62.216425)"
@@ -1552,7 +1567,7 @@
      id="layer5"
      inkscape:label="screen_settings"
      style="display:inline"
-     transform="translate(350.55633,151.12113)">
+     transform="translate(351.83435,151.7494)">
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
        id="rect4388-73"
@@ -1915,7 +1930,7 @@
      id="layer3"
      inkscape:label="screen_account"
      style="display:inline"
-     transform="translate(350.55633,151.12113)"
+     transform="translate(351.83435,151.7494)"
      sodipodi:insensitive="true">
     <flowRoot
        xml:space="preserve"
@@ -1942,7 +1957,8 @@
            height="65.154793"
            x="460.39474"
            y="209.46863"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
         <rect
            style="fill:#666666;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
            id="rect5158-2"
@@ -1950,7 +1966,8 @@
            height="65.1548"
            x="460.39474"
            y="209.46863"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
       </g>
       <flowRoot
          transform="translate(401.10902,-3.3855055)"
@@ -1991,7 +2008,8 @@
            height="65.154793"
            x="460.3418"
            y="274.56177"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
         <rect
            style="fill:#333333;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
            id="rect5158-2-3"
@@ -1999,7 +2017,8 @@
            height="65.1548"
            x="460.3418"
            y="274.56177"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
       </g>
       <flowRoot
          transform="translate(401.0561,61.707632)"
@@ -2037,7 +2056,8 @@
          height="65.154793"
          width="279.82144"
          id="rect5154-9-9"
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+         rx="0.044" />
       <rect
          ry="0.044"
          y="209.9077"
@@ -2045,7 +2065,8 @@
          height="65.1548"
          width="27.630733"
          id="rect5158-2-2"
-         style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+         style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+         rx="0.044" />
     </g>
     <flowRoot
        xml:space="preserve"
@@ -2073,7 +2094,8 @@
            height="65.154793"
            x="460.10461"
            y="404.73322"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
         <rect
            style="fill:#808080;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
            id="rect5158-2-5"
@@ -2081,7 +2103,8 @@
            height="65.1548"
            x="460.10461"
            y="404.73322"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
       </g>
       <flowRoot
          transform="translate(400.81889,191.87908)"
@@ -2158,7 +2181,8 @@
            height="1.8870566"
            x="306.15961"
            y="391.33469"
-           ry="0.94352829" />
+           ry="0.94352829"
+           rx="0.94352829" />
         <rect
            style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
            id="rect5098-7-4"
@@ -2167,7 +2191,8 @@
            x="381.27499"
            y="-317.93118"
            ry="0.94352829"
-           transform="matrix(0,1,-1,0,0,0)" />
+           transform="matrix(0,1,-1,0,0,0)"
+           rx="0.94352829" />
       </g>
     </g>
     <rect
@@ -2287,7 +2312,8 @@
            height="65.154793"
            x="460.51141"
            y="-1506.5117"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
         <rect
            style="fill:#e6e6e6;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
            id="rect5158-4-6-1-5"
@@ -2295,7 +2321,8 @@
            height="65.1548"
            x="460.51141"
            y="-1506.5117"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
       </g>
       <flowRoot
          transform="translate(401.22571,-1719.3659)"
@@ -2336,7 +2363,8 @@
            height="65.154793"
            x="460.44537"
            y="-1441.3776"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
         <rect
            style="fill:#b3b3b3;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
            id="rect5158-4-6-42-5-7"
@@ -2344,7 +2372,8 @@
            height="65.1548"
            x="460.44537"
            y="-1441.3776"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
       </g>
       <flowRoot
          transform="translate(401.15967,-1654.2317)"
@@ -2391,7 +2420,8 @@
            height="1.8870566"
            x="306.15961"
            y="391.33469"
-           ry="0.94352829" />
+           ry="0.94352829"
+           rx="0.94352829" />
         <rect
            style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
            id="rect5098-7-4-32"
@@ -2400,7 +2430,8 @@
            x="381.27499"
            y="-317.93118"
            ry="0.94352829"
-           transform="matrix(0,1,-1,0,0,0)" />
+           transform="matrix(0,1,-1,0,0,0)"
+           rx="0.94352829" />
       </g>
     </g>
     <g
@@ -2416,7 +2447,8 @@
            height="65.154793"
            x="460.49487"
            y="-1636.7385"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
         <rect
            style="fill:#333333;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
            id="rect5158-89-3"
@@ -2424,7 +2456,8 @@
            height="65.1548"
            x="460.49487"
            y="-1636.7385"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
       </g>
       <flowRoot
          transform="translate(401.20917,-1849.5926)"
@@ -2465,7 +2498,8 @@
            height="65.154793"
            x="460.47955"
            y="-1571.5757"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
         <rect
            style="fill:#808080;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
            id="rect5158-4-61-1"
@@ -2473,7 +2507,8 @@
            height="65.1548"
            x="460.47955"
            y="-1571.5757"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
       </g>
       <flowRoot
          transform="translate(401.19384,-1784.4298)"
@@ -2863,7 +2898,7 @@
      id="layer8"
      inkscape:label="screen_input"
      style="display:inline"
-     transform="translate(350.55633,151.12113)">
+     transform="translate(351.83435,151.7494)">
     <g
        id="g9022">
       <g
@@ -2955,7 +2990,8 @@
            height="65.154793"
            x="60"
            y="209.9077"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
         <rect
            style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
            id="rect5158-6"
@@ -2963,7 +2999,8 @@
            height="65.1548"
            x="60"
            y="209.9077"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
       </g>
       <flowRoot
          transform="translate(801.27826,1.040875)"
@@ -2988,7 +3025,8 @@
          height="65.154793"
          width="279.82144"
          id="rect5154-7-2"
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+         rx="0.044" />
       <rect
          ry="0.044"
          y="274.83334"
@@ -2996,7 +3034,8 @@
          height="65.1548"
          width="27.630733"
          id="rect5158-6-8"
-         style="fill:#4d4d4d;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+         style="fill:#4d4d4d;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+         rx="0.044" />
       <flowRoot
          transform="translate(801.24999,65.979206)"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -3020,7 +3059,8 @@
          height="65.154793"
          width="279.82144"
          id="rect5154-7-0"
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+         rx="0.044" />
       <rect
          ry="0.044"
          y="339.74405"
@@ -3028,7 +3068,8 @@
          height="65.1548"
          width="27.630733"
          id="rect5158-6-6"
-         style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+         style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+         rx="0.044" />
       <flowRoot
          transform="translate(801.16071,130.88992)"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -3050,7 +3091,8 @@
        height="65.154793"
        x="860.38776"
        y="404.74667"
-       ry="0.044" />
+       ry="0.044"
+       rx="0.044" />
     <rect
        style="fill:#666666;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
        id="rect5158-6-5"
@@ -3058,7 +3100,8 @@
        height="65.1548"
        x="860.38776"
        y="404.74667"
-       ry="0.044" />
+       ry="0.044"
+       rx="0.044" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot5160-8-8"
@@ -3166,7 +3209,8 @@
            height="65.154793"
            x="60"
            y="209.9077"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
         <rect
            style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
            id="rect5158-6-7"
@@ -3174,7 +3218,8 @@
            height="65.1548"
            x="60"
            y="209.9077"
-           ry="0.044" />
+           ry="0.044"
+           rx="0.044" />
       </g>
       <flowRoot
          transform="translate(801.27826,1.040875)"
@@ -3201,7 +3246,8 @@
          height="65.154793"
          width="279.82144"
          id="rect5154-7-2-1"
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+         rx="0.044" />
       <rect
          ry="0.044"
          y="274.83334"
@@ -3209,7 +3255,8 @@
          height="65.1548"
          width="27.630733"
          id="rect5158-6-8-5"
-         style="fill:#4d4d4d;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+         style="fill:#4d4d4d;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+         rx="0.044" />
       <flowRoot
          transform="translate(801.24999,65.979206)"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -3235,7 +3282,8 @@
          height="65.154793"
          width="279.82144"
          id="rect5154-7-0-3"
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+         rx="0.044" />
       <rect
          ry="0.044"
          y="339.74405"
@@ -3243,7 +3291,8 @@
          height="65.1548"
          width="27.630733"
          id="rect5158-6-6-1"
-         style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+         style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+         rx="0.044" />
       <flowRoot
          transform="translate(801.16071,130.88992)"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -3269,7 +3318,8 @@
          height="65.154793"
          width="279.82144"
          id="rect5154-7-8-0"
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+         rx="0.044" />
       <rect
          ry="0.044"
          y="404.74667"
@@ -3277,7 +3327,8 @@
          height="65.1548"
          width="27.630733"
          id="rect5158-6-5-3"
-         style="fill:#666666;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1" />
+         style="fill:#666666;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
+         rx="0.044" />
       <flowRoot
          transform="translate(801.10206,195.89255)"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.5px;line-height:125%;font-family:Verdana;-inkscape-font-specification:Verdana;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -3775,7 +3826,8 @@
            height="20.535715"
            x="1106.0714"
            y="67.857155"
-           ry="0.0507937" />
+           ry="0.0507937"
+           rx="0.0507937" />
         <rect
            style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
            id="rect7906-1"
@@ -3783,7 +3835,8 @@
            height="7.1428571"
            x="1116.0714"
            y="60.714302"
-           ry="0.0507937" />
+           ry="0.0507937"
+           rx="0.0507937" />
         <circle
            style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:3;stroke-opacity:1"
            id="path7908-8"
@@ -4323,18 +4376,19 @@
      id="layer6"
      inkscape:label="screen_stats"
      style="display:inline"
-     transform="translate(350.55633,151.12113)"
+     transform="translate(351.83435,151.7494)"
      sodipodi:insensitive="true" />
   <g
      inkscape:groupmode="layer"
      id="layer7"
      inkscape:label="screen_graph"
      sodipodi:insensitive="true"
-     transform="translate(350.55633,151.12113)" />
+     transform="translate(351.83435,151.7494)" />
   <g
      inkscape:groupmode="layer"
      id="layer4"
-     inkscape:label="comments">
+     inkscape:label="comments"
+     transform="translate(1.2780193,0.62826508)">
     <flowRoot
        xml:space="preserve"
        id="flowRoot6644"
@@ -4350,7 +4404,7 @@
          style="font-size:12.5px;fill:#ff0000">При долгом нажатии появляется меню, где можно удалить аккаунт</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot6692"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        transform="translate(-115.25841,17.677671)"><flowRegion
          id="flowRegion6694"><rect
            id="rect6696"
@@ -4358,9 +4412,9 @@
            height="50.748608"
            x="1851.2706"
            y="701.80096"
-           style="fill:#ff0000;" /></flowRegion><flowPara
+           style="fill:#ff0000" /></flowRegion><flowPara
          id="flowPara6698"
-         style="font-size:12.5px;fill:#ff0000;">При нажатии появляется фрагмент добавления/редактирования аккаунта</flowPara></flowRoot>    <flowRoot
+         style="font-size:12.5px;fill:#ff0000">При нажатии появляется фрагмент добавления/редактирования аккаунта</flowPara></flowRoot>    <flowRoot
        xml:space="preserve"
        id="flowRoot6644-6"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"

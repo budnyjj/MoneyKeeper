@@ -36,7 +36,7 @@ public class PresenterFragmentCategories implements IPresenterFragmentCategories
     @Override
     public void onStart() {
         mRealm = mDbManager.getRealm();
-        mCategories = CategoryOperations.getCategories(mRealm);
+        mCategories = CategoryOperations.read(mRealm);
         // add pending listeners
         for (final RealmChangeListener listener : mChangeListeners) {
             mCategories.addChangeListener(listener);
@@ -86,7 +86,7 @@ public class PresenterFragmentCategories implements IPresenterFragmentCategories
     @Override
     public boolean deleteCategory(int position) {
         checkInitialized();
-        CommonOperations.deleteObject(mRealm, mCategories, position);
+        CommonOperations.delete(mRealm, mCategories, position);
         return true;
     }
 
