@@ -3,14 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:paddingBottom="16dp"
-    android:paddingEnd="@dimen/margin_end_default"
-    android:paddingLeft="@dimen/margin_start_default"
-    android:paddingRight="@dimen/margin_end_default"
-    android:paddingStart="@dimen/margin_start_default"
-    android:paddingTop="16dp">
+    android:paddingBottom="@dimen/margin_bottom_small"
+    android:paddingTop="@dimen/margin_top_small">
 
     <TextView
         android:id="@+id/text_view_amount_total"

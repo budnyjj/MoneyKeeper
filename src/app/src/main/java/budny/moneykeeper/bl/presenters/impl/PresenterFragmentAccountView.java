@@ -1,5 +1,8 @@
 package budny.moneykeeper.bl.presenters.impl;
 
+import android.content.Context;
+import android.content.Intent;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +13,8 @@ import budny.moneykeeper.db.operations.AccountOperations;
 import budny.moneykeeper.db.util.IDBManager;
 import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.db.util.impl.DBManager;
+import budny.moneykeeper.ui.activities.ActivityInput;
+import budny.moneykeeper.ui.misc.IntentExtras;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 
@@ -17,6 +22,7 @@ public class PresenterFragmentAccountView implements IPresenterFragmentAccountVi
     private static final String TAG = PresenterFragmentAccountView.class.getSimpleName();
     private static final String MSG_NOT_INITIALIZED = TAG + " is not initialized";
 
+    private final Context mContext;
     private final int mAccountIndex;
     private final IDBManager mDbManager = DBManager.getInstance();
     // preserves data change listeners from being garbage collected
@@ -28,7 +34,8 @@ public class PresenterFragmentAccountView implements IPresenterFragmentAccountVi
 
     private volatile boolean mInitialized;
 
-    public PresenterFragmentAccountView(int accountIndex) {
+    public PresenterFragmentAccountView(Context context, int accountIndex) {
+        mContext = context;
         mAccountIndex = accountIndex;
     }
 
@@ -77,6 +84,14 @@ public class PresenterFragmentAccountView implements IPresenterFragmentAccountVi
     @Override
     public BalanceChange getBalanceChange(int index) {
         return mAccount.getBalanceChanges().get(index);
+    }
+
+    @Override
+    public void updateBalanceChange(int index) {
+        Intent intent = new Intent(mContext, ActivityInput.class);
+        intent.putExtra(IntentExtras.FIELD_ACTION, IntentExtras.ACTION_UPDATE);
+        intent.putExtra(IntentExtras.FIELD_INDEX, index);
+        mContext.startActivity(intent);
     }
 
     @Override

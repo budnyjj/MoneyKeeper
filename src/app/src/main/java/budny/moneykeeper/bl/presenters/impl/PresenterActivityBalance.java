@@ -1,6 +1,7 @@
 package budny.moneykeeper.bl.presenters.impl;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
@@ -14,6 +15,7 @@ import budny.moneykeeper.db.operations.AccountOperations;
 import budny.moneykeeper.db.util.IDBManager;
 import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.db.util.impl.DBManager;
+import budny.moneykeeper.ui.activities.ActivityInput;
 import budny.moneykeeper.ui.fragments.FragmentAccountView;
 import budny.moneykeeper.ui.misc.IntentExtras;
 import io.realm.Realm;
@@ -104,6 +106,13 @@ public class PresenterActivityBalance implements IPresenterActivityBalance {
         if (mInitialized) {
             mAccounts.addChangeListener(realmListener);
         }
+    }
+
+    @Override
+    public void createBalanceChange() {
+        Intent intent = new Intent(mContext, ActivityInput.class);
+        intent.putExtra(IntentExtras.FIELD_ACTION, IntentExtras.ACTION_CREATE);
+        mContext.startActivity(intent);
     }
 
     /**

@@ -29,6 +29,11 @@
     <string name="title_input">Input</string>
     <string name="title_report">Report</string>
     <string name="title_settings">Settings</string>
+    <string name="title_category_edit">Edit category</string>
+    <string name="title_total">Total</string>
+    <string name="title_income">Income</string>
+    <string name="title_outcome">Outcome</string>
+
 
     <string name="menu_nav_drawer_item_camera">Camera</string>
     <string name="menu_nav_drawer_item_settings">Settings</string>
@@ -46,7 +51,7 @@
 
     <string name="err_msg_account_name">Invalid account name</string>
     <string name="err_msg_category_name">Invalid category name</string>
-    <string name="title_category_edit">Edit category</string>
-    <string name="title_total">Total</string>
+
     <string name="label_account_currency">Account currency</string>
+    <string name="menu_input_item_save">Save</string>
 </resources>

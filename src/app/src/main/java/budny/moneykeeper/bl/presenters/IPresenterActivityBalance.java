@@ -16,4 +16,6 @@ public interface IPresenterActivityBalance {
     CharSequence getFragmentAccountViewName(int position);
 
     int getNumAccounts();
+
+    void createBalanceChange();
 }

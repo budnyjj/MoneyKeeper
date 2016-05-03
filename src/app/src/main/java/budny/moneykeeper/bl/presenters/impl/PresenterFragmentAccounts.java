@@ -23,6 +23,7 @@ public class PresenterFragmentAccounts implements IPresenterFragmentAccounts {
     private static final String TAG = PresenterFragmentAccounts.class.getSimpleName();
     private static final String MSG_NOT_INITIALIZED = TAG + " is not initialized";
 
+    private final Context mContext;
     private final IDBManager mDbManager = DBManager.getInstance();
     // preserves data change listeners from being garbage collected
     // and saves them from being removed during fragment lifecycle
@@ -32,6 +33,10 @@ public class PresenterFragmentAccounts implements IPresenterFragmentAccounts {
     private RealmResults<Account> mAccounts;
 
     private volatile boolean mInitialized;
+
+    public PresenterFragmentAccounts(Context context) {
+        mContext = context;
+    }
 
     @Override
     public void onStart() {
@@ -69,18 +74,14 @@ public class PresenterFragmentAccounts implements IPresenterFragmentAccounts {
      * Starts {@linkplain budny.moneykeeper.ui.activities.ActivityAccountEdit}
      * to update specified category.
      *
-     * @param context activity context
      * @param index   index of category to edit
      */
     @Override
-    public void updateAccount(Context context, int index) {
-        if (context == null) {
-            return;
-        }
-        Intent intent = new Intent(context, ActivityAccountEdit.class);
+    public void updateAccount(int index) {
+        Intent intent = new Intent(mContext, ActivityAccountEdit.class);
         intent.putExtra(IntentExtras.FIELD_ACTION, IntentExtras.ACTION_UPDATE);
         intent.putExtra(IntentExtras.FIELD_INDEX, index);
-        context.startActivity(intent);
+        mContext.startActivity(intent);
     }
 
     /**

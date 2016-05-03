@@ -15,6 +15,8 @@ public interface IPresenterFragmentAccountView {
 
     BalanceChange getBalanceChange(int index);
 
+    void updateBalanceChange(int index);
+
     String getCurrencyCode();
 
     long getTotalAmount();

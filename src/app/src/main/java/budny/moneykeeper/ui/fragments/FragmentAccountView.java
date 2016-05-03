@@ -17,10 +17,12 @@ import budny.moneykeeper.db.model.BalanceChange;
 import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.ui.misc.IntentExtras;
 import budny.moneykeeper.ui.misc.RVItemDividerDecoration;
+import budny.moneykeeper.ui.misc.RVItemTouchListener;
 import budny.moneykeeper.ui.misc.formatters.ICurrencyFormatter;
 import budny.moneykeeper.ui.misc.formatters.IDateFormatter;
 import budny.moneykeeper.ui.misc.formatters.impl.CurrencyFormatter;
 import budny.moneykeeper.ui.misc.formatters.impl.DateFormatter;
+import budny.moneykeeper.ui.misc.listeners.IRVItemClickListener;
 
 public class FragmentAccountView extends Fragment {
     private static final String TAG = FragmentAccountView.class.getSimpleName();
@@ -50,7 +52,7 @@ public class FragmentAccountView extends Fragment {
             throw new IllegalArgumentException(
                     "Unable to locate following arguments: " + IntentExtras.FIELD_INDEX);
         }
-        mPresenter = new PresenterFragmentAccountView(mAccountIdx);
+        mPresenter = new PresenterFragmentAccountView(getContext(), mAccountIdx);
         // setup owned views
         View view = inflater.inflate(R.layout.fragment_account_view, container, false);
         mTotalAmountFormatter = new CurrencyFormatter(
@@ -61,6 +63,8 @@ public class FragmentAccountView extends Fragment {
         mAdapter = new RVBalanceChangesAdapter(getContext(), mPresenter);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addOnItemTouchListener(new RVItemTouchListener(getActivity(),
+                mRecyclerView, new RVItemClickListener(mPresenter)));
         mRecyclerView.addItemDecoration(new RVItemDividerDecoration(getContext()));
         // setup update listener
         mPresenter.addDataChangeListener(new IDataChangeListener() {
@@ -140,6 +144,24 @@ public class FragmentAccountView extends Fragment {
         @Override
         public int getItemCount() {
             return mPresenter.getNumBalanceChanges();
+        }
+    }
+
+    private static class RVItemClickListener implements IRVItemClickListener {
+        private final IPresenterFragmentAccountView mPresenter;
+
+        public RVItemClickListener(IPresenterFragmentAccountView presenter) {
+            mPresenter = presenter;
+        }
+
+        @Override
+        public void onItemClick(View view, int position) {
+            mPresenter.updateBalanceChange(position);
+        }
+
+        @Override
+        public void onItemLongClick(View view, int position) {
+
         }
     }
 }

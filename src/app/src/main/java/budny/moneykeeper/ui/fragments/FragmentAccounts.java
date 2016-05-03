@@ -22,7 +22,7 @@ import budny.moneykeeper.ui.misc.RVItemTouchListener;
 import budny.moneykeeper.ui.misc.listeners.IRVItemClickListener;
 
 public class FragmentAccounts extends Fragment {
-    private final IPresenterFragmentAccounts mPresenter = new PresenterFragmentAccounts();
+    private IPresenterFragmentAccounts mPresenter;
 
     @SuppressWarnings("FieldCanBeLocal")
     private LayoutManager mLayoutManager;
@@ -36,14 +36,15 @@ public class FragmentAccounts extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_accounts, container, false);
+        mPresenter = new PresenterFragmentAccounts(getContext());
         // setup recycler view
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_accounts);
         mLayoutManager = new LinearLayoutManager(getContext());
         mAdapter = new RVAccountsAdapter(mPresenter);
         mTouchHelper = new ItemTouchHelper(new RVTouchCallback(mPresenter));
         mTouchHelper.attachToRecyclerView(mRecyclerView);
-        mRecyclerView.addOnItemTouchListener(
-                new RVItemTouchListener(getActivity(), mRecyclerView, new RVItemClickListener(mPresenter)));
+        mRecyclerView.addOnItemTouchListener(new RVItemTouchListener(getActivity(),
+                mRecyclerView, new RVItemClickListener(mPresenter)));
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addItemDecoration(new RVItemDividerDecoration(getContext()));
@@ -144,7 +145,7 @@ public class FragmentAccounts extends Fragment {
         }
     }
 
-    private class RVItemClickListener implements IRVItemClickListener {
+    private static class RVItemClickListener implements IRVItemClickListener {
         private final IPresenterFragmentAccounts mPresenter;
 
         public RVItemClickListener(IPresenterFragmentAccounts presenter) {
@@ -153,7 +154,7 @@ public class FragmentAccounts extends Fragment {
 
         @Override
         public void onItemClick(View view, int position) {
-            mPresenter.updateAccount(getActivity(), position);
+            mPresenter.updateAccount(position);
         }
 
         @Override

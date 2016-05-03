@@ -24,7 +24,7 @@ public class ActivityAccountEdit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_edit);
-
+        // setup owned views
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -34,9 +34,8 @@ public class ActivityAccountEdit extends AppCompatActivity {
             }
         });
         setupActionBar(getSupportActionBar());
-
-        FragmentAccountEdit fragment = new FragmentAccountEdit();
         // pass activity's arguments to the fragment
+        FragmentAccountEdit fragment = new FragmentAccountEdit();
         fragment.setArguments(getIntent().getExtras());
         mEditListener = fragment;
         getSupportFragmentManager()

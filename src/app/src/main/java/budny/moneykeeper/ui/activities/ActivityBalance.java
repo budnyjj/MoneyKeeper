@@ -47,15 +47,13 @@ public class ActivityBalance extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_balance);
-
         // initialize presenter
         mPresenter.onCreate();
-
-        // setup views
+        // setup toolbar
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         setupActionBar(getSupportActionBar());
-
+        // setup view pager
         mTabLayout = (TabLayout) findViewById(R.id.tabs);
         mPagerView = (ViewPager) findViewById(R.id.viewpager);
         mPagerAdapter = new AdapterViewPager(getSupportFragmentManager(), mTabLayout, mPresenter);
@@ -65,8 +63,7 @@ public class ActivityBalance extends AppCompatActivity {
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ActivityBalance.this, ActivityInput.class);
-                startActivity(intent);
+                mPresenter.createBalanceChange();
             }
         });
         mDrawerLayout = (DrawerLayout) findViewById(R.id.fragment_container_balance_nav_drawer);
