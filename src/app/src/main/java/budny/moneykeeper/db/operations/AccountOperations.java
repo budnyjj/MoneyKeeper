@@ -15,7 +15,8 @@ public class AccountOperations {
      *
      * @return managed {@linkplain Account} instance
      */
-    public static Account create(Realm realm, String name, String currencyCode) {
+    public static Account create(Realm realm,
+                                 String name, String currencyCode) {
         Account account = new Account();
         account.setName(name);
         account.setCurrencyCode(currencyCode);
@@ -24,16 +25,6 @@ public class AccountOperations {
         // set greater index value in the new account
         int accountIndex = maxIndex == null ? 0 : maxIndex.intValue() + 1;
         account.setIndex(accountIndex);
-        return create(realm, account);
-    }
-
-    /**
-     * Stores account in database.
-     * Initializes account's fields with values from prototype.
-     *
-     * @return managed {@linkplain Account} instance
-     */
-    public static Account create(Realm realm, Account account) {
         // store in database
         realm.beginTransaction();
         Account managedAccount = realm.copyToRealm(account);
@@ -66,14 +57,15 @@ public class AccountOperations {
      * Updates contents of specified account.
      *
      * @param realm Realm instance
-     * @param srcAccount source account with new values
      * @param dstAccount account to be updated
      */
-    public static void update(Realm realm, final Account srcAccount, final Account dstAccount) {
+    public static void update(Realm realm,
+                              final Account dstAccount, final String name, final String currencyCode) {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                dstAccount.setName(srcAccount.getName());
+                dstAccount.setName(name);
+                dstAccount.setCurrencyCode(currencyCode);
             }
         });
     }

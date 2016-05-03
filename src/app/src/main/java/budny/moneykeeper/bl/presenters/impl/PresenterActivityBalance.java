@@ -15,7 +15,6 @@ import budny.moneykeeper.db.util.IDBManager;
 import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.db.util.impl.DBManager;
 import budny.moneykeeper.ui.fragments.FragmentAccountView;
-import budny.moneykeeper.ui.fragments.FragmentTotal;
 import budny.moneykeeper.ui.misc.IntentExtras;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
@@ -82,18 +81,6 @@ public class PresenterActivityBalance implements IPresenterActivityBalance {
     public CharSequence getFragmentAccountViewName(int position) {
         checkInitialized();
         return mAccounts.get(position).getName();
-    }
-
-    @Override
-    public Fragment getFragmentTotal() {
-        checkInitialized();
-        return new FragmentTotal();
-    }
-
-    @Override
-    public CharSequence getFragmentTotalName() {
-        checkInitialized();
-        return mContext.getString(R.string.title_total);
     }
 
     @Override

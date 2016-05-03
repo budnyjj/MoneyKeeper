@@ -23,4 +23,17 @@
             android:singleLine="true"
             android:textSize="@dimen/text_size_big" />
     </android.support.design.widget.TextInputLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/text_secondary" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_currencies"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/margin_bottom_small"
+        android:paddingTop="@dimen/margin_top_small"
+        android:scrollbars="vertical" />
 </LinearLayout>

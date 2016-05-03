@@ -1,9 +1,7 @@
 package budny.moneykeeper.ui.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,7 +15,6 @@ import budny.moneykeeper.bl.presenters.IPresenterFragmentAccountView;
 import budny.moneykeeper.bl.presenters.impl.PresenterFragmentAccountView;
 import budny.moneykeeper.db.model.BalanceChange;
 import budny.moneykeeper.db.util.IDataChangeListener;
-import budny.moneykeeper.ui.activities.ActivityInput;
 import budny.moneykeeper.ui.misc.IntentExtras;
 import budny.moneykeeper.ui.misc.RVItemDividerDecoration;
 import budny.moneykeeper.ui.misc.formatters.ICurrencyFormatter;

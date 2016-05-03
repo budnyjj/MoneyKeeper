@@ -159,13 +159,6 @@ public class ActivityBalance extends AppCompatActivity {
         }
     }
 
-    /**
-     * An adapter for view pager.
-     *
-     * If there is only one account, it provides a fragment for it.
-     * It there is more than one account, it provides a fragment with total values
-     * and number of fragments per each account.
-     */
     private static class AdapterViewPager extends FragmentStatePagerAdapter {
         private final IPresenterActivityBalance mPresenter;
 
@@ -197,37 +190,17 @@ public class ActivityBalance extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            int numAccounts = mPresenter.getNumAccounts();
-            if (numAccounts > 1) {
-                if (position > 0) {
-                    return mPresenter.getFragmentAccountView(position - 1);
-                }
-                return mPresenter.getFragmentTotal();
-            } else {
-                return mPresenter.getFragmentAccountView(position);
-            }
+            return mPresenter.getFragmentAccountView(position);
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            int numAccounts = mPresenter.getNumAccounts();
-            if (numAccounts > 1) {
-                if (position > 0) {
-                    return mPresenter.getFragmentAccountViewName(position - 1);
-                }
-                return mPresenter.getFragmentTotalName();
-            } else {
-                return mPresenter.getFragmentAccountViewName(position);
-            }
+            return mPresenter.getFragmentAccountViewName(position);
         }
 
         @Override
         public int getCount() {
-            int numAccounts = mPresenter.getNumAccounts();
-            if (numAccounts > 1) {
-                return numAccounts + 1;
-            }
-            return numAccounts;
+            return mPresenter.getNumAccounts();
         }
     }
 }
