@@ -5,6 +5,6 @@
         android:id="@+id/menu_categories_item_add"
         android:orderInCategory="100"
         android:icon="@drawable/ic_add_24dp"
-        android:title="@string/menu_categories_item_add"
+        android:title="@string/title_add_category"
         app:showAsAction="ifRoom" />
 </menu>

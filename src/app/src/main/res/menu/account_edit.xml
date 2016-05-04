@@ -5,6 +5,6 @@
         android:id="@+id/menu_account_edit_item_save"
         android:orderInCategory="100"
         android:icon="@drawable/ic_done_24dp"
-        android:title="@string/menu_account_edit_item_save"
+        android:title="@string/title_save"
         app:showAsAction="ifRoom" />
 </menu>

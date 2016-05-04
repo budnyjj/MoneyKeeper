@@ -1,4 +1,4 @@
-package budny.moneykeeper.ui.fragments;
+package budny.moneykeeper.ui.fragments.impl;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -58,8 +58,8 @@ public class FragmentCategoryEdit extends Fragment implements IContentEditListen
         // setup owned views
         View view = inflater.inflate(R.layout.fragment_category_edit, container, false);
         mErrorMsgCategoryName = getString(R.string.err_msg_category_name);
-        mCategoryNameContainer = (TextInputLayout) view.findViewById(R.id.input_container_category_edit_name);
-        mCategoryNameField = (EditText) view.findViewById(R.id.category_edit_name);
+        mCategoryNameContainer = (TextInputLayout) view.findViewById(R.id.fragment_category_edit_edit_text_container_name);
+        mCategoryNameField = (EditText) view.findViewById(R.id.fragment_category_edit_edit_text_name);
         mCategoryNameField.addTextChangedListener(
                 new ValidationTextWatcher(
                         mCategoryNameField, mCategoryNameContainer,

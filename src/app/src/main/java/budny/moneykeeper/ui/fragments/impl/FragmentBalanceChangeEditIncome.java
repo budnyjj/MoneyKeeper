@@ -1,16 +1,15 @@
-package budny.moneykeeper.ui.fragments;
+package budny.moneykeeper.ui.fragments.impl;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import budny.moneykeeper.R;
+import budny.moneykeeper.ui.fragments.IEditFragment;
 import budny.moneykeeper.ui.misc.IntentExtras;
-import budny.moneykeeper.ui.misc.listeners.IContentEditListener;
 
-public class FragmentInputIncome extends Fragment implements IContentEditListener {
+public class FragmentBalanceChangeEditIncome extends IEditFragment {
     private static final String TAG = FragmentCategoryEdit.class.getSimpleName();
 
     //    private final IPresenterFragmentCategoryEdit mPresenter = new PresenterFragmentCategoryEdit();
@@ -48,7 +47,7 @@ public class FragmentInputIncome extends Fragment implements IContentEditListene
             }
         }
         // setup owned views
-        View view = inflater.inflate(R.layout.fragment_input_income, container, false);
+        View view = inflater.inflate(R.layout.fragment_balance_change_edit_income, container, false);
 //        mErrorMsgCategoryName = getString(R.string.err_msg_category_name);
 //        mCategoryNameContainer = (TextInputLayout) view.findViewById(R.id.input_container_category_edit_name);
 //        mCategoryNameField = (EditText) view.findViewById(R.id.category_edit_name);

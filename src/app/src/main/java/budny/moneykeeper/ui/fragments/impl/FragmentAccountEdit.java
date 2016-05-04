@@ -1,4 +1,4 @@
-package budny.moneykeeper.ui.fragments;
+package budny.moneykeeper.ui.fragments.impl;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -73,14 +73,14 @@ public class FragmentAccountEdit extends Fragment implements IContentEditListene
         // setup owned views
         View view = inflater.inflate(R.layout.fragment_account_edit, container, false);
         mErrorMsgAccountName = getString(R.string.err_msg_account_name);
-        mAccountNameContainer = (TextInputLayout) view.findViewById(R.id.input_container_edit_account_name);
-        mAccountNameField = (EditText) view.findViewById(R.id.edit_account_name);
+        mAccountNameContainer = (TextInputLayout) view.findViewById(R.id.fragment_account_edit_edit_text_container_account_name);
+        mAccountNameField = (EditText) view.findViewById(R.id.fragment_account_edit_edit_text_account_name);
         mAccountNameField.addTextChangedListener(
                 new ValidationTextWatcher(
                         mAccountNameField, mAccountNameContainer,
                         mTextValidator, mErrorMsgAccountName));
         // setup recycler view
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_currencies);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_account_edit_recycler_view_currencies);
         mLayoutManager = new LinearLayoutManager(getContext());
         mAdapter = new RVCurrenciesAdapter(mPresenter);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -151,8 +151,8 @@ public class FragmentAccountEdit extends Fragment implements IContentEditListene
 
             public ViewHolder(View v) {
                 super(v);
-                mCurrencyNameView = (TextView) v.findViewById(R.id.text_view_currency_name);
-                mSelectedButton = (RadioButton) v.findViewById(R.id.radio_button_selected);
+                mCurrencyNameView = (TextView) v.findViewById(R.id.rv_row_view_text_view_currency_name);
+                mSelectedButton = (RadioButton) v.findViewById(R.id.rv_row_currency_radio_button_selected);
             }
         }
 

@@ -4,14 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 
-import budny.moneykeeper.bl.presenters.IPresenterActivityAccounts;
+import budny.moneykeeper.bl.presenters.IPresenterActivityAccountsView;
 import budny.moneykeeper.ui.activities.ActivityAccountEdit;
 import budny.moneykeeper.ui.misc.IntentExtras;
 
-public class PresenterActivityAccounts implements IPresenterActivityAccounts {
+public class PresenterActivityAccountsView implements IPresenterActivityAccountsView {
     private final Context mContext;
 
-    public PresenterActivityAccounts(@NonNull Context context) {
+    public PresenterActivityAccountsView(@NonNull Context context) {
         mContext = context;
     }
 

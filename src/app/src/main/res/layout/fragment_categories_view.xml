@@ -4,10 +4,10 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_categories"
+        android:id="@+id/fragment_categories_view_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
+        android:paddingBottom="@dimen/margin_bottom_small"
+        android:paddingTop="@dimen/margin_top_small"
         android:scrollbars="vertical" />
 </FrameLayout>

@@ -1,4 +1,4 @@
-package budny.moneykeeper.ui.fragments;
+package budny.moneykeeper.ui.fragments.impl;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,7 +21,7 @@ import budny.moneykeeper.ui.misc.RVItemDividerDecoration;
 import budny.moneykeeper.ui.misc.RVItemTouchListener;
 import budny.moneykeeper.ui.misc.listeners.IRVItemClickListener;
 
-public class FragmentAccounts extends Fragment {
+public class FragmentAccountsView extends Fragment {
     private IPresenterFragmentAccounts mPresenter;
 
     @SuppressWarnings("FieldCanBeLocal")
@@ -35,10 +35,10 @@ public class FragmentAccounts extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_accounts, container, false);
+        View view = inflater.inflate(R.layout.fragment_accounts_view, container, false);
         mPresenter = new PresenterFragmentAccounts(getContext());
         // setup recycler view
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_accounts);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_accounts_view_recycler_view);
         mLayoutManager = new LinearLayoutManager(getContext());
         mAdapter = new RVAccountsAdapter(mPresenter);
         mTouchHelper = new ItemTouchHelper(new RVTouchCallback(mPresenter));
@@ -75,7 +75,7 @@ public class FragmentAccounts extends Fragment {
 
             public ViewHolder(View v) {
                 super(v);
-                mTextView = (TextView) v.findViewById(R.id.text_view_title);
+                mTextView = (TextView) v.findViewById(R.id.rv_row_account_text_view_name);
             }
         }
 

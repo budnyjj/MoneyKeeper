@@ -1,10 +1,10 @@
 package budny.moneykeeper.bl.presenters;
 
 
-import android.support.v4.app.Fragment;
+import budny.moneykeeper.ui.fragments.IEditFragment;
 
 public interface IPresenterActivityInput {
-    Fragment getFragmentInput(int type);
+    IEditFragment getFragmentInput(int type);
 
     String getFragmentInputName(int type);
 

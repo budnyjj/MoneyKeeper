@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 
 import budny.moneykeeper.db.util.IDataChangeListener;
 
-public interface IPresenterActivityBalance {
+public interface IPresenterActivityBalanceChangesView {
     void onCreate();
 
     void onDestroy();

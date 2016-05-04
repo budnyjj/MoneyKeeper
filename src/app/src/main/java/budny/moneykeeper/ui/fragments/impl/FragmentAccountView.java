@@ -1,4 +1,4 @@
-package budny.moneykeeper.ui.fragments;
+package budny.moneykeeper.ui.fragments.impl;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -56,9 +56,9 @@ public class FragmentAccountView extends Fragment {
         // setup owned views
         View view = inflater.inflate(R.layout.fragment_account_view, container, false);
         mTotalAmountFormatter = new CurrencyFormatter(
-                getContext(), (TextView) view.findViewById(R.id.text_view_amount_total));
+                getContext(), (TextView) view.findViewById(R.id.fragment_account_view_text_view_total_amount));
         // setup recycler view
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_balance_changes);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_account_view_recycler_view_balance_changes);
         mLayoutManager = new LinearLayoutManager(getContext());
         mAdapter = new RVBalanceChangesAdapter(getContext(), mPresenter);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -109,9 +109,9 @@ public class FragmentAccountView extends Fragment {
             public ViewHolder(Context context, View v) {
                 super(v);
                 mAmountFormatter = new CurrencyFormatter(
-                        context, (TextView) v.findViewById(R.id.text_view_amount));
-                mDateFormatter = new DateFormatter((TextView) v.findViewById(R.id.text_view_date));
-                mCategoryTextView = (TextView) v.findViewById(R.id.text_view_category);
+                        context, (TextView) v.findViewById(R.id.rv_row_balance_change_text_view_amount));
+                mDateFormatter = new DateFormatter((TextView) v.findViewById(R.id.rv_row_balance_change_text_view_date));
+                mCategoryTextView = (TextView) v.findViewById(R.id.rv_row_balance_change_text_view_category);
             }
         }
 
@@ -129,7 +129,7 @@ public class FragmentAccountView extends Fragment {
         @Override
         public RVBalanceChangesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.rv_row_balance_change_stat, parent, false);
+                    .inflate(R.layout.rv_row_balance_change, parent, false);
             return new ViewHolder(mContext, v);
         }
 

@@ -8,22 +8,21 @@ import android.support.v4.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import budny.moneykeeper.R;
-import budny.moneykeeper.bl.presenters.IPresenterActivityBalance;
+import budny.moneykeeper.bl.presenters.IPresenterActivityBalanceChangesView;
 import budny.moneykeeper.db.model.Account;
 import budny.moneykeeper.db.operations.AccountOperations;
 import budny.moneykeeper.db.util.IDBManager;
 import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.db.util.impl.DBManager;
-import budny.moneykeeper.ui.activities.ActivityInput;
-import budny.moneykeeper.ui.fragments.FragmentAccountView;
+import budny.moneykeeper.ui.activities.ActivityBalanceChangeEdit;
+import budny.moneykeeper.ui.fragments.impl.FragmentAccountView;
 import budny.moneykeeper.ui.misc.IntentExtras;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 
-public class PresenterActivityBalance implements IPresenterActivityBalance {
-    private static final String TAG = PresenterActivityBalance.class.getSimpleName();
+public class PresenterActivityBalanceChangesView implements IPresenterActivityBalanceChangesView {
+    private static final String TAG = PresenterActivityBalanceChangesView.class.getSimpleName();
     private static final String MSG_NOT_INITIALIZED = TAG + " is not initialized";
 
     private final Context mContext;
@@ -37,7 +36,7 @@ public class PresenterActivityBalance implements IPresenterActivityBalance {
 
     private volatile boolean mInitialized;
 
-    public PresenterActivityBalance(Context context) {
+    public PresenterActivityBalanceChangesView(Context context) {
         mContext = context;
     }
 
@@ -110,7 +109,7 @@ public class PresenterActivityBalance implements IPresenterActivityBalance {
 
     @Override
     public void createBalanceChange() {
-        Intent intent = new Intent(mContext, ActivityInput.class);
+        Intent intent = new Intent(mContext, ActivityBalanceChangeEdit.class);
         intent.putExtra(IntentExtras.FIELD_ACTION, IntentExtras.ACTION_CREATE);
         mContext.startActivity(intent);
     }

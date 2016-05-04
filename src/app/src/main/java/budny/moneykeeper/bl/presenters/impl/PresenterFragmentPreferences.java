@@ -17,12 +17,8 @@ public class PresenterFragmentPreferences implements IPresenterFragmentPreferenc
     private final List<CharSequence> mCurrencyNames;
     private final List<CharSequence> mCurrencyCodes;
 
-    public static PresenterFragmentPreferences getInstance() {
-        return Holder.INSTANCE;
-    }
-
     @TargetApi(Build.VERSION_CODES.KITKAT)
-    private PresenterFragmentPreferences() {
+    public PresenterFragmentPreferences() {
         Set<Currency> currencies = Currency.getAvailableCurrencies();
         mCurrencyNames = new ArrayList<>(currencies.size());
         for (Currency c : currencies) {
@@ -47,9 +43,5 @@ public class PresenterFragmentPreferences implements IPresenterFragmentPreferenc
     @Override
     public CharSequence getDefaultCurrencyCode() {
         return "USD";
-    }
-
-    private static class Holder {
-        private static final PresenterFragmentPreferences INSTANCE = new PresenterFragmentPreferences();
     }
 }

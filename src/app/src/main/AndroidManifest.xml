@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.activities.ActivityBalance"
+            android:name=".ui.activities.ActivityBalanceChangesView"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,20 +29,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activities.ActivityInput"
+            android:name=".ui.activities.ActivityBalanceChangeEdit"
             android:label="@string/title_input" />
         <activity
-            android:name=".ui.activities.ActivityAccounts"
+            android:name=".ui.activities.ActivityAccountsView"
             android:label="@string/title_accounts" />
         <activity
             android:name=".ui.activities.ActivityAccountEdit"
-            android:label="@string/title_account_edit" />
+            android:label="@string/title_edit_account" />
         <activity
-            android:name=".ui.activities.ActivityCategories"
+            android:name=".ui.activities.ActivityCategoriesView"
             android:label="@string/title_categories" />
         <activity
             android:name=".ui.activities.ActivityCategoryEdit"
-            android:label="@string/title_category_edit" />
+            android:label="@string/title_edit_category" />
         <activity
             android:name=".ui.activities.ActivityPreferences"
             android:label="@string/title_settings" />

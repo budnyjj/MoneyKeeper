@@ -1,5 +1,5 @@
 package budny.moneykeeper.bl.presenters;
 
-public interface IPresenterActivityAccounts {
+public interface IPresenterActivityAccountsView {
     void createAccount();
 }

@@ -2,12 +2,12 @@ package budny.moneykeeper.bl.presenters.impl;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 
 import budny.moneykeeper.R;
 import budny.moneykeeper.bl.presenters.IPresenterActivityInput;
-import budny.moneykeeper.ui.fragments.FragmentInputIncome;
-import budny.moneykeeper.ui.fragments.FragmentInputOutcome;
+import budny.moneykeeper.ui.fragments.IEditFragment;
+import budny.moneykeeper.ui.fragments.impl.FragmentBalanceChangeEditIncome;
+import budny.moneykeeper.ui.fragments.impl.FragmentBalanceChangeEditOutcome;
 
 public class PresenterActivityInput implements IPresenterActivityInput {
     private static final int NUM_INPUT_TYPES = 2;
@@ -21,15 +21,15 @@ public class PresenterActivityInput implements IPresenterActivityInput {
         mArgs = args;
     }
 
-    public Fragment getFragmentInput(int type) {
+    public IEditFragment getFragmentInput(int type) {
         switch (type) {
             case 0: {
-                Fragment fragment = new FragmentInputIncome();
+                IEditFragment fragment = new FragmentBalanceChangeEditIncome();
                 fragment.setArguments(mArgs);
                 return fragment;
             }
             case 1: {
-                Fragment fragment = new FragmentInputOutcome();
+                IEditFragment fragment = new FragmentBalanceChangeEditOutcome();
                 fragment.setArguments(mArgs);
                 return fragment;
             }

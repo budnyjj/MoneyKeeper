@@ -1,4 +1,4 @@
-package budny.moneykeeper.ui.fragments;
+package budny.moneykeeper.ui.fragments.impl;
 
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -16,7 +16,7 @@ public class FragmentPreferences extends PreferenceFragment {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
-        mPresenter = PresenterFragmentPreferences.getInstance();
+        mPresenter = new PresenterFragmentPreferences();
 
         final String defaultCurrencyKey =
                 getResources().getString(R.string.pref_key_default_currency);

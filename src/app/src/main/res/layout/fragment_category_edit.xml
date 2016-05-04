@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_container_category_edit_name"
+        android:id="@+id/fragment_category_edit_edit_text_container_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="16dp"
@@ -16,10 +16,10 @@
         android:paddingTop="16dp">
 
         <EditText
-            android:id="@+id/category_edit_name"
+            android:id="@+id/fragment_category_edit_edit_text_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/label_category_name"
+            android:hint="@string/title_category_name"
             android:singleLine="true"
             android:textSize="@dimen/text_size_big" />
     </android.support.design.widget.TextInputLayout>

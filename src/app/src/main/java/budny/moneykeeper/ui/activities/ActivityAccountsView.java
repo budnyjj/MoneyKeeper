@@ -1,6 +1,7 @@
 package budny.moneykeeper.ui.activities;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -9,15 +10,18 @@ import android.view.MenuItem;
 import android.view.View;
 
 import budny.moneykeeper.R;
-import budny.moneykeeper.ui.fragments.impl.FragmentAccountEdit;
-import budny.moneykeeper.ui.misc.listeners.IContentEditListener;
+import budny.moneykeeper.bl.presenters.IPresenterActivityAccountsView;
+import budny.moneykeeper.bl.presenters.impl.PresenterActivityAccountsView;
+import budny.moneykeeper.ui.fragments.impl.FragmentAccountsView;
 
 /**
- * An activity used to edit specified account.
- * Edit action type as well as index of account are specified by arguments bundle.
+ * An activity used to view the list of accounts.
  */
-public class ActivityAccountEdit extends AppCompatActivity {
-    private IContentEditListener mEditListener;
+public class ActivityAccountsView extends AppCompatActivity {
+    @SuppressWarnings("unused")
+    private static final String TAG = ActivityAccountsView.class.getSimpleName();
+
+    private final IPresenterActivityAccountsView mPresenter = new PresenterActivityAccountsView(this);
 
     @SuppressWarnings("FieldCanBeLocal")
     private Toolbar mToolbar;
@@ -25,24 +29,22 @@ public class ActivityAccountEdit extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_edit);
+        setContentView(R.layout.activity_accounts_view);
         initViews();
         initFragments();
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.account_edit, menu);
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
+        getMenuInflater().inflate(R.menu.accounts, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_account_edit_item_save:
-                if (mEditListener.onEditContent()) {
-                    onBackPressed();
-                }
+            case R.id.menu_accounts_item_add:
+                mPresenter.createAccount();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -67,12 +69,9 @@ public class ActivityAccountEdit extends AppCompatActivity {
 
     private void initFragments() {
         // pass activity's arguments to the fragment
-        FragmentAccountEdit fragment = new FragmentAccountEdit();
-        fragment.setArguments(getIntent().getExtras());
-        mEditListener = fragment;
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.activity_account_edit_fragment_container, fragment)
+                .add(R.id.activity_accounts_view_fragment_container, new FragmentAccountsView())
                 .commit();
     }
 }

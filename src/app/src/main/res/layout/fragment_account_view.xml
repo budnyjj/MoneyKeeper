@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/margin_top_small">
 
     <TextView
-        android:id="@+id/text_view_amount_total"
+        android:id="@+id/fragment_account_view_text_view_total_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/margin_bottom_default"
@@ -28,10 +28,10 @@
         android:background="@color/text_secondary" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_balance_changes"
+        android:id="@+id/fragment_account_view_recycler_view_balance_changes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
+        android:paddingBottom="@dimen/margin_bottom_small"
+        android:paddingTop="@dimen/margin_top_small"
         android:scrollbars="vertical" />
 </LinearLayout>

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -23,12 +22,15 @@ import android.view.MenuItem;
 import android.view.View;
 
 import budny.moneykeeper.R;
-import budny.moneykeeper.bl.presenters.IPresenterActivityBalance;
-import budny.moneykeeper.bl.presenters.impl.PresenterActivityBalance;
+import budny.moneykeeper.bl.presenters.IPresenterActivityBalanceChangesView;
+import budny.moneykeeper.bl.presenters.impl.PresenterActivityBalanceChangesView;
 import budny.moneykeeper.db.util.IDataChangeListener;
 
-public class ActivityBalance extends AppCompatActivity {
-    private final IPresenterActivityBalance mPresenter = new PresenterActivityBalance(this);
+/**
+ * An activity used to view the list of balance changes of all accounts.
+ */
+public class ActivityBalanceChangesView extends AppCompatActivity {
+    private final IPresenterActivityBalanceChangesView mPresenter = new PresenterActivityBalanceChangesView(this);
 
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
@@ -36,7 +38,7 @@ public class ActivityBalance extends AppCompatActivity {
     @SuppressWarnings("FieldCanBeLocal")
     private FloatingActionButton mFab;
     @SuppressWarnings("FieldCanBeLocal")
-    private TabLayout mTabLayout;
+    private TabLayout mTabs;
     private Toolbar mToolbar;
     @SuppressWarnings("FieldCanBeLocal")
     private ViewPager mPagerView;
@@ -46,79 +48,9 @@ public class ActivityBalance extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_balance);
-        // initialize presenter
         mPresenter.onCreate();
-        // setup toolbar
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-        setupActionBar(getSupportActionBar());
-        // setup view pager
-        mTabLayout = (TabLayout) findViewById(R.id.tabs);
-        mPagerView = (ViewPager) findViewById(R.id.viewpager);
-        mPagerAdapter = new AdapterViewPager(getSupportFragmentManager(), mTabLayout, mPresenter);
-        mPagerView.setAdapter(mPagerAdapter);
-        mTabLayout.setupWithViewPager(mPagerView);
-        mFab = (FloatingActionButton) findViewById(R.id.fab);
-        mFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.createBalanceChange();
-            }
-        });
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.fragment_container_balance_nav_drawer);
-        mDrawerToggle = new ActionBarDrawerToggle(
-                this, mDrawerLayout, mToolbar,
-                R.string.nav_drawer_open, R.string.nav_drawer_close) {
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                invalidateOptionsMenu();
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-                invalidateOptionsMenu();
-            }
-
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-                super.onDrawerSlide(drawerView, slideOffset);
-                mToolbar.setAlpha(1 - slideOffset / 2);
-            }
-        };
-        mDrawerLayout.addDrawerListener(mDrawerToggle);
-
-        mNavigationView = (NavigationView) findViewById(R.id.balance_navigation);
-        mNavigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem item) {
-                        Class<? extends Activity> selectedActivityCls = null;
-                        switch (item.getItemId()) {
-                            case R.id.menu_nav_drawer_item_accounts:
-                                selectedActivityCls = ActivityAccounts.class;
-                                break;
-                            case R.id.menu_nav_drawer_item_categories:
-                                selectedActivityCls = ActivityCategories.class;
-                                break;
-                            case R.id.menu_nav_drawer_item_settings:
-                                selectedActivityCls = ActivityPreferences.class;
-                                break;
-                            case R.id.menu_nav_drawer_item_camera:
-                                selectedActivityCls = ActivityCamera.class;
-                                break;
-                        }
-
-                        mDrawerLayout.closeDrawer(mNavigationView);
-                        if (selectedActivityCls != null) {
-                            Intent intent = new Intent(getBaseContext(), selectedActivityCls);
-                            startActivity(intent);
-                        }
-                        return true;
-                    }
-                });
+        setContentView(R.layout.activity_balance_changes_view);
+        initViews();
     }
 
     @Override
@@ -144,35 +76,105 @@ public class ActivityBalance extends AppCompatActivity {
         final int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.menu_balance_item_group_categories) {
+        if (id == R.id.menu_balance_item_group_by_categories) {
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupActionBar(@Nullable ActionBar bar) {
+    private void initViews() {
+        // toolbar
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        ActionBar bar = getSupportActionBar();
         if (bar != null) {
             bar.setDefaultDisplayHomeAsUpEnabled(true);
         }
+        // view pager
+        mTabs = (TabLayout) findViewById(R.id.activity_balance_changes_view_tabs);
+        mPagerView = (ViewPager) findViewById(R.id.activity_balance_changes_view_view_pager);
+        mPagerAdapter = new AdapterViewPager(getSupportFragmentManager(), mTabs, mPresenter);
+        mPagerView.setAdapter(mPagerAdapter);
+        mTabs.setupWithViewPager(mPagerView);
+        // floating action button
+        mFab = (FloatingActionButton) findViewById(R.id.activity_balance_changes_view_fab);
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.createBalanceChange();
+            }
+        });
+        // navigation drawer
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.activity_balance_changes_view_nav_drawer);
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, mToolbar,
+                R.string.nav_drawer_open, R.string.nav_drawer_close) {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                invalidateOptionsMenu();
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                invalidateOptionsMenu();
+            }
+
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                super.onDrawerSlide(drawerView, slideOffset);
+                mToolbar.setAlpha(1 - slideOffset / 2);
+            }
+        };
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
+        mNavigationView = (NavigationView) findViewById(R.id.activity_balance_changes_view_navigation_view);
+        mNavigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem item) {
+                        Class<? extends Activity> selectedActivityCls = null;
+                        switch (item.getItemId()) {
+                            case R.id.menu_nav_drawer_item_accounts:
+                                selectedActivityCls = ActivityAccountsView.class;
+                                break;
+                            case R.id.menu_nav_drawer_item_categories:
+                                selectedActivityCls = ActivityCategoriesView.class;
+                                break;
+                            case R.id.menu_nav_drawer_item_settings:
+                                selectedActivityCls = ActivityPreferences.class;
+                                break;
+                            case R.id.menu_nav_drawer_item_camera:
+                                selectedActivityCls = ActivityCamera.class;
+                                break;
+                        }
+                        mDrawerLayout.closeDrawer(mNavigationView);
+                        if (selectedActivityCls != null) {
+                            Intent intent = new Intent(getBaseContext(), selectedActivityCls);
+                            startActivity(intent);
+                        }
+                        return true;
+                    }
+                });
     }
 
     private static class AdapterViewPager extends FragmentStatePagerAdapter {
-        private final IPresenterActivityBalance mPresenter;
+        private final IPresenterActivityBalanceChangesView mPresenter;
 
-        private final TabLayout mTabLayout;
+        private final TabLayout mLayout;
 
         public AdapterViewPager(@NonNull FragmentManager manager,
-                                TabLayout layout, IPresenterActivityBalance presenter) {
+                                TabLayout layout, IPresenterActivityBalanceChangesView presenter) {
             super(manager);
-            mTabLayout = layout;
+            mLayout = layout;
             mPresenter = presenter;
             mPresenter.addDataChangeListener(new IDataChangeListener() {
                 @Override
                 public void onChange() {
                     if (mPresenter.getNumAccounts() > 1) {
-                        mTabLayout.setVisibility(View.VISIBLE);
+                        mLayout.setVisibility(View.VISIBLE);
                     } else {
-                        mTabLayout.setVisibility(View.GONE);
+                        mLayout.setVisibility(View.GONE);
                     }
                     notifyDataSetChanged();
                 }

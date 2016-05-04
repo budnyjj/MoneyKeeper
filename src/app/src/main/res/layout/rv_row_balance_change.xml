@@ -7,7 +7,7 @@
     android:paddingTop="@dimen/margin_top_small">
 
     <TextView
-        android:id="@+id/text_view_amount"
+        android:id="@+id/rv_row_balance_change_text_view_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -21,13 +21,13 @@
         tools:text="+100,500.99" />
 
     <TextView
-        android:id="@+id/text_view_date"
+        android:id="@+id/rv_row_balance_change_text_view_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_below="@id/text_view_amount"
+        android:layout_below="@id/rv_row_balance_change_text_view_amount"
         android:layout_marginEnd="@dimen/margin_end_default"
         android:layout_marginLeft="@dimen/margin_start_default"
         android:layout_marginRight="@dimen/margin_start_default"
@@ -37,10 +37,10 @@
         tools:text="07.08.1993" />
 
     <TextView
-        android:id="@+id/text_view_category"
+        android:id="@+id/rv_row_balance_change_text_view_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text_view_amount"
+        android:layout_below="@id/rv_row_balance_change_text_view_amount"
         android:layout_marginEnd="@dimen/margin_end_default"
         android:layout_marginLeft="@dimen/margin_start_default"
         android:layout_marginRight="@dimen/margin_end_default"

@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_container_edit_account_name"
+        android:id="@+id/fragment_account_edit_edit_text_container_account_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/margin_bottom_default"
@@ -16,10 +16,10 @@
         android:paddingTop="@dimen/margin_top_default">
 
         <EditText
-            android:id="@+id/edit_account_name"
+            android:id="@+id/fragment_account_edit_edit_text_account_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/label_account_name"
+            android:hint="@string/title_account_name"
             android:singleLine="true"
             android:textSize="@dimen/text_size_big" />
     </android.support.design.widget.TextInputLayout>
@@ -30,7 +30,7 @@
         android:background="@color/text_secondary" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_currencies"
+        android:id="@+id/fragment_account_edit_recycler_view_currencies"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/margin_bottom_small"

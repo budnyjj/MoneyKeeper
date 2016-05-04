@@ -13,7 +13,7 @@ import budny.moneykeeper.db.operations.AccountOperations;
 import budny.moneykeeper.db.util.IDBManager;
 import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.db.util.impl.DBManager;
-import budny.moneykeeper.ui.activities.ActivityInput;
+import budny.moneykeeper.ui.activities.ActivityBalanceChangeEdit;
 import budny.moneykeeper.ui.misc.IntentExtras;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
@@ -88,7 +88,7 @@ public class PresenterFragmentAccountView implements IPresenterFragmentAccountVi
 
     @Override
     public void updateBalanceChange(int index) {
-        Intent intent = new Intent(mContext, ActivityInput.class);
+        Intent intent = new Intent(mContext, ActivityBalanceChangeEdit.class);
         intent.putExtra(IntentExtras.FIELD_ACTION, IntentExtras.ACTION_UPDATE);
         intent.putExtra(IntentExtras.FIELD_INDEX, index);
         mContext.startActivity(intent);
