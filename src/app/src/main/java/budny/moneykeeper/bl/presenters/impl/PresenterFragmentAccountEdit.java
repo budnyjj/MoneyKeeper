@@ -2,7 +2,6 @@ package budny.moneykeeper.bl.presenters.impl;
 
 import android.annotation.TargetApi;
 import android.os.Build;
-import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Currency;
@@ -19,7 +18,6 @@ import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.db.util.impl.DBManager;
 import budny.moneykeeper.ui.misc.IntentExtras;
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 public class PresenterFragmentAccountEdit implements IPresenterFragmentAccountEdit {
     private static final String TAG = PresenterFragmentAccountEdit.class.getSimpleName();
@@ -34,8 +32,7 @@ public class PresenterFragmentAccountEdit implements IPresenterFragmentAccountEd
 
     private Realm mRealm;
     private Account mAccount;
-    // adjust index based on locale
-    private int mSelectedCurrencyIdx;
+    private int mSelectedCurrencyIndex;
 
     private volatile boolean mInitialized;
 
@@ -52,10 +49,10 @@ public class PresenterFragmentAccountEdit implements IPresenterFragmentAccountEd
         if (IntentExtras.ACTION_UPDATE.equals(mAction)) {
             // read specified account and pick currency from it
             mAccount = AccountOperations.read(mRealm).get(mAccountIndex);
-            mSelectedCurrencyIdx = mCurrencies.indexOf(Currency.getInstance(mAccount.getCurrencyCode()));
+            mSelectedCurrencyIndex = mCurrencies.indexOf(Currency.getInstance(mAccount.getCurrencyCode()));
         } else {
             // set currency index based on default locale
-            mSelectedCurrencyIdx = mCurrencies.indexOf(Currency.getInstance(Locale.getDefault()));
+            mSelectedCurrencyIndex = mCurrencies.indexOf(Currency.getInstance(Locale.getDefault()));
         }
         mInitialized = true;
     }
@@ -111,7 +108,7 @@ public class PresenterFragmentAccountEdit implements IPresenterFragmentAccountEd
 
     @Override
     public void selectCurrency(int index) {
-        mSelectedCurrencyIdx = index;
+        mSelectedCurrencyIndex = index;
         for (IDataChangeListener listener : mCurrencySelectedListeners) {
             listener.onChange();
         }
@@ -119,12 +116,12 @@ public class PresenterFragmentAccountEdit implements IPresenterFragmentAccountEd
 
     @Override
     public boolean isSelectedCurrency(int index) {
-        return mSelectedCurrencyIdx == index;
+        return mSelectedCurrencyIndex == index;
     }
 
     @Override
     public String getSelectedCurrencyCode() {
-        return mCurrencies.get(mSelectedCurrencyIdx).getCurrencyCode();
+        return mCurrencies.get(mSelectedCurrencyIndex).getCurrencyCode();
     }
 
     @Override

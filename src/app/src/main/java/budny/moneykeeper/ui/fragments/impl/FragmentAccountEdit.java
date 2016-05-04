@@ -2,7 +2,6 @@ package budny.moneykeeper.ui.fragments.impl;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,83 +18,54 @@ import budny.moneykeeper.bl.validators.IValidator;
 import budny.moneykeeper.bl.validators.impl.TextValidator;
 import budny.moneykeeper.db.model.Account;
 import budny.moneykeeper.db.util.IDataChangeListener;
+import budny.moneykeeper.ui.fragments.IFragmentEdit;
 import budny.moneykeeper.ui.misc.IntentExtras;
 import budny.moneykeeper.ui.misc.RVItemDividerDecoration;
 import budny.moneykeeper.ui.misc.RVItemTouchListener;
 import budny.moneykeeper.ui.misc.ValidationTextWatcher;
-import budny.moneykeeper.ui.misc.listeners.IContentEditListener;
 import budny.moneykeeper.ui.misc.listeners.IRVItemClickListener;
 
-public class FragmentAccountEdit extends Fragment implements IContentEditListener {
+/**
+ * A fragment used to edit specified account.
+ * Concrete action (add/modify) as well as index of the
+ * target account are specified by the arguments bundle.
+ */
+public class FragmentAccountEdit extends IFragmentEdit {
     private static final String TAG = FragmentAccountEdit.class.getSimpleName();
 
     private final IValidator mTextValidator = new TextValidator();
 
+    private IPresenterFragmentAccountEdit mPresenter;
     // action to perform with account (create or update)
     private String mAction = IntentExtras.ACTION_INVALID;
     // index of account to edit
-    private int mAccountIdx = IntentExtras.INDEX_INVALID;
-    private IPresenterFragmentAccountEdit mPresenter;
-    private String mErrorMsgAccountName;
+    private int mAccountIndex = IntentExtras.INDEX_INVALID;
 
     @SuppressWarnings("FieldCanBeLocal")
-    private TextInputLayout mAccountNameContainer;
-    private EditText mAccountNameField;
+    private TextInputLayout mAccountNameLayout;
     @SuppressWarnings("FieldCanBeLocal")
-    private RecyclerView.LayoutManager mLayoutManager;
+    private EditText mAccountNameText;
     @SuppressWarnings("FieldCanBeLocal")
-    private RecyclerView mRecyclerView;
+    private RecyclerView.LayoutManager mCurrenciesManager;
     @SuppressWarnings("FieldCanBeLocal")
-    private RecyclerView.Adapter mAdapter;
+    private RecyclerView mCurrenciesView;
+    @SuppressWarnings("FieldCanBeLocal")
+    private RecyclerView.Adapter mCurrenciesAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // parse arguments
-        Bundle args = getArguments();
-        if (args == null) {
-            throw new IllegalArgumentException(
-                    TAG + " is not initialized with arguments bundle");
-        }
-        String action = args.getString(IntentExtras.FIELD_ACTION);
-        mAction = (action == null) ? IntentExtras.ACTION_INVALID : action;
-        if (IntentExtras.ACTION_INVALID.equals(mAction)) {
-            throw new IllegalArgumentException(
-                    "Unable to locate following arguments: " + IntentExtras.FIELD_ACTION);
-        }
-        if (IntentExtras.ACTION_UPDATE.equals(mAction)) {
-            mAccountIdx = args.getInt(IntentExtras.FIELD_INDEX, IntentExtras.INDEX_INVALID);
-            if (mAccountIdx == IntentExtras.INDEX_INVALID) {
-                throw new IllegalArgumentException(
-                        "Unable to locate following arguments: " + IntentExtras.FIELD_INDEX);
-            }
-        }
-        mPresenter = new PresenterFragmentAccountEdit(mAction, mAccountIdx);
-        // setup owned views
-        View view = inflater.inflate(R.layout.fragment_account_edit, container, false);
-        mErrorMsgAccountName = getString(R.string.err_msg_account_name);
-        mAccountNameContainer = (TextInputLayout) view.findViewById(R.id.fragment_account_edit_edit_text_container_account_name);
-        mAccountNameField = (EditText) view.findViewById(R.id.fragment_account_edit_edit_text_account_name);
-        mAccountNameField.addTextChangedListener(
-                new ValidationTextWatcher(
-                        mAccountNameField, mAccountNameContainer,
-                        mTextValidator, mErrorMsgAccountName));
-        // setup recycler view
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_account_edit_recycler_view_currencies);
-        mLayoutManager = new LinearLayoutManager(getContext());
-        mAdapter = new RVCurrenciesAdapter(mPresenter);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addOnItemTouchListener(
-                new RVItemTouchListener(getActivity(), mRecyclerView, new RVItemClickListener(mPresenter)));
-        mRecyclerView.addItemDecoration(new RVItemDividerDecoration(getContext()));
-        return view;
+        parseArguments();
+        mPresenter = new PresenterFragmentAccountEdit(mAction, mAccountIndex);
+        View rootView = inflater.inflate(R.layout.fragment_account_edit, container, false);
+        initViews(rootView);
+        return rootView;
     }
 
     @Override
     public void onStart() {
         super.onStart();
         mPresenter.onStart();
-        updateFields();
+        updateViews();
     }
 
     @Override
@@ -106,16 +76,11 @@ public class FragmentAccountEdit extends Fragment implements IContentEditListene
 
     @Override
     public boolean onEditContent() {
-        String accountName = mAccountNameField.getText().toString().trim();
+        String accountName = mAccountNameText.getText().toString().trim();
         if (!mTextValidator.validate(accountName)) {
-            mAccountNameContainer.setError(mErrorMsgAccountName);
+            mAccountNameLayout.setError(getString(R.string.err_msg_account_name));
             return false;
         }
-
-        Account account = new Account();
-        account.setName(accountName);
-        // TODO: setup account fields dynamically
-        account.setCurrencyCode("EUR");
 
         switch (mAction) {
             case IntentExtras.ACTION_CREATE:
@@ -130,14 +95,56 @@ public class FragmentAccountEdit extends Fragment implements IContentEditListene
         return true;
     }
 
+    private void parseArguments() {
+        Bundle args = getArguments();
+        if (args == null) {
+            throw new IllegalArgumentException(
+                    TAG + " is not initialized with arguments bundle");
+        }
+        String action = args.getString(IntentExtras.FIELD_ACTION);
+        mAction = (action == null) ? IntentExtras.ACTION_INVALID : action;
+        if (IntentExtras.ACTION_INVALID.equals(mAction)) {
+            throw new IllegalArgumentException(
+                    "Unable to locate following arguments: " + IntentExtras.FIELD_ACTION);
+        }
+        if (IntentExtras.ACTION_UPDATE.equals(mAction)) {
+            mAccountIndex = args.getInt(IntentExtras.FIELD_INDEX, IntentExtras.INDEX_INVALID);
+            if (mAccountIndex == IntentExtras.INDEX_INVALID) {
+                throw new IllegalArgumentException(
+                        "Unable to locate following arguments: " + IntentExtras.FIELD_INDEX);
+            }
+        }
+    }
+
+    private void initViews(View rootView) {
+        // account name text view
+        mAccountNameLayout = (TextInputLayout) rootView.findViewById(
+                R.id.fragment_account_edit_edit_text_container_account_name);
+        mAccountNameText = (EditText) rootView.findViewById(
+                R.id.fragment_account_edit_edit_text_account_name);
+        mAccountNameText.addTextChangedListener(
+                new ValidationTextWatcher(mAccountNameText, mAccountNameLayout,
+                        mTextValidator, getString(R.string.err_msg_account_name)));
+        // currencies recycler view
+        mCurrenciesView = (RecyclerView) rootView.findViewById(
+                R.id.fragment_account_edit_recycler_view_currencies);
+        mCurrenciesManager = new LinearLayoutManager(getContext());
+        mCurrenciesAdapter = new RVCurrenciesAdapter(mPresenter);
+        mCurrenciesView.setLayoutManager(mCurrenciesManager);
+        mCurrenciesView.setAdapter(mCurrenciesAdapter);
+        mCurrenciesView.addOnItemTouchListener(new RVItemTouchListener(
+                getActivity(), mCurrenciesView, new RVItemClickListener(mPresenter)));
+        mCurrenciesView.addItemDecoration(new RVItemDividerDecoration(getContext()));
+    }
+
     /**
-     * Fills owned fields with data.
+     * Fills owned fields with data based on contents of the arguments bundle.
      */
-    private void updateFields() {
+    private void updateViews() {
         if (IntentExtras.ACTION_UPDATE.equals(mAction)
-                && mAccountIdx != IntentExtras.INDEX_INVALID) {
+                && mAccountIndex != IntentExtras.INDEX_INVALID) {
             Account account = mPresenter.getAccount();
-            mAccountNameField.setText(account.getName());
+            mAccountNameText.setText(account.getName());
         }
     }
 
@@ -151,8 +158,10 @@ public class FragmentAccountEdit extends Fragment implements IContentEditListene
 
             public ViewHolder(View v) {
                 super(v);
-                mCurrencyNameView = (TextView) v.findViewById(R.id.rv_row_view_text_view_currency_name);
-                mSelectedButton = (RadioButton) v.findViewById(R.id.rv_row_currency_radio_button_selected);
+                mCurrencyNameView = (TextView) v.findViewById(
+                        R.id.rv_row_view_text_view_currency_name);
+                mSelectedButton = (RadioButton) v.findViewById(
+                        R.id.rv_row_currency_radio_button_selected);
             }
         }
 
@@ -185,7 +194,7 @@ public class FragmentAccountEdit extends Fragment implements IContentEditListene
         }
     }
 
-    private class RVItemClickListener implements IRVItemClickListener {
+    private static class RVItemClickListener implements IRVItemClickListener {
         private final IPresenterFragmentAccountEdit mPresenter;
 
         public RVItemClickListener(IPresenterFragmentAccountEdit presenter) {

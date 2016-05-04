@@ -21,34 +21,27 @@ import budny.moneykeeper.ui.misc.RVItemDividerDecoration;
 import budny.moneykeeper.ui.misc.RVItemTouchListener;
 import budny.moneykeeper.ui.misc.listeners.IRVItemClickListener;
 
+/**
+ * A fragment used to show all accounts.
+ */
 public class FragmentAccountsView extends Fragment {
     private IPresenterFragmentAccounts mPresenter;
 
     @SuppressWarnings("FieldCanBeLocal")
-    private LayoutManager mLayoutManager;
+    private LayoutManager mAccountsManager;
     @SuppressWarnings("FieldCanBeLocal")
-    private RecyclerView mRecyclerView;
+    private RecyclerView mAccountsView;
     @SuppressWarnings("FieldCanBeLocal")
-    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.Adapter mAccountsAdapter;
     @SuppressWarnings("FieldCanBeLocal")
-    private ItemTouchHelper mTouchHelper;
+    private ItemTouchHelper mAccountsTouchHelper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_accounts_view, container, false);
         mPresenter = new PresenterFragmentAccounts(getContext());
-        // setup recycler view
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_accounts_view_recycler_view);
-        mLayoutManager = new LinearLayoutManager(getContext());
-        mAdapter = new RVAccountsAdapter(mPresenter);
-        mTouchHelper = new ItemTouchHelper(new RVTouchCallback(mPresenter));
-        mTouchHelper.attachToRecyclerView(mRecyclerView);
-        mRecyclerView.addOnItemTouchListener(new RVItemTouchListener(getActivity(),
-                mRecyclerView, new RVItemClickListener(mPresenter)));
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addItemDecoration(new RVItemDividerDecoration(getContext()));
-        return view;
+        View rootView = inflater.inflate(R.layout.fragment_accounts_view, container, false);
+        initViews(rootView);
+        return rootView;
     }
 
     @Override
@@ -57,7 +50,7 @@ public class FragmentAccountsView extends Fragment {
         mPresenter.onStart();
         // update recycler view contents for those cases,
         // when user navigates back from corresponding edit activity
-        mAdapter.notifyDataSetChanged();
+        mAccountsAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -66,16 +59,30 @@ public class FragmentAccountsView extends Fragment {
         mPresenter.onStop();
     }
 
+    private void initViews(View rootView) {
+        // accounts recycler view
+        mAccountsView = (RecyclerView) rootView.findViewById(R.id.fragment_accounts_view_recycler_view);
+        mAccountsManager = new LinearLayoutManager(getContext());
+        mAccountsAdapter = new RVAccountsAdapter(mPresenter);
+        mAccountsTouchHelper = new ItemTouchHelper(new RVTouchCallback(mPresenter));
+        mAccountsTouchHelper.attachToRecyclerView(mAccountsView);
+        mAccountsView.addOnItemTouchListener(new RVItemTouchListener(getActivity(),
+                mAccountsView, new RVItemClickListener(mPresenter)));
+        mAccountsView.setLayoutManager(mAccountsManager);
+        mAccountsView.setAdapter(mAccountsAdapter);
+        mAccountsView.addItemDecoration(new RVItemDividerDecoration(getContext()));
+    }
+
     private static class RVAccountsAdapter
             extends RecyclerView.Adapter<RVAccountsAdapter.ViewHolder> {
         private final IPresenterFragmentAccounts mPresenter;
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
-            public TextView mTextView;
+            public TextView mNameView;
 
             public ViewHolder(View v) {
                 super(v);
-                mTextView = (TextView) v.findViewById(R.id.rv_row_account_text_view_name);
+                mNameView = (TextView) v.findViewById(R.id.rv_row_account_text_view_name);
             }
         }
 
@@ -99,7 +106,7 @@ public class FragmentAccountsView extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             Account account = mPresenter.getAccount(position);
-            holder.mTextView.setText(account.getName());
+            holder.mNameView.setText(account.getName());
         }
 
         @Override

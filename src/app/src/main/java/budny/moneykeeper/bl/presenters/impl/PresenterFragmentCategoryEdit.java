@@ -6,57 +6,71 @@ import budny.moneykeeper.db.operations.CategoryOperations;
 import budny.moneykeeper.db.operations.CommonOperations;
 import budny.moneykeeper.db.util.IDBManager;
 import budny.moneykeeper.db.util.impl.DBManager;
+import budny.moneykeeper.ui.misc.IntentExtras;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
 public class PresenterFragmentCategoryEdit implements IPresenterFragmentCategoryEdit {
     private static final String TAG = PresenterFragmentCategoryEdit.class.getSimpleName();
     private static final String MSG_NOT_INITIALIZED = TAG + " is not initialized";
+    private static final String MSG_INVALID_ACTION = "This method should not be invoked with this action: ";
 
+    private final String mAction;
+    private final int mCategoryIndex;
     private final IDBManager mDbManager = DBManager.getInstance();
 
     private Realm mRealm;
-    private RealmResults<Category> mCategories;
+    private Category mCategory;
 
     private volatile boolean mInitialized;
+
+    public PresenterFragmentCategoryEdit(String action, int categoryIndex) {
+        mAction = action;
+        mCategoryIndex = categoryIndex;
+    }
 
     @Override
     public void onStart() {
         mRealm = mDbManager.getRealm();
-        mCategories = CategoryOperations.read(mRealm);
+        if (IntentExtras.ACTION_UPDATE.equals(mAction)) {
+            mCategory = CategoryOperations.read(mRealm).get(mCategoryIndex);
+        }
         mInitialized = true;
     }
 
     @Override
     public void onStop() {
         checkInitialized();
-        mCategories = null;
+        mCategory = null;
         mRealm.close();
         mInitialized = false;
     }
 
     @Override
-    public Category getCategory(int index) {
+    public Category getCategory() {
         checkInitialized();
-        return mCategories.get(index);
+        if (!IntentExtras.ACTION_UPDATE.equals(mAction)) {
+            throw new IllegalStateException(MSG_INVALID_ACTION + mAction);
+        }
+        return mCategory;
     }
 
     @Override
-    public void createCategory(Category category) {
+    public void createCategory(String name) {
         checkInitialized();
-        CommonOperations.create(mRealm, category);
+        if (!IntentExtras.ACTION_CREATE.equals(mAction)) {
+            throw new IllegalStateException(MSG_INVALID_ACTION + mAction);
+        }
+        CategoryOperations.create(mRealm, name);
     }
 
-    /**
-     * Updates specified category by replacing its contents.
-     *
-     * @param dstIndex    index of category to be replaced
-     * @param srcCategory new category
-     */
     @Override
-    public void updateCategory(Category srcCategory, int dstIndex) {
+    public void updateCategory(String name) {
         checkInitialized();
-        CategoryOperations.update(mRealm, srcCategory, mCategories.get(dstIndex));
+        if (!IntentExtras.ACTION_UPDATE.equals(mAction)) {
+            throw new IllegalStateException(MSG_INVALID_ACTION + mAction);
+        }
+        CategoryOperations.update(mRealm, mCategory, name);
     }
 
     /**

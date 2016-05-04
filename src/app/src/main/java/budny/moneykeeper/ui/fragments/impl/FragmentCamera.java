@@ -14,17 +14,15 @@ import budny.moneykeeper.R;
 import budny.moneykeeper.cv.Filters;
 import budny.moneykeeper.cv.CVManager;
 
+/**
+ * A fragment used to demonstrate camera-related functionality.
+ */
 public class FragmentCamera extends Fragment
         implements CameraBridgeViewBase.CvCameraViewListener2 {
     @SuppressWarnings("unused")
     private static final String TAG = FragmentCamera.class.getSimpleName();
 
     private CameraBridgeViewBase mCameraView;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,10 +49,12 @@ public class FragmentCamera extends Fragment
 
     @Override
     public void onCameraViewStarted(int width, int height) {
+
     }
 
     @Override
     public void onCameraViewStopped() {
+
     }
 
     @Override

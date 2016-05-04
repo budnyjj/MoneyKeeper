@@ -24,63 +24,47 @@ import budny.moneykeeper.ui.misc.formatters.impl.CurrencyFormatter;
 import budny.moneykeeper.ui.misc.formatters.impl.DateFormatter;
 import budny.moneykeeper.ui.misc.listeners.IRVItemClickListener;
 
+/**
+ * A fragment used to show the details of specified account.
+ * The index of the target account is specified by the arguments bundle.
+ */
 public class FragmentAccountView extends Fragment {
     private static final String TAG = FragmentAccountView.class.getSimpleName();
 
-    @SuppressWarnings("FieldCanBeLocal")
-    private int mAccountIdx = IntentExtras.INDEX_INVALID;
     private IPresenterFragmentAccountView mPresenter;
+    @SuppressWarnings("FieldCanBeLocal")
+    private int mAccountIndex = IntentExtras.INDEX_INVALID;
 
     private ICurrencyFormatter mTotalAmountFormatter;
     @SuppressWarnings("FieldCanBeLocal")
-    private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView.LayoutManager mBalanceChangesManager;
     @SuppressWarnings("FieldCanBeLocal")
-    private RecyclerView mRecyclerView;
+    private RecyclerView mBalanceChangesView;
     @SuppressWarnings("FieldCanBeLocal")
-    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.Adapter mBalanceChangesAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // parse arguments
-        Bundle args = getArguments();
-        if (args == null) {
-            throw new IllegalArgumentException(
-                    TAG + " is not initialized with arguments bundle");
-        }
-        mAccountIdx = args.getInt(IntentExtras.FIELD_INDEX, IntentExtras.INDEX_INVALID);
-        if (mAccountIdx == IntentExtras.INDEX_INVALID) {
-            throw new IllegalArgumentException(
-                    "Unable to locate following arguments: " + IntentExtras.FIELD_INDEX);
-        }
-        mPresenter = new PresenterFragmentAccountView(getContext(), mAccountIdx);
-        // setup owned views
-        View view = inflater.inflate(R.layout.fragment_account_view, container, false);
-        mTotalAmountFormatter = new CurrencyFormatter(
-                getContext(), (TextView) view.findViewById(R.id.fragment_account_view_text_view_total_amount));
-        // setup recycler view
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_account_view_recycler_view_balance_changes);
-        mLayoutManager = new LinearLayoutManager(getContext());
-        mAdapter = new RVBalanceChangesAdapter(getContext(), mPresenter);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addOnItemTouchListener(new RVItemTouchListener(getActivity(),
-                mRecyclerView, new RVItemClickListener(mPresenter)));
-        mRecyclerView.addItemDecoration(new RVItemDividerDecoration(getContext()));
-        // setup update listener
+        parseArguments();
+        mPresenter = new PresenterFragmentAccountView(getContext(), mAccountIndex);
         mPresenter.addDataChangeListener(new IDataChangeListener() {
             @Override
             public void onChange() {
-                updateFields();
+                updateViews();
             }
         });
-        return view;
+        // setup owned views
+        View rootView = inflater.inflate(R.layout.fragment_account_view, container, false);
+        initViews(rootView);
+        return rootView;
     }
 
     @Override
     public void onStart() {
         super.onStart();
         mPresenter.onStart();
-        updateFields();
+        updateViews();
     }
 
     @Override
@@ -89,10 +73,38 @@ public class FragmentAccountView extends Fragment {
         mPresenter.onStop();
     }
 
+    private void parseArguments() {
+        Bundle args = getArguments();
+        if (args == null) {
+            throw new IllegalArgumentException(
+                    TAG + " is not initialized with arguments bundle");
+        }
+        mAccountIndex = args.getInt(IntentExtras.FIELD_INDEX, IntentExtras.INDEX_INVALID);
+        if (mAccountIndex == IntentExtras.INDEX_INVALID) {
+            throw new IllegalArgumentException(
+                    "Unable to locate following arguments: " + IntentExtras.FIELD_INDEX);
+        }
+    }
+
+    private void initViews(View rootView) {
+        // amount text view
+        mTotalAmountFormatter = new CurrencyFormatter(
+                getContext(), (TextView) rootView.findViewById(R.id.fragment_account_view_text_view_total_amount));
+        // setup recycler view
+        mBalanceChangesView = (RecyclerView) rootView.findViewById(R.id.fragment_account_view_recycler_view_balance_changes);
+        mBalanceChangesManager = new LinearLayoutManager(getContext());
+        mBalanceChangesAdapter = new RVBalanceChangesAdapter(getContext(), mPresenter);
+        mBalanceChangesView.setLayoutManager(mBalanceChangesManager);
+        mBalanceChangesView.setAdapter(mBalanceChangesAdapter);
+        mBalanceChangesView.addOnItemTouchListener(new RVItemTouchListener(getActivity(),
+                mBalanceChangesView, new RVItemClickListener(mPresenter)));
+        mBalanceChangesView.addItemDecoration(new RVItemDividerDecoration(getContext()));
+    }
+
     /**
-     * Fills owned fields with data.
+     * Fills owned fields with updated data.
      */
-    private void updateFields() {
+    private void updateViews() {
         mTotalAmountFormatter.format(mPresenter.getTotalAmount(), mPresenter.getCurrencyCode());
     }
 
@@ -104,14 +116,16 @@ public class FragmentAccountView extends Fragment {
         public static class ViewHolder extends RecyclerView.ViewHolder {
             public final ICurrencyFormatter mAmountFormatter;
             public final IDateFormatter mDateFormatter;
-            public final TextView mCategoryTextView;
+            public final TextView mCategoryView;
 
             public ViewHolder(Context context, View v) {
                 super(v);
                 mAmountFormatter = new CurrencyFormatter(
                         context, (TextView) v.findViewById(R.id.rv_row_balance_change_text_view_amount));
-                mDateFormatter = new DateFormatter((TextView) v.findViewById(R.id.rv_row_balance_change_text_view_date));
-                mCategoryTextView = (TextView) v.findViewById(R.id.rv_row_balance_change_text_view_category);
+                mDateFormatter = new DateFormatter(
+                        (TextView) v.findViewById(R.id.rv_row_balance_change_text_view_date));
+                mCategoryView =
+                        (TextView) v.findViewById(R.id.rv_row_balance_change_text_view_category);
             }
         }
 
@@ -138,7 +152,7 @@ public class FragmentAccountView extends Fragment {
             BalanceChange change = mPresenter.getBalanceChange(position);
             holder.mAmountFormatter.format(change.getAmount(), mPresenter.getCurrencyCode());
             holder.mDateFormatter.format(change.getDate());
-            holder.mCategoryTextView.setText(change.getCategory().getName());
+            holder.mCategoryView.setText(change.getCategory().getName());
         }
 
         @Override

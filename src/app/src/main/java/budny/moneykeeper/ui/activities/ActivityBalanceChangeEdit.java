@@ -19,7 +19,7 @@ import android.view.ViewGroup;
 import budny.moneykeeper.R;
 import budny.moneykeeper.bl.presenters.IPresenterActivityInput;
 import budny.moneykeeper.bl.presenters.impl.PresenterActivityInput;
-import budny.moneykeeper.ui.fragments.IEditFragment;
+import budny.moneykeeper.ui.fragments.IFragmentEdit;
 import budny.moneykeeper.ui.misc.listeners.IContentEditListener;
 
 /**
@@ -137,7 +137,7 @@ public class ActivityBalanceChangeEdit extends AppCompatActivity {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            IEditFragment fragment = (IEditFragment) super.instantiateItem(container, position);
+            IFragmentEdit fragment = (IFragmentEdit) super.instantiateItem(container, position);
             mListeners.put(position, fragment);
             return fragment;
         }

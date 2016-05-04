@@ -9,15 +9,14 @@ import budny.moneykeeper.bl.presenters.IPresenterFragmentPreferences;
 import budny.moneykeeper.bl.presenters.impl.PresenterFragmentPreferences;
 
 public class FragmentPreferences extends PreferenceFragment {
+    @SuppressWarnings("FieldCanBeLocal")
     private IPresenterFragmentPreferences mPresenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
-
         mPresenter = new PresenterFragmentPreferences();
-
         final String defaultCurrencyKey =
                 getResources().getString(R.string.pref_key_default_currency);
         final ListPreference defaultCurrencyPreference =

@@ -6,10 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import budny.moneykeeper.R;
-import budny.moneykeeper.ui.fragments.IEditFragment;
+import budny.moneykeeper.ui.fragments.IFragmentEdit;
 import budny.moneykeeper.ui.misc.IntentExtras;
 
-public class FragmentBalanceChangeEditOutcome extends IEditFragment {
+public class FragmentBalanceChangeEditOutcome extends IFragmentEdit {
     private static final String TAG = FragmentCategoryEdit.class.getSimpleName();
 
     //    private final IPresenterFragmentCategoryEdit mPresenter = new PresenterFragmentCategoryEdit();

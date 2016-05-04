@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import budny.moneykeeper.R;
 import budny.moneykeeper.bl.presenters.IPresenterActivityInput;
-import budny.moneykeeper.ui.fragments.IEditFragment;
+import budny.moneykeeper.ui.fragments.IFragmentEdit;
 import budny.moneykeeper.ui.fragments.impl.FragmentBalanceChangeEditIncome;
 import budny.moneykeeper.ui.fragments.impl.FragmentBalanceChangeEditOutcome;
 
@@ -21,15 +21,15 @@ public class PresenterActivityInput implements IPresenterActivityInput {
         mArgs = args;
     }
 
-    public IEditFragment getFragmentInput(int type) {
+    public IFragmentEdit getFragmentInput(int type) {
         switch (type) {
             case 0: {
-                IEditFragment fragment = new FragmentBalanceChangeEditIncome();
+                IFragmentEdit fragment = new FragmentBalanceChangeEditIncome();
                 fragment.setArguments(mArgs);
                 return fragment;
             }
             case 1: {
-                IEditFragment fragment = new FragmentBalanceChangeEditOutcome();
+                IFragmentEdit fragment = new FragmentBalanceChangeEditOutcome();
                 fragment.setArguments(mArgs);
                 return fragment;
             }

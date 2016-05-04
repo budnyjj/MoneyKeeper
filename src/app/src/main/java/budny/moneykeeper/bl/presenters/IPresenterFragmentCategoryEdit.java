@@ -7,9 +7,9 @@ public interface IPresenterFragmentCategoryEdit {
 
     void onStop();
 
-    void createCategory(Category category);
+    void createCategory(String name);
 
-    void updateCategory(Category srcCategory, int dstIndex);
+    void updateCategory(String name);
 
-    Category getCategory(int index);
+    Category getCategory();
 }

@@ -42,14 +42,13 @@ public class CategoryOperations {
      * Updates contents of specified category.
      *
      * @param realm Realm instance
-     * @param srcCategory source category with new values
-     * @param dstCategory category to be updated
+     * @param category category to be updated
      */
-    public static void update(Realm realm, final Category srcCategory, final Category dstCategory) {
+    public static void update(Realm realm, final Category category, final String name) {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                dstCategory.setName(srcCategory.getName());
+                category.setName(name);
             }
         });
     }
