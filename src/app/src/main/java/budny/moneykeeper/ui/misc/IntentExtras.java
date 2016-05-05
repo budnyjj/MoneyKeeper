@@ -9,6 +9,8 @@ public class IntentExtras {
     public static final String ACTION_UPDATE = "ACTION_UPDATE";
     public static final String ACTION_INVALID = "ACTION_INVALID";
 
-    public static final String FIELD_INDEX = "FIELD_INDEX";
+    public static final String FIELD_INDEX_ACCOUNT = "FIELD_INDEX_ACCOUNT";
+    public static final String FIELD_INDEX_CATEGORY = "FIELD_INDEX_ACCOUNT";
+    public static final String FIELD_INDEX_BALANCE_CHANGE = "FIELD_INDEX_BALANCE_CHANGE";
     public static final int INDEX_INVALID = -1;
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:orientation="horizontal">
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_end_default"
+        android:layout_marginLeft="@dimen/margin_start_default"
+        android:layout_marginRight="@dimen/margin_end_default"
+        android:layout_marginStart="@dimen/margin_start_default"
+        android:id="@+id/rv_row_currency_select_radio_button_selected"/>
+
+    <TextView
+        android:id="@+id/rv_row_currency_select_text_view_currency_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/margin_end_default"
+        android:layout_marginLeft="@dimen/margin_start_default"
+        android:layout_marginRight="@dimen/margin_end_default"
+        android:layout_marginStart="@dimen/margin_start_default"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/text_size_default"
+        tools:text="Currency name" />
+</LinearLayout>

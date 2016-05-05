@@ -13,21 +13,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import budny.moneykeeper.R;
-import budny.moneykeeper.bl.presenters.IPresenterFragmentCategories;
-import budny.moneykeeper.bl.presenters.impl.PresenterFragmentCategories;
-import budny.moneykeeper.db.model.Category;
+import budny.moneykeeper.bl.presenters.IPresenterFragmentCategoriesView;
+import budny.moneykeeper.bl.presenters.impl.PresenterFragmentCategoriesView;
 import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.ui.misc.RVItemDividerDecoration;
 import budny.moneykeeper.ui.misc.RVItemTouchListener;
 import budny.moneykeeper.ui.misc.listeners.IRVItemClickListener;
 
 public class FragmentCategoriesView extends Fragment {
-    private final IPresenterFragmentCategories mPresenter = new PresenterFragmentCategories();
+    private final IPresenterFragmentCategoriesView mPresenter = new PresenterFragmentCategoriesView();
 
-    LayoutManager mLayoutManager;
-    RecyclerView mRecyclerView;
-    RVAccountsAdapter mAdapter;
-    ItemTouchHelper mTouchHelper;
+    LayoutManager mCategoriesManager;
+    RecyclerView mCategoriesView;
+    RVAccountsAdapter mCategoriesAdapter;
+    ItemTouchHelper mCategoriesTouchHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,16 +37,16 @@ public class FragmentCategoriesView extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_categories_view, container, false);
         // setup recycler view
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_categories_view_recycler_view);
-        mLayoutManager = new LinearLayoutManager(getContext());
-        mAdapter = new RVAccountsAdapter(mPresenter);
-        mTouchHelper = new ItemTouchHelper(new RVTouchCallback(mPresenter));
-        mTouchHelper.attachToRecyclerView(mRecyclerView);
-        mRecyclerView.addOnItemTouchListener(
-                new RVItemTouchListener(getActivity(), mRecyclerView, new RVItemClickListener(mPresenter)));
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addItemDecoration(new RVItemDividerDecoration(getContext()));
+        mCategoriesView = (RecyclerView) view.findViewById(R.id.fragment_categories_view_recycler_view);
+        mCategoriesManager = new LinearLayoutManager(getContext());
+        mCategoriesAdapter = new RVAccountsAdapter(mPresenter);
+        mCategoriesTouchHelper = new ItemTouchHelper(new RVTouchCallback(mPresenter));
+        mCategoriesTouchHelper.attachToRecyclerView(mCategoriesView);
+        mCategoriesView.addOnItemTouchListener(
+                new RVItemTouchListener(getActivity(), mCategoriesView, new RVItemClickListener(mPresenter)));
+        mCategoriesView.setLayoutManager(mCategoriesManager);
+        mCategoriesView.setAdapter(mCategoriesAdapter);
+        mCategoriesView.addItemDecoration(new RVItemDividerDecoration(getContext()));
         return view;
     }
 
@@ -57,7 +56,7 @@ public class FragmentCategoriesView extends Fragment {
         mPresenter.onStart();
         // update recycler view contents for those cases,
         // when user navigates back from corresponding edit activity
-        mAdapter.notifyDataSetChanged();
+        mCategoriesAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -68,18 +67,18 @@ public class FragmentCategoriesView extends Fragment {
 
     private static class RVAccountsAdapter
             extends RecyclerView.Adapter<RVAccountsAdapter.ViewHolder> {
-        private final IPresenterFragmentCategories mPresenter;
+        private final IPresenterFragmentCategoriesView mPresenter;
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
             public TextView mTextView;
 
             public ViewHolder(View v) {
                 super(v);
-                mTextView = (TextView) v.findViewById(R.id.rv_row_category_text_view_name);
+                mTextView = (TextView) v.findViewById(R.id.rv_row_category_view_text_view_name);
             }
         }
 
-        public RVAccountsAdapter(IPresenterFragmentCategories presenter) {
+        public RVAccountsAdapter(IPresenterFragmentCategoriesView presenter) {
             mPresenter = presenter;
             mPresenter.addDataChangeListener(new IDataChangeListener() {
                 @Override
@@ -93,14 +92,13 @@ public class FragmentCategoriesView extends Fragment {
         public RVAccountsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View v = LayoutInflater
                     .from(parent.getContext())
-                    .inflate(R.layout.rv_row_category, parent, false);
+                    .inflate(R.layout.rv_row_category_view, parent, false);
             return new ViewHolder(v);
         }
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            Category category = mPresenter.getCategory(position);
-            holder.mTextView.setText(category.getName());
+            holder.mTextView.setText(mPresenter.getCategoryName(position));
         }
 
         @Override
@@ -110,9 +108,9 @@ public class FragmentCategoriesView extends Fragment {
     }
 
     private static class RVTouchCallback extends ItemTouchHelper.Callback {
-        private final IPresenterFragmentCategories mPresenter;
+        private final IPresenterFragmentCategoriesView mPresenter;
 
-        public RVTouchCallback(IPresenterFragmentCategories presenter) {
+        public RVTouchCallback(IPresenterFragmentCategoriesView presenter) {
             mPresenter = presenter;
         }
 
@@ -145,9 +143,9 @@ public class FragmentCategoriesView extends Fragment {
     }
 
     private class RVItemClickListener implements IRVItemClickListener {
-        private final IPresenterFragmentCategories mPresenter;
+        private final IPresenterFragmentCategoriesView mPresenter;
 
-        public RVItemClickListener(IPresenterFragmentCategories presenter) {
+        public RVItemClickListener(IPresenterFragmentCategoriesView presenter) {
             mPresenter = presenter;
         }
 

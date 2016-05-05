@@ -5,7 +5,7 @@ import android.content.Context;
 import budny.moneykeeper.db.model.Category;
 import budny.moneykeeper.db.util.IDataChangeListener;
 
-public interface IPresenterFragmentCategories {
+public interface IPresenterFragmentCategoriesView {
     void onStart();
 
     void onStop();
@@ -14,7 +14,7 @@ public interface IPresenterFragmentCategories {
 
     int getNumCategories();
 
-    Category getCategory(int position);
+    String getCategoryName(int index);
 
     /**
      * Update specified category.

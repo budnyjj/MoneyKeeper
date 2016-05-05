@@ -13,7 +13,7 @@ public class FragmentBalanceChangeEditOutcome extends IFragmentEdit {
     private static final String TAG = FragmentCategoryEdit.class.getSimpleName();
 
     //    private final IPresenterFragmentCategoryEdit mPresenter = new PresenterFragmentCategoryEdit();
-//    private final IValidator mTextValidator = new TextValidator();
+//    private final IContentValidator mTextValidator = new TextValidator();
 //
     // action to perform with category (create or update)
     private String mAction = IntentExtras.ACTION_INVALID;
@@ -40,10 +40,10 @@ public class FragmentBalanceChangeEditOutcome extends IFragmentEdit {
                     "Unable to locate following arguments: " + IntentExtras.FIELD_ACTION);
         }
         if (IntentExtras.ACTION_UPDATE.equals(mAction)) {
-            mBalanceChangeIdx = args.getInt(IntentExtras.FIELD_INDEX, IntentExtras.INDEX_INVALID);
+            mBalanceChangeIdx = args.getInt(IntentExtras.FIELD_INDEX_BALANCE_CHANGE, IntentExtras.INDEX_INVALID);
             if (mBalanceChangeIdx == IntentExtras.INDEX_INVALID) {
                 throw new IllegalArgumentException(
-                        "Unable to locate following arguments: " + IntentExtras.FIELD_INDEX);
+                        "Unable to locate following arguments: " + IntentExtras.FIELD_INDEX_BALANCE_CHANGE);
             }
         }
         // setup owned views

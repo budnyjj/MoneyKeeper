@@ -41,9 +41,9 @@ public class ActivityBalanceChangesView extends AppCompatActivity {
     private TabLayout mTabs;
     private Toolbar mToolbar;
     @SuppressWarnings("FieldCanBeLocal")
-    private ViewPager mPagerView;
+    private ViewPager mAccountsView;
     @SuppressWarnings("FieldCanBeLocal")
-    private PagerAdapter mPagerAdapter;
+    private PagerAdapter mAccountsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,16 +92,16 @@ public class ActivityBalanceChangesView extends AppCompatActivity {
         }
         // view pager
         mTabs = (TabLayout) findViewById(R.id.activity_balance_changes_view_tabs);
-        mPagerView = (ViewPager) findViewById(R.id.activity_balance_changes_view_view_pager);
-        mPagerAdapter = new AdapterViewPager(getSupportFragmentManager(), mTabs, mPresenter);
-        mPagerView.setAdapter(mPagerAdapter);
-        mTabs.setupWithViewPager(mPagerView);
+        mAccountsView = (ViewPager) findViewById(R.id.activity_balance_changes_view_view_pager);
+        mAccountsAdapter = new AdapterViewPager(getSupportFragmentManager(), mTabs, mPresenter);
+        mAccountsView.setAdapter(mAccountsAdapter);
+        mTabs.setupWithViewPager(mAccountsView);
         // floating action button
         mFab = (FloatingActionButton) findViewById(R.id.activity_balance_changes_view_fab);
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.createBalanceChange();
+                mPresenter.createBalanceChange(mAccountsView.getCurrentItem());
             }
         });
         // navigation drawer

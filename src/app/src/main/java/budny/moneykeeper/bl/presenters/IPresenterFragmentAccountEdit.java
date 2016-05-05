@@ -12,7 +12,7 @@ public interface IPresenterFragmentAccountEdit {
 
     void updateAccount(String name, String currencyCode);
 
-    Account getAccount();
+    String getAccountName();
 
     String getCurrencyName(int index);
 

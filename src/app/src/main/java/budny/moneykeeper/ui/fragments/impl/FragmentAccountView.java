@@ -30,6 +30,8 @@ import budny.moneykeeper.ui.misc.listeners.IRVItemClickListener;
  */
 public class FragmentAccountView extends Fragment {
     private static final String TAG = FragmentAccountView.class.getSimpleName();
+    private static final String MSG_NOT_INITIALIZED = TAG + " is not initialized with arguments bundle";
+    private static final String MSG_NO_ARGS = "Unable to locate following arguments: ";
 
     private IPresenterFragmentAccountView mPresenter;
     @SuppressWarnings("FieldCanBeLocal")
@@ -76,13 +78,11 @@ public class FragmentAccountView extends Fragment {
     private void parseArguments() {
         Bundle args = getArguments();
         if (args == null) {
-            throw new IllegalArgumentException(
-                    TAG + " is not initialized with arguments bundle");
+            throw new IllegalArgumentException(MSG_NOT_INITIALIZED);
         }
-        mAccountIndex = args.getInt(IntentExtras.FIELD_INDEX, IntentExtras.INDEX_INVALID);
+        mAccountIndex = args.getInt(IntentExtras.FIELD_INDEX_ACCOUNT, IntentExtras.INDEX_INVALID);
         if (mAccountIndex == IntentExtras.INDEX_INVALID) {
-            throw new IllegalArgumentException(
-                    "Unable to locate following arguments: " + IntentExtras.FIELD_INDEX);
+            throw new IllegalArgumentException(MSG_NO_ARGS + IntentExtras.FIELD_INDEX_ACCOUNT);
         }
     }
 

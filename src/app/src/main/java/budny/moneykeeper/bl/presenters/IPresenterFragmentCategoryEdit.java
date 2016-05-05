@@ -11,5 +11,5 @@ public interface IPresenterFragmentCategoryEdit {
 
     void updateCategory(String name);
 
-    Category getCategory();
+    String getCategoryName();
 }

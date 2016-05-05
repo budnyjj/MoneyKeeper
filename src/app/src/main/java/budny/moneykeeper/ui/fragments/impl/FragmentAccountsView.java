@@ -13,9 +13,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import budny.moneykeeper.R;
-import budny.moneykeeper.bl.presenters.IPresenterFragmentAccounts;
-import budny.moneykeeper.bl.presenters.impl.PresenterFragmentAccounts;
-import budny.moneykeeper.db.model.Account;
+import budny.moneykeeper.bl.presenters.IPresenterFragmentAccountsView;
+import budny.moneykeeper.bl.presenters.impl.PresenterFragmentAccountsView;
 import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.ui.misc.RVItemDividerDecoration;
 import budny.moneykeeper.ui.misc.RVItemTouchListener;
@@ -25,7 +24,7 @@ import budny.moneykeeper.ui.misc.listeners.IRVItemClickListener;
  * A fragment used to show all accounts.
  */
 public class FragmentAccountsView extends Fragment {
-    private IPresenterFragmentAccounts mPresenter;
+    private IPresenterFragmentAccountsView mPresenter;
 
     @SuppressWarnings("FieldCanBeLocal")
     private LayoutManager mAccountsManager;
@@ -38,7 +37,7 @@ public class FragmentAccountsView extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mPresenter = new PresenterFragmentAccounts(getContext());
+        mPresenter = new PresenterFragmentAccountsView(getContext());
         View rootView = inflater.inflate(R.layout.fragment_accounts_view, container, false);
         initViews(rootView);
         return rootView;
@@ -75,7 +74,7 @@ public class FragmentAccountsView extends Fragment {
 
     private static class RVAccountsAdapter
             extends RecyclerView.Adapter<RVAccountsAdapter.ViewHolder> {
-        private final IPresenterFragmentAccounts mPresenter;
+        private final IPresenterFragmentAccountsView mPresenter;
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
             public TextView mNameView;
@@ -86,7 +85,7 @@ public class FragmentAccountsView extends Fragment {
             }
         }
 
-        public RVAccountsAdapter(IPresenterFragmentAccounts presenter) {
+        public RVAccountsAdapter(IPresenterFragmentAccountsView presenter) {
             mPresenter = presenter;
             mPresenter.addDataChangeListener(new IDataChangeListener() {
                 @Override
@@ -105,8 +104,7 @@ public class FragmentAccountsView extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            Account account = mPresenter.getAccount(position);
-            holder.mNameView.setText(account.getName());
+            holder.mNameView.setText(mPresenter.getAccountName(position));
         }
 
         @Override
@@ -116,9 +114,9 @@ public class FragmentAccountsView extends Fragment {
     }
 
     private class RVTouchCallback extends ItemTouchHelper.Callback {
-        private final IPresenterFragmentAccounts mPresenter;
+        private final IPresenterFragmentAccountsView mPresenter;
 
-        public RVTouchCallback(IPresenterFragmentAccounts presenter) {
+        public RVTouchCallback(IPresenterFragmentAccountsView presenter) {
             mPresenter = presenter;
         }
 
@@ -153,9 +151,9 @@ public class FragmentAccountsView extends Fragment {
     }
 
     private static class RVItemClickListener implements IRVItemClickListener {
-        private final IPresenterFragmentAccounts mPresenter;
+        private final IPresenterFragmentAccountsView mPresenter;
 
-        public RVItemClickListener(IPresenterFragmentAccounts presenter) {
+        public RVItemClickListener(IPresenterFragmentAccountsView presenter) {
             mPresenter = presenter;
         }
 

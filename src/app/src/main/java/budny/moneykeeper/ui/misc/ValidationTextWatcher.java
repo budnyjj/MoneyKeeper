@@ -5,19 +5,19 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
-import budny.moneykeeper.bl.validators.IValidator;
+import budny.moneykeeper.bl.validators.IContentValidator;
 
 /**
  * Text watcher with validation function.
  */
 public class ValidationTextWatcher implements TextWatcher {
-    private final IValidator mValidator;
+    private final IContentValidator mValidator;
     private final TextInputLayout mInputContainer;
     private final EditText mInputField;
     private final String mErrorMsg;
 
     public ValidationTextWatcher(EditText inputField, TextInputLayout inputContainer,
-                                 IValidator validator, String errorMsg) {
+                                 IContentValidator validator, String errorMsg) {
         mErrorMsg = errorMsg;
         mInputField = inputField;
         mInputContainer = inputContainer;

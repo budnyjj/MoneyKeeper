@@ -71,7 +71,7 @@ public class PresenterActivityBalanceChangesView implements IPresenterActivityBa
         checkInitialized();
         // create argument
         Bundle args = new Bundle();
-        args.putInt(IntentExtras.FIELD_INDEX, index);
+        args.putInt(IntentExtras.FIELD_INDEX_ACCOUNT, index);
         // create fragment and pass arguments into it
         Fragment fragment = new FragmentAccountView();
         fragment.setArguments(args);
@@ -108,8 +108,9 @@ public class PresenterActivityBalanceChangesView implements IPresenterActivityBa
     }
 
     @Override
-    public void createBalanceChange() {
+    public void createBalanceChange(int accountIndex) {
         Intent intent = new Intent(mContext, ActivityBalanceChangeEdit.class);
+        intent.putExtra(IntentExtras.FIELD_INDEX_ACCOUNT, accountIndex);
         intent.putExtra(IntentExtras.FIELD_ACTION, IntentExtras.ACTION_CREATE);
         mContext.startActivity(intent);
     }

@@ -6,7 +6,7 @@ import android.content.Intent;
 import java.util.ArrayList;
 import java.util.List;
 
-import budny.moneykeeper.bl.presenters.IPresenterFragmentAccounts;
+import budny.moneykeeper.bl.presenters.IPresenterFragmentAccountsView;
 import budny.moneykeeper.db.model.Account;
 import budny.moneykeeper.db.operations.AccountOperations;
 import budny.moneykeeper.db.operations.CommonOperations;
@@ -19,8 +19,8 @@ import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 
-public class PresenterFragmentAccounts implements IPresenterFragmentAccounts {
-    private static final String TAG = PresenterFragmentAccounts.class.getSimpleName();
+public class PresenterFragmentAccountsView implements IPresenterFragmentAccountsView {
+    private static final String TAG = PresenterFragmentAccountsView.class.getSimpleName();
     private static final String MSG_NOT_INITIALIZED = TAG + " is not initialized";
 
     private final Context mContext;
@@ -34,7 +34,7 @@ public class PresenterFragmentAccounts implements IPresenterFragmentAccounts {
 
     private volatile boolean mInitialized;
 
-    public PresenterFragmentAccounts(Context context) {
+    public PresenterFragmentAccountsView(Context context) {
         mContext = context;
     }
 
@@ -65,9 +65,9 @@ public class PresenterFragmentAccounts implements IPresenterFragmentAccounts {
     }
 
     @Override
-    public Account getAccount(int position) {
+    public String getAccountName(int position) {
         checkInitialized();
-        return mAccounts.get(position);
+        return mAccounts.get(position).getName();
     }
 
     /**
@@ -80,7 +80,7 @@ public class PresenterFragmentAccounts implements IPresenterFragmentAccounts {
     public void updateAccount(int index) {
         Intent intent = new Intent(mContext, ActivityAccountEdit.class);
         intent.putExtra(IntentExtras.FIELD_ACTION, IntentExtras.ACTION_UPDATE);
-        intent.putExtra(IntentExtras.FIELD_INDEX, index);
+        intent.putExtra(IntentExtras.FIELD_INDEX_ACCOUNT, index);
         mContext.startActivity(intent);
     }
 

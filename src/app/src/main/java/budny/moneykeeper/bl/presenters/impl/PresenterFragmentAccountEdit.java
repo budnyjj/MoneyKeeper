@@ -66,12 +66,12 @@ public class PresenterFragmentAccountEdit implements IPresenterFragmentAccountEd
     }
 
     @Override
-    public Account getAccount() {
+    public String getAccountName() {
         checkInitialized();
         if (!IntentExtras.ACTION_UPDATE.equals(mAction)) {
             throw new IllegalStateException(MSG_INVALID_ACTION + mAction);
         }
-        return mAccount;
+        return mAccount.getName();
     }
 
     @Override

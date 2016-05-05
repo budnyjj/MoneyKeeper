@@ -90,7 +90,8 @@ public class PresenterFragmentAccountView implements IPresenterFragmentAccountVi
     public void updateBalanceChange(int index) {
         Intent intent = new Intent(mContext, ActivityBalanceChangeEdit.class);
         intent.putExtra(IntentExtras.FIELD_ACTION, IntentExtras.ACTION_UPDATE);
-        intent.putExtra(IntentExtras.FIELD_INDEX, index);
+        intent.putExtra(IntentExtras.FIELD_INDEX_ACCOUNT, mAccountIndex);
+        intent.putExtra(IntentExtras.FIELD_INDEX_BALANCE_CHANGE, index);
         mContext.startActivity(intent);
     }
 

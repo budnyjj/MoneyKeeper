@@ -6,7 +6,7 @@ import android.content.Intent;
 import java.util.ArrayList;
 import java.util.List;
 
-import budny.moneykeeper.bl.presenters.IPresenterFragmentCategories;
+import budny.moneykeeper.bl.presenters.IPresenterFragmentCategoriesView;
 import budny.moneykeeper.db.model.Category;
 import budny.moneykeeper.db.operations.CategoryOperations;
 import budny.moneykeeper.db.operations.CommonOperations;
@@ -19,8 +19,8 @@ import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 
-public class PresenterFragmentCategories implements IPresenterFragmentCategories {
-    private static final String TAG = PresenterFragmentCategories.class.getSimpleName();
+public class PresenterFragmentCategoriesView implements IPresenterFragmentCategoriesView {
+    private static final String TAG = PresenterFragmentCategoriesView.class.getSimpleName();
     private static final String MSG_NOT_INITIALIZED = TAG + " is not initialized";
 
     private final IDBManager mDbManager = DBManager.getInstance();
@@ -60,9 +60,9 @@ public class PresenterFragmentCategories implements IPresenterFragmentCategories
     }
 
     @Override
-    public Category getCategory(int position) {
+    public String getCategoryName(int position) {
         checkInitialized();
-        return mCategories.get(position);
+        return mCategories.get(position).getName();
     }
 
     /**
@@ -79,7 +79,7 @@ public class PresenterFragmentCategories implements IPresenterFragmentCategories
         }
         Intent intent = new Intent(context, ActivityCategoryEdit.class);
         intent.putExtra(IntentExtras.FIELD_ACTION, IntentExtras.ACTION_UPDATE);
-        intent.putExtra(IntentExtras.FIELD_INDEX, index);
+        intent.putExtra(IntentExtras.FIELD_INDEX_CATEGORY, index);
         context.startActivity(intent);
     }
 

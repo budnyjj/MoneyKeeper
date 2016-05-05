@@ -14,9 +14,8 @@ import android.widget.TextView;
 import budny.moneykeeper.R;
 import budny.moneykeeper.bl.presenters.IPresenterFragmentAccountEdit;
 import budny.moneykeeper.bl.presenters.impl.PresenterFragmentAccountEdit;
-import budny.moneykeeper.bl.validators.IValidator;
+import budny.moneykeeper.bl.validators.IContentValidator;
 import budny.moneykeeper.bl.validators.impl.TextValidator;
-import budny.moneykeeper.db.model.Account;
 import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.ui.fragments.IFragmentEdit;
 import budny.moneykeeper.ui.misc.IntentExtras;
@@ -33,7 +32,7 @@ import budny.moneykeeper.ui.misc.listeners.IRVItemClickListener;
 public class FragmentAccountEdit extends IFragmentEdit {
     private static final String TAG = FragmentAccountEdit.class.getSimpleName();
 
-    private final IValidator mTextValidator = new TextValidator();
+    private final IContentValidator mTextValidator = new TextValidator();
 
     private IPresenterFragmentAccountEdit mPresenter;
     // action to perform with account (create or update)
@@ -108,10 +107,10 @@ public class FragmentAccountEdit extends IFragmentEdit {
                     "Unable to locate following arguments: " + IntentExtras.FIELD_ACTION);
         }
         if (IntentExtras.ACTION_UPDATE.equals(mAction)) {
-            mAccountIndex = args.getInt(IntentExtras.FIELD_INDEX, IntentExtras.INDEX_INVALID);
+            mAccountIndex = args.getInt(IntentExtras.FIELD_INDEX_ACCOUNT, IntentExtras.INDEX_INVALID);
             if (mAccountIndex == IntentExtras.INDEX_INVALID) {
                 throw new IllegalArgumentException(
-                        "Unable to locate following arguments: " + IntentExtras.FIELD_INDEX);
+                        "Unable to locate following arguments: " + IntentExtras.FIELD_INDEX_ACCOUNT);
             }
         }
     }
@@ -143,8 +142,7 @@ public class FragmentAccountEdit extends IFragmentEdit {
     private void updateViews() {
         if (IntentExtras.ACTION_UPDATE.equals(mAction)
                 && mAccountIndex != IntentExtras.INDEX_INVALID) {
-            Account account = mPresenter.getAccount();
-            mAccountNameText.setText(account.getName());
+            mAccountNameText.setText(mPresenter.getAccountName());
         }
     }
 
@@ -159,9 +157,9 @@ public class FragmentAccountEdit extends IFragmentEdit {
             public ViewHolder(View v) {
                 super(v);
                 mCurrencyNameView = (TextView) v.findViewById(
-                        R.id.rv_row_view_text_view_currency_name);
+                        R.id.rv_row_currency_select_text_view_currency_name);
                 mSelectedButton = (RadioButton) v.findViewById(
-                        R.id.rv_row_currency_radio_button_selected);
+                        R.id.rv_row_currency_select_radio_button_selected);
             }
         }
 
@@ -178,7 +176,7 @@ public class FragmentAccountEdit extends IFragmentEdit {
         @Override
         public RVCurrenciesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.rv_row_currency, parent, false);
+                    .inflate(R.layout.rv_row_currency_select, parent, false);
             return new ViewHolder(v);
         }
 

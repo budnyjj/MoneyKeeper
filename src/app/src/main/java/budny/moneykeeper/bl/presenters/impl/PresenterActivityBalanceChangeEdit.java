@@ -9,14 +9,14 @@ import budny.moneykeeper.ui.fragments.IFragmentEdit;
 import budny.moneykeeper.ui.fragments.impl.FragmentBalanceChangeEditIncome;
 import budny.moneykeeper.ui.fragments.impl.FragmentBalanceChangeEditOutcome;
 
-public class PresenterActivityInput implements IPresenterActivityInput {
+public class PresenterActivityBalanceChangeEdit implements IPresenterActivityInput {
     private static final int NUM_INPUT_TYPES = 2;
     private static final String MSG_ERR_UNKNOWN_TYPE = "Unknown input type: ";
 
     private final Context mContext;
     private final Bundle mArgs;
 
-    public PresenterActivityInput(Context context, Bundle args) {
+    public PresenterActivityBalanceChangeEdit(Context context, Bundle args) {
         mContext = context;
         mArgs = args;
     }

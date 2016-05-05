@@ -1,5 +1,5 @@
 package budny.moneykeeper.bl.validators;
 
-public interface IValidator {
+public interface IContentValidator {
     boolean validate(String value);
 }

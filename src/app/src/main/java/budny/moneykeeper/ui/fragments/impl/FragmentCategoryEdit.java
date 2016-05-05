@@ -10,9 +10,8 @@ import android.widget.EditText;
 import budny.moneykeeper.R;
 import budny.moneykeeper.bl.presenters.IPresenterFragmentCategoryEdit;
 import budny.moneykeeper.bl.presenters.impl.PresenterFragmentCategoryEdit;
-import budny.moneykeeper.bl.validators.IValidator;
+import budny.moneykeeper.bl.validators.IContentValidator;
 import budny.moneykeeper.bl.validators.impl.TextValidator;
-import budny.moneykeeper.db.model.Category;
 import budny.moneykeeper.ui.fragments.IFragmentEdit;
 import budny.moneykeeper.ui.misc.IntentExtras;
 import budny.moneykeeper.ui.misc.ValidationTextWatcher;
@@ -24,8 +23,10 @@ import budny.moneykeeper.ui.misc.ValidationTextWatcher;
  */
 public class FragmentCategoryEdit extends IFragmentEdit {
     private static final String TAG = FragmentCategoryEdit.class.getSimpleName();
+    private static final String MSG_NOT_INITIALIZED = TAG + " is not initialized with arguments bundle";
+    private static final String MSG_NO_ARGS = "Unable to locate following arguments: ";
 
-    private final IValidator mTextValidator = new TextValidator();
+    private final IContentValidator mTextValidator = new TextValidator();
 
     private IPresenterFragmentCategoryEdit mPresenter;
     // action to perform with category (create or update)
@@ -87,8 +88,7 @@ public class FragmentCategoryEdit extends IFragmentEdit {
     private void updateViews() {
         if (IntentExtras.ACTION_UPDATE.equals(mAction)
                 && mCategoryIndex != IntentExtras.INDEX_INVALID) {
-            Category category = mPresenter.getCategory();
-            mCategoryNameText.setText(category.getName());
+            mCategoryNameText.setText(mPresenter.getCategoryName());
         }
     }
 
@@ -96,20 +96,17 @@ public class FragmentCategoryEdit extends IFragmentEdit {
         // parse arguments
         Bundle args = getArguments();
         if (args == null) {
-            throw new IllegalArgumentException(
-                    TAG + " is not initialized with arguments bundle");
+            throw new IllegalArgumentException(MSG_NOT_INITIALIZED);
         }
         String action = args.getString(IntentExtras.FIELD_ACTION);
         mAction = (action == null) ? IntentExtras.ACTION_INVALID : action;
         if (IntentExtras.ACTION_INVALID.equals(mAction)) {
-            throw new IllegalArgumentException(
-                    "Unable to locate following arguments: " + IntentExtras.FIELD_ACTION);
+            throw new IllegalArgumentException(MSG_NO_ARGS + IntentExtras.FIELD_ACTION);
         }
         if (IntentExtras.ACTION_UPDATE.equals(mAction)) {
-            mCategoryIndex = args.getInt(IntentExtras.FIELD_INDEX, IntentExtras.INDEX_INVALID);
+            mCategoryIndex = args.getInt(IntentExtras.FIELD_INDEX_CATEGORY, IntentExtras.INDEX_INVALID);
             if (mCategoryIndex == IntentExtras.INDEX_INVALID) {
-                throw new IllegalArgumentException(
-                        "Unable to locate following arguments: " + IntentExtras.FIELD_INDEX);
+                throw new IllegalArgumentException(MSG_NO_ARGS + IntentExtras.FIELD_INDEX_CATEGORY);
             }
         }
     }

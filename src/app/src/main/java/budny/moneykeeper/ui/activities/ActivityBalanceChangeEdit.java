@@ -18,13 +18,14 @@ import android.view.ViewGroup;
 
 import budny.moneykeeper.R;
 import budny.moneykeeper.bl.presenters.IPresenterActivityInput;
-import budny.moneykeeper.bl.presenters.impl.PresenterActivityInput;
+import budny.moneykeeper.bl.presenters.impl.PresenterActivityBalanceChangeEdit;
 import budny.moneykeeper.ui.fragments.IFragmentEdit;
 import budny.moneykeeper.ui.misc.listeners.IContentEditListener;
 
 /**
- * An activity used to edit specified account.
- * Edit action type as well as index of balance are specified by arguments bundle.
+ * An activity used to edit specified balance change.
+ * Edit action type, index parent account as well as index of balance
+ * are specified by arguments bundle.
  */
 public class ActivityBalanceChangeEdit extends AppCompatActivity {
     private static final int DEFAULT_FRAGMENT_INDEX = 0;
@@ -45,7 +46,7 @@ public class ActivityBalanceChangeEdit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // pass arguments bundle to presenter
-        mPresenter = new PresenterActivityInput(this, getIntent().getExtras());
+        mPresenter = new PresenterActivityBalanceChangeEdit(this, getIntent().getExtras());
         setContentView(R.layout.activity_balance_change_edit);
         initViews();
         initEditListener();

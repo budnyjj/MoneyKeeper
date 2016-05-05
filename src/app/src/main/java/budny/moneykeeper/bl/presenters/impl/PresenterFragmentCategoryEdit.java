@@ -47,12 +47,12 @@ public class PresenterFragmentCategoryEdit implements IPresenterFragmentCategory
     }
 
     @Override
-    public Category getCategory() {
+    public String getCategoryName() {
         checkInitialized();
         if (!IntentExtras.ACTION_UPDATE.equals(mAction)) {
             throw new IllegalStateException(MSG_INVALID_ACTION + mAction);
         }
-        return mCategory;
+        return mCategory.getName();
     }
 
     @Override

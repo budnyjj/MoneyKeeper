@@ -11,11 +11,11 @@ public interface IPresenterActivityBalanceChangesView {
 
     void addDataChangeListener(IDataChangeListener listener);
 
-    Fragment getFragmentAccountView(int position);
+    Fragment getFragmentAccountView(int index);
 
-    CharSequence getFragmentAccountViewName(int position);
+    CharSequence getFragmentAccountViewName(int index);
 
     int getNumAccounts();
 
-    void createBalanceChange();
+    void createBalanceChange(int accountIndex);
 }
