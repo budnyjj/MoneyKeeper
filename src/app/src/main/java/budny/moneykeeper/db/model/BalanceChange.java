@@ -1,7 +1,9 @@
 package budny.moneykeeper.db.model;
 
 import java.util.Date;
+import java.util.List;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 
 public class BalanceChange extends RealmObject {
@@ -9,7 +11,8 @@ public class BalanceChange extends RealmObject {
     public static final String FIELD_DATE = "mDate";
 
     private long mAmount;
-    private Category mCategory;
+    @SuppressWarnings("unused")
+    private RealmList<Category> mCategories;
     private Date mDate;
 
     public long getAmount() {
@@ -20,12 +23,8 @@ public class BalanceChange extends RealmObject {
         mAmount = amount;
     }
 
-    public Category getCategory() {
-        return mCategory;
-    }
-
-    public void setCategory(Category category) {
-        mCategory = category;
+    public List<Category> getCategories() {
+        return mCategories;
     }
 
     public Date getDate() {

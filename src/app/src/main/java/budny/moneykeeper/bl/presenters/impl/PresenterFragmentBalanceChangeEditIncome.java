@@ -1,14 +1,18 @@
 package budny.moneykeeper.bl.presenters.impl;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import budny.moneykeeper.bl.presenters.IPresenterFragmentBalanceChangeEditIncome;
+import budny.moneykeeper.db.model.Account;
 import budny.moneykeeper.db.model.BalanceChange;
 import budny.moneykeeper.db.model.Category;
 import budny.moneykeeper.db.operations.AccountOperations;
+import budny.moneykeeper.db.operations.BalanceChangeOperations;
 import budny.moneykeeper.db.operations.CategoryOperations;
 import budny.moneykeeper.db.util.IDBManager;
+import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.db.util.impl.DBManager;
 import budny.moneykeeper.ui.misc.IntentExtras;
 import io.realm.Realm;
@@ -25,8 +29,10 @@ public class PresenterFragmentBalanceChangeEditIncome
     private final int mBalanceChangeIndex;
     private final IDBManager mDbManager = DBManager.getInstance();
     private final Set<Integer> mSelectedCategoryIndexes = new HashSet<>();
+    private final Set<IDataChangeListener> mCategorySelectedListeners = new HashSet<>();
 
     private Realm mRealm;
+    private Account mAccount;
     private BalanceChange mBalanceChange;
     private RealmResults<Category> mAllCategories;
 
@@ -42,15 +48,15 @@ public class PresenterFragmentBalanceChangeEditIncome
     @Override
     public void onStart() {
         mRealm = mDbManager.getRealm();
+        mAccount = AccountOperations.read(mRealm).get(mAccountIndex);
         mAllCategories = CategoryOperations.read(mRealm);
         if (IntentExtras.ACTION_UPDATE.equals(mAction)) {
             // read specified account and pick specified balance change from it
-            mBalanceChange = AccountOperations
-                    .read(mRealm)
-                    .get(mAccountIndex)
-                    .getBalanceChanges()
-                    .get(mBalanceChangeIndex);
-            mSelectedCategoryIndexes.add(mAllCategories.indexOf(mBalanceChange.getCategory()));
+            mBalanceChange = mAccount.getBalanceChanges().get(mBalanceChangeIndex);
+            // initialize indexes of selected categories
+            for (Category category : mBalanceChange.getCategories()) {
+                mSelectedCategoryIndexes.add(mAllCategories.indexOf(category));
+            }
         }
         mInitialized = true;
     }
@@ -61,6 +67,31 @@ public class PresenterFragmentBalanceChangeEditIncome
         mAllCategories = null;
         mRealm.close();
         mInitialized = false;
+    }
+
+    @Override
+    public void createBalanceChange(long amount, Set<Category> categories) {
+        checkInitialized();
+        // TODO: use date from user input
+        // create balance change
+        BalanceChange change = BalanceChangeOperations.create(mRealm, amount, new Date());
+        // add categories to balance change
+        for (Category category : categories) {
+            BalanceChangeOperations.addCategory(mRealm, change, category);
+        }
+        // add balance change to the account
+        AccountOperations.addBalanceChange(mRealm, mAccount, change);
+    }
+
+    @Override
+    public void updateBalanceChange(long amount, Set<Category> categories) {
+        checkInitialized();
+        // TODO: use date from user input
+        BalanceChangeOperations.update(mRealm, mBalanceChange, amount, new Date());
+        BalanceChangeOperations.clearCategories(mRealm, mBalanceChange);
+        for (Category category : categories) {
+            BalanceChangeOperations.addCategory(mRealm, mBalanceChange, category);
+        }
     }
 
     @Override
@@ -84,12 +115,39 @@ public class PresenterFragmentBalanceChangeEditIncome
         return mAllCategories.get(index).getName();
     }
 
+    @Override
     public boolean isSelectedCategory(int index) {
+        checkInitialized();
         return mSelectedCategoryIndexes.contains(index);
     }
 
-    public void selectCategory(int index) {
-        mSelectedCategoryIndexes.add(index);
+    @Override
+    public void toggleCategory(int index) {
+        checkInitialized();
+        if (isSelectedCategory(index)) {
+            mSelectedCategoryIndexes.remove(index);
+        } else {
+            mSelectedCategoryIndexes.add(index);
+        }
+        // notify about changes of selected categories set
+        for (IDataChangeListener listener : mCategorySelectedListeners) {
+            listener.onChange();
+        }
+    }
+
+    @Override
+    public Set<Category> getSelectedCategories() {
+        checkInitialized();
+        Set<Category> selectedCategories = new HashSet<>();
+        for (int categoryIndex : mSelectedCategoryIndexes) {
+            selectedCategories.add(mAllCategories.get(categoryIndex));
+        }
+        return selectedCategories;
+    }
+
+    @Override
+    public void addCategorySelectedListener(IDataChangeListener listener) {
+        mCategorySelectedListeners.add(listener);
     }
 
     /**

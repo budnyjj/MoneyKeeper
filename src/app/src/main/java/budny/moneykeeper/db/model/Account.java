@@ -6,6 +6,7 @@ import io.realm.RealmObject;
 public class Account extends RealmObject {
     public static final String FIELD_INDEX = "mIndex";
 
+    @SuppressWarnings("unused")
     private RealmList<BalanceChange> mBalanceChanges;
     private String mCurrencyCode;
     private int mIndex;

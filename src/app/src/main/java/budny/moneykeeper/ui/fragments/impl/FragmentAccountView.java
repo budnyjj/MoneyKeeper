@@ -18,8 +18,10 @@ import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.ui.misc.IntentExtras;
 import budny.moneykeeper.ui.misc.RVItemDividerDecoration;
 import budny.moneykeeper.ui.misc.RVItemTouchListener;
+import budny.moneykeeper.ui.misc.formatters.ICategoriesFormatter;
 import budny.moneykeeper.ui.misc.formatters.ICurrencyFormatter;
 import budny.moneykeeper.ui.misc.formatters.IDateFormatter;
+import budny.moneykeeper.ui.misc.formatters.impl.CategoriesFormatter;
 import budny.moneykeeper.ui.misc.formatters.impl.CurrencyFormatter;
 import budny.moneykeeper.ui.misc.formatters.impl.DateFormatter;
 import budny.moneykeeper.ui.misc.listeners.IRVItemClickListener;
@@ -116,7 +118,7 @@ public class FragmentAccountView extends Fragment {
         public static class ViewHolder extends RecyclerView.ViewHolder {
             public final ICurrencyFormatter mAmountFormatter;
             public final IDateFormatter mDateFormatter;
-            public final TextView mCategoryView;
+            public final ICategoriesFormatter mCategoriesFormatter;
 
             public ViewHolder(Context context, View v) {
                 super(v);
@@ -124,8 +126,8 @@ public class FragmentAccountView extends Fragment {
                         context, (TextView) v.findViewById(R.id.rv_row_balance_change_text_view_amount));
                 mDateFormatter = new DateFormatter(
                         (TextView) v.findViewById(R.id.rv_row_balance_change_text_view_date));
-                mCategoryView =
-                        (TextView) v.findViewById(R.id.rv_row_balance_change_text_view_category);
+                mCategoriesFormatter = new CategoriesFormatter(
+                        (TextView) v.findViewById(R.id.rv_row_balance_change_text_view_category));
             }
         }
 
@@ -152,7 +154,7 @@ public class FragmentAccountView extends Fragment {
             BalanceChange change = mPresenter.getBalanceChange(position);
             holder.mAmountFormatter.format(change.getAmount(), mPresenter.getCurrencyCode());
             holder.mDateFormatter.format(change.getDate());
-            holder.mCategoryView.setText(change.getCategory().getName());
+            holder.mCategoriesFormatter.format(change.getCategories());
         }
 
         @Override

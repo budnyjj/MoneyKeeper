@@ -57,9 +57,13 @@ public class DBManager implements IDBManager {
         List<Category> categories = CategoryOperations.read(realm);
         int numCategories = categories.size();
 
-        BalanceChange bc1 = BalanceChangeOperations.create(realm, 100_000, categories.get(1), new Date());
-        BalanceChange bc2 = BalanceChangeOperations.create(realm, -200_000, categories.get(2), new Date());
-        BalanceChange bc3 = BalanceChangeOperations.create(realm, 50_000, categories.get(3), new Date());
+        BalanceChange bc1 = BalanceChangeOperations.create(realm, 100_000, new Date());
+        BalanceChangeOperations.addCategory(realm, bc1, categories.get(0));
+        BalanceChangeOperations.addCategory(realm, bc1, categories.get(1));
+        BalanceChange bc2 = BalanceChangeOperations.create(realm, -200_000, new Date());
+        BalanceChangeOperations.addCategory(realm, bc2, categories.get(0));
+        BalanceChangeOperations.addCategory(realm, bc2, categories.get(2));
+        BalanceChange bc3 = BalanceChangeOperations.create(realm, 50_000, new Date());
 
         Account defaultAccount = AccountOperations.create(realm, DEFAULT_ACCOUNT_NAME, "USD");
         AccountOperations.addBalanceChange(realm, defaultAccount, bc1);

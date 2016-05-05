@@ -16,6 +16,7 @@ import budny.moneykeeper.bl.presenters.IPresenterFragmentBalanceChangeEditIncome
 import budny.moneykeeper.bl.presenters.impl.PresenterFragmentBalanceChangeEditIncome;
 import budny.moneykeeper.bl.validators.IContentValidator;
 import budny.moneykeeper.bl.validators.impl.CurrencyValidator;
+import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.ui.fragments.IFragmentEdit;
 import budny.moneykeeper.ui.misc.IntentExtras;
 import budny.moneykeeper.ui.misc.RVItemDividerDecoration;
@@ -75,7 +76,24 @@ public class FragmentBalanceChangeEditIncome extends IFragmentEdit {
 
     @Override
     public boolean onEditContent() {
-        // TODO: update this field
+        // TODO: use custom formatter?
+        String amountStr = mAmountText.getText().toString().trim();
+        if (!mCurrencyValidator.validate(amountStr)) {
+            mAmountLayout.setError(getString(R.string.err_msg_amount));
+            return false;
+        }
+        long amount = Long.valueOf(amountStr);
+
+        switch (mAction) {
+            case IntentExtras.ACTION_CREATE:
+                mPresenter.createBalanceChange(amount, mPresenter.getSelectedCategories());
+                break;
+            case IntentExtras.ACTION_UPDATE:
+                mPresenter.updateBalanceChange(amount, mPresenter.getSelectedCategories());
+                break;
+            default:
+                break;
+        }
         return true;
     }
 
@@ -156,6 +174,12 @@ public class FragmentBalanceChangeEditIncome extends IFragmentEdit {
 
         public RVCategoriesAdapter(IPresenterFragmentBalanceChangeEditIncome presenter) {
             mPresenter = presenter;
+            mPresenter.addCategorySelectedListener(new IDataChangeListener() {
+                @Override
+                public void onChange() {
+                    notifyDataSetChanged();
+                }
+            });
         }
 
         @Override
@@ -186,7 +210,7 @@ public class FragmentBalanceChangeEditIncome extends IFragmentEdit {
 
         @Override
         public void onItemClick(View view, int position) {
-            mPresenter.selectCategory(position);
+            mPresenter.toggleCategory(position);
         }
 
         @Override
