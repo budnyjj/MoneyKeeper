@@ -17,7 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import budny.moneykeeper.R;
-import budny.moneykeeper.bl.presenters.IPresenterActivityInput;
+import budny.moneykeeper.bl.presenters.IPresenterActivityBalanceChangeEdit;
 import budny.moneykeeper.bl.presenters.impl.PresenterActivityBalanceChangeEdit;
 import budny.moneykeeper.ui.fragments.IFragmentEdit;
 import budny.moneykeeper.ui.misc.listeners.IContentEditListener;
@@ -28,10 +28,8 @@ import budny.moneykeeper.ui.misc.listeners.IContentEditListener;
  * are specified by arguments bundle.
  */
 public class ActivityBalanceChangeEdit extends AppCompatActivity {
-    private static final int DEFAULT_FRAGMENT_INDEX = 0;
-
     private IContentEditListener mEditListener;
-    private IPresenterActivityInput mPresenter;
+    private IPresenterActivityBalanceChangeEdit mPresenter;
 
     @SuppressWarnings("FieldCanBeLocal")
     private Toolbar mToolbar;
@@ -98,9 +96,11 @@ public class ActivityBalanceChangeEdit extends AppCompatActivity {
      * Initializes edit listener by instantiating the default fragment in owned view pager.
      */
     private void initEditListener() {
-        Object pagerItem = mPagerAdapter.instantiateItem(mPagerView, DEFAULT_FRAGMENT_INDEX);
-        mPagerAdapter.setPrimaryItem(mPagerView, DEFAULT_FRAGMENT_INDEX, pagerItem);
+        int editType = mPresenter.getSuggestedEditType();
+        Object pagerItem = mPagerAdapter.instantiateItem(mPagerView, editType);
+        mPagerAdapter.setPrimaryItem(mPagerView, editType, pagerItem);
         mEditListener = mPagerAdapter.getCurrentEditListener(mPagerView.getCurrentItem());
+        mPagerView.setCurrentItem(editType);
     }
 
     /**
@@ -108,9 +108,9 @@ public class ActivityBalanceChangeEdit extends AppCompatActivity {
      */
     private static class AdapterViewPager extends FragmentStatePagerAdapter {
         private final SparseArray<IContentEditListener> mListeners = new SparseArray<>();
-        private final IPresenterActivityInput mPresenter;
+        private final IPresenterActivityBalanceChangeEdit mPresenter;
 
-        public AdapterViewPager(@NonNull FragmentManager manager, IPresenterActivityInput presenter) {
+        public AdapterViewPager(@NonNull FragmentManager manager, IPresenterActivityBalanceChangeEdit presenter) {
             super(manager);
             mPresenter = presenter;
         }
@@ -123,17 +123,17 @@ public class ActivityBalanceChangeEdit extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return mPresenter.getFragmentInput(position);
+            return mPresenter.getFragmentEdit(position);
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return mPresenter.getFragmentInputName(position);
+            return mPresenter.getFragmentEditName(position);
         }
 
         @Override
         public int getCount() {
-            return mPresenter.getNumInputTypes();
+            return mPresenter.getNumEditTypes();
         }
 
         @Override

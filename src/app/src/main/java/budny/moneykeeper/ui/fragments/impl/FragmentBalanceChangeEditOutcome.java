@@ -107,9 +107,9 @@ public class FragmentBalanceChangeEditOutcome extends IFragmentEdit {
             throw new IllegalArgumentException(
                     MSG_NO_ARGS + IntentExtras.FIELD_ACTION);
         }
+        mBalanceChangeIndex =
+                args.getInt(IntentExtras.FIELD_INDEX_BALANCE_CHANGE, IntentExtras.INDEX_INVALID);
         if (IntentExtras.ACTION_UPDATE.equals(mAction)) {
-            mBalanceChangeIndex =
-                    args.getInt(IntentExtras.FIELD_INDEX_BALANCE_CHANGE, IntentExtras.INDEX_INVALID);
             if (mBalanceChangeIndex == IntentExtras.INDEX_INVALID) {
                 throw new IllegalArgumentException(
                         MSG_NO_ARGS + IntentExtras.FIELD_INDEX_BALANCE_CHANGE);
