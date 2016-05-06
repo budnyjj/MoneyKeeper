@@ -56,21 +56,30 @@ public class PresenterFragmentCategoryEdit implements IPresenterFragmentCategory
     }
 
     @Override
-    public void createCategory(String name) {
-        checkInitialized();
-        if (!IntentExtras.ACTION_CREATE.equals(mAction)) {
-            throw new IllegalStateException(MSG_INVALID_ACTION + mAction);
-        }
-        CategoryOperations.create(mRealm, name);
-    }
-
-    @Override
-    public void updateCategory(String name) {
+    public Category.Type getCategoryType() {
         checkInitialized();
         if (!IntentExtras.ACTION_UPDATE.equals(mAction)) {
             throw new IllegalStateException(MSG_INVALID_ACTION + mAction);
         }
-        CategoryOperations.update(mRealm, mCategory, name);
+        return mCategory.getType();
+    }
+
+    @Override
+    public void createCategory(String name, Category.Type type) {
+        checkInitialized();
+        if (!IntentExtras.ACTION_CREATE.equals(mAction)) {
+            throw new IllegalStateException(MSG_INVALID_ACTION + mAction);
+        }
+        CategoryOperations.create(mRealm, name, type);
+    }
+
+    @Override
+    public void updateCategory(String name, Category.Type type) {
+        checkInitialized();
+        if (!IntentExtras.ACTION_UPDATE.equals(mAction)) {
+            throw new IllegalStateException(MSG_INVALID_ACTION + mAction);
+        }
+        CategoryOperations.update(mRealm, mCategory, name, type);
     }
 
     /**

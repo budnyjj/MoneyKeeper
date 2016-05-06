@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import budny.moneykeeper.bl.presenters.IPresenterFragmentBalanceChangeEditIncome;
+import budny.moneykeeper.bl.presenters.IPresenterFragmentBalanceChangeEditOutcome;
 import budny.moneykeeper.db.model.Account;
 import budny.moneykeeper.db.model.BalanceChange;
 import budny.moneykeeper.db.model.Category;
@@ -18,8 +18,8 @@ import budny.moneykeeper.ui.misc.IntentExtras;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-public class PresenterFragmentBalanceChangeEditIncome
-        implements IPresenterFragmentBalanceChangeEditIncome {
+public class PresenterFragmentBalanceChangeEditOutcome
+        implements IPresenterFragmentBalanceChangeEditOutcome {
     private static final String TAG = PresenterFragmentCategoriesView.class.getSimpleName();
     private static final String MSG_NOT_INITIALIZED = TAG + " is not initialized";
     private static final String MSG_INVALID_ACTION = "This method should not be invoked with this action: ";
@@ -38,7 +38,7 @@ public class PresenterFragmentBalanceChangeEditIncome
 
     private volatile boolean mInitialized;
 
-    public PresenterFragmentBalanceChangeEditIncome(
+    public PresenterFragmentBalanceChangeEditOutcome(
             String action, int accountIndex, int balanceChangeIndex) {
         mAction = action;
         mAccountIndex = accountIndex;
@@ -49,13 +49,13 @@ public class PresenterFragmentBalanceChangeEditIncome
     public void onStart() {
         mRealm = mDbManager.getRealm();
         mAccount = AccountOperations.read(mRealm).get(mAccountIndex);
-        mAllCategories = CategoryOperations.readIncome(mRealm);
+        mAllCategories = CategoryOperations.readOutcome(mRealm);
         if (IntentExtras.ACTION_UPDATE.equals(mAction)) {
             // read specified account and pick specified balance change from it
             mBalanceChange = mAccount.getBalanceChanges().get(mBalanceChangeIndex);
-            // initialize indexes of selected categories with income type only
+            // initialize indexes of selected categories with outcome type only
             for (Category category : mBalanceChange.getCategories()) {
-                if (Category.Type.INCOME.equals(category.getType())) {
+                if (Category.Type.OUTCOME.equals(category.getType())) {
                     mSelectedCategoryIndexes.add(mAllCategories.indexOf(category));
                 }
             }

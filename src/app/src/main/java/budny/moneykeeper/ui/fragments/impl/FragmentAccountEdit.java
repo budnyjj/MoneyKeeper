@@ -14,15 +14,14 @@ import android.widget.TextView;
 import budny.moneykeeper.R;
 import budny.moneykeeper.bl.presenters.IPresenterFragmentAccountEdit;
 import budny.moneykeeper.bl.presenters.impl.PresenterFragmentAccountEdit;
-import budny.moneykeeper.bl.validators.IContentValidator;
-import budny.moneykeeper.bl.validators.impl.TextValidator;
 import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.ui.fragments.IFragmentEdit;
 import budny.moneykeeper.ui.misc.IntentExtras;
 import budny.moneykeeper.ui.misc.RVItemDividerDecoration;
 import budny.moneykeeper.ui.misc.RVItemTouchListener;
-import budny.moneykeeper.ui.misc.ValidationTextWatcher;
 import budny.moneykeeper.ui.misc.listeners.IRVItemClickListener;
+import budny.moneykeeper.ui.misc.managers.IEditManager;
+import budny.moneykeeper.ui.misc.managers.impl.EditManagerText;
 
 /**
  * A fragment used to edit specified account.
@@ -32,18 +31,13 @@ import budny.moneykeeper.ui.misc.listeners.IRVItemClickListener;
 public class FragmentAccountEdit extends IFragmentEdit {
     private static final String TAG = FragmentAccountEdit.class.getSimpleName();
 
-    private final IContentValidator mTextValidator = new TextValidator();
-
     private IPresenterFragmentAccountEdit mPresenter;
     // action to perform with account (create or update)
     private String mAction = IntentExtras.ACTION_INVALID;
     // index of account to edit
     private int mAccountIndex = IntentExtras.INDEX_INVALID;
 
-    @SuppressWarnings("FieldCanBeLocal")
-    private TextInputLayout mAccountNameLayout;
-    @SuppressWarnings("FieldCanBeLocal")
-    private EditText mAccountNameText;
+    private IEditManager<String> mAccountNameEditManager;
     @SuppressWarnings("FieldCanBeLocal")
     private RecyclerView.LayoutManager mCurrenciesManager;
     @SuppressWarnings("FieldCanBeLocal")
@@ -75,18 +69,18 @@ public class FragmentAccountEdit extends IFragmentEdit {
 
     @Override
     public boolean onEditContent() {
-        String accountName = mAccountNameText.getText().toString().trim();
-        if (!mTextValidator.validate(accountName)) {
-            mAccountNameLayout.setError(getString(R.string.err_msg_account_name));
+        if (!mAccountNameEditManager.isValid()) {
             return false;
         }
 
         switch (mAction) {
             case IntentExtras.ACTION_CREATE:
-                mPresenter.createAccount(accountName, mPresenter.getSelectedCurrencyCode());
+                mPresenter.createAccount(
+                        mAccountNameEditManager.getValue(), mPresenter.getSelectedCurrencyCode());
                 break;
             case IntentExtras.ACTION_UPDATE:
-                mPresenter.updateAccount(accountName, mPresenter.getSelectedCurrencyCode());
+                mPresenter.updateAccount(
+                        mAccountNameEditManager.getValue(), mPresenter.getSelectedCurrencyCode());
                 break;
             default:
                 break;
@@ -117,13 +111,10 @@ public class FragmentAccountEdit extends IFragmentEdit {
 
     private void initViews(View rootView) {
         // account name text view
-        mAccountNameLayout = (TextInputLayout) rootView.findViewById(
-                R.id.fragment_account_edit_edit_text_container_account_name);
-        mAccountNameText = (EditText) rootView.findViewById(
-                R.id.fragment_account_edit_edit_text_account_name);
-        mAccountNameText.addTextChangedListener(
-                new ValidationTextWatcher(mAccountNameText, mAccountNameLayout,
-                        mTextValidator, getString(R.string.err_msg_account_name)));
+        mAccountNameEditManager = new EditManagerText(
+                (EditText) rootView.findViewById(R.id.fragment_account_edit_edit_text_account_name),
+                (TextInputLayout) rootView.findViewById(R.id.fragment_account_edit_edit_text_container_account_name),
+                getString(R.string.err_msg_account_name), true);
         // currencies recycler view
         mCurrenciesView = (RecyclerView) rootView.findViewById(
                 R.id.fragment_account_edit_recycler_view_currencies);
@@ -142,7 +133,7 @@ public class FragmentAccountEdit extends IFragmentEdit {
     private void updateViews() {
         if (IntentExtras.ACTION_UPDATE.equals(mAction)
                 && mAccountIndex != IntentExtras.INDEX_INVALID) {
-            mAccountNameText.setText(mPresenter.getAccountName());
+            mAccountNameEditManager.setValue(mPresenter.getAccountName());
         }
     }
 

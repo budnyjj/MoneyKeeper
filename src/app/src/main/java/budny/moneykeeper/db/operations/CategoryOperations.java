@@ -11,9 +11,10 @@ public class CategoryOperations {
      *
      * @return managed {@linkplain Category} instance
      */
-    public static Category create(Realm realm, String name) {
+    public static Category create(Realm realm, String name, Category.Type type) {
         Category category = new Category();
         category.setName(name);
+        category.setType(type);
         return create(realm, category);
     }
 
@@ -32,10 +33,30 @@ public class CategoryOperations {
     }
 
     /**
-     * Retrieves categories from database.
+     * Retrieves all categories from database.
      */
     public static RealmResults<Category> read(Realm realm) {
         return realm.where(Category.class).findAllSorted(Category.FIELD_NAME);
+    }
+
+    /**
+     * Retrieves all categories from database.
+     */
+    public static RealmResults<Category> readIncome(Realm realm) {
+        return realm
+                .where(Category.class)
+                .contains(Category.FIELD_TYPE, Category.Type.INCOME.toString())
+                .findAllSorted(Category.FIELD_NAME);
+    }
+
+    /**
+     * Retrieves all categories from database.
+     */
+    public static RealmResults<Category> readOutcome(Realm realm) {
+        return realm
+                .where(Category.class)
+                .contains(Category.FIELD_TYPE, Category.Type.OUTCOME.toString())
+                .findAllSorted(Category.FIELD_NAME);
     }
 
     /**
@@ -44,11 +65,13 @@ public class CategoryOperations {
      * @param realm Realm instance
      * @param category category to be updated
      */
-    public static void update(Realm realm, final Category category, final String name) {
+    public static void update(Realm realm, final Category category,
+                              final String name, final Category.Type type) {
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
                 category.setName(name);
+                category.setType(type);
             }
         });
     }

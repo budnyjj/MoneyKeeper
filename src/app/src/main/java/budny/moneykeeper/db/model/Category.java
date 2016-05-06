@@ -4,9 +4,14 @@ import io.realm.RealmObject;
 
 public class Category extends RealmObject {
     public static final String FIELD_NAME = "mName";
+    public static final String FIELD_TYPE = "mType";
+    public enum Type {
+        INCOME, OUTCOME
+    }
 
     private String mName;
-    private String mConversionRate;
+    // store enums as strings
+    private String mType;
 
     public String getName() {
         return mName;
@@ -16,13 +21,11 @@ public class Category extends RealmObject {
         mName = name;
     }
 
-    // TODO: use BigDecimal instead
-    public String getConversionRate() {
-        return mConversionRate;
+    public Type getType() {
+        return Type.valueOf(mType);
     }
 
-    // TODO: use BigDecimal instead
-    public void setConversionRate(String rate) {
-        mConversionRate = rate;
+    public void setType(Type type) {
+        mType = type.toString();
     }
 }

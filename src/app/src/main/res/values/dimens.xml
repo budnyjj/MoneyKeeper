@@ -9,7 +9,9 @@
     <dimen name="margin_bottom_small">8dp</dimen>
     <dimen name="margin_bottom_default">16dp</dimen>
     <dimen name="margin_end_default">16dp</dimen>
+    <dimen name="margin_end_very_small">4dp</dimen>
     <dimen name="margin_start_default">16dp</dimen>
+    <dimen name="margin_start_very_small">4dp</dimen>
     <dimen name="margin_top_small">8dp</dimen>
     <dimen name="margin_top_default">16dp</dimen>
 

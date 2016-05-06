@@ -14,22 +14,20 @@ import android.widget.TextView;
 import budny.moneykeeper.R;
 import budny.moneykeeper.bl.presenters.IPresenterFragmentBalanceChangeEditIncome;
 import budny.moneykeeper.bl.presenters.impl.PresenterFragmentBalanceChangeEditIncome;
-import budny.moneykeeper.bl.validators.IContentValidator;
-import budny.moneykeeper.bl.validators.impl.CurrencyValidator;
 import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.ui.fragments.IFragmentEdit;
 import budny.moneykeeper.ui.misc.IntentExtras;
 import budny.moneykeeper.ui.misc.RVItemDividerDecoration;
 import budny.moneykeeper.ui.misc.RVItemTouchListener;
-import budny.moneykeeper.ui.misc.ValidationTextWatcher;
 import budny.moneykeeper.ui.misc.listeners.IRVItemClickListener;
+import budny.moneykeeper.ui.misc.managers.IEditManagerAmount;
+import budny.moneykeeper.ui.misc.managers.impl.EditManagerAmountIncome;
 
 public class FragmentBalanceChangeEditIncome extends IFragmentEdit {
     private static final String TAG = FragmentCategoryEdit.class.getSimpleName();
     private static final String MSG_NOT_INITIALIZED = TAG + " is not initialized with arguments bundle";
     private static final String MSG_NO_ARGS = "Unable to locate following arguments: ";
 
-    private final IContentValidator mCurrencyValidator = new CurrencyValidator();
     // action to perform with balance change (create or update)
     private String mAction = IntentExtras.ACTION_INVALID;
     // index of parent account
@@ -38,10 +36,7 @@ public class FragmentBalanceChangeEditIncome extends IFragmentEdit {
     private int mBalanceChangeIndex = IntentExtras.INDEX_INVALID;
 
     private IPresenterFragmentBalanceChangeEditIncome mPresenter;
-    @SuppressWarnings("FieldCanBeLocal")
-    private TextInputLayout mAmountLayout;
-    @SuppressWarnings("FieldCanBeLocal")
-    private EditText mAmountText;
+    private IEditManagerAmount mAmountEditManager;
     @SuppressWarnings("FieldCanBeLocal")
     private RecyclerView.LayoutManager mCategoriesManager;
     @SuppressWarnings("FieldCanBeLocal")
@@ -76,20 +71,18 @@ public class FragmentBalanceChangeEditIncome extends IFragmentEdit {
 
     @Override
     public boolean onEditContent() {
-        // TODO: use custom formatter?
-        String amountStr = mAmountText.getText().toString().trim();
-        if (!mCurrencyValidator.validate(amountStr)) {
-            mAmountLayout.setError(getString(R.string.err_msg_amount));
+        if (!mAmountEditManager.isValid()) {
             return false;
         }
-        long amount = Long.valueOf(amountStr);
 
         switch (mAction) {
             case IntentExtras.ACTION_CREATE:
-                mPresenter.createBalanceChange(amount, mPresenter.getSelectedCategories());
+                mPresenter.createBalanceChange(
+                        mAmountEditManager.getValue(), mPresenter.getSelectedCategories());
                 break;
             case IntentExtras.ACTION_UPDATE:
-                mPresenter.updateBalanceChange(amount, mPresenter.getSelectedCategories());
+                mPresenter.updateBalanceChange(
+                        mAmountEditManager.getValue(), mPresenter.getSelectedCategories());
                 break;
             default:
                 break;
@@ -126,12 +119,10 @@ public class FragmentBalanceChangeEditIncome extends IFragmentEdit {
 
     private void initViews(View rootView) {
         // amount edit text
-        mAmountLayout = (TextInputLayout) rootView.findViewById(
-                R.id.fragment_balance_change_edit_income_text_container_amount);
-        mAmountText = (EditText) rootView.findViewById(
-                R.id.fragment_balance_change_edit_income_edit_text_amount);
-        mAmountText.addTextChangedListener(new ValidationTextWatcher(
-                mAmountText, mAmountLayout, mCurrencyValidator, getString(R.string.err_msg_amount)));
+        mAmountEditManager = new EditManagerAmountIncome(
+                (EditText) rootView.findViewById(R.id.fragment_balance_change_edit_income_edit_text_amount),
+                (TextInputLayout) rootView.findViewById(R.id.fragment_balance_change_edit_income_text_container_amount),
+                getString(R.string.err_msg_amount), true);
         // categories recycler view
         mCategoriesView = (RecyclerView) rootView.findViewById(
                 R.id.fragment_balance_change_edit_income_recycler_view_categories);
@@ -150,8 +141,7 @@ public class FragmentBalanceChangeEditIncome extends IFragmentEdit {
     private void updateViews() {
         if (IntentExtras.ACTION_UPDATE.equals(mAction)
                 && mBalanceChangeIndex != IntentExtras.INDEX_INVALID) {
-            // TODO: use a formatter
-            mAmountText.setText(String.valueOf(mPresenter.getAmount()));
+            mAmountEditManager.setValue(mPresenter.getAmount());
         }
     }
 

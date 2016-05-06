@@ -21,7 +21,10 @@ public class DBManager implements IDBManager {
     private static final String REALM_FILE_NAME = "data.realm";
 
     private static final String DEFAULT_ACCOUNT_NAME = "Default";
-    private static final String[] DEFAULT_CATEGORIES = new String[]{"Food", "Auto", "Salary", "Home", "Misc"};
+    private static final String[] DEFAULT_CATEGORIES_INCOME =
+            new String[]{"Salary"};
+    private static final String[] DEFAULT_CATEGORIES_OUTCOME =
+            new String[]{"Food", "Auto", "Home", "Misc"};
 
     private volatile boolean mInitialized = false;
 
@@ -51,19 +54,21 @@ public class DBManager implements IDBManager {
     }
 
     private void fillDatabaseWithDefaultData(Realm realm) {
-        for (String categoryName : DEFAULT_CATEGORIES) {
-            CategoryOperations.create(realm, categoryName);
+        for (String categoryName : DEFAULT_CATEGORIES_INCOME) {
+            CategoryOperations.create(realm, categoryName, Category.Type.INCOME);
+        }
+        for (String categoryName : DEFAULT_CATEGORIES_OUTCOME) {
+            CategoryOperations.create(realm, categoryName, Category.Type.OUTCOME);
         }
         List<Category> categories = CategoryOperations.read(realm);
-        int numCategories = categories.size();
 
-        BalanceChange bc1 = BalanceChangeOperations.create(realm, 100_000, new Date());
+        BalanceChange bc1 = BalanceChangeOperations.create(realm, 100_150_000_000L, new Date());
         BalanceChangeOperations.addCategory(realm, bc1, categories.get(0));
         BalanceChangeOperations.addCategory(realm, bc1, categories.get(1));
-        BalanceChange bc2 = BalanceChangeOperations.create(realm, -200_000, new Date());
+        BalanceChange bc2 = BalanceChangeOperations.create(realm, -200_300_000_000L, new Date());
         BalanceChangeOperations.addCategory(realm, bc2, categories.get(0));
         BalanceChangeOperations.addCategory(realm, bc2, categories.get(2));
-        BalanceChange bc3 = BalanceChangeOperations.create(realm, 50_000, new Date());
+        BalanceChange bc3 = BalanceChangeOperations.create(realm, 50_100_000_000L, new Date());
 
         Account defaultAccount = AccountOperations.create(realm, DEFAULT_ACCOUNT_NAME, "USD");
         AccountOperations.addBalanceChange(realm, defaultAccount, bc1);

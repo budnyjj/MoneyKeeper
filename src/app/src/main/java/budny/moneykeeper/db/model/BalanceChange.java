@@ -9,7 +9,13 @@ import io.realm.RealmObject;
 public class BalanceChange extends RealmObject {
     public static final String FIELD_AMOUNT = "mAmount";
     public static final String FIELD_DATE = "mDate";
+    public static final long FRACTION_DIVISOR = 1000_000_000L;
 
+    /**
+     * Amount of change.
+     * It is stored as long: 9 lower digits represent fraction part;
+     *                       rest of upper digits are for the integer part
+     */
     private long mAmount;
     @SuppressWarnings("unused")
     private RealmList<Category> mCategories;

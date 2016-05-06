@@ -6,15 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.RadioGroup;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import budny.moneykeeper.R;
 import budny.moneykeeper.bl.presenters.IPresenterFragmentCategoryEdit;
 import budny.moneykeeper.bl.presenters.impl.PresenterFragmentCategoryEdit;
-import budny.moneykeeper.bl.validators.IContentValidator;
-import budny.moneykeeper.bl.validators.impl.TextValidator;
+import budny.moneykeeper.db.model.Category;
 import budny.moneykeeper.ui.fragments.IFragmentEdit;
 import budny.moneykeeper.ui.misc.IntentExtras;
-import budny.moneykeeper.ui.misc.ValidationTextWatcher;
+import budny.moneykeeper.ui.misc.managers.IEditManager;
+import budny.moneykeeper.ui.misc.managers.impl.EditManagerRadioGroup;
+import budny.moneykeeper.ui.misc.managers.impl.EditManagerText;
 
 /**
  * A fragment used to edit specified category.
@@ -26,17 +31,14 @@ public class FragmentCategoryEdit extends IFragmentEdit {
     private static final String MSG_NOT_INITIALIZED = TAG + " is not initialized with arguments bundle";
     private static final String MSG_NO_ARGS = "Unable to locate following arguments: ";
 
-    private final IContentValidator mTextValidator = new TextValidator();
-
     private IPresenterFragmentCategoryEdit mPresenter;
     // action to perform with category (create or update)
     private String mAction = IntentExtras.ACTION_INVALID;
     // index of category to edit
     private int mCategoryIndex = IntentExtras.INDEX_INVALID;
 
-    @SuppressWarnings("FieldCanBeLocal")
-    private TextInputLayout mCategoryNameLayout;
-    private EditText mCategoryNameText;
+    private IEditManager<String> mCategoryNameEditManager;
+    private IEditManager<Category.Type> mCategoryTypeEditManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,33 +65,23 @@ public class FragmentCategoryEdit extends IFragmentEdit {
 
     @Override
     public boolean onEditContent() {
-        String categoryName = mCategoryNameText.getText().toString().trim();
-        if (!mTextValidator.validate(categoryName)) {
-            mCategoryNameLayout.setError(getString(R.string.err_msg_category_name));
+        if (!mCategoryNameEditManager.isValid()
+                || !mCategoryTypeEditManager.isValid()) {
             return false;
         }
-
         switch (mAction) {
             case IntentExtras.ACTION_CREATE:
-                mPresenter.createCategory(categoryName);
+                mPresenter.createCategory(
+                        mCategoryNameEditManager.getValue(), mCategoryTypeEditManager.getValue());
                 break;
             case IntentExtras.ACTION_UPDATE:
-                mPresenter.updateCategory(categoryName);
+                mPresenter.updateCategory(
+                        mCategoryNameEditManager.getValue(), mCategoryTypeEditManager.getValue());
                 break;
             default:
                 break;
         }
         return true;
-    }
-
-    /**
-     * Fills owned views with data.
-     */
-    private void updateViews() {
-        if (IntentExtras.ACTION_UPDATE.equals(mAction)
-                && mCategoryIndex != IntentExtras.INDEX_INVALID) {
-            mCategoryNameText.setText(mPresenter.getCategoryName());
-        }
     }
 
     private void parseArguments() {
@@ -112,13 +104,27 @@ public class FragmentCategoryEdit extends IFragmentEdit {
     }
 
     private void initViews(View rootView) {
-        mCategoryNameLayout = (TextInputLayout) rootView.findViewById(
-                R.id.fragment_category_edit_edit_text_container_name);
-        mCategoryNameText = (EditText) rootView.findViewById(
-                R.id.fragment_category_edit_edit_text_name);
-        mCategoryNameText.addTextChangedListener(
-                new ValidationTextWatcher(
-                        mCategoryNameText, mCategoryNameLayout,
-                        mTextValidator, getString(R.string.err_msg_category_name)));
+        mCategoryNameEditManager = new EditManagerText(
+                (EditText) rootView.findViewById(R.id.fragment_category_edit_edit_text_name),
+                (TextInputLayout) rootView.findViewById(R.id.fragment_category_edit_edit_text_container_name),
+                getString(R.string.err_msg_category_name), true);
+        // setup category type radio group
+        Map<Integer, Category.Type> uiTypeMap = new HashMap<>();
+        uiTypeMap.put(R.id.fragment_category_edit_radio_button_income, Category.Type.INCOME);
+        uiTypeMap.put(R.id.fragment_category_edit_radio_button_outcome, Category.Type.OUTCOME);
+        mCategoryTypeEditManager = new EditManagerRadioGroup<>(
+                (RadioGroup) rootView.findViewById(R.id.fragment_category_edit_radio_group_type),
+                uiTypeMap);
+    }
+
+    /**
+     * Fills owned views with data.
+     */
+    private void updateViews() {
+        if (IntentExtras.ACTION_UPDATE.equals(mAction)
+                && mCategoryIndex != IntentExtras.INDEX_INVALID) {
+            mCategoryNameEditManager.setValue(mPresenter.getCategoryName());
+            mCategoryTypeEditManager.setValue(mPresenter.getCategoryType());
+        }
     }
 }

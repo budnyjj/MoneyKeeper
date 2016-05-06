@@ -10,21 +10,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Date;
+import java.util.List;
+
 import budny.moneykeeper.R;
 import budny.moneykeeper.bl.presenters.IPresenterFragmentAccountView;
 import budny.moneykeeper.bl.presenters.impl.PresenterFragmentAccountView;
 import budny.moneykeeper.db.model.BalanceChange;
+import budny.moneykeeper.db.model.Category;
 import budny.moneykeeper.db.util.IDataChangeListener;
 import budny.moneykeeper.ui.misc.IntentExtras;
 import budny.moneykeeper.ui.misc.RVItemDividerDecoration;
 import budny.moneykeeper.ui.misc.RVItemTouchListener;
-import budny.moneykeeper.ui.misc.formatters.ICategoriesFormatter;
-import budny.moneykeeper.ui.misc.formatters.ICurrencyFormatter;
-import budny.moneykeeper.ui.misc.formatters.IDateFormatter;
-import budny.moneykeeper.ui.misc.formatters.impl.CategoriesFormatter;
-import budny.moneykeeper.ui.misc.formatters.impl.CurrencyFormatter;
-import budny.moneykeeper.ui.misc.formatters.impl.DateFormatter;
 import budny.moneykeeper.ui.misc.listeners.IRVItemClickListener;
+import budny.moneykeeper.ui.misc.managers.IViewManager;
+import budny.moneykeeper.ui.misc.managers.IViewManagerAmount;
+import budny.moneykeeper.ui.misc.managers.impl.ViewManagerAmount;
+import budny.moneykeeper.ui.misc.managers.impl.ViewManagerCategories;
+import budny.moneykeeper.ui.misc.managers.impl.ViewManagerDate;
 
 /**
  * A fragment used to show the details of specified account.
@@ -39,7 +42,7 @@ public class FragmentAccountView extends Fragment {
     @SuppressWarnings("FieldCanBeLocal")
     private int mAccountIndex = IntentExtras.INDEX_INVALID;
 
-    private ICurrencyFormatter mTotalAmountFormatter;
+    private IViewManagerAmount mTotalAmountViewManager;
     @SuppressWarnings("FieldCanBeLocal")
     private RecyclerView.LayoutManager mBalanceChangesManager;
     @SuppressWarnings("FieldCanBeLocal")
@@ -90,8 +93,9 @@ public class FragmentAccountView extends Fragment {
 
     private void initViews(View rootView) {
         // amount text view
-        mTotalAmountFormatter = new CurrencyFormatter(
-                getContext(), (TextView) rootView.findViewById(R.id.fragment_account_view_text_view_total_amount));
+        mTotalAmountViewManager = new ViewManagerAmount(
+                getContext(),
+                (TextView) rootView.findViewById(R.id.fragment_account_view_text_view_total_amount));
         // setup recycler view
         mBalanceChangesView = (RecyclerView) rootView.findViewById(R.id.fragment_account_view_recycler_view_balance_changes);
         mBalanceChangesManager = new LinearLayoutManager(getContext());
@@ -107,7 +111,8 @@ public class FragmentAccountView extends Fragment {
      * Fills owned fields with updated data.
      */
     private void updateViews() {
-        mTotalAmountFormatter.format(mPresenter.getTotalAmount(), mPresenter.getCurrencyCode());
+        mTotalAmountViewManager.setCurrencyCode(mPresenter.getCurrencyCode());
+        mTotalAmountViewManager.setValue(mPresenter.getTotalAmount());
     }
 
     private static class RVBalanceChangesAdapter
@@ -116,17 +121,18 @@ public class FragmentAccountView extends Fragment {
         private final IPresenterFragmentAccountView mPresenter;
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
-            public final ICurrencyFormatter mAmountFormatter;
-            public final IDateFormatter mDateFormatter;
-            public final ICategoriesFormatter mCategoriesFormatter;
+            public final IViewManagerAmount mAmountViewManager;
+            public final IViewManager<Date> mDateViewManager;
+            public final IViewManager<List<Category>> mCategoriesViewManager;
 
             public ViewHolder(Context context, View v) {
                 super(v);
-                mAmountFormatter = new CurrencyFormatter(
-                        context, (TextView) v.findViewById(R.id.rv_row_balance_change_text_view_amount));
-                mDateFormatter = new DateFormatter(
+                mAmountViewManager = new ViewManagerAmount(
+                        context,
+                        (TextView) v.findViewById(R.id.rv_row_balance_change_text_view_amount));
+                mDateViewManager = new ViewManagerDate(
                         (TextView) v.findViewById(R.id.rv_row_balance_change_text_view_date));
-                mCategoriesFormatter = new CategoriesFormatter(
+                mCategoriesViewManager = new ViewManagerCategories(
                         (TextView) v.findViewById(R.id.rv_row_balance_change_text_view_category));
             }
         }
@@ -152,9 +158,10 @@ public class FragmentAccountView extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             BalanceChange change = mPresenter.getBalanceChange(position);
-            holder.mAmountFormatter.format(change.getAmount(), mPresenter.getCurrencyCode());
-            holder.mDateFormatter.format(change.getDate());
-            holder.mCategoriesFormatter.format(change.getCategories());
+            holder.mAmountViewManager.setCurrencyCode(mPresenter.getCurrencyCode());
+            holder.mAmountViewManager.setValue(change.getAmount());
+            holder.mDateViewManager.setValue(change.getDate());
+            holder.mCategoriesViewManager.setValue(change.getCategories());
         }
 
         @Override

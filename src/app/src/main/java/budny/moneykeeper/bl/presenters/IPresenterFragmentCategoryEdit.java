@@ -7,9 +7,11 @@ public interface IPresenterFragmentCategoryEdit {
 
     void onStop();
 
-    void createCategory(String name);
+    void createCategory(String name, Category.Type type);
 
-    void updateCategory(String name);
+    void updateCategory(String name, Category.Type type);
 
     String getCategoryName();
+
+    Category.Type getCategoryType();
 }
