@@ -17,8 +17,9 @@
             android:id="@+id/activity_balance_change_edit_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabGravity="fill"
-            app:tabMode="scrollable" />
+            app:tabMaxWidth="0dp"
+            app:tabMode="fixed"
+            app:tabGravity="fill" />
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager

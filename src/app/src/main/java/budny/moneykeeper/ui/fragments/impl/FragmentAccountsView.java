@@ -1,6 +1,7 @@
 package budny.moneykeeper.ui.fragments.impl;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -146,7 +147,17 @@ public class FragmentAccountsView extends Fragment {
 
         @Override
         public void onSwiped(ViewHolder holder, int direction) {
-            mPresenter.deleteAccount(holder.getAdapterPosition());
+            final int position = holder.getAdapterPosition();
+            mPresenter.deleteAccount(position);
+            Snackbar bar = Snackbar
+                    .make(mAccountsView, "Account removed", Snackbar.LENGTH_LONG)
+                    .setAction("Undo", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mPresenter.unDeleteLastAccount(position);
+                        }
+                    });
+            bar.show();
         }
     }
 

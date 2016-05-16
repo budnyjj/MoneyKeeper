@@ -25,6 +25,10 @@ public class PresenterFragmentAccountsView implements IPresenterFragmentAccounts
 
     private final Context mContext;
     private final IDBManager mDbManager = DBManager.getInstance();
+    // array of indexes of accounts which are exposed to presenter client
+    private final ArrayList<Integer> mAccountActiveIndexes = new ArrayList<>();
+    // stack of indexes of accounts which were selected to be deleted
+    private final List<Integer> mAccountToDeleteIndexes = new ArrayList<>();
     // preserves data change listeners from being garbage collected
     // and saves them from being removed during fragment lifecycle
     private final List<RealmChangeListener> mChangeListeners = new ArrayList<>();
@@ -42,6 +46,10 @@ public class PresenterFragmentAccountsView implements IPresenterFragmentAccounts
     public void onStart() {
         mRealm = mDbManager.getRealm();
         mAccounts = AccountOperations.read(mRealm);
+        // fill list of indexes of active accounts
+        for (int accountIndex = 0; accountIndex < mAccounts.size(); accountIndex++) {
+            mAccountActiveIndexes.add(accountIndex);
+        }
         // add pending listeners
         for (final RealmChangeListener listener : mChangeListeners) {
             mAccounts.addChangeListener(listener);
@@ -52,6 +60,10 @@ public class PresenterFragmentAccountsView implements IPresenterFragmentAccounts
     @Override
     public void onStop() {
         checkInitialized();
+        // delete pending accounts
+        for (int accountIndex : mAccountToDeleteIndexes) {
+            CommonOperations.delete(mRealm, mAccounts, accountIndex);
+        }
         mAccounts.removeChangeListeners();
         mAccounts = null;
         mRealm.close();
@@ -61,13 +73,14 @@ public class PresenterFragmentAccountsView implements IPresenterFragmentAccounts
     @Override
     public int getNumAccounts() {
         checkInitialized();
-        return mAccounts.size();
+        return mAccountActiveIndexes.size();
     }
 
     @Override
-    public String getAccountName(int position) {
+    public String getAccountName(int index) {
         checkInitialized();
-        return mAccounts.get(position).getName();
+        int internalIndex = mAccountActiveIndexes.get(index);
+        return mAccounts.get(internalIndex).getName();
     }
 
     /**
@@ -78,32 +91,55 @@ public class PresenterFragmentAccountsView implements IPresenterFragmentAccounts
      */
     @Override
     public void updateAccount(int index) {
+        int internalIndex = mAccountActiveIndexes.get(index);
         Intent intent = new Intent(mContext, ActivityAccountEdit.class);
         intent.putExtra(IntentExtras.FIELD_ACTION, IntentExtras.ACTION_UPDATE);
-        intent.putExtra(IntentExtras.FIELD_INDEX_ACCOUNT, index);
+        intent.putExtra(IntentExtras.FIELD_INDEX_ACCOUNT, internalIndex);
         mContext.startActivity(intent);
     }
 
     /**
      * Deletes specified account.
      *
-     * @param index index of account to delete
+     * @param position index of account to delete
      * @return true, if the actual deletion was performed
      */
     @Override
-    public boolean deleteAccount(int index) {
+    public boolean deleteAccount(int position) {
         checkInitialized();
-        // there are more accounts, so we can delete this one
-        CommonOperations.delete(mRealm, mAccounts, index);
+        mAccountToDeleteIndexes.add(mAccountActiveIndexes.remove(position));
+        // notify clients about changes
+        for (RealmChangeListener listener : mChangeListeners) {
+            listener.onChange();
+        }
         return true;
     }
 
     @Override
-    public void swapAccounts(int fromPosition, int toPosition) {
+    public boolean unDeleteLastAccount(int position) {
         checkInitialized();
-        Account fromAccount = mAccounts.get(fromPosition);
-        Account toAccount = mAccounts.get(toPosition);
+        int numAccountsToDelete = mAccountToDeleteIndexes.size();
+        if (numAccountsToDelete == 0) {
+            // there are no deleted accounts
+            return false;
+        }
+        mAccountActiveIndexes.add(position, mAccountToDeleteIndexes.remove(numAccountsToDelete - 1));
+        // notify clients about changes
+        for (RealmChangeListener listener : mChangeListeners) {
+            listener.onChange();
+        }
+        return true;
+    }
+
+    @Override
+    public void swapAccounts(int fromIndex, int toIndex) {
+        checkInitialized();
+        int internalFromIndex = mAccountActiveIndexes.get(fromIndex);
+        int internalToIndex = mAccountActiveIndexes.get(toIndex);
+        Account fromAccount = mAccounts.get(internalFromIndex);
+        Account toAccount = mAccounts.get(internalToIndex);
         AccountOperations.swap(mRealm, fromAccount, toAccount);
+        // notify clients about changes
         for (RealmChangeListener listener : mChangeListeners) {
             listener.onChange();
         }

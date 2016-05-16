@@ -78,6 +78,8 @@ public class DBManager implements IDBManager {
         Account defaultAccount2 = AccountOperations.create(realm, DEFAULT_ACCOUNT_NAME + "2", "EUR");
         AccountOperations.addBalanceChange(realm, defaultAccount2, bc1);
         AccountOperations.addBalanceChange(realm, defaultAccount2, bc2);
+
+        Account defaultAccount3 = AccountOperations.create(realm, DEFAULT_ACCOUNT_NAME + "3", "BYR");
     }
 
     private DBManager() {

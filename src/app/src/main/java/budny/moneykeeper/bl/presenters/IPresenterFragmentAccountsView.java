@@ -26,10 +26,18 @@ public interface IPresenterFragmentAccountsView {
     /**
      * Deletes specified account, if possible.
      *
-     * @param index index of account to delete
+     * @param position position in adapter of item to delete
      * @return true, if deletion succeed, false otherwise
      */
-    boolean deleteAccount(int index);
+    boolean deleteAccount(int position);
+
+    /**
+     * Undo last account delete operation.
+     *
+     * @param position position in adapter item undo-deleted item
+     * @return true, if undo succeed, false otherwise
+     */
+    boolean unDeleteLastAccount(int position);
 
     void swapAccounts(int fromPosition, int toPosition);
 }

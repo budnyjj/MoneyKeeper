@@ -20,8 +20,8 @@ public class PresenterActivityBalanceChangeEdit implements IPresenterActivityBal
     private static final String MSG_NO_ARGS = "Unable to locate following arguments: ";
     private static final String MSG_UNKNOWN_TYPE = "Unknown input type: ";
     private static final int NUM_INPUT_TYPES = 2;
-    private static final int INPUT_TYPE_INCOME = 0;
-    private static final int INPUT_TYPE_OUTCOME = 1;
+    private static final int INPUT_TYPE_OUTCOME = 0;
+    private static final int INPUT_TYPE_INCOME = 1;
 
     private final Context mContext;
     private final Bundle mArgs;
@@ -94,7 +94,7 @@ public class PresenterActivityBalanceChangeEdit implements IPresenterActivityBal
 
     @Override
     public int getSuggestedEditType() {
-        int suggestedType = INPUT_TYPE_INCOME;
+        int suggestedType = INPUT_TYPE_OUTCOME;
         if (IntentExtras.ACTION_UPDATE.equals(mAction)) {
             // we are modifying the existing balance change,
             // so try to suggest correct edit type based on the amount of the balance change
