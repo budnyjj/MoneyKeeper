@@ -85,4 +85,22 @@ public class AccountOperations {
             }
         });
     }
+
+    /**
+     * Adds balance change to specified account.
+     *
+     * This method doesn't delete balance change from database.
+     *
+     * @param realm Realm instance
+     * @param account account to update, managed by Realm
+     * @param change balance change to remove, managed by Realm
+     */
+    public static void removeBalanceChange(Realm realm, final Account account, final BalanceChange change) {
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                account.getBalanceChanges().remove(change);
+            }
+        });
+    }
 }

@@ -114,7 +114,7 @@ public class FragmentAccountEdit extends IFragmentEdit {
         mAccountNameEditManager = new EditManagerText(
                 (EditText) rootView.findViewById(R.id.fragment_account_edit_edit_text_account_name),
                 (TextInputLayout) rootView.findViewById(R.id.fragment_account_edit_edit_text_container_account_name),
-                getString(R.string.err_msg_account_name), true);
+                getString(R.string.msg_err_account_name), true);
         // currencies recycler view
         mCurrenciesView = (RecyclerView) rootView.findViewById(
                 R.id.fragment_account_edit_recycler_view_currencies);

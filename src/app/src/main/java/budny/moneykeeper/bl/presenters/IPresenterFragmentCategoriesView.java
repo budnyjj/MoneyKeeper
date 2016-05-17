@@ -14,21 +14,29 @@ public interface IPresenterFragmentCategoriesView {
 
     int getNumCategories();
 
-    String getCategoryName(int index);
+    String getCategoryName(int position);
 
     /**
      * Update specified category.
      *
      * @param context activity context
-     * @param index   index of category to update
+     * @param position   index of category to update
      */
-    void updateCategory(Context context, int index);
+    void updateCategory(Context context, int position);
 
     /**
      * Deletes specified category, if possible.
      *
-     * @param index index of category to delete
+     * @param position index of category to delete
      * @return true, if deletion succeed, false otherwise
      */
-    boolean deleteCategory(int index);
+    boolean deleteCategory(int position);
+
+    /**
+     * Undo last category delete operation.
+     *
+     * @param position position in adapter to insert undo-deleted item
+     * @return true, if undo succeed, false otherwise
+     */
+    boolean unDeleteLastCategory(int position);
 }

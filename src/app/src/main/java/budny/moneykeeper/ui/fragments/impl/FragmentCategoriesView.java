@@ -1,6 +1,7 @@
 package budny.moneykeeper.ui.fragments.impl;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -107,7 +108,7 @@ public class FragmentCategoriesView extends Fragment {
         }
     }
 
-    private static class RVTouchCallback extends ItemTouchHelper.Callback {
+    private class RVTouchCallback extends ItemTouchHelper.Callback {
         private final IPresenterFragmentCategoriesView mPresenter;
 
         public RVTouchCallback(IPresenterFragmentCategoriesView presenter) {
@@ -137,8 +138,21 @@ public class FragmentCategoriesView extends Fragment {
         }
 
         @Override
-        public void onSwiped(ViewHolder viewHolder, int direction) {
-            mPresenter.deleteCategory(viewHolder.getAdapterPosition());
+        public void onSwiped(ViewHolder holder, int direction) {
+            final int position = holder.getAdapterPosition();
+            String categoryName = mPresenter.getCategoryName(position);
+            String msgDeleted =  String.format(getString(R.string.msg_category_deleted), categoryName);
+            String msgUndo = getString(R.string.title_undo);
+            mPresenter.deleteCategory(position);
+            Snackbar bar = Snackbar
+                    .make(mCategoriesView, msgDeleted, Snackbar.LENGTH_LONG)
+                    .setAction(msgUndo, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mPresenter.unDeleteLastCategory(position);
+                        }
+                    });
+            bar.show();
         }
     }
 

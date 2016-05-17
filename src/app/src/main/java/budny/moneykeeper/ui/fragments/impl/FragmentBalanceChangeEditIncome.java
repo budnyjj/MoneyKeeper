@@ -123,7 +123,7 @@ public class FragmentBalanceChangeEditIncome extends IFragmentEdit {
         mAmountEditManager = new EditManagerAmountIncome(
                 (EditText) rootView.findViewById(R.id.fragment_balance_change_edit_income_edit_text_amount),
                 (TextInputLayout) rootView.findViewById(R.id.fragment_balance_change_edit_income_text_container_amount),
-                getString(R.string.err_msg_amount), true);
+                getString(R.string.msg_err_amount), true);
         // categories recycler view
         mCategoriesView = (RecyclerView) rootView.findViewById(
                 R.id.fragment_balance_change_edit_income_recycler_view_categories);

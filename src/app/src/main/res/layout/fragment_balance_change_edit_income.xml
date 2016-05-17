@@ -22,7 +22,7 @@
             android:hint="@string/title_amount"
             android:singleLine="true"
             android:textSize="@dimen/text_size_big"
-            android:inputType="number"/>
+            android:inputType="numberDecimal"/>
     </android.support.design.widget.TextInputLayout>
 
     <View

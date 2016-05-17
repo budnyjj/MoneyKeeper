@@ -36,11 +36,6 @@ public class Account extends RealmObject {
         mName = name;
     }
 
-    // TODO: consider using lazy evaluation
-    public long getTotalAmount() {
-        return mBalanceChanges.sum(BalanceChange.FIELD_AMOUNT).longValue();
-    }
-
     public RealmList<BalanceChange> getBalanceChanges() {
         return mBalanceChanges;
     }

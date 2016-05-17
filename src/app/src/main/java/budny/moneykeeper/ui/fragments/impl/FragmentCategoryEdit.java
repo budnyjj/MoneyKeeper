@@ -107,7 +107,7 @@ public class FragmentCategoryEdit extends IFragmentEdit {
         mCategoryNameEditManager = new EditManagerText(
                 (EditText) rootView.findViewById(R.id.fragment_category_edit_edit_text_name),
                 (TextInputLayout) rootView.findViewById(R.id.fragment_category_edit_edit_text_container_name),
-                getString(R.string.err_msg_category_name), true);
+                getString(R.string.msg_err_category_name), true);
         // setup category type radio group
         Map<Integer, Category.Type> uiTypeMap = new HashMap<>();
         uiTypeMap.put(R.id.fragment_category_edit_radio_button_income, Category.Type.INCOME);

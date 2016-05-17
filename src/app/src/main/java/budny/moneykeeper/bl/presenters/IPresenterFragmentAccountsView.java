@@ -1,8 +1,5 @@
 package budny.moneykeeper.bl.presenters;
 
-import android.content.Context;
-
-import budny.moneykeeper.db.model.Account;
 import budny.moneykeeper.db.util.IDataChangeListener;
 
 public interface IPresenterFragmentAccountsView {
@@ -19,9 +16,9 @@ public interface IPresenterFragmentAccountsView {
     /**
      * Update specified category.
      *
-     * @param index   index of account to update
+     * @param position position of account to update
      */
-    void updateAccount(int index);
+    void updateAccount(int position);
 
     /**
      * Deletes specified account, if possible.

@@ -2,9 +2,12 @@ package budny.moneykeeper.ui.fragments.impl;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +46,8 @@ public class FragmentAccountView extends Fragment {
     private int mAccountIndex = IntentExtras.INDEX_INVALID;
 
     private IViewManagerAmount mTotalAmountViewManager;
+    @SuppressWarnings("FieldCanBeLocal")
+    private ItemTouchHelper mBalanceChangesTouchHelper;
     @SuppressWarnings("FieldCanBeLocal")
     private RecyclerView.LayoutManager mBalanceChangesManager;
     @SuppressWarnings("FieldCanBeLocal")
@@ -102,6 +107,8 @@ public class FragmentAccountView extends Fragment {
         mBalanceChangesAdapter = new RVBalanceChangesAdapter(getContext(), mPresenter);
         mBalanceChangesView.setLayoutManager(mBalanceChangesManager);
         mBalanceChangesView.setAdapter(mBalanceChangesAdapter);
+        mBalanceChangesTouchHelper = new ItemTouchHelper(new RVTouchCallback(mPresenter));
+        mBalanceChangesTouchHelper.attachToRecyclerView(mBalanceChangesView);
         mBalanceChangesView.addOnItemTouchListener(new RVItemTouchListener(getActivity(),
                 mBalanceChangesView, new RVItemClickListener(mPresenter)));
         mBalanceChangesView.addItemDecoration(new RVItemDividerDecoration(getContext()));
@@ -167,6 +174,53 @@ public class FragmentAccountView extends Fragment {
         @Override
         public int getItemCount() {
             return mPresenter.getNumBalanceChanges();
+        }
+    }
+
+    private class RVTouchCallback extends ItemTouchHelper.Callback {
+        private final IPresenterFragmentAccountView mPresenter;
+
+        public RVTouchCallback(IPresenterFragmentAccountView presenter) {
+            mPresenter = presenter;
+        }
+
+        @Override
+        public boolean isLongPressDragEnabled() {
+            return false;
+        }
+
+        @Override
+        public boolean isItemViewSwipeEnabled() {
+            return true;
+        }
+
+        @Override
+        public int getMovementFlags(RecyclerView recyclerView, ViewHolder viewHolder) {
+            int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
+            int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
+            return makeMovementFlags(dragFlags, swipeFlags);
+        }
+
+        @Override
+        public boolean onMove(RecyclerView recyclerView, ViewHolder source, ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(ViewHolder holder, int direction) {
+            final int position = holder.getAdapterPosition();
+            String msgDeleted = getString(R.string.msg_balance_change_deleted);
+            String msgUndo = getString(R.string.title_undo);
+            mPresenter.deleteBalanceChange(position);
+            Snackbar bar = Snackbar
+                    .make(mBalanceChangesView, msgDeleted, Snackbar.LENGTH_LONG)
+                    .setAction(msgUndo, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mPresenter.unDeleteLastBalanceChange(position);
+                        }
+                    });
+            bar.show();
         }
     }
 

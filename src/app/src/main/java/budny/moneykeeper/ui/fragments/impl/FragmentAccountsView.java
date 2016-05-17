@@ -148,10 +148,13 @@ public class FragmentAccountsView extends Fragment {
         @Override
         public void onSwiped(ViewHolder holder, int direction) {
             final int position = holder.getAdapterPosition();
+            String accountName = mPresenter.getAccountName(position);
+            String msgDeleted =  String.format(getString(R.string.msg_account_deleted), accountName);
+            String msgUndo = getString(R.string.title_undo);
             mPresenter.deleteAccount(position);
             Snackbar bar = Snackbar
-                    .make(mAccountsView, "Account removed", Snackbar.LENGTH_LONG)
-                    .setAction("Undo", new View.OnClickListener() {
+                    .make(mAccountsView, msgDeleted, Snackbar.LENGTH_LONG)
+                    .setAction(msgUndo, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             mPresenter.unDeleteLastAccount(position);

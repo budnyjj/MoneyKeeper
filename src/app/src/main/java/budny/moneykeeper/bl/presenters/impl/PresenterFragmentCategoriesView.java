@@ -19,11 +19,22 @@ import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 
+/**
+ * The primary implementation of {@linkplain IPresenterFragmentCategoriesView}.
+ *
+ * It supports the actual list of categories, queried from Realm,
+ * the list of category indexes, which are exposed to the client and
+ * the stack of category indexes which are marked to be deleted.
+ */
 public class PresenterFragmentCategoriesView implements IPresenterFragmentCategoriesView {
     private static final String TAG = PresenterFragmentCategoriesView.class.getSimpleName();
     private static final String MSG_NOT_INITIALIZED = TAG + " is not initialized";
 
     private final IDBManager mDbManager = DBManager.getInstance();
+    // array of indexes of categories which are exposed to client
+    private final List<Integer> mExposedCategoryIndexes = new ArrayList<>();
+    // stack of indexes of categories which were marked to be deleted
+    private final List<Integer> mDeletedCategoryIndexes = new ArrayList<>();
     // preserves data change listeners from being garbage collected
     // and saves them from being removed during fragment lifecycle
     private final List<RealmChangeListener> mChangeListeners = new ArrayList<>();
@@ -37,6 +48,10 @@ public class PresenterFragmentCategoriesView implements IPresenterFragmentCatego
     public void onStart() {
         mRealm = mDbManager.getRealm();
         mCategories = CategoryOperations.read(mRealm);
+        // fill list of indexes of active categories
+        for (int index = 0; index < mCategories.size(); index++) {
+            mExposedCategoryIndexes.add(index);
+        }
         // add pending listeners
         for (final RealmChangeListener listener : mChangeListeners) {
             mCategories.addChangeListener(listener);
@@ -47,6 +62,9 @@ public class PresenterFragmentCategoriesView implements IPresenterFragmentCatego
     @Override
     public void onStop() {
         checkInitialized();
+        deleteSelectedCategories();
+        // clear indexes
+        mExposedCategoryIndexes.clear();
         mCategories.removeChangeListeners();
         mCategories = null;
         mRealm.close();
@@ -56,13 +74,14 @@ public class PresenterFragmentCategoriesView implements IPresenterFragmentCatego
     @Override
     public int getNumCategories() {
         checkInitialized();
-        return mCategories.size();
+        return mExposedCategoryIndexes.size();
     }
 
     @Override
     public String getCategoryName(int position) {
         checkInitialized();
-        return mCategories.get(position).getName();
+        int index = mExposedCategoryIndexes.get(position);
+        return mCategories.get(index).getName();
     }
 
     /**
@@ -70,13 +89,15 @@ public class PresenterFragmentCategoriesView implements IPresenterFragmentCatego
      * to update specified category.
      *
      * @param context activity context
-     * @param index   index of category to edit
+     * @param position   index of category to edit
+     * @throws NullPointerException if context is null
      */
     @Override
-    public void updateCategory(Context context, int index) {
+    public void updateCategory(Context context, int position) {
         if (context == null) {
-            return;
+            throw new NullPointerException("Context should not be null");
         }
+        int index = mExposedCategoryIndexes.get(position);
         Intent intent = new Intent(context, ActivityCategoryEdit.class);
         intent.putExtra(IntentExtras.FIELD_ACTION, IntentExtras.ACTION_UPDATE);
         intent.putExtra(IntentExtras.FIELD_INDEX_CATEGORY, index);
@@ -86,7 +107,30 @@ public class PresenterFragmentCategoriesView implements IPresenterFragmentCatego
     @Override
     public boolean deleteCategory(int position) {
         checkInitialized();
-        CommonOperations.delete(mRealm, mCategories, position);
+        // remove category with specified position and add its index to the delete stack
+        mDeletedCategoryIndexes.add(mExposedCategoryIndexes.remove(position));
+        // notify clients about changes
+        for (RealmChangeListener listener : mChangeListeners) {
+            listener.onChange();
+        }
+        return true;
+    }
+
+    @Override
+    public boolean unDeleteLastCategory(int position) {
+        checkInitialized();
+        int numDeletedCategories = mDeletedCategoryIndexes.size();
+        if (numDeletedCategories == 0) {
+            // there are no categories to delete
+            return false;
+        }
+        // pop index of category from stack and add it to specified position
+        mExposedCategoryIndexes.add(
+                position, mDeletedCategoryIndexes.remove(numDeletedCategories - 1));
+        // notify clients about changes
+        for (RealmChangeListener listener : mChangeListeners) {
+            listener.onChange();
+        }
         return true;
     }
 
@@ -104,6 +148,33 @@ public class PresenterFragmentCategoriesView implements IPresenterFragmentCatego
         // if already initialized, add change listener immediately
         if (mInitialized) {
             mCategories.addChangeListener(realmListener);
+        }
+    }
+
+    /**
+     * Performs actual deletion of selected categories.
+     */
+    private void deleteSelectedCategories() {
+        while (!mDeletedCategoryIndexes.isEmpty()) {
+            // pop first index
+            int index = mDeletedCategoryIndexes.remove(0);
+            CommonOperations.delete(mRealm, mCategories, index);
+            updateDeletedCategoryIndexes(index);
+        }
+    }
+
+    /**
+     * Adjusts indexes of categories to delete after delete one of them.
+     *
+     * @param deletedIndex index of deleted category
+     */
+    private void updateDeletedCategoryIndexes(int deletedIndex) {
+        for (int i = 0; i < mDeletedCategoryIndexes.size(); i++) {
+            // decrease indexes, which were higher than deleted one
+            int curIndex = mDeletedCategoryIndexes.get(i);
+            if (curIndex > deletedIndex) {
+                mDeletedCategoryIndexes.set(i, curIndex - 1);
+            }
         }
     }
 
