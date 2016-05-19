@@ -1,2 +1,2 @@
 include ':app'
-include ':thirdparty:opencv'
+include ':thirdparty:opencv:java'

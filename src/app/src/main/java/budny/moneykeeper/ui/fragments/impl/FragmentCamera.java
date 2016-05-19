@@ -23,6 +23,8 @@ public class FragmentCamera extends Fragment
     private static final String TAG = FragmentCamera.class.getSimpleName();
 
     private CameraBridgeViewBase mCameraView;
+    private Mat mOutputFrame;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class FragmentCamera extends Fragment
         super.onResume();
         if (CVManager.init()) {
             mCameraView.enableView();
+            mOutputFrame = new Mat();
         }
     }
 
@@ -59,6 +62,7 @@ public class FragmentCamera extends Fragment
 
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        return Filters.basicFilter(inputFrame.rgba());
+        Filters.basic(inputFrame.rgba(), mOutputFrame);
+        return mOutputFrame;
     }
 }

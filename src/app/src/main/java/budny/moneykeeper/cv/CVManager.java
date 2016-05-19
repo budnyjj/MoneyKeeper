@@ -7,6 +7,7 @@ public class CVManager {
 
     static {
         System.loadLibrary("opencv_java3");
+        System.loadLibrary("cv");
     }
 
     public static boolean init() {
