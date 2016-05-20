@@ -27,5 +27,16 @@ public class Filters {
         }
     }
 
+    public static void highlight(Mat src, Mat dst) {
+        if (src == null || dst == null) {
+            throw new NullPointerException(MSG_SHOULD_NOT_BE_NULL);
+        }
+        if (!nativeHighlight(src.getNativeObjAddr(), dst.getNativeObjAddr(), 100, 400)) {
+            throw new CvException(MSG_NATIVE_ERROR);
+        }
+    }
+
     public static native boolean nativeBasic(long pSrcMat, long pDstMat);
+
+    public static native boolean nativeHighlight(long pSrcMat, long pDstMat, int width, int height);
 }

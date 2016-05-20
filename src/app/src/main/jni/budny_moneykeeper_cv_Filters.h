@@ -9,11 +9,19 @@ extern "C" {
 #endif
 /*
  * Class:     budny_moneykeeper_cv_Filters
- * Method:    nativeBasicFilter
+ * Method:    nativeBasic
  * Signature: (JJ)Z
  */
-JNIEXPORT jboolean JNICALL Java_budny_moneykeeper_cv_Filters_nativeBasicFilter
+JNIEXPORT jboolean JNICALL Java_budny_moneykeeper_cv_Filters_nativeBasic
   (JNIEnv *, jclass, jlong, jlong);
+
+/*
+ * Class:     budny_moneykeeper_cv_Filters
+ * Method:    nativeHighlight
+ * Signature: (JJII)Z
+ */
+JNIEXPORT jboolean JNICALL Java_budny_moneykeeper_cv_Filters_nativeHighlight
+  (JNIEnv *, jclass, jlong, jlong, jint, jint);
 
 #ifdef __cplusplus
 }

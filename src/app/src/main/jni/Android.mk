@@ -12,7 +12,8 @@ include $(OPENCV_PATH)/jni/OpenCV.mk
 LOCAL_MODULE := cv
 LOCAL_SRC_FILES := \
 	cv_jni.cpp \
-	cv/filters.cpp
+	cv/filters.cpp \
+	cv/operations.cpp
 LOCAL_C_INCLUDES += $(JNIAPP_PATH)
 LOCAL_C_INCLUDES += $(OPENCV_PATH)/jni/include
 

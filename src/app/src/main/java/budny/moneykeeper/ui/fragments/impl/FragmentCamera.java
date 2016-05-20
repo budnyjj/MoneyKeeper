@@ -9,10 +9,12 @@ import android.view.ViewGroup;
 
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
 
 import budny.moneykeeper.R;
 import budny.moneykeeper.cv.Filters;
 import budny.moneykeeper.cv.CVManager;
+import budny.moneykeeper.cv.Operations;
 
 /**
  * A fragment used to demonstrate camera-related functionality.
@@ -62,7 +64,17 @@ public class FragmentCamera extends Fragment
 
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        Filters.basic(inputFrame.rgba(), mOutputFrame);
+        Mat roi = new Mat();
+        Mat inputMat = inputFrame.rgba();
+        // select region of interest
+        Operations.sliceCentered(inputMat, roi, 400, 100);
+        Operations.darken(inputMat, mOutputFrame);
+        // process region of interest
+        Imgproc.cvtColor(roi, roi, Imgproc.COLOR_RGBA2GRAY);
+        Filters.basic(roi, roi);
+        Imgproc.cvtColor(roi, roi, Imgproc.COLOR_GRAY2RGBA);
+        // merge results
+        Operations.mergeCentered(mOutputFrame, roi, mOutputFrame);
         return mOutputFrame;
     }
 }
