@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">MoneyKeeper</string>
+
+    <!--<string name="main">Main</string>-->
+
+    <string name="menu_item_group_by_categories">Группировать по категориям</string>
+
+    <string name="nav_drawer_close">Закрыть</string>
+    <string name="nav_drawer_open">Открыть</string>
+
+    <string name="pref_dialog_title_default_currency">Выбор валюты по умолчанию</string>
+    <string name="pref_header_title_accounts">Учетные записи</string>
+    <string name="pref_header_summary_accounts">Наличные, кредитные карты, депозиты, …</string>
+    <string name="pref_header_title_categories">Категории</string>
+    <string name="pref_header_summary_categories">Категории учета денежных средств</string>
+    <string name="pref_header_title_default_currency">Валюта по умолчанию</string>
+    <string name="pref_header_summary_default_currency">Выберите валюту по умолчанию</string>
+    <string name="pref_key_default_currency">default_currency</string>
+
+    <string name="title_account">Учетная запись</string>
+    <string name="title_accounts">Учетные записи</string>
+    <string name="title_account_name">Название учетной записи</string>
+    <string name="title_amount">Значение</string>
+    <string name="title_add_account">Добавить учетную запись</string>
+    <string name="title_add_category">Добавить категорию</string>
+    <string name="title_balance">Баланс</string>
+    <string name="title_camera">Камера</string>
+    <string name="title_categories">Категории</string>
+    <string name="title_category_name">Название категории</string>
+    <string name="title_category_type">Тип категории</string>
+    <string name="title_edit_account">Изменить учетную запись</string>
+    <string name="title_edit_category">Изменить категорию</string>
+    <string name="title_income">Доход</string>
+    <string name="title_input">Ввод</string>
+    <string name="title_outcome">Расход</string>
+    <string name="title_report">Отчет</string>
+    <string name="title_save">Сохранить</string>
+    <string name="title_settings">Настройки</string>
+    <string name="title_total">Всего</string>
+    <string name="title_undo">Отмена</string>
+
+    <string name="msg_account_deleted">Учетная запись %1$s удалена</string>
+    <string name="msg_category_deleted">Категория %1$s удалена</string>
+    <string name="msg_err_account_name">Недопустимое название учетной записи</string>
+    <string name="msg_err_category_name">Недопустимое название категории</string>
+    <string name="msg_err_amount">Недопустимое значение</string>
+    <string name="msg_balance_change_deleted">Транзакция удалена</string>
+
+
+    <!--<string name="title_account_currency">Account currency</string>-->
+</resources>

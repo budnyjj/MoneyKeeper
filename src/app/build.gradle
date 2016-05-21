@@ -31,7 +31,7 @@ android {
         abi {
             enable true
             reset()
-            include 'armeabi-v7a'
+            include 'armeabi-v7a', 'x86'
             universalApk false
         }
     }
