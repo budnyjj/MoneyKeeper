@@ -27,6 +27,15 @@ public class Filters {
         }
     }
 
+    public static void basic2(Mat src, Mat dst) {
+        if (src == null || dst == null) {
+            throw new NullPointerException(MSG_SHOULD_NOT_BE_NULL);
+        }
+        if (!nativeBasic2(src.getNativeObjAddr(), dst.getNativeObjAddr())) {
+            throw new CvException(MSG_NATIVE_ERROR);
+        }
+    }
+
     public static void highlight(Mat src, Mat dst) {
         if (src == null || dst == null) {
             throw new NullPointerException(MSG_SHOULD_NOT_BE_NULL);
@@ -37,6 +46,8 @@ public class Filters {
     }
 
     public static native boolean nativeBasic(long pSrcMat, long pDstMat);
+
+    public static native boolean nativeBasic2(long pSrcMat, long pDstMat);
 
     public static native boolean nativeHighlight(long pSrcMat, long pDstMat, int width, int height);
 }

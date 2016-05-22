@@ -67,7 +67,7 @@ public class FragmentCamera extends Fragment
         Mat roi = new Mat();
         Mat inputMat = inputFrame.rgba();
         // select region of interest
-        Operations.sliceCentered(inputMat, roi, 400, 100);
+        Operations.sliceCentered(inputMat, roi, 200, 70);
         Operations.darken(inputMat, mOutputFrame);
         // process region of interest
         Imgproc.cvtColor(roi, roi, Imgproc.COLOR_RGBA2GRAY);

@@ -17,6 +17,14 @@ JNIEXPORT jboolean JNICALL Java_budny_moneykeeper_cv_Filters_nativeBasic
 
 /*
  * Class:     budny_moneykeeper_cv_Filters
+ * Method:    nativeBasic2
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_budny_moneykeeper_cv_Filters_nativeBasic2
+  (JNIEnv *, jclass, jlong, jlong);
+
+/*
+ * Class:     budny_moneykeeper_cv_Filters
  * Method:    nativeHighlight
  * Signature: (JJII)Z
  */
