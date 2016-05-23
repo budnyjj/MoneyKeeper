@@ -18,7 +18,12 @@ using std::runtime_error;
 using std::string;
 using std::auto_ptr;
 using std::vector;
+using cv::ml::KNearest;
+using cv::ml::TrainData;
 using cv::Mat;
+using cv::Point;
+using cv::Ptr;
+using cv::Rect;
 
 
 template <class T>
@@ -50,7 +55,7 @@ vector<Mat> readMnistData(const string& filename) {
     endswap(&n_cols);
     // read image data and store it in vector
     vector<Mat> dst_vec;
-    dst_vec.resize(n_images, Mat::zeros(n_rows, n_cols, CV_8UC1));
+    dst_vec.resize(n_images, Mat::zeros(n_rows, n_cols, CV_8U));
     for (int i = 0; i < n_images; i++) {
         for (int r = 0; r < n_rows; r++) {
             for (int c = 0; c < n_cols; c++) {
@@ -64,16 +69,15 @@ vector<Mat> readMnistData(const string& filename) {
                 //     cout << "  ";
                 // }
             }
-// e            cout << "\n";
+            // cout << "\n";
         }
-// e        cout << "\n\n" << endl; //
+        // cout << "\n\n" << endl;
     }
 
-    // for (int i = 0; i < dst_vec.size(); i++) {
-    //     cout << dst_vec[i].rows << ":" << dst_vec[i].cols << endl;
-        for (int r = 0; r < dst_vec[10].rows; r++) {
-            for (int c = 0; c < dst_vec[10].cols; c++) {
-                if (dst_vec[10].at<uchar>(r, c) > 0) {
+    for (int i = 0; i < n_images; i++) {
+        for (int r = 0; r < n_rows; r++) {
+            for (int c = 0; c < n_cols; c++) {
+                if (dst_vec[i].at<uchar>(r, c) > 0) {
                     cout << "# ";
                 } else {
                     cout << "  ";
@@ -81,8 +85,8 @@ vector<Mat> readMnistData(const string& filename) {
             }
             cout << "\n";
         }
-    //     cout << "\n\n" << endl;
-    // }
+        cout << "\n\n" << endl;
+    }
 
 
     return dst_vec;
@@ -100,23 +104,13 @@ Mat mergeDataset(const vector<Mat>& src_vec) {
 
     dataset = Mat(n_images, n_rows * n_cols, CV_32FC1);
     for (int i = 0; i < n_images; i++) {
-        // cout << i << ":" << endl;
         int rc = 0;
         for (int r = 0; r < n_rows; r++) {
             for (int c = 0; c < n_cols; c++) {
-                // if (src_vec[i].at<uchar>(r, c) > 0) {
-                //     cout << "# ";
-                // } else {
-                //     cout << "  ";
-                // }
-
-
                 dataset.at<float>(i, rc) = src_vec[i].at<uchar>(r, c);
                 rc++;
             }
-            // cout << "\n";
         }
-        // cout << "\n\n" << endl;
     }
 
     return dataset;
@@ -168,22 +162,6 @@ Mat readData(const string& filename) {
     vector<Mat> vec_train_data = readMnistData(filename);
     cout << "Size of source data set:\n"
          << "  " << vec_train_data.size() << endl;
-
-    // for (int i = 0; i < vec_train_data.size(); i++) {
-    //     cout << vec_train_data[i].rows << ":" << vec_train_data[i].cols << endl;
-    //     for (int r = 0; r < vec_train_data[i].rows; r++) {
-    //         for (int c = 0; c < vec_train_data[i].cols; c++) {
-    //             if (vec_train_data[i].at<uchar>(r, c) > 0) {
-    //                 cout << "# ";
-    //             } else {
-    //                 cout << "  ";
-    //             }
-    //         }
-    //         cout << "\n";
-    //     }
-    //     cout << "\n\n" << endl;
-    // }
-
     // merge training dataset into single mat
     Mat mat_train_data = mergeDataset(vec_train_data);
     cout << "Size of merged data set:\n"
@@ -206,33 +184,53 @@ Mat readLabels(const string& filename) {
 
 int main() {
     // read MNIST train images and labels into OpenCV Mats
-    Mat train_data = readData("data/train-images-idx3-ubyte");
-    Mat train_labels = readLabels("data/train-labels-idx1-ubyte");
-    // train classifier
-    CvKNearest knn(train_data, train_labels);
+    Mat train_samples = readData("data/train-images-idx3-ubyte");
+    Mat train_responses = readLabels("data/train-labels-idx1-ubyte");
+    Ptr<TrainData> train_data =
+        TrainData::create(train_samples, cv::ml::ROW_SAMPLE, train_responses);
+    // setup and train classifier
+    Ptr<KNearest> classifier = KNearest::create();
+    classifier->setIsClassifier(true);
+    classifier->setAlgorithmType(KNearest::BRUTE_FORCE);
+    classifier->setDefaultK(10);
+    classifier->train(train_data);
     // read MNIST test images and labels into OpenCV Mats
-    Mat test_data = readData("data/t10k-images-idx3-ubyte");
-    Mat test_labels = readLabels("data/t10k-labels-idx1-ubyte");
-
-    // classify test data
-    int n_tests = 100;
-    int n_successes = 0;
-
-    for (int i = 0; i < n_tests; i++) {
-        Mat test_sample =
-            test_data(cv::Rect(cv::Point(0, i), cv::Point(test_data.cols, i+1)));
-        float prediction = knn.find_nearest(test_sample, knn.get_max_k());
-        cout << train_labels.at<float>(i, 0) << ": "
-             << prediction << endl;
-        if (train_labels.at<float>(i, 0) == prediction) {
-            n_successes++;
-        }
+    Mat test_samples = readData("data/t10k-images-idx3-ubyte");
+    Mat test_responses = readLabels("data/t10k-labels-idx1-ubyte");
+    Ptr<TrainData> test_data =
+        TrainData::create(test_samples, cv::ml::ROW_SAMPLE, test_responses);
+    // classify test samples
+    int n_test_samples = test_samples.rows;
+    int n_test_features = test_samples.cols;
+    int n_test_successes = 0;
+    for (int i = 0; i < n_test_samples; i++) {
+        Mat test_sample = test_samples(Rect(Point(0, i), Point(n_test_features, i+1)));
+        Mat test_results(0, 0, CV_32F);
+        float result =
+            classifier->findNearest(test_sample, classifier->getDefaultK(), test_results);
+        cout << "Expected: " << test_responses.at<float>(i, 0)
+             << ", Got: " << result << endl;
     }
-    cout << "Number of positive guesses (total number of tests): accuracy\n"
-         << "  " << n_successes
-         << " (" << n_tests << "): "
-         << float(n_successes) / n_tests * 100
-         << endl;
+
+    // // classify test data
+    // int n_tests = 100;
+    // int n_successes = 0;
+
+    // for (int i = 0; i < n_tests; i++) {
+    //     Mat test_sample =
+    //         test_data(cv::Rect(cv::Point(0, i), cv::Point(test_data.cols, i+1)));
+    //     float prediction = knn.find_nearest(test_sample, knn.get_max_k());
+    //     cout << train_labels.at<float>(i, 0) << ": "
+    //          << prediction << endl;
+    //     if (train_labels.at<float>(i, 0) == prediction) {
+    //         n_successes++;
+    //     }
+    // }
+    // cout << "Number of positive guesses (total number of tests): accuracy\n"
+    //      << "  " << n_successes
+    //      << " (" << n_tests << "): "
+    //      << float(n_successes) / n_tests * 100
+    //      << endl;
 
     return 0;
 }
