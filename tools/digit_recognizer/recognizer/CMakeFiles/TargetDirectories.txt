@@ -1,0 +1,1 @@
+/home/budnyjj/dev/projects/MoneyKeeper/tools/digit_recognizer/recognizer/CMakeFiles/recognizer.dir
