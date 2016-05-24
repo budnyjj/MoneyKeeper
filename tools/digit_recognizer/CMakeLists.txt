@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION 2.8)
+
+project(utils)
+find_package(OpenCV REQUIRED)
+include_directories(src/utils/include)
+file(GLOB SRC_UTILS "src/utils/*.cpp")
+add_library(utils STATIC ${SRC_UTILS})
+
+project(trainer)
+find_package(OpenCV REQUIRED)
+include_directories(src/utils/include)
+add_executable(trainer src/trainer.cpp)
+target_link_libraries(trainer ${OpenCV_LIBS})
+target_link_libraries(trainer utils)
+
+project(recognizer)
+find_package(OpenCV REQUIRED)
+include_directories(src/utils/include)
+add_executable(recognizer src/recognizer.cpp)
+target_link_libraries(recognizer ${OpenCV_LIBS})
+target_link_libraries(recognizer utils)
