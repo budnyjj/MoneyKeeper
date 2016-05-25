@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/budnyjj/projects/MoneyKeeper/tools/digit_recognizer
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -77,6 +66,17 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -148,6 +148,46 @@ trainer: cmake_check_build_system
 trainer/fast:
 	$(MAKE) -f CMakeFiles/trainer.dir/build.make CMakeFiles/trainer.dir/build
 .PHONY : trainer/fast
+
+#=============================================================================
+# Target rules for targets named classifier
+
+# Build rule for target.
+classifier: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 classifier
+.PHONY : classifier
+
+# fast build rule for target.
+classifier/fast:
+	$(MAKE) -f CMakeFiles/classifier.dir/build.make CMakeFiles/classifier.dir/build
+.PHONY : classifier/fast
+
+src/classifier.o: src/classifier.cpp.o
+
+.PHONY : src/classifier.o
+
+# target to build an object file
+src/classifier.cpp.o:
+	$(MAKE) -f CMakeFiles/classifier.dir/build.make CMakeFiles/classifier.dir/src/classifier.cpp.o
+.PHONY : src/classifier.cpp.o
+
+src/classifier.i: src/classifier.cpp.i
+
+.PHONY : src/classifier.i
+
+# target to preprocess a source file
+src/classifier.cpp.i:
+	$(MAKE) -f CMakeFiles/classifier.dir/build.make CMakeFiles/classifier.dir/src/classifier.cpp.i
+.PHONY : src/classifier.cpp.i
+
+src/classifier.s: src/classifier.cpp.s
+
+.PHONY : src/classifier.s
+
+# target to generate assembly for a file
+src/classifier.cpp.s:
+	$(MAKE) -f CMakeFiles/classifier.dir/build.make CMakeFiles/classifier.dir/src/classifier.cpp.s
+.PHONY : src/classifier.cpp.s
 
 src/recognizer.o: src/recognizer.cpp.o
 
@@ -263,11 +303,15 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... rebuild_cache"
 	@echo "... utils"
 	@echo "... edit_cache"
 	@echo "... recognizer"
-	@echo "... rebuild_cache"
 	@echo "... trainer"
+	@echo "... classifier"
+	@echo "... src/classifier.o"
+	@echo "... src/classifier.i"
+	@echo "... src/classifier.s"
 	@echo "... src/recognizer.o"
 	@echo "... src/recognizer.i"
 	@echo "... src/recognizer.s"

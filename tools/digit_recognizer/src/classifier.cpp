@@ -14,7 +14,7 @@
 #include "operations.hpp"
 
 
-using cv::FileStorage;
+using cv::Algorithm;
 using cv::KeyPoint;
 using cv::Mat;
 using cv::ORB;
@@ -33,14 +33,15 @@ using std::vector;
 
 void usage(const std::string& exec_name) {
     cout << "Usage: " << exec_name << " <images> <labels> <params>\n"
-         << "  <images> path to the MNIST images\n"
-         << "  <labels> path to the MNIST labels\n"
-         << "  <params> path to store parameters of trained classifier in XML format"
+         << "  <images>  path to the MNIST images\n"
+         << "  <labels>  path to the MNIST labels\n"
+         << "  <params>  path to load parameters of trained classifier in XML format\n"
+         << "  <n_tests> number of tests"
          << endl;
 }
 
 int main(int argc, char** argv) {
-    if (argc != 4) {
+    if (argc != 5) {
         usage(argv[0]);
         return -1;
     }
@@ -48,9 +49,11 @@ int main(int argc, char** argv) {
     string path_samples = argv[1];
     string path_responses = argv[2];
     string path_parameters = argv[3];
+    size_t n_tests = std::stoi(argv[4]);
     cout << "Path to MNIST images:          " << path_samples << "\n"
          << "Path to MNIST labels:          " << path_responses << "\n"
-         << "Path to classifier parameters: " << path_parameters
+         << "Path to classifier parameters: " << path_parameters << "\n"
+         << "Number of tests:               " << n_tests
          << endl;
 
     // read MNIST train images and labels into OpenCV Mats
@@ -93,22 +96,32 @@ int main(int argc, char** argv) {
     // }
     cout << "Number of descriptors: " << descriptors.size() << endl;
     Mat descriptors_mrg = Operations::flatten<float>(descriptors);
+    size_t n_descriptors = descriptors_mrg.rows;
+    size_t n_features = descriptors_mrg.cols;
     cout << "Train data size:\n"
-         << "  samples:  " << descriptors_mrg.rows << "\n"
-         << "  features: " << descriptors_mrg.cols
+         << "  samples:  " << n_descriptors << "\n"
+         << "  features: " << n_features
          << endl;
 
-    Ptr<TrainData> data =
-        TrainData::create(descriptors_mrg, cv::ml::ROW_SAMPLE, responses);
+    // load classifier
+    Ptr<KNearest> classifier = Algorithm::load<KNearest>(path_parameters);
+    // classify test samples
+    size_t n_successes = 0;
+    Mat test_results(0, 0, CV_32F);
+    for (int i = 0; i < n_tests; i++) {
+        Mat descriptor_mrg = descriptors_mrg(Rect(Point(0, i), Point(n_features, i+1)));
+        float result =
+            classifier->findNearest(descriptor_mrg, classifier->getDefaultK(), test_results);
+        cout << "Expected: " << responses.at<float>(i, 0)
+             << ", Got: " << result << endl;
+        if (result == responses.at<float>(i, 0)) {
+            n_successes++;
+        }
+    }
 
-    // setup and train classifier
-    Ptr<KNearest> classifier = KNearest::create();
-    classifier->setIsClassifier(true);
-    classifier->setAlgorithmType(KNearest::BRUTE_FORCE);
-    classifier->setDefaultK(10);
-    classifier->train(data);
-
-    // store trained model in file
-    classifier->save(path_parameters);
-    return 0;
+    cout << "Number of positive guesses (total number of tests): accuracy\n"
+         << "  " << n_successes
+         << " (" << n_tests << "): "
+         << float(n_successes) / n_tests * 100
+         << endl;
 }

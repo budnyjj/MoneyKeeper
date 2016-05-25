@@ -13,6 +13,13 @@ add_executable(trainer src/trainer.cpp)
 target_link_libraries(trainer ${OpenCV_LIBS})
 target_link_libraries(trainer utils)
 
+project(classifier)
+find_package(OpenCV REQUIRED)
+include_directories(src/utils/include)
+add_executable(classifier src/classifier.cpp)
+target_link_libraries(classifier ${OpenCV_LIBS})
+target_link_libraries(classifier utils)
+
 project(recognizer)
 find_package(OpenCV REQUIRED)
 include_directories(src/utils/include)

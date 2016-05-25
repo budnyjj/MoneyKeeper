@@ -74,34 +74,11 @@ vector<Mat> normalize(const vector<Mat>& rois) {
             std::min(double(SAMPLE_ROWS) / roi.rows,
                      double(SAMPLE_COLS) / roi.cols);
         cv::resize(roi, scaled_roi, Size(), scale_factor, scale_factor, cv::INTER_NEAREST);
-        Mat normalized_roi = Mat::zeros(SAMPLE_ROWS, SAMPLE_ROWS, CV_8U);
+        Mat normalized_roi = Mat::zeros(SAMPLE_ROWS, SAMPLE_ROWS, CV_32F);
         Operations::mergeCentered(normalized_roi, scaled_roi, normalized_roi);
         normalized_rois.push_back(normalized_roi);
     }
     return normalized_rois;
-}
-
-Mat mergeDataset(const vector<Mat>& src_vec) {
-    Mat dataset;
-
-    int n_images = src_vec.size();
-    if (n_images == 0) {
-        return dataset;
-    }
-    int n_rows = src_vec[0].rows;
-    int n_cols = src_vec[0].cols;
-
-    dataset = Mat(n_images, n_rows * n_cols, CV_32F);
-    for (int i = 0; i < n_images; i++) {
-        int rc = 0;
-        for (int r = 0; r < n_rows; r++) {
-            for (int c = 0; c < n_cols; c++) {
-                dataset.at<float>(i, rc) = src_vec[i].at<uchar>(r, c);
-                rc++;
-            }
-        }
-    }
-    return dataset;
 }
 
 Mat makePreview(const vector<Mat>& src_vec) {
@@ -169,7 +146,7 @@ int main(int argc, char** argv) {
 
   // prepare dataset
   vector<Mat> norm_rois = normalize(rois);
-  Mat merged_rois = mergeDataset(norm_rois);
+  Mat merged_rois = Operations::flatten<float>(norm_rois);
   Mat preview_rois = makePreview(norm_rois);
   // setup classifier
   Ptr<KNearest> classifier = Algorithm::load<KNearest>(argv[2]);

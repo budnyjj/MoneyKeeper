@@ -22,7 +22,7 @@ static void endswap(T* obj) {
     std::reverse(memp, memp + sizeof(T));
 }
 
-cv::Mat MnistLoader::loadSamples(const string& filename) {
+vector<Mat> MnistLoader::loadSamples(const string& filename) {
     ifstream file(filename.c_str(), std::ios::binary);
     if (!file.is_open()) {
         throw runtime_error("Unable to open file with MNIST data");
@@ -44,22 +44,22 @@ cv::Mat MnistLoader::loadSamples(const string& filename) {
     file.read(reinterpret_cast<char*>(&n_cols), sizeof(n_cols));
     endswap(&n_cols);
     // read image data and store it in vector
-    Mat samples(n_images, n_rows * n_cols, CV_32F);
+    vector<Mat> samples;
     for (int i = 0; i < n_images; i++) {
-        int rc = 0;
+        Mat sample(n_rows, n_cols, CV_8U);
         for (int r = 0; r < n_rows; r++) {
             for (int c = 0; c < n_cols; c++) {
                 uchar value = 0;
                 file.read(reinterpret_cast<char*>(&value), sizeof(value));
-                samples.at<float>(i, rc) = value;
-                rc++;
+                sample.at<uchar>(r, c) = value;
             }
         }
+        samples.push_back(sample);
     }
     return samples;
 }
 
-cv::Mat MnistLoader::loadResponses(const string& filename) {
+Mat MnistLoader::loadResponses(const string& filename) {
     ifstream file(filename.c_str(), std::ios::binary);
     if (!file.is_open()) {
         throw runtime_error("Unable to open file with MNIST labels");
