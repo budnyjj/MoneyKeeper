@@ -9,15 +9,16 @@
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/ml/ml.hpp"
+#include "opencv2/objdetect/objdetect.hpp"
 
 #include "mnist_loader.hpp"
 #include "operations.hpp"
 
 
 using cv::Algorithm;
+using cv::HOGDescriptor;
 using cv::KeyPoint;
 using cv::Mat;
-using cv::ORB;
 using cv::Point;
 using cv::Ptr;
 using cv::Rect;
@@ -29,6 +30,10 @@ using std::endl;
 using std::runtime_error;
 using std::string;
 using std::vector;
+
+
+const static int SAMPLE_ROWS = 28;
+const static int SAMPLE_COLS = 28;
 
 
 void usage(const std::string& exec_name) {
@@ -84,15 +89,16 @@ int main(int argc, char** argv) {
         samples[i].convertTo(descriptor, CV_32F);
         descriptors.push_back(descriptor);
     }
-    // Ptr<ORB> detector = ORB::create(10, 1.2f, 8, 2, 0, 2, ORB::HARRIS_SCORE, 2, 20);
-    // vector<KeyPoint> keypoints;
+    // HOGDescriptor detector(Size(SAMPLE_ROWS, SAMPLE_COLS),
+    //                        Size(SAMPLE_ROWS / 2, SAMPLE_COLS / 2),
+    //                        Size(SAMPLE_COLS / 4, SAMPLE_COLS / 4),
+    //                        Size(SAMPLE_COLS / 4, SAMPLE_COLS / 4),
+    //                        9);
+    // vector<Point> locations;
     // for (int i = 0; i < n_samples; i++) {
-    //     Mat sample, descriptor, descriptor_float;
-    //     cv::cvtColor(samples[i], sample, cv::COLOR_GRAY2RGB);
-    //     detector->detect(sample, keypoints);
-    //     detector->compute(sample, keypoints, descriptor);
-    //     descriptor.convertTo(descriptor_float, CV_32F);
-    //     descriptors.push_back(descriptor_float);
+    //     vector<float> descriptor;
+    //     detector.compute(samples[i], descriptor, Size(0, 0), Size(0, 0), locations);
+    //     descriptors.push_back(Operations::toRow(descriptor));
     // }
     cout << "Number of descriptors: " << descriptors.size() << endl;
     Mat descriptors_mrg = Operations::flatten<float>(descriptors);

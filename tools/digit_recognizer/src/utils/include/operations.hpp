@@ -14,6 +14,8 @@ public:
     static bool mergeCentered(
             const cv::Mat& src_bottom_mat, const cv::Mat& src_top_mat,
             cv::Mat& dst_mat);
+    static cv::Mat toRow(const std::vector<float>& src_vec);
+
     template<typename T>
     static cv::Mat flatten(const std::vector<cv::Mat>& src_vec);
 };

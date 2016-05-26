@@ -243,6 +243,33 @@ src/trainer.cpp.s:
 	$(MAKE) -f CMakeFiles/trainer.dir/build.make CMakeFiles/trainer.dir/src/trainer.cpp.s
 .PHONY : src/trainer.cpp.s
 
+src/utils/filters.o: src/utils/filters.cpp.o
+
+.PHONY : src/utils/filters.o
+
+# target to build an object file
+src/utils/filters.cpp.o:
+	$(MAKE) -f CMakeFiles/utils.dir/build.make CMakeFiles/utils.dir/src/utils/filters.cpp.o
+.PHONY : src/utils/filters.cpp.o
+
+src/utils/filters.i: src/utils/filters.cpp.i
+
+.PHONY : src/utils/filters.i
+
+# target to preprocess a source file
+src/utils/filters.cpp.i:
+	$(MAKE) -f CMakeFiles/utils.dir/build.make CMakeFiles/utils.dir/src/utils/filters.cpp.i
+.PHONY : src/utils/filters.cpp.i
+
+src/utils/filters.s: src/utils/filters.cpp.s
+
+.PHONY : src/utils/filters.s
+
+# target to generate assembly for a file
+src/utils/filters.cpp.s:
+	$(MAKE) -f CMakeFiles/utils.dir/build.make CMakeFiles/utils.dir/src/utils/filters.cpp.s
+.PHONY : src/utils/filters.cpp.s
+
 src/utils/mnist_loader.o: src/utils/mnist_loader.cpp.o
 
 .PHONY : src/utils/mnist_loader.o
@@ -318,6 +345,9 @@ help:
 	@echo "... src/trainer.o"
 	@echo "... src/trainer.i"
 	@echo "... src/trainer.s"
+	@echo "... src/utils/filters.o"
+	@echo "... src/utils/filters.i"
+	@echo "... src/utils/filters.s"
 	@echo "... src/utils/mnist_loader.o"
 	@echo "... src/utils/mnist_loader.i"
 	@echo "... src/utils/mnist_loader.s"

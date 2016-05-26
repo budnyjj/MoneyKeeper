@@ -6,11 +6,14 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/ml/ml.hpp>
+#include "opencv2/objdetect/objdetect.hpp"
 
+#include "filters.hpp"
 #include "operations.hpp"
 
 
 using cv::Algorithm;
+using cv::HOGDescriptor;
 using cv::Mat;
 using cv::Point;
 using cv::Ptr;
@@ -22,13 +25,14 @@ using cv::ml::KNearest;
 using std::cout;
 using std::endl;
 using std::ostringstream;
+using std::string;
 using std::vector;
 
 
-const static char * const WINDOW_NAME_ORIG = "Original image";
-const static char * const WINDOW_NAME_PROC = "Processed image";
-const static char * const WINDOW_NAME_ROIS = "Regions of interest";
-const static char * const WINDOW_NAME_RESP = "Responses";
+const static char * const WINDOW_NAME_SRC = "Source image";
+const static char * const WINDOW_NAME_PRC = "Processed image";
+const static char * const WINDOW_NAME_SMP = "Samples";
+const static char * const WINDOW_NAME_RSP = "Responses";
 const static int SAMPLE_ROWS = 28;
 const static int SAMPLE_COLS = 28;
 
@@ -36,52 +40,45 @@ const static int SAMPLE_COLS = 28;
 void usage(const std::string& exec_name) {
     cout << "Usage: " << exec_name << " <image> <params>\n"
          << "  <image> path to the sample image\n"
-         << "  <params> path to the parameters of trained classifier in XML format\n"
+         << "  <params> path to the parameters of trained classifier in XML format"
          << endl;
 }
 
 // extracts regions of interest
-vector<Mat> preprocess(const Mat& src_mat, Mat& dst_mat) {
-    // preprocessing
-    cv::blur(src_mat, dst_mat, Size(3, 3));
-    adaptiveThreshold(dst_mat, dst_mat, 255, cv::ADAPTIVE_THRESH_MEAN_C,
-                      cv::THRESH_BINARY_INV, 11, 5);
-
-    // find and draw contours
+vector<Mat> findSamples(const Mat& src_mat) {
     Mat tmp_mat;
-    dst_mat.copyTo(tmp_mat);
+    src_mat.copyTo(tmp_mat);
     vector<vector<Point> > contours;
     vector<Vec4i> hierarchy;
     cv::findContours(tmp_mat, contours, hierarchy,
-        CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
-    vector<Mat> rois;
+                     CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
+    vector<Mat> samples;
     for (int i = 0; i < contours.size(); i = hierarchy[i][0]) {
-        Rect roi_rect = cv::boundingRect(contours[i]);
-        // cv::rectangle(dst_mat, roi.tl(), roi.br(), Scalar(100, 100, 100), 2, 8, 0);
-        rois.push_back(dst_mat(roi_rect));
+        Rect sample_rect = cv::boundingRect(contours[i]);
+        samples.push_back(src_mat(sample_rect));
     }
 
-    return rois;
+    return samples;
 }
 
-vector<Mat> normalize(const vector<Mat>& rois) {
-    vector<Mat> normalized_rois;
-    for (int i = 0; i < rois.size(); i++) {
-        const Mat& roi = rois[i];
-        Mat scaled_roi(0, 0, CV_8U);
-        // cv::resize(rois[i], normalized_roi, normalized_roi.size(), 0, 0, cv::INTER_NEAREST);
-        double scale_factor =
-            std::min(double(SAMPLE_ROWS) / roi.rows,
-                     double(SAMPLE_COLS) / roi.cols);
-        cv::resize(roi, scaled_roi, Size(), scale_factor, scale_factor, cv::INTER_NEAREST);
-        Mat normalized_roi = Mat::zeros(SAMPLE_ROWS, SAMPLE_ROWS, CV_32F);
-        Operations::mergeCentered(normalized_roi, scaled_roi, normalized_roi);
-        normalized_rois.push_back(normalized_roi);
+vector<Mat> normalizeSamples(const vector<Mat>& samples) {
+    vector<Mat> samples_norm;
+    for (int i = 0; i < samples.size(); i++) {
+        const Mat& sample = samples[i];
+        Mat sample_scaled(SAMPLE_ROWS - 10, SAMPLE_COLS - 10, CV_8U);
+        cv::resize(sample, sample_scaled, sample_scaled.size(), 0, 0, cv::INTER_NEAREST);
+        // double scale_factor =
+        //     std::min(double(SAMPLE_ROWS) / sample.rows,
+        //              double(SAMPLE_COLS) / sample.cols);
+        // cv::resize(sample, sample_scaled, Size(), scale_factor, scale_factor, cv::INTER_NEAREST);
+        Mat sample_norm = Mat::zeros(SAMPLE_ROWS, SAMPLE_ROWS, CV_8U);
+        Operations::mergeCentered(sample_norm, sample_scaled, sample_norm);
+        samples_norm.push_back(sample_norm);
     }
-    return normalized_rois;
+    return samples_norm;
 }
 
-Mat makePreview(const vector<Mat>& src_vec) {
+Mat makeSamplesPreview(const vector<Mat>& src_vec) {
     Mat preview;
 
     int n_images = src_vec.size();
@@ -91,7 +88,7 @@ Mat makePreview(const vector<Mat>& src_vec) {
     int n_rows = src_vec[0].rows;
     int n_cols = src_vec[0].cols;
 
-    preview = Mat(n_rows, n_images * n_cols, CV_32F);
+    preview = Mat(n_rows, n_images * n_cols, CV_8U);
     int n_cols_offset = 0;
     for (int i = 0; i < n_images; i++) {
         src_vec[i].copyTo(preview
@@ -102,78 +99,116 @@ Mat makePreview(const vector<Mat>& src_vec) {
     return preview;
 }
 
-Mat drawResponses(const Mat& responses, const vector<Mat>& rois) {
-    int n_rois = rois.size();
-    if (n_rois == 0) {
+Mat makeResponsesPreview(const Mat& responses, const Size& sample_size) {
+    int n_responses = responses.rows;
+    if (n_responses == 0) {
         return Mat();
     }
 
-    int n_rows = rois[0].rows;
-    int n_cols = rois[0].cols;
+    int n_rows = sample_size.height;
+    int n_cols = sample_size.width;
 
-    vector<Mat> preview_responses;
-    for (int i = 0; i < n_rois; i++) {
-        Mat preview_response = Mat::zeros(n_rows, n_cols, CV_32F);
+    vector<Mat> samples;
+    for (int i = 0; i < n_responses; i++) {
+        Mat sample = Mat::zeros(n_rows, n_cols, CV_8U);
         ostringstream oss;
-        oss << responses.at<float>(i, 0);
-        cv::putText(preview_response, oss.str(), Point(0, n_rows),
+        oss << sample.at<float>(i, 0);
+        cv::putText(sample, oss.str(), Point(0, n_rows),
                     cv::FONT_HERSHEY_COMPLEX_SMALL, 1.0, Scalar(255));
-        preview_responses.push_back(preview_response);
+        samples.push_back(sample);
     }
-    return makePreview(preview_responses);
+    return makeSamplesPreview(samples);
 }
 
 int main(int argc, char** argv) {
-  if (argc != 3) {
-      usage(argv[0]);
-      return -1;
-  }
+    if (argc != 3) {
+        usage(argv[0]);
+        return -1;
+    }
 
-  cout << "Path to sample image:          " << argv[1] << "\n"
-       << "Path to classifier parameters: " << argv[2] << "\n"
-       << endl;
+    string path_image = argv[1];
+    string path_parameters = argv[2];
 
-  Mat preview_src = cv::imread(argv[1], CV_LOAD_IMAGE_UNCHANGED);
-  if (preview_src.empty()) {
-    cout << "Unable to load image" << endl;
-    usage(argv[0]);
-    return -1;
-  }
+    cout << "Path to source image:          " << path_image << "\n"
+         << "Path to classifier parameters: " << path_parameters
+         << endl;
 
-  Mat preview_dst;
-  cv::cvtColor(preview_src, preview_dst, cv::COLOR_BGR2GRAY);
-  vector<Mat> rois = preprocess(preview_dst, preview_dst);
+    Mat src = cv::imread(path_image, CV_LOAD_IMAGE_UNCHANGED);
+    if (src.empty()) {
+        cout << "Unable to load image" << endl;
+        usage(argv[0]);
+        return -1;
+    }
 
-  // prepare dataset
-  vector<Mat> norm_rois = normalize(rois);
-  Mat merged_rois = Operations::flatten<float>(norm_rois);
-  Mat preview_rois = makePreview(norm_rois);
-  // setup classifier
-  Ptr<KNearest> classifier = Algorithm::load<KNearest>(argv[2]);
+    // perform basic filtering
+    Mat filtered;
+    cv::cvtColor(src, filtered, cv::COLOR_BGR2GRAY);
+    Filters::basic(filtered, filtered);
 
-  Mat test_results(0, 0, CV_32F);
-  classifier->findNearest(merged_rois, classifier->getDefaultK(), test_results);
-  Mat preview_responses = drawResponses(test_results, norm_rois);
+    // extract regions of interest
+    vector<Mat> samples = findSamples(filtered);
+    vector<Mat> samples_norm = normalizeSamples(samples);
+    int n_samples = samples_norm.size();
 
-  cv::namedWindow(WINDOW_NAME_ORIG, CV_WINDOW_AUTOSIZE);
-  cv::imshow(WINDOW_NAME_ORIG, preview_src);
-  cv::namedWindow(WINDOW_NAME_PROC, CV_WINDOW_AUTOSIZE);
-  cv::imshow(WINDOW_NAME_PROC, preview_dst);
-  cv::namedWindow(WINDOW_NAME_ROIS, CV_WINDOW_AUTOSIZE);
-  cv::imshow(WINDOW_NAME_ROIS, preview_rois);
-  cv::namedWindow(WINDOW_NAME_RESP, CV_WINDOW_AUTOSIZE);
-  cv::imshow(WINDOW_NAME_RESP, preview_responses);
+    // make preview from extracted samples
+    Mat samples_preview = makeSamplesPreview(samples_norm);
 
-  while (true) {
-      if (cv::waitKey(0) == 'q') {
-          break;
-      }
-  }
+    // detect features on samples and extract their descriptors
+    vector<Mat> descriptors;
+    for (int i = 0; i < n_samples; i++) {
+        Mat descriptor;
+        samples_norm[i].convertTo(descriptor, CV_32F);
+        descriptors.push_back(descriptor);
+    }
+    // HOGDescriptor detector(Size(SAMPLE_ROWS, SAMPLE_COLS),
+    //                        Size(SAMPLE_ROWS / 2, SAMPLE_COLS / 2),
+    //                        Size(SAMPLE_COLS / 4, SAMPLE_COLS / 4),
+    //                        Size(SAMPLE_COLS / 4, SAMPLE_COLS / 4),
+    //                        9);
+    // vector<Point> locations;
+    // for (int i = 0; i < n_samples; i++) {
+    //     vector<float> descriptor;
+    //     detector.compute(samples_norm[i], descriptor, Size(0, 0), Size(0, 0), locations);
+    //     descriptors.push_back(Operations::toRow(descriptor));
+    // }
+    cout << "Number of descriptors: " << descriptors.size() << endl;
+    Mat descriptors_mrg = Operations::flatten<float>(descriptors);
+    size_t n_descriptors = descriptors_mrg.rows;
+    size_t n_features = descriptors_mrg.cols;
+    cout << "Classification data size:\n"
+         << "  samples:  " << n_descriptors << "\n"
+         << "  features: " << n_features
+         << endl;
 
-  cv::destroyWindow(WINDOW_NAME_ORIG);
-  cv::destroyWindow(WINDOW_NAME_PROC);
-  cv::destroyWindow(WINDOW_NAME_ROIS);
-  cv::destroyWindow(WINDOW_NAME_RESP);
+    // classify descriptors
+    Ptr<KNearest> classifier = Algorithm::load<KNearest>(path_parameters);
+    Mat responses(0, 0, CV_32F);
+    classifier->findNearest(descriptors_mrg, classifier->getDefaultK(), responses);
 
-  return 0;
+    // make preview for results
+    Mat responses_preview =
+        makeResponsesPreview(responses, Size(SAMPLE_ROWS, SAMPLE_COLS));
+
+    // show results
+    cv::namedWindow(WINDOW_NAME_SRC, CV_WINDOW_AUTOSIZE);
+    cv::imshow(WINDOW_NAME_SRC, src);
+    cv::namedWindow(WINDOW_NAME_PRC, CV_WINDOW_AUTOSIZE);
+    cv::imshow(WINDOW_NAME_PRC, filtered);
+    cv::namedWindow(WINDOW_NAME_SMP, CV_WINDOW_AUTOSIZE);
+    cv::imshow(WINDOW_NAME_SMP, samples_preview);
+    cv::namedWindow(WINDOW_NAME_RSP, CV_WINDOW_AUTOSIZE);
+    cv::imshow(WINDOW_NAME_RSP, responses_preview);
+
+    while (true) {
+        if (cv::waitKey(0) == 'q') {
+            break;
+        }
+    }
+
+    cv::destroyWindow(WINDOW_NAME_SRC);
+    cv::destroyWindow(WINDOW_NAME_PRC);
+    cv::destroyWindow(WINDOW_NAME_SMP);
+    cv::destroyWindow(WINDOW_NAME_RSP);
+
+    return 0;
 }

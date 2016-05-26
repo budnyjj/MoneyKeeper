@@ -50,3 +50,17 @@ bool Operations::mergeCentered(
                        .colRange((bottom_cols - top_cols) / 2, (bottom_cols + top_cols) / 2));
     return true;
 }
+
+Mat Operations::toRow(const std::vector<float>& src_vec) {
+    Mat result;
+    size_t n_values = src_vec.size();
+    if (n_values == 0) {
+        return result;
+    }
+
+    result = Mat(1, n_values, CV_32F);
+    for (size_t i = 0; i < n_values; i++) {
+        result.at<float>(0, i) = src_vec[i];
+    }
+    return result;
+}
