@@ -24,6 +24,7 @@ using cv::Ptr;
 using cv::Rect;
 using cv::Size;
 using cv::ml::KNearest;
+using cv::ml::SVM;
 using cv::ml::TrainData;
 using std::cout;
 using std::endl;
@@ -84,22 +85,22 @@ int main(int argc, char** argv) {
 
     // detect features on samples and extract their descriptors
     vector<Mat> descriptors;
-    for (int i = 0; i < n_samples; i++) {
-        Mat descriptor;
-        samples[i].convertTo(descriptor, CV_32F);
-        descriptors.push_back(descriptor);
-    }
-    // HOGDescriptor detector(Size(SAMPLE_ROWS, SAMPLE_COLS),
-    //                        Size(SAMPLE_ROWS / 2, SAMPLE_COLS / 2),
-    //                        Size(SAMPLE_COLS / 4, SAMPLE_COLS / 4),
-    //                        Size(SAMPLE_COLS / 4, SAMPLE_COLS / 4),
-    //                        9);
-    // vector<Point> locations;
     // for (int i = 0; i < n_samples; i++) {
-    //     vector<float> descriptor;
-    //     detector.compute(samples[i], descriptor, Size(0, 0), Size(0, 0), locations);
-    //     descriptors.push_back(Operations::toRow(descriptor));
+    //     Mat descriptor;
+    //     samples[i].convertTo(descriptor, CV_32F);
+    //     descriptors.push_back(descriptor);
     // }
+    HOGDescriptor detector(Size(SAMPLE_ROWS, SAMPLE_COLS),
+                           Size(SAMPLE_ROWS / 2, SAMPLE_COLS / 2),
+                           Size(SAMPLE_COLS / 4, SAMPLE_COLS / 4),
+                           Size(SAMPLE_COLS / 4, SAMPLE_COLS / 4),
+                           9);
+    vector<Point> locations;
+    for (int i = 0; i < n_samples; i++) {
+        vector<float> descriptor;
+        detector.compute(samples[i], descriptor, Size(0, 0), Size(0, 0), locations);
+        descriptors.push_back(Operations::toRow(descriptor));
+    }
     cout << "Number of descriptors: " << descriptors.size() << endl;
     Mat descriptors_mrg = Operations::flatten<float>(descriptors);
     size_t n_descriptors = descriptors_mrg.rows;
@@ -110,17 +111,19 @@ int main(int argc, char** argv) {
          << endl;
 
     // load classifier
-    Ptr<KNearest> classifier = Algorithm::load<KNearest>(path_parameters);
+    // Ptr<KNearest> classifier = Algorithm::load<KNearest>(path_parameters);
+    Ptr<SVM> classifier = Algorithm::load<SVM>(path_parameters);
     // classify test samples
     size_t n_successes = 0;
     Mat test_results(0, 0, CV_32F);
+    // classifier->findNearest(descriptors_mrg, classifier->getDefaultK(), test_results);
+    classifier->predict(descriptors_mrg, test_results);
     for (int i = 0; i < n_tests; i++) {
-        Mat descriptor_mrg = descriptors_mrg(Rect(Point(0, i), Point(n_features, i+1)));
-        float result =
-            classifier->findNearest(descriptor_mrg, classifier->getDefaultK(), test_results);
-        cout << "Expected: " << responses.at<float>(i, 0)
-             << ", Got: " << result << endl;
-        if (result == responses.at<float>(i, 0)) {
+        int expected = responses.at<int>(i, 0);
+        int actual = test_results.at<float>(i, 0);
+        cout << "Expected: " << expected
+             << ", Got: " << actual << endl;
+        if (actual == expected) {
             n_successes++;
         }
     }

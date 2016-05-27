@@ -23,7 +23,9 @@ using cv::Point;
 using cv::Ptr;
 using cv::Rect;
 using cv::Size;
+using cv::TermCriteria;
 using cv::ml::KNearest;
+using cv::ml::SVM;
 using cv::ml::TrainData;
 using std::cout;
 using std::endl;
@@ -81,22 +83,22 @@ int main(int argc, char** argv) {
 
     // detect features on samples and extract their descriptors
     vector<Mat> descriptors;
-    for (int i = 0; i < n_samples; i++) {
-        Mat descriptor;
-        samples[i].convertTo(descriptor, CV_32F);
-        descriptors.push_back(descriptor);
-    }
-    // HOGDescriptor detector(Size(SAMPLE_ROWS, SAMPLE_COLS),
-    //                        Size(SAMPLE_ROWS / 2, SAMPLE_COLS / 2),
-    //                        Size(SAMPLE_COLS / 4, SAMPLE_COLS / 4),
-    //                        Size(SAMPLE_COLS / 4, SAMPLE_COLS / 4),
-    //                        9);
-    // vector<Point> locations;
     // for (int i = 0; i < n_samples; i++) {
-    //     vector<float> descriptor;
-    //     detector.compute(samples[i], descriptor, Size(0, 0), Size(0, 0), locations);
-    //     descriptors.push_back(Operations::toRow(descriptor));
+    //     Mat descriptor;
+    //     samples[i].convertTo(descriptor, CV_32F);
+    //     descriptors.push_back(descriptor);
     // }
+    HOGDescriptor detector(Size(SAMPLE_ROWS, SAMPLE_COLS),
+                           Size(SAMPLE_ROWS / 2, SAMPLE_COLS / 2),
+                           Size(SAMPLE_COLS / 4, SAMPLE_COLS / 4),
+                           Size(SAMPLE_COLS / 4, SAMPLE_COLS / 4),
+                           9);
+    vector<Point> locations;
+    for (int i = 0; i < n_samples; i++) {
+        vector<float> descriptor;
+        detector.compute(samples[i], descriptor, Size(0, 0), Size(0, 0), locations);
+        descriptors.push_back(Operations::toRow(descriptor));
+    }
     cout << "Number of descriptors: " << descriptors.size() << endl;
     Mat descriptors_mrg = Operations::flatten<float>(descriptors);
     cout << "Train data size:\n"
@@ -108,10 +110,18 @@ int main(int argc, char** argv) {
         TrainData::create(descriptors_mrg, cv::ml::ROW_SAMPLE, responses);
 
     // setup and train classifier
-    Ptr<KNearest> classifier = KNearest::create();
-    classifier->setIsClassifier(true);
-    classifier->setAlgorithmType(KNearest::BRUTE_FORCE);
-    classifier->setDefaultK(10);
+    // Ptr<KNearest> classifier = KNearest::create();
+    // classifier->setIsClassifier(true);
+    // classifier->setAlgorithmType(KNearest::BRUTE_FORCE);
+    // classifier->setDefaultK(10);
+    // classifier->train(data);
+
+    Ptr<SVM> classifier = SVM::create();
+    classifier->setType(SVM::C_SVC);
+    classifier->setKernel(SVM::POLY);
+    classifier->setTermCriteria(cv::TermCriteria(TermCriteria::MAX_ITER, 100, 1e-6));
+    classifier->setGamma(3);
+    classifier->setDegree(3);
     classifier->train(data);
 
     // store trained model in file

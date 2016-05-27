@@ -22,6 +22,7 @@ using cv::Scalar;
 using cv::Size;
 using cv::Vec4i;
 using cv::ml::KNearest;
+using cv::ml::SVM;
 using std::cout;
 using std::endl;
 using std::ostringstream;
@@ -65,12 +66,14 @@ vector<Mat> normalizeSamples(const vector<Mat>& samples) {
     vector<Mat> samples_norm;
     for (int i = 0; i < samples.size(); i++) {
         const Mat& sample = samples[i];
-        Mat sample_scaled(SAMPLE_ROWS - 10, SAMPLE_COLS - 10, CV_8U);
-        cv::resize(sample, sample_scaled, sample_scaled.size(), 0, 0, cv::INTER_NEAREST);
+        Mat sample_scaled(20, 20, CV_8U);
+        cv::resize(sample, sample_scaled, sample_scaled.size(), 0, 0, cv::INTER_AREA);
+        // cv::erode(sample_scaled, sample_scaled,
+        //           cv::getStructuringElement(cv::MORPH_RECT, Size(3, 3)));
         // double scale_factor =
         //     std::min(double(SAMPLE_ROWS) / sample.rows,
         //              double(SAMPLE_COLS) / sample.cols);
-        // cv::resize(sample, sample_scaled, Size(), scale_factor, scale_factor, cv::INTER_NEAREST);
+        // cv::resize(sample, sample_scaled, Size(), scale_factor, scale_factor, cv::INTER_LINEAR);
         Mat sample_norm = Mat::zeros(SAMPLE_ROWS, SAMPLE_ROWS, CV_8U);
         Operations::mergeCentered(sample_norm, sample_scaled, sample_norm);
         samples_norm.push_back(sample_norm);
@@ -108,16 +111,16 @@ Mat makeResponsesPreview(const Mat& responses, const Size& sample_size) {
     int n_rows = sample_size.height;
     int n_cols = sample_size.width;
 
-    vector<Mat> samples;
+    vector<Mat> response_previews;
     for (int i = 0; i < n_responses; i++) {
-        Mat sample = Mat::zeros(n_rows, n_cols, CV_8U);
+        Mat response_preview = Mat::zeros(n_rows, n_cols, CV_8U);
         ostringstream oss;
-        oss << sample.at<float>(i, 0);
-        cv::putText(sample, oss.str(), Point(0, n_rows),
+        oss << responses.at<float>(i, 0);
+        cv::putText(response_preview, oss.str(), Point(3, n_rows - 3),
                     cv::FONT_HERSHEY_COMPLEX_SMALL, 1.0, Scalar(255));
-        samples.push_back(sample);
+        response_previews.push_back(response_preview);
     }
-    return makeSamplesPreview(samples);
+    return makeSamplesPreview(response_previews);
 }
 
 int main(int argc, char** argv) {
@@ -155,22 +158,22 @@ int main(int argc, char** argv) {
 
     // detect features on samples and extract their descriptors
     vector<Mat> descriptors;
-    for (int i = 0; i < n_samples; i++) {
-        Mat descriptor;
-        samples_norm[i].convertTo(descriptor, CV_32F);
-        descriptors.push_back(descriptor);
-    }
-    // HOGDescriptor detector(Size(SAMPLE_ROWS, SAMPLE_COLS),
-    //                        Size(SAMPLE_ROWS / 2, SAMPLE_COLS / 2),
-    //                        Size(SAMPLE_COLS / 4, SAMPLE_COLS / 4),
-    //                        Size(SAMPLE_COLS / 4, SAMPLE_COLS / 4),
-    //                        9);
-    // vector<Point> locations;
     // for (int i = 0; i < n_samples; i++) {
-    //     vector<float> descriptor;
-    //     detector.compute(samples_norm[i], descriptor, Size(0, 0), Size(0, 0), locations);
-    //     descriptors.push_back(Operations::toRow(descriptor));
+    //     Mat descriptor;
+    //     samples_norm[i].convertTo(descriptor, CV_32F);
+    //     descriptors.push_back(descriptor);
     // }
+    HOGDescriptor detector(Size(SAMPLE_ROWS, SAMPLE_COLS),
+                           Size(SAMPLE_ROWS / 2, SAMPLE_COLS / 2),
+                           Size(SAMPLE_COLS / 4, SAMPLE_COLS / 4),
+                           Size(SAMPLE_COLS / 4, SAMPLE_COLS / 4),
+                           9);
+    vector<Point> locations;
+    for (int i = 0; i < n_samples; i++) {
+        vector<float> descriptor;
+        detector.compute(samples_norm[i], descriptor, Size(0, 0), Size(0, 0), locations);
+        descriptors.push_back(Operations::toRow(descriptor));
+    }
     cout << "Number of descriptors: " << descriptors.size() << endl;
     Mat descriptors_mrg = Operations::flatten<float>(descriptors);
     size_t n_descriptors = descriptors_mrg.rows;
@@ -181,9 +184,11 @@ int main(int argc, char** argv) {
          << endl;
 
     // classify descriptors
-    Ptr<KNearest> classifier = Algorithm::load<KNearest>(path_parameters);
+    // Ptr<KNearest> classifier = Algorithm::load<KNearest>(path_parameters);
+    Ptr<SVM> classifier = Algorithm::load<SVM>(path_parameters);
     Mat responses(0, 0, CV_32F);
-    classifier->findNearest(descriptors_mrg, classifier->getDefaultK(), responses);
+    // classifier->findNearest(descriptors_mrg, classifier->getDefaultK(), responses);
+    classifier->predict(descriptors_mrg, responses);
 
     // make preview for results
     Mat responses_preview =

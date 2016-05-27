@@ -74,11 +74,11 @@ Mat MnistLoader::loadResponses(const string& filename) {
     file.read(reinterpret_cast<char*>(&n_labels), sizeof(n_labels));
     endswap(&n_labels);
     // read and store labels
-    Mat responses(n_labels, 1, CV_32F);
+    Mat responses(n_labels, 1, CV_32S);
     for (int i = 0; i < n_labels; i++) {
         uchar value = 0;
         file.read(reinterpret_cast<char*>(&value), sizeof(value));
-        responses.at<float>(i, 0) = value;
+        responses.at<int>(i, 0) = value;
     }
     return responses;
 }
