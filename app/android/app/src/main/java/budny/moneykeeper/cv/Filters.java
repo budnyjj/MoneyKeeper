@@ -8,7 +8,7 @@ import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
 public class Filters {
-    public static final String TAG = Filters.class.getSimpleName();
+    private static final String TAG = Filters.class.getSimpleName();
     private static final String MSG_SHOULD_NOT_BE_NULL = "Input arguments should not be null";
     private static final String MSG_NATIVE_ERROR = "Caught error during native method invocation";
 

@@ -15,6 +15,7 @@ import budny.moneykeeper.R;
 import budny.moneykeeper.cv.Filters;
 import budny.moneykeeper.cv.CVManager;
 import budny.moneykeeper.cv.Operations;
+import budny.moneykeeper.cv.Recognizer;
 
 /**
  * A fragment used to demonstrate camera-related functionality.
@@ -26,10 +27,11 @@ public class FragmentCamera extends Fragment
 
     private CameraBridgeViewBase mCameraView;
     private Mat mOutputFrame;
-
+    private Recognizer mRecognizer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mRecognizer = new Recognizer(getResources().getAssets());
         View view = inflater.inflate(R.layout.fragment_camera, container, false);
         mCameraView = (CameraBridgeViewBase) view.findViewById(R.id.fragment_camera_view_camera);
         mCameraView.setVisibility(SurfaceView.VISIBLE);
@@ -71,7 +73,7 @@ public class FragmentCamera extends Fragment
         Operations.darken(inputMat, mOutputFrame);
         // process region of interest
         Imgproc.cvtColor(roi, roi, Imgproc.COLOR_RGBA2GRAY);
-        Filters.basic(roi, roi);
+        mRecognizer.recognize(roi, roi);
         Imgproc.cvtColor(roi, roi, Imgproc.COLOR_GRAY2RGBA);
         // merge results
         Operations.mergeCentered(mOutputFrame, roi, mOutputFrame);

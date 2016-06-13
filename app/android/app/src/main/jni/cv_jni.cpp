@@ -1,10 +1,14 @@
 #include "budny_moneykeeper_cv_Filters.h"
 #include "budny_moneykeeper_cv_Operations.h"
+#include "budny_moneykeeper_cv_Recognizer.h"
+
+#include <android/asset_manager_jni.h>
 
 #include <opencv2/core/core.hpp>
 
 #include "cv/filters.hpp"
 #include "cv/operations.hpp"
+#include "cv/recognizer.hpp"
 
 
 extern "C" JNIEXPORT jboolean JNICALL
@@ -51,4 +55,30 @@ Java_budny_moneykeeper_cv_Operations_nativeMergeCentered(
     cv::Mat& src_top_mat = *(reinterpret_cast<cv::Mat*>(j_src_top_mat));
     cv::Mat& dst_mat = *(reinterpret_cast<cv::Mat*>(j_dst_mat));
     return Operations::mergeCentered(src_bottom_mat, src_top_mat, dst_mat);
+}
+
+extern "C" JNIEXPORT jlong JNICALL
+Java_budny_moneykeeper_cv_Recognizer_nativeInitialize(
+       JNIEnv* j_env, jobject,
+       jobject j_manager, jstring j_model_filename) {
+    AAssetManager* manager = AAssetManager_fromJava(j_env, j_manager);
+    Recognizer* recognizer = new Recognizer(manager, "abc");
+    return reinterpret_cast<jlong>(recognizer);
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_budny_moneykeeper_cv_Recognizer_nativeDispose(
+        JNIEnv*, jobject,
+        jlong j_recognizer) {
+    Recognizer* recognizer = reinterpret_cast<Recognizer*>(j_recognizer);
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_budny_moneykeeper_cv_Recognizer_nativeRecognize(
+       JNIEnv*, jobject,
+       jlong j_recognizer, jlong j_src_mat, jlong j_dst_mat) {
+    Recognizer* recognizer = reinterpret_cast<Recognizer*>(j_recognizer);
+    cv::Mat& src_mat = *(reinterpret_cast<cv::Mat*>(j_src_mat));
+    cv::Mat& dst_mat = *(reinterpret_cast<cv::Mat*>(j_dst_mat));
+    recognizer->recognize(src_mat, dst_mat);
 }

@@ -13,10 +13,10 @@ public class CVManager {
 
     public static boolean init() {
         try {
-            Log.i(TAG, "Loading OpenCV library");
+            Log.i(TAG, "Loading native libraries");
             CVManager loader = Holder.INSTANCE;
         } catch (SecurityException | UnsatisfiedLinkError e) {
-            Log.e(TAG, "Unable to load OpenCV library");
+            Log.e(TAG, "Unable to load native libraries: " + e);
             return false;
         }
         return true;
