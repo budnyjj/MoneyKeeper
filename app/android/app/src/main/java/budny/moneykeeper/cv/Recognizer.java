@@ -8,7 +8,7 @@ import org.opencv.core.Mat;
 public class Recognizer {
     private static final String TAG = Recognizer.class.getSimpleName();
     private static final String MSG_SHOULD_NOT_BE_NULL = "Input arguments should not be null";
-    private static final String MODEL_FILENAME = "";
+    private static final String MODEL_FILENAME = "cv/model/svm-hog.xml";
 
     static {
         if (!CVManager.init()) {

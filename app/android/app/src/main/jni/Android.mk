@@ -14,7 +14,9 @@ LOCAL_SRC_FILES := \
 	cv_jni.cpp \
 	cv/filters.cpp \
 	cv/operations.cpp \
-    cv/recognizer.cpp
+    cv/recognizer.cpp \
+	util/jnihelpers.cpp \
+	util/logging.cpp
 LOCAL_C_INCLUDES += $(JNIAPP_PATH)
 LOCAL_C_INCLUDES += $(OPENCV_PATH)/jni/include
 

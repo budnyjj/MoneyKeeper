@@ -2,6 +2,8 @@
 #include "budny_moneykeeper_cv_Operations.h"
 #include "budny_moneykeeper_cv_Recognizer.h"
 
+#include <string>
+
 #include <android/asset_manager_jni.h>
 
 #include <opencv2/core/core.hpp>
@@ -9,6 +11,8 @@
 #include "cv/filters.hpp"
 #include "cv/operations.hpp"
 #include "cv/recognizer.hpp"
+#include "util/jnihelpers.hpp"
+#include "util/logging.hpp"
 
 
 extern "C" JNIEXPORT jboolean JNICALL
@@ -62,7 +66,8 @@ Java_budny_moneykeeper_cv_Recognizer_nativeInitialize(
        JNIEnv* j_env, jobject,
        jobject j_manager, jstring j_model_filename) {
     AAssetManager* manager = AAssetManager_fromJava(j_env, j_manager);
-    Recognizer* recognizer = new Recognizer(manager, "abc");
+    std::string model_filename = jni::stdString(j_env, j_model_filename);
+    Recognizer* recognizer = new Recognizer(manager, model_filename);
     return reinterpret_cast<jlong>(recognizer);
 }
 
@@ -71,6 +76,7 @@ Java_budny_moneykeeper_cv_Recognizer_nativeDispose(
         JNIEnv*, jobject,
         jlong j_recognizer) {
     Recognizer* recognizer = reinterpret_cast<Recognizer*>(j_recognizer);
+    delete recognizer;
 }
 
 extern "C" JNIEXPORT void JNICALL
