@@ -28,6 +28,7 @@ public class FragmentCamera extends Fragment
     private CameraBridgeViewBase mCameraView;
     private Mat mOutputFrame;
     private Recognizer mRecognizer;
+    private long mFrameNumber;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,14 +67,21 @@ public class FragmentCamera extends Fragment
 
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
+        mFrameNumber++;
         Mat roi = new Mat();
         Mat inputMat = inputFrame.rgba();
         // select region of interest
         Operations.sliceCentered(inputMat, roi, 200, 70);
         Operations.darken(inputMat, mOutputFrame);
-        // process region of interest
+
         Imgproc.cvtColor(roi, roi, Imgproc.COLOR_RGBA2GRAY);
-        mRecognizer.recognize(roi, roi);
+        if (mFrameNumber % 10 == 0) {
+            // process region of interest
+            mRecognizer.recognize(roi, roi);
+        } else {
+            Filters.basic(roi, roi);
+        }
+        Filters.contours(roi, roi);
         Imgproc.cvtColor(roi, roi, Imgproc.COLOR_GRAY2RGBA);
         // merge results
         Operations.mergeCentered(mOutputFrame, roi, mOutputFrame);

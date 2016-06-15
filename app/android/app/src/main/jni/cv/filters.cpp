@@ -21,54 +21,25 @@ RNG Filters::rng(12345);
 
 bool Filters::basic(const Mat& src_mat, Mat& dst_mat) {
     // preprocessing
-
-    // my filter
     cv::blur(src_mat, dst_mat, Size(3, 3));
     adaptiveThreshold(dst_mat, dst_mat, 255, cv::ADAPTIVE_THRESH_MEAN_C,
                       cv::THRESH_BINARY_INV, 11, 5);
+    return true;
+}
 
-
+bool Filters::contours(const Mat& src_mat, Mat& dst_mat) {
+    src_mat.copyTo(dst_mat);
     // find and draw contours
     vector<vector<Point>> contours;
     vector<Vec4i> hierarchy;
     cv::findContours(dst_mat, contours, hierarchy,
-        CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
+        CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
     for (int i = 0; i < contours.size(); i = hierarchy[i][0]) {
         Rect rect = cv::boundingRect(contours[i]);
         cv::rectangle(dst_mat, rect.tl(), rect.br(), Scalar(100, 100, 100), 2, 8, 0);
     }
-
     return true;
 }
-
-bool Filters::basic2(const Mat& src_mat, Mat& dst_mat) {
-    // preprocessing
-
-    // cv::blur(src_mat, dst_mat, Size(3, 3));
-    // cv::Canny(dst_mat, dst_mat, 10, 100);
-    // adaptiveThreshold(dst_mat, dst_mat, 255, cv::ADAPTIVE_THRESH_MEAN_C,
-    //                   cv::THRESH_BINARY_INV, 11, 5);
-
-
-    // book filter
-    // cv::dilate(src_mat, dst_mat,
-    //            cv::getStructuringElement(CV_SHAPE_CROSS, Size(3,3)));
-    // adaptiveThreshold(dst_mat, dst_mat, 255, cv::ADAPTIVE_THRESH_MEAN_C,
-    //                   cv::THRESH_BINARY_INV, 15, 2);
-
-    // find and draw contours
-    // vector<vector<Point>> contours;
-    // vector<Vec4i> hierarchy;
-    // cv::findContours(dst_mat, contours, hierarchy,
-    //     CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
-    // for (int i = 0; i < contours.size(); i = hierarchy[i][0]) {
-    //     Rect rect = cv::boundingRect(contours[i]);
-    //     cv::rectangle(dst_mat, rect.tl(), rect.br(), Scalar(150, 150, 150), 2, 8, 0);
-    // }
-
-    return true;
-}
-
 
 bool Filters::highlight(const Mat& src_mat, cv::Mat& dst_mat,
                         std::size_t width, std::size_t height) {

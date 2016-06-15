@@ -6,7 +6,7 @@ public class CVManager {
     private static final String TAG = CVManager.class.getSimpleName();
 
     static {
-        System.loadLibrary("c++_shared");
+        System.loadLibrary("gnustl_shared");
         System.loadLibrary("opencv_java3");
         System.loadLibrary("cv");
     }
